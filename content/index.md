@@ -4,8 +4,8 @@ title: Willkommen zu meinem digitalen Garten
 
 # Willkommen
 
-Dies ist mein öffentlicher Notiz-Garten, gehostet mit [Quartz](https://quartz.jzhao.xyz/).
+Dies ist mein öffentlicher Notiz-Garten.
 
 ## Über diese Seite
 
-Diese Seite wird automatisch aus meinem Obsidian Vault synchronisiert und mit Quartz generiert.
+Diese Seite wird automatisch aus meinem Obsidian Vault synchronisiert.
