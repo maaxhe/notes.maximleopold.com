@@ -1,0 +1,8 @@
+# Robots.txt for notes.maximleopold.com
+# Allow all search engines to index the site
+
+User-agent: *
+Allow: /
+
+# Sitemap location (generated automatically by Quartz)
+Sitemap: https://notes.maximleopold.com/sitemap.xml

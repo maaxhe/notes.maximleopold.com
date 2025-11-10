@@ -1,0 +1,18 @@
+# Cloudflare Pages configuration for Quartz
+# This is an alternative to Netlify deployment
+# Documentation: https://developers.cloudflare.com/pages/
+
+name = "notes-maximleopold"
+compatibility_date = "2024-01-01"
+
+# Pages configuration
+[site]
+  bucket = "public"
+
+# Build configuration (can also be set in Cloudflare dashboard)
+# Build command: npm run sync && npm run build
+# Build output directory: public
+# Root directory: /
+
+# Environment variables can be set in Cloudflare dashboard under:
+# Settings > Environment variables

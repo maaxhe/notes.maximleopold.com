@@ -1,0 +1,40 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check TypeScript types
+        run: npm run check:types
+
+      - name: Check code formatting
+        run: npx prettier . --check
+
+      - name: Sync content
+        run: npm run sync
+        continue-on-error: true # Vault might not be accessible in CI
+
+      - name: Build site
+        run: npm run build
+
+      - name: Check internal links
+        run: npm run check:links
+        if: success() # Only if build succeeded

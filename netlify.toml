@@ -1,0 +1,55 @@
+# Netlify configuration for Quartz static site
+# Documentation: https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # Build command to run
+  command = "npm run sync && npm run build"
+
+  # Directory to publish (Quartz outputs to 'public' by default)
+  publish = "public"
+
+  # Node version to use
+  [build.environment]
+    NODE_VERSION = "22"
+
+# Redirect rules
+[[redirects]]
+  # Handle 404s with custom 404 page
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+# Headers for better security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Security headers
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # Cache static assets for 1 year
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Deploy context-specific settings
+[context.production]
+  command = "npm run sync && npm run build"
+
+[context.deploy-preview]
+  command = "npm run sync && npm run build"
+
+[context.branch-deploy]
+  command = "npm run sync && npm run build"
