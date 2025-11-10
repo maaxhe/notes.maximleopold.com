@@ -99,8 +99,26 @@ type GiscusElement = Omit<HTMLElement, "dataset"> & {
   }
 }
 
-// Load immediately on script execution
-loadGiscus()
+// Try to load immediately, and retry if container is not ready
+const tryLoadGiscus = () => {
+  const container = document.querySelector(".giscus")
+  if (container) {
+    loadGiscus()
+  } else {
+    // Retry after a short delay if container is not ready
+    setTimeout(tryLoadGiscus, 100)
+  }
+}
+
+// Load on initial page load
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", tryLoadGiscus)
+} else {
+  tryLoadGiscus()
+}
 
 // Load on navigation in SPA
-document.addEventListener("nav", loadGiscus)
+document.addEventListener("nav", () => {
+  // Small delay to ensure DOM is updated
+  setTimeout(loadGiscus, 50)
+})
