@@ -99,8 +99,8 @@ type GiscusElement = Omit<HTMLElement, "dataset"> & {
   }
 }
 
-// Load on initial page load
-document.addEventListener("DOMContentLoaded", loadGiscus)
+// Load immediately on script execution
+loadGiscus()
 
 // Load on navigation in SPA
 document.addEventListener("nav", loadGiscus)
