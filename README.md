@@ -26,12 +26,14 @@ This project converts an Obsidian vault into a static website with full support 
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/maximleopold/notes.maximleopold.com.git
    cd notes.maximleopold.com
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
@@ -42,19 +44,21 @@ This project converts an Obsidian vault into a static website with full support 
 
    ```typescript
    const CONFIG = {
-     VAULT_PATH: '/path/to/your/vault',
-     PUBLIC_DIRS: ['/FolderToPublish'],
-     ASSETS_DIRS: ['/FolderToPublish/Images'],
+     VAULT_PATH: "/path/to/your/vault",
+     PUBLIC_DIRS: ["/FolderToPublish"],
+     ASSETS_DIRS: ["/FolderToPublish/Images"],
      // ...
-   };
+   }
    ```
 
    Or set the environment variable:
+
    ```bash
    export VAULT_PATH="/path/to/your/vault"
    ```
 
 4. **Run local development server**
+
    ```bash
    npm run dev
    ```
@@ -90,31 +94,20 @@ Edit `scripts/sync-from-vault.ts`:
 ```typescript
 const CONFIG = {
   // Path to your Obsidian vault
-  VAULT_PATH: process.env.VAULT_PATH || '/path/to/vault',
+  VAULT_PATH: process.env.VAULT_PATH || "/path/to/vault",
 
   // Directories to publish (whitelist)
-  PUBLIC_DIRS: [
-    '/PublicNotes',
-    '/Blog',
-    '/Research',
-  ],
+  PUBLIC_DIRS: ["/PublicNotes", "/Blog", "/Research"],
 
   // Asset directories (images, PDFs, etc.)
-  ASSETS_DIRS: [
-    '/PublicNotes/Images',
-    '/Blog/Assets',
-  ],
+  ASSETS_DIRS: ["/PublicNotes/Images", "/Blog/Assets"],
 
   // Patterns to exclude (blacklist)
-  EXCLUDE_PATTERNS: [
-    '**/Private/**',
-    '**/*.excalidraw',
-    '**/Templates/**',
-  ],
+  EXCLUDE_PATTERNS: ["**/Private/**", "**/*.excalidraw", "**/Templates/**"],
 
   // Only sync files with "publish: true" in frontmatter
   REQUIRE_PUBLISH_FLAG: false,
-};
+}
 ```
 
 ### Site Settings
@@ -142,7 +135,7 @@ There are two approaches to publishing notes:
 Only directories listed in `PUBLIC_DIRS` are published.
 
 ```typescript
-PUBLIC_DIRS: ['/Blog', '/Research']
+PUBLIC_DIRS: ["/Blog", "/Research"]
 ```
 
 #### 2. Frontmatter Flag
@@ -174,10 +167,12 @@ Obsidian image embeds are automatically converted:
 
 ```markdown
 # In Obsidian:
+
 ![[image.png]]
 ![[folder/diagram.jpg|My Caption]]
 
 # Converts to:
+
 ![](/assets/image.png)
 ![My Caption](/assets/folder/diagram.jpg)
 ```
@@ -334,6 +329,7 @@ Husky pre-commit hooks automatically:
 - Prevent committing private content
 
 To bypass (not recommended):
+
 ```bash
 git commit --no-verify
 ```
@@ -363,8 +359,8 @@ GitHub Actions automatically:
 3. **Use frontmatter**:
    ```markdown
    ---
-   publish: true  # Only if REQUIRE_PUBLISH_FLAG is enabled
-   draft: true    # Automatically excluded
+   publish: true # Only if REQUIRE_PUBLISH_FLAG is enabled
+   draft: true # Automatically excluded
    ---
    ```
 
@@ -373,19 +369,24 @@ GitHub Actions automatically:
 ### Build Errors
 
 **Vault not found**:
+
 ```bash
 Error: Vault path does not exist
 ```
+
 → Update `VAULT_PATH` in `scripts/sync-from-vault.ts` or environment variable
 
 **Broken links detected**:
+
 ```bash
 ❌ Broken internal links found
 ```
+
 → Run `npm run check:links` to see details
 → Fix or remove broken wikilinks in your notes
 
 **Missing dependencies**:
+
 ```bash
 npm ci  # Clean install
 ```
@@ -393,12 +394,14 @@ npm ci  # Clean install
 ### Development Issues
 
 **Port already in use**:
+
 ```bash
 # Change port in dev server or kill the process
 lsof -ti:8080 | xargs kill -9
 ```
 
 **Changes not reflecting**:
+
 ```bash
 # Clear cache and rebuild
 rm -rf .quartz-cache public
@@ -408,11 +411,13 @@ npm run dev
 ### Deployment Issues
 
 **CI Build Failing**:
+
 1. Check GitHub Actions logs
 2. Verify all secrets are set correctly
 3. Test build locally: `npm run sync && npm run build`
 
 **Images not loading**:
+
 1. Ensure images are in `ASSETS_DIRS`
 2. Check image paths in markdown
 3. Verify `static/assets/` directory exists
@@ -424,9 +429,9 @@ npm run dev
 Quartz automatically resolves wikilinks:
 
 ```markdown
-[[Note Name]]              → /note-name
-[[Folder/Note Name]]       → /folder/note-name
-[[Note Name|Custom Text]]  → Custom Text → /note-name
+[[Note Name]] → /note-name
+[[Folder/Note Name]] → /folder/note-name
+[[Note Name|Custom Text]] → Custom Text → /note-name
 ```
 
 ### Backlinks
@@ -436,6 +441,7 @@ Every note automatically shows which other notes link to it.
 ### Graph View
 
 Interactive graph visualization of note connections:
+
 - Click nodes to navigate
 - Zoom and pan
 - Filter by tags
@@ -443,6 +449,7 @@ Interactive graph visualization of note connections:
 ### Search
 
 Full-text search with:
+
 - Instant results
 - Keyboard navigation
 - Content preview
@@ -450,6 +457,7 @@ Full-text search with:
 ### Tags
 
 Organize notes by topic:
+
 ```markdown
 ---
 tags:
@@ -469,6 +477,7 @@ Supports KaTeX for mathematical notation:
 Inline: $E = mc^2$
 
 Block:
+
 $$
 \int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
 $$
@@ -521,6 +530,7 @@ npm run build && npm run check:links
 ## 🤝 Contributing
 
 This is a personal site, but feel free to:
+
 - Report issues
 - Suggest improvements
 - Fork for your own use

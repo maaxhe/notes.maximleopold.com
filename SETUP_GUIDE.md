@@ -10,22 +10,19 @@ Update `scripts/sync-from-vault.ts` with your specific paths:
 
 ```typescript
 const CONFIG = {
-  VAULT_PATH: '/Users/maxmacbookpro/Library/Mobile Documents/iCloud~md~obsidian/Documents/Brain online',
+  VAULT_PATH:
+    "/Users/maxmacbookpro/Library/Mobile Documents/iCloud~md~obsidian/Documents/Brain online",
 
   PUBLIC_DIRS: [
-    '/Bachelorarbeit',  // Your public directories
+    "/Bachelorarbeit", // Your public directories
   ],
 
   ASSETS_DIRS: [
-    '/Bachelorarbeit/BA_Bilder',  // Your image directories
+    "/Bachelorarbeit/BA_Bilder", // Your image directories
   ],
 
-  EXCLUDE_PATTERNS: [
-    '**/Private/**',
-    '**/*.excalidraw',
-    '**/Templates/**',
-  ],
-};
+  EXCLUDE_PATTERNS: ["**/Private/**", "**/*.excalidraw", "**/Templates/**"],
+}
 ```
 
 ### 2. Test Local Build
@@ -96,6 +93,7 @@ git push -u origin main
 If you prefer Cloudflare Pages over Netlify:
 
 1. **Disable Netlify Workflow**:
+
    ```bash
    mv .github/workflows/deploy-netlify.yml .github/workflows/deploy-netlify.yml.disabled
    ```
@@ -119,11 +117,13 @@ If you prefer Cloudflare Pages over Netlify:
 1. **Write in Obsidian** as usual in your whitelisted directories
 
 2. **Preview locally**:
+
    ```bash
    npm run dev
    ```
 
 3. **Commit and push**:
+
    ```bash
    git add .
    git commit -m "Add notes on [topic]"
@@ -214,6 +214,7 @@ export const defaultContentPageLayout: ContentLayout = {
 ### Pre-commit Hooks
 
 Husky automatically runs checks before each commit:
+
 - Formats code
 - Checks for potential secrets
 - Prevents committing private content
@@ -221,6 +222,7 @@ Husky automatically runs checks before each commit:
 ### Manual Secret Check
 
 Before committing, review staged files:
+
 ```bash
 git diff --cached | grep -i "password\|secret\|token\|api"
 ```
@@ -236,12 +238,15 @@ ls -R content/  # Should not show any Private/ directories
 ## 🐛 Common Issues & Solutions
 
 ### Issue: Vault not found
+
 ```bash
 Error: Vault path does not exist
 ```
+
 **Solution**: Update `VAULT_PATH` in `scripts/sync-from-vault.ts`
 
 ### Issue: Build fails with "Cannot find module"
+
 ```bash
 npm ci          # Clean install
 rm -rf node_modules package-lock.json
@@ -249,18 +254,23 @@ npm install
 ```
 
 ### Issue: Images not loading
+
 **Solution**:
+
 1. Check images are in `ASSETS_DIRS`
 2. Ensure paths use forward slashes
 3. Run `npm run sync` again
 
 ### Issue: Broken wikilinks
+
 **Solution**:
+
 - Broken wikilinks to non-existent pages are normal in digital gardens
 - They will be automatically created when you add those notes
 - Use `npm run check:links` to review
 
 ### Issue: Changes not showing in dev server
+
 ```bash
 # Clear cache and rebuild
 rm -rf .quartz-cache public
@@ -294,6 +304,7 @@ analytics: {
 ### Optimize Build Time
 
 1. **Disable OG Image Generation** (for faster builds):
+
    ```typescript
    // In quartz.config.ts, comment out:
    // Plugin.CustomOgImages(),
@@ -306,6 +317,7 @@ analytics: {
 ### CDN Optimization
 
 Netlify/Cloudflare automatically provide:
+
 - Global CDN
 - Automatic SSL
 - Compression (gzip/brotli)
