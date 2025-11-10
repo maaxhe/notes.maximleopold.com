@@ -3,6 +3,8 @@
 
 [build]
   # Build command to run
+  # Note: 'npm run sync' will gracefully skip if the Obsidian vault is not available
+  # Content should be committed to git for CI/CD deployments
   command = "npm run sync && npm run build"
 
   # Directory to publish (Quartz outputs to 'public' by default)

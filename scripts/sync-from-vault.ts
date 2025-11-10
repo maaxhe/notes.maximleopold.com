@@ -351,11 +351,15 @@ function main(): void {
 
   // Validate vault path
   if (!fs.existsSync(CONFIG.VAULT_PATH)) {
-    console.error(`❌ Vault path does not exist: ${CONFIG.VAULT_PATH}`)
-    console.error(
-      "Please update VAULT_PATH in the script or set the VAULT_PATH environment variable.",
+    console.warn(`⚠️  Vault path does not exist: ${CONFIG.VAULT_PATH}`)
+    console.log(
+      "Skipping sync - this is expected in CI/CD environments where content is already committed.",
     )
-    process.exit(1)
+    console.log(
+      "For local development, please update VAULT_PATH in the script or set the VAULT_PATH environment variable.",
+    )
+    console.log("\n✅ Sync skipped (vault not available)\n")
+    process.exit(0)
   }
 
   // Clean and prepare
