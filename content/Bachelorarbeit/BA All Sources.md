@@ -273,6 +273,8 @@ Parietal Cortex:
 
 ### Glasser, M. F., Coalson, T. S., Robinson, E. C., Hacker, C. D., Harwell, J., Yacoub, E., Ugurbil, K., Andersson, J., Beckmann, C. F., Jenkinson, M., Smith, S. M., & Van Essen, D. C. (2016). A multi-modal parcellation of human cerebral cortex. _Nature_, _536_(7615), 171–178. [https://doi.org/10.1038/nature18933](https://doi.org/10.1038/nature18933)
 
+^621d35
+
 - The early auditory areas include A1, LBelt (Lateral Belt), MBelt (Medial Belt), PBelt (Para-Belt), and the retro-insular cortex (RI). These areas are surrounded by areas, OP2-3, OP1, PFcm, PSL, A4, Ig, and TA2.
 - A1 is very heavily myelinated, even relative to its heavily myelinated surrounding neighbors
 

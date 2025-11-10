@@ -83,6 +83,9 @@ document.addEventListener("nav", () => {
   const theme = document.documentElement.getAttribute("saved-theme")
   if (theme) {
     giscusScript.setAttribute("data-theme", getThemeUrl(getThemeName(theme)))
+  } else {
+    // Fallback to light theme if no theme is set
+    giscusScript.setAttribute("data-theme", getThemeUrl("light"))
   }
 
   giscusContainer.appendChild(giscusScript)
