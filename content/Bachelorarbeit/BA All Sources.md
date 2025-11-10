@@ -379,7 +379,7 @@ https://www.uni-osnabrueck.de/fb8/ikw/institut/personal
 
 - [x] schauen wir uns Working Memory and oder rein resting-state? 
 - [x] unterschied zwischen functional connectivity und effective connectivity und diffusion tractography --> ist das relevant? 
-- [x] ![[Bachelorarbeit Cognitive Science#^579d43]]
+- [x] ![[BA All Sources#^579d43]]
 - [ ] 
 ## Source
 Rolls, E. T., Rauschecker, J. P., Deco, G., Huang, C.-C., & Feng, J. (2023). Auditory cortical connectivity in humans. _Cerebral Cortex_, _33_(10), 6207–6227. [https://doi.org/10.1093/cercor/bhac496](https://doi.org/10.1093/cercor/bhac496)
@@ -409,7 +409,7 @@ preferential connectivity
 ### Aufgaben 
 - [ ] Areale in Dorsal/ventral einteilen
 	- [ ] wo ist der Herschl Gyrus? alles dahinter soll where pathway sein -> Herschl == A1
-	- [ ] schauen wo die einzelnen areale im Glasser Atlas sind -> [[Bachelorarbeit Cognitive Science#^dfae6d]]
+	- [ ] schauen wo die einzelnen areale im Glasser Atlas sind -> [[BA All Sources#^dfae6d]]
 	- [ ] welche Areale sind auf dem Poeppel paper lateral view zu sehen?
 - [ ] Mehr Quellen finden 
 - [ ] wie wichtig sind functions? ist der auditory cortex involved in decisions?-> ist diese frage überhaupt relevant?
@@ -425,4 +425,8 @@ preferential connectivity
 Created: 2025-08-19 12:50
 
 
-[[Verbindung Obsidian mit meiner Homepage]]
+
+TESTETSTETSTSTETS
+
+Was auch immer
+Dieser Text wurde nach 17:03 geschrieben
