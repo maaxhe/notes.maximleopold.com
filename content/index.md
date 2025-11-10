@@ -6,13 +6,6 @@ title: Willkommen zu meinem digitalen Garten
 
 Dies ist mein öffentlicher Notiz-Garten, gehostet mit [Quartz](https://quartz.jzhao.xyz/).
 
-## Verfügbare Inhalte
-
-Hier findest du meine öffentlichen Notizen zu verschiedenen Themen:
-
-- [[Bachelorarbeit/Bachelorarbeit Cognitive Science|Bachelorarbeit Cognitive Science]]
-- [[Bachelorarbeit/MBelt|MBelt]]
-
 ## Über diese Seite
 
 Diese Seite wird automatisch aus meinem Obsidian Vault synchronisiert und mit Quartz generiert.
