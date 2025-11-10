@@ -1,5 +1,5 @@
 ---
-title: Maxim Leopold's Notes
+title: Maxim's Notes
 ---
 
 # Welcome to My Digital Garden
@@ -17,4 +17,4 @@ These notes are published from my personal Obsidian vault using [Quartz](https:/
 
 ---
 
-*Last updated: 2025-11-10*
+_Last updated: 2025-11-10_
