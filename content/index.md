@@ -4,7 +4,7 @@ title: Willkommen zu meinem digitalen Garten
 
 # Willkommen
 
-Dies ist mein öffentlicher Notiz-Garten.
+Moin, das hier sind meine persönlichen Notizen - hochgeladen direkt von Obsidian.
 
 ## Über diese Seite
 
