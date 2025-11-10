@@ -44,7 +44,8 @@ const CONFIG = {
 
   // Target directories
   CONTENT_DIR: "./content",
-  ASSETS_DIR: "./static/assets",
+  // Assets are copied to content dir so Quartz can resolve Obsidian wikilinks
+  ASSETS_DIR: "./content",
 
   // If true, only sync files with "publish: true" in frontmatter
   REQUIRE_PUBLISH_FLAG: false,
@@ -202,19 +203,16 @@ function collectAssets(): Map<string, string> {
       )
 
       if (isAsset) {
-        const relativePath = path.relative(fullPath, filePath)
-        const destPath = path.join(CONFIG.ASSETS_DIR, relativePath)
+        // Keep the same relative path from vault root for Obsidian wikilinks
+        const relativeFromVault = path.relative(CONFIG.VAULT_PATH, filePath)
+        const destPath = path.join(CONFIG.ASSETS_DIR, relativeFromVault)
 
-        // Store both the filename and the full path as keys
-        const filename = path.basename(filePath)
-        const webPath = "/assets/" + normalizePath(relativePath)
-
-        assetsMap.set(filename, webPath)
-        assetsMap.set(relativePath, webPath)
-
-        // Copy asset
+        // Copy asset maintaining vault structure
         copyFile(filePath, destPath)
-        console.log(`  ✓ ${filename}`)
+        console.log(`  ✓ ${relativeFromVault}`)
+
+        const filename = path.basename(filePath)
+        assetsMap.set(filename, relativeFromVault)
       }
     })
   }
@@ -269,7 +267,7 @@ function syncContent(assetsMap: Map<string, string>): SyncStats {
 
         // Transform content
         let transformed = content
-        transformed = transformImageEmbeds(transformed, assetsMap)
+        // Note: Keeping Obsidian wikilink syntax ![[image.png]] as Quartz handles it natively
         transformed = transformDataview(transformed)
 
         // Determine destination path (preserve directory structure)
