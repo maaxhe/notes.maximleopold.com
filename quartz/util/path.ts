@@ -173,12 +173,26 @@ export function resolveRelative(current: FullSlug, target: FullSlug | SimpleSlug
   return res
 }
 
+// Helper function to remove markdown formatting from anchor text
+function cleanMarkdownFromAnchor(text: string): string {
+  // Remove markdown links: [text](url) -> text
+  let cleaned = text.replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1")
+  // Remove bold/italic: **text** or *text* -> text
+  cleaned = cleaned.replace(/\*\*([^\*]+)\*\*/g, "$1")
+  cleaned = cleaned.replace(/\*([^\*]+)\*/g, "$1")
+  // Remove code: `text` -> text
+  cleaned = cleaned.replace(/`([^`]+)`/g, "$1")
+  return cleaned
+}
+
 export function splitAnchor(link: string): [string, string] {
   let [fp, anchor] = link.split("#", 2)
   if (fp.endsWith(".pdf")) {
     return [fp, anchor === undefined ? "" : `#${anchor}`]
   }
-  anchor = anchor === undefined ? "" : "#" + slugAnchor(anchor)
+  // Clean markdown formatting from anchor before slugifying
+  const cleanedAnchor = anchor === undefined ? "" : cleanMarkdownFromAnchor(anchor)
+  anchor = cleanedAnchor === "" ? "" : "#" + slugAnchor(cleanedAnchor)
   return [fp, anchor]
 }
 
