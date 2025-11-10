@@ -8,6 +8,8 @@ Dies ist mein öffentlicher Notiz-Garten, gehostet mit [Quartz](https://quartz.j
 
 ## Verfügbare Inhalte
 
+Hier findest du meine öffentlichen Notizen zu verschiedenen Themen:
+
 - [[Bachelorarbeit/Bachelorarbeit Cognitive Science|Bachelorarbeit Cognitive Science]]
 - [[Bachelorarbeit/MBelt|MBelt]]
 

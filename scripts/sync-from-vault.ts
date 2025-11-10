@@ -315,9 +315,18 @@ function walkDirectory(dir: string, callback: (filePath: string) => void): void 
 
 /**
  * Clean destination directories before sync
+ * Preserves index.md if it exists
  */
 function cleanDestinations(): void {
   console.log("🧹 Cleaning destination directories...")
+
+  // Backup index.md if it exists
+  const indexPath = path.join(CONFIG.CONTENT_DIR, "index.md")
+  let indexBackup: string | null = null
+  if (fs.existsSync(indexPath)) {
+    indexBackup = fs.readFileSync(indexPath, "utf-8")
+    console.log("  ℹ️  Backing up index.md")
+  }
 
   if (fs.existsSync(CONFIG.CONTENT_DIR)) {
     fs.rmSync(CONFIG.CONTENT_DIR, { recursive: true, force: true })
@@ -329,6 +338,12 @@ function cleanDestinations(): void {
 
   fs.mkdirSync(CONFIG.CONTENT_DIR, { recursive: true })
   fs.mkdirSync(CONFIG.ASSETS_DIR, { recursive: true })
+
+  // Restore index.md if it was backed up
+  if (indexBackup) {
+    fs.writeFileSync(indexPath, indexBackup, "utf-8")
+    console.log("  ℹ️  Restored index.md")
+  }
 
   console.log("✅ Cleaned\n")
 }
