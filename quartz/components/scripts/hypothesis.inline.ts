@@ -7,19 +7,19 @@ let lastUrl = location.href
 // Function to trigger Hypothesis to check for annotations
 function refreshHypothesis() {
   if (!window.hypothesisEmbed) {
-    console.log('Hypothesis not loaded yet, waiting...')
+    console.log("Hypothesis not loaded yet, waiting...")
     // Wait for Hypothesis to load
     setTimeout(refreshHypothesis, 100)
     return
   }
 
-  console.log('Hypothesis: Refreshing annotations for new page')
+  console.log("Hypothesis: Refreshing annotations for new page")
 
   // Method 1: Use Hypothesis's internal API if available
   if (window.hypothesisConfig) {
     // Trigger a re-check by dispatching events Hypothesis listens to
-    window.dispatchEvent(new Event('load'))
-    window.dispatchEvent(new Event('DOMContentLoaded'))
+    window.dispatchEvent(new Event("load"))
+    window.dispatchEvent(new Event("DOMContentLoaded"))
   }
 
   // Method 2: Force Hypothesis to re-scan the page
@@ -29,7 +29,7 @@ function refreshHypothesis() {
     window.hypothesisConfig = oldConfig
 
     // Hypothesis listens for this event to know when to rescan
-    const event = new Event('hypothesisConfigChanged')
+    const event = new Event("hypothesisConfigChanged")
     window.dispatchEvent(event)
   }, 50)
 
@@ -65,7 +65,7 @@ async function handleNav() {
 
   // Only act if URL actually changed or initial load
   if (currentUrl !== lastUrl || !hypothesisLoaded) {
-    console.log('Hypothesis: Page navigation detected')
+    console.log("Hypothesis: Page navigation detected")
     lastUrl = currentUrl
 
     // Wait for Hypothesis to be ready
@@ -77,4 +77,4 @@ async function handleNav() {
 }
 
 // Listen for Quartz's nav event (fires on every page navigation including initial load)
-document.addEventListener('nav', handleNav)
+document.addEventListener("nav", handleNav)
