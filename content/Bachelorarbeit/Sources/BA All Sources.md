@@ -1,5 +1,6 @@
 ---
 title: "BA All Sources"
+permalink: Bachelorarbeit/Sources/BA-All-Sources
 aliases:
   - BA All Sources
   - BA-All-Sources
@@ -330,6 +331,9 @@ more about [[STSdp]]:
 
 
 ### Frühholz (2015) - NeuroImage 
+
+^0ead40
+
 Frühholz, S., Gschwind, M., & Grandjean, D. (2015). Bilateral dorsal and ventral fiber pathways for the processing of affective prosody identified by probabilistic fiber tracking. _NeuroImage_, _109_, 27–34. [https://doi.org/10.1016/j.neuroimage.2015.01.016](https://doi.org/10.1016/j.neuroimage.2015.01.016)
 
 - Dorsal and ventral pathways for syntacto-semantic speech processing in the left hemisphere are represented in the dual-stream model of auditory processing.
@@ -493,3 +497,4 @@ preferential connectivity
 
 
 Created: 2025-08-19 12:50
+
