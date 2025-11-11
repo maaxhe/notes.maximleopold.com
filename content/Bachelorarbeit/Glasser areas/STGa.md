@@ -6,9 +6,9 @@
 - realtive to TGd is more activated in STORY and CUE-AVG
 
 ## see also
-Tags: #cognitivescience/neuroscience #science 
+Tags: #cognitivescience/neuroscience #science #stream/ventral
 *Superlink:* [[050 🧠Neuroscience]] 
-
+![[Glasser HCP-MMP1 human brain lateral view.png]]
 ## Source
 [[BA All Sources#Glasser et al. (2016) - Nature 621d35]]
 

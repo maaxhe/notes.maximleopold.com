@@ -9,7 +9,7 @@
 ## see also
 Tags: #cognitivescience/neuroscience #science 
 *Superlink:* [[050 🧠Neuroscience]] 
-
+![[Glasser HCP-MMP1 human brain lateral view.png]]
 ## Source
 
 

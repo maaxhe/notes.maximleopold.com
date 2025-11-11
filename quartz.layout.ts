@@ -41,6 +41,18 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Explorer(),
   ],
   right: [
+    Component.RecentNotes({
+      title: "Stream · dorsal",
+      limit: 5,
+      showTags: false,
+      filter: (page) => page.frontmatter?.tags?.includes("stream/dorsal") ?? false,
+    }),
+    Component.RecentNotes({
+      title: "Stream · ventral",
+      limit: 5,
+      showTags: false,
+      filter: (page) => page.frontmatter?.tags?.includes("stream/ventral") ?? false,
+    }),
     Component.Graph({
       localGraph: { showTags: false },
       globalGraph: { showTags: false },

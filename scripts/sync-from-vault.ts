@@ -14,6 +14,7 @@
 import * as fs from "fs"
 import * as path from "path"
 import * as crypto from "crypto"
+import matter from "gray-matter"
 import { fileURLToPath } from "url"
 
 // ============================================================================
@@ -49,7 +50,22 @@ const CONFIG = {
 
   // If true, only sync files with "publish: true" in frontmatter
   REQUIRE_PUBLISH_FLAG: false,
+
+  // Require a specific frontmatter tag to export content (set to null to disable)
+  REQUIRED_FRONTMATTER_TAG: "share-with-prof",
+
+  /**
+   * Regexes describing sections that must be removed before publishing.
+   * Update these to match the markers you use inside the vault.
+   */
+  SENSITIVE_SECTION_PATTERNS: [
+    /<!--\s*private:start\s*-->[\s\S]*?<!--\s*private:end\s*-->/gi,
+    /%%\s*private\b[\s\S]*?%%[\s\S]*?%%\s*endprivate\s*%%/gi,
+    /```private[\s\S]*?```/gi,
+  ] as RegExp[],
 }
+
+type Frontmatter = Record<string, unknown>
 
 // ============================================================================
 // UTILITY FUNCTIONS
@@ -80,16 +96,56 @@ function shouldExclude(filePath: string): boolean {
 /**
  * Check if file has publish: true in frontmatter
  */
-function shouldPublish(content: string): boolean {
+function shouldPublish(frontmatter: Frontmatter): boolean {
   if (!CONFIG.REQUIRE_PUBLISH_FLAG) return true
 
-  const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---/
-  const match = content.match(frontmatterRegex)
+  const publishValue = frontmatter?.publish
+  if (typeof publishValue === "boolean") return publishValue
+  if (typeof publishValue === "string") {
+    return publishValue.trim().toLowerCase() === "true"
+  }
 
-  if (!match) return false
+  return false
+}
 
-  const frontmatter = match[1]
-  return /^\s*publish:\s*true\s*$/m.test(frontmatter)
+function normalizeTags(tagValue: unknown): string[] {
+  const clean = (value: string) => value.replace(/^#+/, "").trim().toLowerCase()
+
+  const fromString = (value: string): string[] =>
+    value
+      .split(/[,;]/)
+      .flatMap((segment) =>
+        segment
+          .split(/\s+/)
+          .map(clean)
+          .filter((token) => token.length > 0),
+      )
+
+  if (Array.isArray(tagValue)) {
+    return tagValue
+      .flatMap((item) => (typeof item === "string" ? fromString(item) : []))
+      .filter((token) => token.length > 0)
+  }
+
+  if (typeof tagValue === "string") {
+    return fromString(tagValue)
+  }
+
+  return []
+}
+
+function hasRequiredTag(frontmatter: Frontmatter): boolean {
+  const requiredTag = CONFIG.REQUIRED_FRONTMATTER_TAG?.toLowerCase()
+  if (!requiredTag) return true
+
+  const tags = normalizeTags(frontmatter?.tags ?? frontmatter?.tag)
+  return tags.includes(requiredTag)
+}
+
+function removeSensitiveSections(content: string): string {
+  if (!Array.isArray(CONFIG.SENSITIVE_SECTION_PATTERNS)) return content
+
+  return CONFIG.SENSITIVE_SECTION_PATTERNS.reduce((acc, pattern) => acc.replace(pattern, ""), content)
 }
 
 /**
@@ -256,18 +312,27 @@ function syncContent(assetsMap: Map<string, string>): SyncStats {
       stats.filesProcessed++
 
       try {
-        const content = fs.readFileSync(filePath, "utf-8")
+        const rawContent = fs.readFileSync(filePath, "utf-8")
+        const parsed = matter(rawContent)
+        const frontmatter = (parsed.data ?? {}) as Frontmatter
 
         // Check publish flag if required
-        if (!shouldPublish(content)) {
+        if (!shouldPublish(frontmatter)) {
           stats.filesSkipped++
           console.log(`  ⊗ No publish flag: ${path.basename(filePath)}`)
           return
         }
 
-        // Transform content
-        let transformed = content
-        // Note: Keeping Obsidian wikilink syntax ![[image.png]] as Quartz handles it natively
+        if (!hasRequiredTag(frontmatter)) {
+          stats.filesSkipped++
+          console.log(
+            `  ⊗ Missing tag "${CONFIG.REQUIRED_FRONTMATTER_TAG}": ${path.basename(filePath)}`,
+          )
+          return
+        }
+
+        // Transform content (keep wikilinks, strip sensitive parts, downgrade unsupported blocks)
+        let transformed = removeSensitiveSections(rawContent)
         transformed = transformDataview(transformed)
 
         // Determine destination path (preserve directory structure)
