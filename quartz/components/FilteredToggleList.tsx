@@ -14,13 +14,15 @@ interface Options {
   sort?: (a: QuartzPluginData, b: QuartzPluginData) => number
   defaultOpen?: boolean
   emptyLabel?: string
+  collapsible?: boolean
 }
 
 const defaultOptions = {
   limit: 5,
   defaultOpen: false,
   emptyLabel: "No notes yet.",
-} satisfies Required<Pick<Options, "limit" | "defaultOpen" | "emptyLabel">>
+  collapsible: true,
+} satisfies Required<Pick<Options, "limit" | "defaultOpen" | "emptyLabel" | "collapsible">>
 
 export default ((userOpts: Options) => {
   const FilteredToggleList: QuartzComponent = ({
@@ -36,11 +38,10 @@ export default ((userOpts: Options) => {
     }
 
     const pages = allFiles.filter(opts.filter).sort(opts.sort)
-    const { summary, description, limit, defaultOpen, emptyLabel } = opts
+    const { summary, description, limit, defaultOpen, emptyLabel, collapsible } = opts
 
-    return (
-      <details class={classNames(displayClass, "filtered-toggle-list")} open={defaultOpen}>
-        <summary>{summary}</summary>
+    const ListBody = (
+      <>
         {description && <p class="description">{description}</p>}
         <ul>
           {pages.slice(0, limit).map((page) => {
@@ -57,7 +58,23 @@ export default ((userOpts: Options) => {
           })}
           {pages.length === 0 && <li class="empty">{emptyLabel}</li>}
         </ul>
-      </details>
+      </>
+    )
+
+    if (collapsible) {
+      return (
+        <details class={classNames(displayClass, "filtered-toggle-list")} open={defaultOpen}>
+          <summary>{summary}</summary>
+          {ListBody}
+        </details>
+      )
+    }
+
+    return (
+      <div class={classNames(displayClass, "filtered-toggle-list", "static")}>
+        <p class="summary-label">{summary}</p>
+        {ListBody}
+      </div>
     )
   }
 

@@ -7,11 +7,21 @@
   font-size: 0.85rem;
 }
 
-.filtered-toggle-list summary {
+.filtered-toggle-list summary,
+.filtered-toggle-list .summary-label {
   cursor: pointer;
   list-style: none;
   font-weight: 600;
   color: var(--gray);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+}
+
+.filtered-toggle-list.static .summary-label {
+  cursor: default;
+  color: var(--darkgray);
 }
 
 .filtered-toggle-list[open] summary {
@@ -25,7 +35,6 @@
 .filtered-toggle-list summary::before {
   content: "▸";
   display: inline-block;
-  margin-right: 0.35rem;
   transition: transform 0.2s ease;
 }
 

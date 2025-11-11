@@ -48,6 +48,9 @@ ul.toc-content.overflow {
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  scrollbar-gutter: stable;
   list-style: none;
 
   /* Custom scrollbar styling */

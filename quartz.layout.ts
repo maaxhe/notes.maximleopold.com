@@ -69,6 +69,7 @@ export const defaultContentPageLayout: PageLayout = {
       summary: "#stream/dorsal",
       emptyLabel: "Keine freigegebenen Notizen für diesen Stream.",
       limit: 8,
+      collapsible: false,
       filter: (page) =>
         (page.frontmatter?.tags ?? []).some(
           (tag) => typeof tag === "string" && tag.toLowerCase() === "stream/dorsal",
@@ -78,10 +79,21 @@ export const defaultContentPageLayout: PageLayout = {
       summary: "#stream/ventral",
       emptyLabel: "Keine freigegebenen Notizen für diesen Stream.",
       limit: 8,
+      collapsible: false,
       filter: (page) =>
         (page.frontmatter?.tags ?? []).some(
           (tag) => typeof tag === "string" && tag.toLowerCase() === "stream/ventral",
         ),
+    }),
+    Component.FilteredToggleList({
+      summary: "Schreiben an",
+      emptyLabel: "Keine Schreib-Notizen veröffentlicht.",
+      limit: 10,
+      collapsible: false,
+      filter: (page) => {
+        const slug = page.slug?.toLowerCase() ?? ""
+        return slug.startsWith("bachelorarbeit/schreiben")
+      },
     }),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Bibliography(),
