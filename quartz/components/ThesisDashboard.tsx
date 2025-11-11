@@ -17,14 +17,22 @@ const defaultOptions: ThesisDashboardOptions = {
 
 export default ((opts?: Partial<ThesisDashboardOptions>) => {
   const options: ThesisDashboardOptions = { ...defaultOptions, ...opts }
+  const normalizedFolderPath = options.folderPath?.toLowerCase()
 
   const ThesisDashboard: QuartzComponent = ({ fileData, allFiles, cfg }: QuartzComponentProps) => {
     // Filter files that are in the BA folder or have BA tag
     const thesisFiles = allFiles
-      .filter(
-        (file) =>
-          file.slug?.startsWith(options.folderPath!) || file.frontmatter?.tags?.includes("ba"),
-      )
+      .filter((file) => {
+        const slugLower = file.slug?.toLowerCase() ?? ""
+        const matchesFolder = normalizedFolderPath
+          ? slugLower.startsWith(normalizedFolderPath)
+          : false
+        const tags = (file.frontmatter?.tags ?? []).flatMap((tag) =>
+          typeof tag === "string" ? [tag.toLowerCase()] : [],
+        )
+        const hasBATag = tags.includes("ba")
+        return matchesFolder || hasBATag
+      })
       .filter((file) => file.slug !== fileData.slug) // Don't show current page
       .sort((a, b) => {
         // Sort by chapter number if available

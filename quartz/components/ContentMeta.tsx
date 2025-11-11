@@ -20,7 +20,8 @@ const defaultOptions: ContentMetaOptions = {
 }
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24
-const startOfLocalDay = (date: Date) => new Date(date.getFullYear(), date.getMonth(), date.getDate())
+const startOfLocalDay = (date: Date) =>
+  new Date(date.getFullYear(), date.getMonth(), date.getDate())
 const differenceInCalendarDays = (a: Date, b: Date) => {
   const startA = startOfLocalDay(a)
   const startB = startOfLocalDay(b)

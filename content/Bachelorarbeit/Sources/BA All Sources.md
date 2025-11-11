@@ -362,6 +362,17 @@ Methods used by Frühholz:
 Friederici, A. D. (2011). The Brain Basis of Language Processing: From Structure to Function. _Physiological Reviews_, _91_(4), 1357–1392. [https://doi.org/10.1152/physrev.00006.2011](https://doi.org/10.1152/physrev.00006.2011)
 
 - Networks involving the temporal cortex and the inferior frontal cortex with a clear left lateralization were shown to support syntactic processes, whereas less lateralized temporo-frontal networks subserve semantic processes.
+
+![[Friederici 2011 Figure 3.png]]
+
+Anatomy in the auditory cortex: 
+- In an attempt to specify subregions in the auditory cortex and adjacent areas in humans, researchers have relied on neuroanatomical data from non-human primates for which a core region in HG, a surrounding belt and parabelt region has been identified (213, 230). In humans, the PAC is located on the superior surface of the temporal lobe bilaterally in HG. Three regions can be identified adjacent to HG. A region located posterior, the planum temporale (PT), a region anterolateral to HG called planum polare (PP), and a region at the lateral convexity of the cortex in the STG extending to the superior temporal sulcus (STS). All these regions are involved in the acoustic analysis of speech. Cytoarchitectonic studies have indicated that the PAC usually covers the medial two-thirds of the anterior HG (176), and the identification of a subregion in the lateral convexity of the STG has been confirmed by a receptorarchitectonic analysis (175).
+
+![[Friederici 2011 Table 1 MNI coordinates.png]]
+
+frequencies: 
+- Hickok and Poeppel (118) proposed that the left and right hemisphere generally work at different frequencies, leading to a relative lateralization of functions.
+
 ### Andere Aussagen aus paper
 [[Was bedeuten die Vergleiche aus Glasser SUPPL]]
 

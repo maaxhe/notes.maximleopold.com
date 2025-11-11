@@ -103,7 +103,7 @@ export const defaultContentPageLayout: PageLayout = {
   afterBody: [
     Component.ConditionalRender({
       component: Component.ThesisDashboard(),
-      condition: (page) => page.fileData.slug === "dashboard-ba",
+      condition: (page) => page.fileData.slug?.toLowerCase().endsWith("dashboard-ba") ?? false,
     }),
     Component.Backlinks(),
     Component.PageNavigation(),

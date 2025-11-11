@@ -613,12 +613,23 @@ ol.overflow {
   overflow-y: hidden;
 }
 
-.external-embed.youtube,
-iframe.pdf {
+.external-embed.youtube {
   aspect-ratio: 16 / 9;
   height: 100%;
   width: 100%;
   border-radius: 5px;
+}
+
+iframe.pdf {
+  display: block;
+  width: 100%;
+  min-height: 520px;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  margin: 1rem 0;
 }
 
 .navigation-progress {

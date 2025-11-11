@@ -35,8 +35,6 @@
 
 Hier stehen die ganzen Vergleiche drin und was genau die Begriffe bedeuten: 
 ![[HCP_S1200_Release_Reference_Manual.pdf]]
-
-[📄 HCP S1200 Reference Manual als PDF herunterladen](/a-Literatur-Notizen/PDFs/HCP_S1200_Release_Reference_Manual.pdf)
 ## see also
 Tags: #cognitivescience/neuroscience #science 
 *Superlink:* [[050 🧠Neuroscience]] 
