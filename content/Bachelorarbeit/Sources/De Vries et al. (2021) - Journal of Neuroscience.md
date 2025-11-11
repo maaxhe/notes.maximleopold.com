@@ -8,5 +8,4 @@ subjects who were better prepared (i.e., attended better to the correct stream r
 
 - paper could show alpha connections from IFJ to auditory cortex -> Figure 3d
 
-
 ![[Marinato and Baldauf - 2019 - Object-based attention in complex, naturalistic auditory streams.pdf]]

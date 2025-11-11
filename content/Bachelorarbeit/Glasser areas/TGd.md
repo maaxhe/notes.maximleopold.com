@@ -1,13 +1,10 @@
 ## TGd
 
-
-
 ## see also
-Tags: #cognitivescience/neuroscience #science #stream/ventral 
-*Superlink:* [[050 🧠Neuroscience]] 
+
+Tags: #cognitivescience/neuroscience #science #stream/ventral
+_Superlink:_ [[050 🧠Neuroscience]]
 
 ## Source
-
-
 
 Created: 2025-11-11 14:33
