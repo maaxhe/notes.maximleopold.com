@@ -87,16 +87,6 @@ export const defaultContentPageLayout: PageLayout = {
           (tag) => typeof tag === "string" && tag.toLowerCase() === "stream/ventral",
         ),
     }),
-    Component.FilteredToggleList({
-      summary: "Schreiben an",
-      emptyLabel: "Keine Schreib-Notizen veröffentlicht.",
-      limit: 10,
-      collapsible: false,
-      filter: (page) => {
-        const slug = page.slug?.toLowerCase() ?? ""
-        return slug.startsWith("bachelorarbeit/schreiben")
-      },
-    }),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Bibliography(),
   ],
