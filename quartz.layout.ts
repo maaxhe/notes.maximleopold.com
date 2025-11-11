@@ -23,6 +23,7 @@ export const defaultContentPageLayout: PageLayout = {
     }),
     Component.ArticleTitle(),
     Component.ContentMeta(),
+    Component.NewBadge(),
     Component.FeedbackBadge(),
     Component.ReviewStatus(),
     Component.ExportButton(),

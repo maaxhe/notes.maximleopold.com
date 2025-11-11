@@ -18,11 +18,7 @@ const defaultOptions: ThesisDashboardOptions = {
 export default ((opts?: Partial<ThesisDashboardOptions>) => {
   const options: ThesisDashboardOptions = { ...defaultOptions, ...opts }
 
-  const ThesisDashboard: QuartzComponent = ({
-    fileData,
-    allFiles,
-    cfg,
-  }: QuartzComponentProps) => {
+  const ThesisDashboard: QuartzComponent = ({ fileData, allFiles, cfg }: QuartzComponentProps) => {
     // Filter files that are in the BA folder or have BA tag
     const thesisFiles = allFiles
       .filter(

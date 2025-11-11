@@ -20,11 +20,7 @@ const defaultOptions: RecentChangesOptions = {
 export default ((opts?: Partial<RecentChangesOptions>) => {
   const options: RecentChangesOptions = { ...defaultOptions, ...opts }
 
-  const RecentChanges: QuartzComponent = ({
-    fileData,
-    allFiles,
-    cfg,
-  }: QuartzComponentProps) => {
+  const RecentChanges: QuartzComponent = ({ fileData, allFiles, cfg }: QuartzComponentProps) => {
     // Filter files and sort by modification date
     let files = allFiles.filter((file) => file.dates?.modified)
 

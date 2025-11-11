@@ -13,10 +13,7 @@ const defaultOptions: FeedbackBadgeOptions = {
 export default ((opts?: Partial<FeedbackBadgeOptions>) => {
   const options: FeedbackBadgeOptions = { ...defaultOptions, ...opts }
 
-  const FeedbackBadge: QuartzComponent = ({
-    fileData,
-    displayClass,
-  }: QuartzComponentProps) => {
+  const FeedbackBadge: QuartzComponent = ({ fileData, displayClass }: QuartzComponentProps) => {
     const needsFeedback = fileData.frontmatter?.needsFeedback as boolean | undefined
     const feedbackNote = fileData.frontmatter?.feedbackNote as string | undefined
 
