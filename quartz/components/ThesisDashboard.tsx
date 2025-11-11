@@ -38,6 +38,11 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
         )
       })
 
+    // Don't show dashboard if there are no thesis files
+    if (thesisFiles.length === 0) {
+      return null
+    }
+
     // Calculate overall statistics
     const totalFiles = thesisFiles.length
     const completedFiles = thesisFiles.filter(

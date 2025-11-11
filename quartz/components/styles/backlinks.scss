@@ -18,14 +18,16 @@ button.backlinks-header {
   text-align: left;
   cursor: pointer;
   padding: 0;
+  margin: 0;
   color: var(--dark);
   display: flex;
   align-items: center;
+  gap: 0;
 
   & h3 {
     font-size: 1rem;
-    display: inline-block;
     margin: 0;
+    padding: 0;
   }
 
   & .fold {

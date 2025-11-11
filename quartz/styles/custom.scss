@@ -5,7 +5,9 @@
 /* Fix for TOC and Backlinks scrolling in right sidebar */
 .sidebar.right {
   overflow-y: auto !important;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
+  max-height: 100vh;
+  padding-bottom: 2rem !important;
 
   /* Custom scrollbar for sidebar */
   &::-webkit-scrollbar {
@@ -28,4 +30,15 @@
   /* Firefox */
   scrollbar-width: thin;
   scrollbar-color: var(--gray) transparent;
+}
+
+/* Ensure TOC and Backlinks don't clip */
+.toc,
+.backlinks {
+  overflow: visible !important;
+}
+
+.toc-content,
+.backlinks-content {
+  overflow-y: auto !important;
 }

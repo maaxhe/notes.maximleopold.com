@@ -23,7 +23,6 @@ export const defaultContentPageLayout: PageLayout = {
     }),
     Component.ArticleTitle(),
     Component.ContentMeta(),
-    Component.NewBadge(),
     Component.FeedbackBadge(),
     Component.ReviewStatus(),
     Component.ExportButton(),
@@ -89,6 +88,10 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Backlinks(),
   ],
   afterBody: [
+    Component.ConditionalRender({
+      component: Component.ThesisDashboard(),
+      condition: (page) => page.fileData.slug === "index",
+    }),
     Component.PageNavigation(),
   ],
 }

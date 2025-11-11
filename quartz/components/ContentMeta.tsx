@@ -54,9 +54,12 @@ export default ((opts?: Partial<ContentMetaOptions>) => {
             timeAgo = `vor ${years} ${years === 1 ? "Jahr" : "Jahren"}`
           }
 
+          // Add "Neu" indicator for recently modified pages (within 7 days)
+          const isNew = diffDays <= 7
+
           segments.push(
             <span class="last-modified">
-              📝 Zuletzt geändert: <DateComponent date={date} locale={cfg.locale} /> ({timeAgo})
+              📝 Zuletzt geändert: <DateComponent date={date} locale={cfg.locale} /> ({timeAgo}){isNew && <span class="new-indicator"> 🆕</span>}
             </span>,
           )
         }
