@@ -51,8 +51,11 @@ const CONFIG = {
   // If true, only sync files with "publish: true" in frontmatter
   REQUIRE_PUBLISH_FLAG: false,
 
-  // Require a specific frontmatter tag to export content (set to null to disable)
-  REQUIRED_FRONTMATTER_TAG: "share-with-prof",
+  // Require a specific frontmatter tag to export content (set env REQUIRED_FRONTMATTER_TAG to override)
+  REQUIRED_FRONTMATTER_TAG:
+    process.env.REQUIRED_FRONTMATTER_TAG === undefined
+      ? null
+      : process.env.REQUIRED_FRONTMATTER_TAG || null,
 
   /**
    * Regexes describing sections that must be removed before publishing.
@@ -435,6 +438,9 @@ function main(): void {
   console.log("Configuration:")
   console.log(`  Vault: ${CONFIG.VAULT_PATH}`)
   console.log(`  Public dirs: ${CONFIG.PUBLIC_DIRS.join(", ")}`)
+  console.log(
+    `  Required tag: ${CONFIG.REQUIRED_FRONTMATTER_TAG ?? "(none - exporting all matching files)"}`,
+  )
   console.log(`  Require publish flag: ${CONFIG.REQUIRE_PUBLISH_FLAG}\n`)
 
   // Validate vault path

@@ -49,13 +49,19 @@ export const defaultContentPageLayout: PageLayout = {
       summary: "#stream/dorsal",
       emptyLabel: "Keine freigegebenen Notizen für diesen Stream.",
       limit: 8,
-      filter: (page) => page.frontmatter?.tags?.includes("stream/dorsal") ?? false,
+      filter: (page) =>
+        (page.frontmatter?.tags ?? []).some(
+          (tag) => typeof tag === "string" && tag.toLowerCase() === "stream/dorsal",
+        ),
     }),
     Component.FilteredToggleList({
       summary: "#stream/ventral",
       emptyLabel: "Keine freigegebenen Notizen für diesen Stream.",
       limit: 8,
-      filter: (page) => page.frontmatter?.tags?.includes("stream/ventral") ?? false,
+      filter: (page) =>
+        (page.frontmatter?.tags ?? []).some(
+          (tag) => typeof tag === "string" && tag.toLowerCase() === "stream/ventral",
+        ),
     }),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
