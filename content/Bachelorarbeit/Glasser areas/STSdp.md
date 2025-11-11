@@ -10,7 +10,7 @@
 Quelle: [[STSdp#^ba7a9b]]
 
 
-[[Wofür stehen die Begriffe und ]]
+[[Was bedeuten die Vergleiche aus Glasser SUPPL]]
 ## see also
 Tags: #cognitivescience/neuroscience #science 
 *Superlink:* [[050 🧠Neuroscience]] 

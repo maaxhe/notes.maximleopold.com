@@ -30,7 +30,7 @@ const CONFIG = {
   PUBLIC_DIRS: ["/Bachelorarbeit"],
 
   // Asset directories (images, PDFs, etc.)
-  ASSETS_DIRS: ["/a Literatur-Notizen/Bilder"],
+  ASSETS_DIRS: ["/a Literatur-Notizen/Bilder", "/a Literatur-Notizen/PDFs"],
 
   // Glob patterns to exclude (never publish these)
   EXCLUDE_PATTERNS: [

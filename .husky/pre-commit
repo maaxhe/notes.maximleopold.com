@@ -3,6 +3,10 @@
 
 echo "🔍 Running pre-commit checks..."
 
+# Sync from Obsidian vault
+echo "🔄 Syncing from Obsidian vault..."
+npm run sync
+
 # Format code
 echo "📝 Formatting code..."
 npm run format
