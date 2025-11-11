@@ -16,7 +16,7 @@ Tags: #cognitivescience/neuroscience #science
 *Superlink:* [[050 🧠Neuroscience]] 
 
 ## Source
-[[BA All Sources#^621d35|Glasser et al. (2016)]] ^ba7a9b
+[[BA All Sources#Glasser et al. (2016) - Nature]] ^ba7a9b
 
 
 Created: 2025-11-10 16:05
