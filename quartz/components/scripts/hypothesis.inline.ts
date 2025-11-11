@@ -1,80 +1,89 @@
 // Hypothesis SPA navigation handler
-// This ensures Hypothesis works immediately on every page load
+// AGGRESSIVE APPROACH: Completely destroy and reload Hypothesis on every navigation
 
-let hypothesisLoaded = false
 let lastUrl = location.href
+let hypothesisScript = null
 
-// Function to trigger Hypothesis to check for annotations
-function refreshHypothesis() {
-  if (!window.hypothesisEmbed) {
-    console.log("Hypothesis not loaded yet, waiting...")
-    // Wait for Hypothesis to load
-    setTimeout(refreshHypothesis, 100)
-    return
+// Completely remove Hypothesis from the page
+function destroyHypothesis() {
+  console.log("Hypothesis: Destroying current instance")
+
+  // Remove all Hypothesis elements
+  const selectors = [
+    "hypothesis-sidebar",
+    "hypothesis-adder",
+    'link[type="application/annotator+html"]',
+    'iframe[title="Hypothesis annotation viewer"]',
+    'iframe[src*="hypothes.is"]',
+    ".annotator-frame",
+    ".annotator-wrapper",
+    ".hypothesis-highlights",
+  ]
+
+  selectors.forEach((selector) => {
+    document.querySelectorAll(selector).forEach((el) => el.remove())
+  })
+
+  // Remove the script tag
+  if (hypothesisScript && hypothesisScript.parentNode) {
+    hypothesisScript.parentNode.removeChild(hypothesisScript)
+    hypothesisScript = null
   }
 
-  console.log("Hypothesis: Refreshing annotations for new page")
-
-  // Method 1: Use Hypothesis's internal API if available
-  if (window.hypothesisConfig) {
-    // Trigger a re-check by dispatching events Hypothesis listens to
-    window.dispatchEvent(new Event("load"))
-    window.dispatchEvent(new Event("DOMContentLoaded"))
-  }
-
-  // Method 2: Force Hypothesis to re-scan the page
-  // Remove and re-add the hypothesisConfig to trigger a reload
-  const oldConfig = window.hypothesisConfig
-  setTimeout(() => {
-    window.hypothesisConfig = oldConfig
-
-    // Hypothesis listens for this event to know when to rescan
-    const event = new Event("hypothesisConfigChanged")
-    window.dispatchEvent(event)
-  }, 50)
-
-  hypothesisLoaded = true
+  // Clear window objects
+  delete window.hypothesisEmbed
+  delete window.Hypothesis
 }
 
-// Wait for Hypothesis to be ready
-function waitForHypothesis() {
-  return new Promise((resolve) => {
-    if (window.hypothesisEmbed) {
-      resolve(true)
-      return
+// Load Hypothesis fresh
+function loadHypothesis() {
+  console.log("Hypothesis: Loading fresh instance for", location.href)
+
+  // Destroy any existing instance first
+  destroyHypothesis()
+
+  // Recreate the config
+  window.hypothesisConfig = function () {
+    return {
+      showHighlights: "always",
+      openSidebar: false,
+      theme: "clean",
     }
+  }
 
-    const checkInterval = setInterval(() => {
-      if (window.hypothesisEmbed) {
-        clearInterval(checkInterval)
-        resolve(true)
-      }
-    }, 50)
+  // Create and inject new script
+  hypothesisScript = document.createElement("script")
+  hypothesisScript.src = "https://hypothes.is/embed.js"
+  hypothesisScript.async = true
 
-    // Timeout after 10 seconds
-    setTimeout(() => {
-      clearInterval(checkInterval)
-      resolve(false)
-    }, 10000)
-  })
+  // Add load handler
+  hypothesisScript.onload = function () {
+    console.log("Hypothesis: Script loaded successfully")
+  }
+
+  hypothesisScript.onerror = function () {
+    console.error("Hypothesis: Failed to load script")
+  }
+
+  document.head.appendChild(hypothesisScript)
 }
 
 // Handle navigation
-async function handleNav() {
+function handleNav() {
   const currentUrl = location.href
 
-  // Only act if URL actually changed or initial load
-  if (currentUrl !== lastUrl || !hypothesisLoaded) {
-    console.log("Hypothesis: Page navigation detected")
+  // Only reload if URL actually changed
+  if (currentUrl !== lastUrl) {
+    console.log("Hypothesis: Navigation detected, reloading")
     lastUrl = currentUrl
 
-    // Wait for Hypothesis to be ready
-    await waitForHypothesis()
-
-    // Small delay to let the page content load
-    setTimeout(refreshHypothesis, 200)
+    // Give the page a moment to settle, then reload Hypothesis
+    setTimeout(loadHypothesis, 500)
   }
 }
 
-// Listen for Quartz's nav event (fires on every page navigation including initial load)
+// Initial load
+loadHypothesis()
+
+// Listen for Quartz's nav event
 document.addEventListener("nav", handleNav)
