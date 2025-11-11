@@ -83,8 +83,8 @@ export const ContentPage: QuartzEmitterPlugin<Partial<FullPageLayout>> = (userOp
           containsIndex = true
         }
 
-        // only process home page, non-tag pages, and non-index pages
-        if (slug.endsWith("/index") || slug.startsWith("tags/")) continue
+        // only process home page, non-tag pages, non-index pages, and non-annotations page
+        if (slug.endsWith("/index") || slug.startsWith("tags/") || slug === "annotations") continue
         yield processContent(ctx, tree, file.data, allFiles, opts, resources)
       }
 

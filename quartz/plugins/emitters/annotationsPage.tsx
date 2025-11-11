@@ -4,7 +4,7 @@ import BodyConstructor from "../../components/Body"
 import { pageResources, renderPage } from "../../components/renderPage"
 import { FullPageLayout } from "../../cfg"
 import { FullSlug } from "../../util/path"
-import { sharedPageComponents } from "../../../quartz.layout"
+import { sharedPageComponents, defaultListPageLayout } from "../../../quartz.layout"
 import { AnnotationsOverviewPage } from "../../components"
 import { defaultProcessedContent } from "../vfile"
 import { write } from "./helpers"
@@ -12,10 +12,8 @@ import { write } from "./helpers"
 export const AnnotationsPage: QuartzEmitterPlugin = () => {
   const opts: FullPageLayout = {
     ...sharedPageComponents,
+    ...defaultListPageLayout,
     pageBody: AnnotationsOverviewPage(),
-    beforeBody: [],
-    left: [],
-    right: [],
   }
 
   const { head: Head, pageBody, footer: Footer } = opts
