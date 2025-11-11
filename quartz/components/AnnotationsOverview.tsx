@@ -16,22 +16,6 @@ export default ((opts?: Partial<AnnotationsOverviewOptions>) => {
     return (
       <div class={classNames(displayClass, "annotations-overview")}>
         <div class="annotations-header">
-          <a href="/" class="back-button" title="Zurück zur Startseite">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-            Zurück
-          </a>
           <h1>Alle Annotationen</h1>
         </div>
 
@@ -66,12 +50,62 @@ export default ((opts?: Partial<AnnotationsOverviewOptions>) => {
 
         <div class="hypothesis-embed-container">
           <h2>Neueste Annotationen</h2>
-          <iframe
-            src="https://hypothes.is/stream?q=group:7DzYpr4y"
-            class="hypothesis-stream"
-            title="Hypothesis Annotations Stream"
-          ></iframe>
+          <p class="stream-note">
+            Die Annotations werden direkt von der Hypothesis-Gruppe geladen. Falls nichts angezeigt
+            wird, besuche den Link oben um alle Annotationen zu sehen.
+          </p>
+          <div id="annotations-list" class="annotations-list-container"></div>
         </div>
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (async function() {
+                const GROUP_ID = '7DzYpr4y';
+                const API_URL = 'https://api.hypothes.is/api/search';
+
+                try {
+                  const response = await fetch(\`\${API_URL}?group=\${GROUP_ID}&limit=20&sort=updated&order=desc\`);
+                  const data = await response.json();
+
+                  const listEl = document.getElementById('annotations-list');
+                  if (!listEl) return;
+
+                  if (!data.rows || data.rows.length === 0) {
+                    listEl.innerHTML = '<p class="no-annotations">Noch keine Annotationen in dieser Gruppe.</p>';
+                    return;
+                  }
+
+                  const html = data.rows.map(ann => {
+                    const date = new Date(ann.created);
+                    const user = ann.user.split(':')[1]?.split('@')[0] || 'Unbekannt';
+                    const quote = ann.target?.[0]?.selector?.find(s => s.type === 'TextQuoteSelector')?.exact || '';
+                    const text = ann.text || '';
+                    const url = ann.uri.replace('https://notes.maximleopold.com', '');
+
+                    return \`
+                      <div class="annotation-item">
+                        <div class="annotation-meta">
+                          <strong>\${user}</strong>
+                          <span class="date">\${date.toLocaleDateString('de-DE')}</span>
+                        </div>
+                        \${quote ? \`<blockquote>\${quote}</blockquote>\` : ''}
+                        \${text ? \`<p class="annotation-text">\${text}</p>\` : ''}
+                        <a href="\${url}" class="page-link">→ Zur Seite</a>
+                      </div>
+                    \`;
+                  }).join('');
+
+                  listEl.innerHTML = html;
+                } catch (err) {
+                  console.error('Failed to load annotations:', err);
+                  document.getElementById('annotations-list').innerHTML =
+                    '<p class="error">Fehler beim Laden der Annotationen.</p>';
+                }
+              })();
+            `,
+          }}
+        />
 
         <div class="usage-instructions">
           <h3>Wie funktioniert's?</h3>
@@ -189,11 +223,73 @@ export default ((opts?: Partial<AnnotationsOverviewOptions>) => {
       font-size: 1.5rem;
     }
 
-    .hypothesis-stream {
-      width: 100%;
-      height: 800px;
-      border: none;
-      display: block;
+    .stream-note {
+      padding: 1rem;
+      color: var(--gray);
+      font-size: 0.95rem;
+      font-style: italic;
+    }
+
+    .annotations-list-container {
+      padding: 1.5rem;
+      max-height: 800px;
+      overflow-y: auto;
+    }
+
+    .annotation-item {
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      background: var(--light);
+      border: 1px solid var(--lightgray);
+      border-radius: 6px;
+    }
+
+    .annotation-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+      color: var(--darkgray);
+    }
+
+    .annotation-meta .date {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    .annotation-item blockquote {
+      margin: 1rem 0;
+      padding: 0.75rem 1rem;
+      background: var(--highlight);
+      border-left: 3px solid var(--secondary);
+      font-style: italic;
+      color: var(--darkgray);
+    }
+
+    .annotation-item .annotation-text {
+      margin: 1rem 0;
+      line-height: 1.6;
+    }
+
+    .annotation-item .page-link {
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .annotation-item .page-link:hover {
+      text-decoration: underline;
+    }
+
+    .no-annotations,
+    .error {
+      padding: 2rem;
+      text-align: center;
+      color: var(--gray);
+      font-style: italic;
+    }
+
+    .error {
+      color: var(--darkgray);
     }
 
     .usage-instructions {

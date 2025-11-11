@@ -101,7 +101,7 @@ export default (() => {
         {/* Hypothesis configuration */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.hypothesisConfig = function () { return { showHighlights: 'always', openSidebar: false, theme: 'clean' }; };`,
+            __html: `window.hypothesisConfig = function () { return { showHighlights: 'always', openSidebar: true, theme: 'clean', enableExperimentalNewNoteButton: true }; };`,
           }}
         />
         {/* Load Hypothesis - simple and direct */}
