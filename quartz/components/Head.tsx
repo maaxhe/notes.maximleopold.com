@@ -104,8 +104,8 @@ export default (() => {
             __html: `window.hypothesisConfig = function () { return { showHighlights: 'always', openSidebar: false, theme: 'clean', enableExperimentalNewNoteButton: true }; };`,
           }}
         />
-        {/* Load Hypothesis - simple and direct */}
-        <script async src="https://hypothes.is/embed.js"></script>
+        {/* Load Hypothesis - defer ensures DOM is ready first */}
+        <script defer src="https://hypothes.is/embed.js"></script>
       </head>
     )
   }

@@ -1,121 +1,72 @@
 // Hypothesis SPA navigation handler
-// Smart approach: Only reload when safe, don't interrupt user interaction
+// Ensures annotations work on first load AND after navigation
 
 let lastUrl = location.href
-let hypothesisLoaded = false
-let isUserInteracting = false
-let interactionTimeout = null
+let hypothesisReady = false
 
-// Check if user is currently interacting with Hypothesis
-function checkInteraction() {
-  // Check if annotation adder is visible
-  const adder = document.querySelector("hypothesis-adder")
-  const sidebar = document.querySelector("hypothesis-sidebar")
-  const isSidebarOpen = sidebar?.classList.contains("is-open")
-
-  isUserInteracting = !!adder || isSidebarOpen
-
-  if (isUserInteracting) {
-    console.log("Hypothesis: User is interacting, delaying reload")
-    // Reset timeout
-    clearTimeout(interactionTimeout)
-    interactionTimeout = setTimeout(() => {
-      isUserInteracting = false
-    }, 5000) // Consider user done after 5 seconds of no new interactions
-  }
-
-  return isUserInteracting
-}
-
-// Wait for Hypothesis to be ready
+// Wait for Hypothesis to fully load
 function waitForHypothesis() {
   return new Promise((resolve) => {
-    if (window.hypothesisEmbed) {
+    // Check if already loaded
+    if (window.hypothesisEmbed || document.querySelector("hypothesis-sidebar")) {
+      hypothesisReady = true
       resolve(true)
       return
     }
 
+    // Poll for Hypothesis to be ready
     const checkInterval = setInterval(() => {
-      if (window.hypothesisEmbed) {
+      if (window.hypothesisEmbed || document.querySelector("hypothesis-sidebar")) {
         clearInterval(checkInterval)
-        hypothesisLoaded = true
-        console.log("Hypothesis: Ready")
+        hypothesisReady = true
+        console.log("✓ Hypothesis loaded and ready")
         resolve(true)
       }
-    }, 100)
+    }, 50)
 
-    // Timeout after 10 seconds
+    // Timeout after 15 seconds
     setTimeout(() => {
       clearInterval(checkInterval)
+      if (!hypothesisReady) {
+        console.warn("⚠ Hypothesis failed to load")
+      }
       resolve(false)
-    }, 10000)
+    }, 15000)
   })
 }
 
-// Trigger Hypothesis to refresh annotations (without full reload)
-function refreshAnnotations() {
-  console.log("Hypothesis: Refreshing annotations for new page")
+// Trigger Hypothesis to scan the page for annotations
+function refreshHypothesis() {
+  if (!hypothesisReady) return
 
-  // Hypothesis listens to these events to refresh
-  if (window.hypothesisEmbed) {
-    // Dispatch events that Hypothesis monitors
-    window.dispatchEvent(new Event("hypothesisLoad"))
+  // Trigger events that make Hypothesis re-scan the page
+  setTimeout(() => {
     window.dispatchEvent(new Event("hypothesisReady"))
-
-    // Give it a moment to process
-    setTimeout(() => {
-      // Force re-scan by triggering mutation observer
-      const event = new Event("DOMContentLoaded")
-      document.dispatchEvent(event)
-    }, 100)
-  }
+    document.dispatchEvent(new Event("DOMContentLoaded"))
+  }, 100)
 }
 
-// Handle navigation
+// Handle navigation between pages
 async function handleNav() {
   const currentUrl = location.href
 
-  // Only act if URL actually changed
   if (currentUrl !== lastUrl) {
-    console.log("Hypothesis: Page navigation detected")
+    console.log("→ Page changed, refreshing Hypothesis")
     lastUrl = currentUrl
 
-    // Check if user is interacting
-    if (checkInteraction()) {
-      console.log("Hypothesis: Skipping refresh, user is interacting")
-      // Try again in a moment
-      setTimeout(handleNav, 2000)
-      return
-    }
-
-    // Wait for Hypothesis to be ready
-    if (!hypothesisLoaded) {
+    if (!hypothesisReady) {
       await waitForHypothesis()
     }
 
-    // Small delay to let the page content load
-    setTimeout(refreshAnnotations, 300)
+    // Give the page content time to load, then refresh
+    setTimeout(refreshHypothesis, 500)
   }
 }
 
-// Monitor for user interactions
-document.addEventListener(
-  "mouseup",
-  () => {
-    const selection = window.getSelection()
-    if (selection && selection.toString().trim().length > 0) {
-      isUserInteracting = true
-      clearTimeout(interactionTimeout)
-      interactionTimeout = setTimeout(() => {
-        isUserInteracting = false
-      }, 3000)
-    }
-  },
-  true,
-)
+// Initialize on first load
+waitForHypothesis().then(() => {
+  console.log("✓ Hypothesis initialized for first page load")
+})
 
-// Initial load - wait for Hypothesis
-waitForHypothesis()
-
-// Listen for Quartz's nav event
+// Listen for Quartz SPA navigation
 document.addEventListener("nav", handleNav)

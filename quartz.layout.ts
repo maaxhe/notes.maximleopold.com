@@ -99,12 +99,12 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Comments({
       provider: "giscus",
       options: {
-        repo: "maxleopold/notes.maximleopold.com",
-        repoId: "REPLACE_WITH_YOUR_REPO_ID",
+        repo: "maaxhe/notes.maximleopold.com",
+        repoId: "R_kgDOQS7ZRQ",
         category: "General",
-        categoryId: "REPLACE_WITH_YOUR_CATEGORY_ID",
+        categoryId: "DIC_kwDOQS7ZRc4CxpfZ",
         mapping: "pathname",
-        strict: true,
+        strict: false,
         reactionsEnabled: true,
         inputPosition: "bottom",
       },
