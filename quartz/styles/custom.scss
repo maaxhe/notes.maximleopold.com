@@ -1,3 +1,31 @@
 @use "./base.scss";
 
 // put your custom CSS here!
+
+/* Fix for TOC and Backlinks scrolling in right sidebar */
+.sidebar.right {
+  overflow-y: auto !important;
+  overflow-x: hidden;
+
+  /* Custom scrollbar for sidebar */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--gray);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--darkgray);
+  }
+
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: var(--gray) transparent;
+}

@@ -47,10 +47,7 @@ export default ((opts?: Partial<BacklinksOptions>) => {
           aria-controls={id}
           aria-expanded={!isCollapsed}
         >
-          <h3>
-            {i18n(cfg.locale).components.backlinks.title}
-            <span class="backlinks-count">({backlinkFiles.length})</span>
-          </h3>
+          <h3>{i18n(cfg.locale).components.backlinks.title}</h3>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"

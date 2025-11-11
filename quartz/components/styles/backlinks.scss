@@ -3,9 +3,9 @@
 .backlinks {
   display: flex;
   flex-direction: column;
-  overflow-y: visible;
   min-height: 1.4rem;
-  flex: 0 0 auto;
+  flex: 0 1 auto;
+  margin-top: 1rem;
 
   &:has(button.backlinks-header.collapsed) {
     flex: 0 1 1.4rem;
@@ -21,20 +21,11 @@ button.backlinks-header {
   color: var(--dark);
   display: flex;
   align-items: center;
-  width: 100%;
 
   & h3 {
     font-size: 1rem;
     display: inline-block;
     margin: 0;
-
-    .backlinks-count {
-      font-size: 0.85rem;
-      font-weight: normal;
-      color: var(--darkgray);
-      opacity: 0.8;
-      margin-left: 0.25rem;
-    }
   }
 
   & .fold {
@@ -50,13 +41,14 @@ button.backlinks-header {
 
 ul.backlinks-content.overflow {
   list-style: none;
-  padding: 0;
+  position: relative;
   margin: 0.5rem 0;
-  max-height: 300px;
+  padding: 0;
+  padding-right: 0.5rem;
+  max-height: 250px;
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: contain;
-  transition: max-height 0.3s ease;
 
   &.collapsed {
     max-height: 0;

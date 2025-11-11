@@ -90,19 +90,6 @@ export const defaultContentPageLayout: PageLayout = {
   ],
   afterBody: [
     Component.PageNavigation(),
-    Component.Comments({
-      provider: "giscus",
-      options: {
-        repo: "maaxhe/notes.maximleopold.com",
-        repoId: "R_kgDOQS7ZRQ",
-        category: "General",
-        categoryId: "DIC_kwDOQS7ZRc4CxpfZ",
-        mapping: "pathname",
-        reactionsEnabled: true,
-        inputPosition: "top",
-        lang: "de",
-      },
-    }),
   ],
 }
 
