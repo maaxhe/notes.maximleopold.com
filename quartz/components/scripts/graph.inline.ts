@@ -573,9 +573,33 @@ function cleanupGlobalGraphs() {
   globalGraphCleanups = []
 }
 
+// Toggle functionality for graph header
+function toggleGraph(this: HTMLElement) {
+  this.classList.toggle("collapsed")
+  this.setAttribute(
+    "aria-expanded",
+    this.getAttribute("aria-expanded") === "true" ? "false" : "true",
+  )
+  const graphOuter = this.nextElementSibling as HTMLElement | undefined
+  if (!graphOuter) return
+  graphOuter.classList.toggle("collapsed")
+}
+
+function setupGraphToggle() {
+  for (const graph of document.getElementsByClassName("graph")) {
+    const button = graph.querySelector(".graph-header")
+    if (!button) continue
+    button.addEventListener("click", toggleGraph)
+    window.addCleanup(() => button.removeEventListener("click", toggleGraph))
+  }
+}
+
 document.addEventListener("nav", async (e: CustomEventMap["nav"]) => {
   const slug = e.detail.url
   addToVisited(simplifySlug(slug))
+
+  // Setup graph toggle
+  setupGraphToggle()
 
   async function renderLocalGraph() {
     cleanupLocalGraphs()
@@ -639,29 +663,6 @@ document.addEventListener("nav", async (e: CustomEventMap["nav"]) => {
     icon.addEventListener("click", renderGlobalGraph)
     window.addCleanup(() => icon.removeEventListener("click", renderGlobalGraph))
   })
-
-  // Toggle functionality for graph header
-  function toggleGraph(this: HTMLElement) {
-    this.classList.toggle("collapsed")
-    this.setAttribute(
-      "aria-expanded",
-      this.getAttribute("aria-expanded") === "true" ? "false" : "true",
-    )
-    const graphOuter = this.nextElementSibling as HTMLElement | undefined
-    if (!graphOuter) return
-    graphOuter.classList.toggle("collapsed")
-  }
-
-  function setupGraphToggle() {
-    for (const graph of document.getElementsByClassName("graph")) {
-      const button = graph.querySelector(".graph-header")
-      if (!button) continue
-      button.addEventListener("click", toggleGraph)
-      window.addCleanup(() => button.removeEventListener("click", toggleGraph))
-    }
-  }
-
-  setupGraphToggle()
 
   document.addEventListener("keydown", shortcutHandler)
   window.addCleanup(() => {

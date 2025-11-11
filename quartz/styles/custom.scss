@@ -6,8 +6,8 @@
 .sidebar.right {
   overflow-y: auto !important;
   overflow-x: hidden !important;
-  max-height: 100vh;
-  padding-bottom: 2rem !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
 
   /* Custom scrollbar for sidebar */
   &::-webkit-scrollbar {
@@ -32,9 +32,10 @@
   scrollbar-color: var(--gray) transparent;
 }
 
-/* Ensure TOC and Backlinks don't clip */
+/* Ensure TOC and Backlinks have proper overflow */
 .toc,
-.backlinks {
+.backlinks,
+.graph {
   overflow: visible !important;
 }
 

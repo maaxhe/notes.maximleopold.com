@@ -11,7 +11,7 @@ interface ThesisDashboardOptions {
 
 const defaultOptions: ThesisDashboardOptions = {
   title: "Bachelorarbeit - Übersicht",
-  folderPath: "Schreiben",
+  folderPath: "bachelorarbeit/schreiben",
   showProgress: true,
 }
 
