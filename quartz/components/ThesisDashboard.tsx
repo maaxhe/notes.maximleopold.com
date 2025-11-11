@@ -52,7 +52,7 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
 
     // Calculate overall statistics
     const totalFiles = thesisFiles.length
-    const statusOf = (f: typeof thesisFiles[number]) =>
+    const statusOf = (f: (typeof thesisFiles)[number]) =>
       typeof f.frontmatter?.status === "string" ? f.frontmatter.status.toLowerCase() : undefined
     const finalFiles = thesisFiles.filter((f) => statusOf(f) === "final").length
     const approvedFiles = thesisFiles.filter((f) => statusOf(f) === "approved").length

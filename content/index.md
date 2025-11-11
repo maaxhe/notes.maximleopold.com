@@ -11,3 +11,8 @@ Moin, das hier sind meine persönlichen Notizen - hochgeladen direkt von Obsidia
 Diese Seite wird automatisch aus meinem Obsidian Vault synchronisiert.
 
 Hier kannst du all meine Notizen durchsuchen, die ich mal gemacht habe - viel Spaß dabei :D
+
+## Schnellzugriffe
+
+- [📋 Dashboard Bachelorarbeit](Bachelorarbeit/Dashboard-BA)
+- [✅ To-Do's](Bachelorarbeit/To-Do's)
