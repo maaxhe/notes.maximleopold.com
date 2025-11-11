@@ -20,14 +20,20 @@ export default ((opts?: Partial<AnnotationsOverviewOptions>) => {
       <div class={classNames(displayClass, "annotations-overview")}>
         <h1>Alle Annotationen</h1>
         <p class="annotations-description">
-          Hier findest du alle öffentlichen Annotationen auf dieser Website. Neue Annotationen werden
-          mit einem Badge markiert.
+          Hier findest du alle öffentlichen Annotationen auf dieser Website. Neue Annotationen
+          werden mit einem Badge markiert.
         </p>
 
         <div class="annotations-filters">
-          <button class="filter-btn active" data-filter="all">Alle</button>
-          <button class="filter-btn" data-filter="new">Neue</button>
-          <button class="filter-btn" data-filter="my">Meine</button>
+          <button class="filter-btn active" data-filter="all">
+            Alle
+          </button>
+          <button class="filter-btn" data-filter="new">
+            Neue
+          </button>
+          <button class="filter-btn" data-filter="my">
+            Meine
+          </button>
         </div>
 
         <div id="annotations-loading" class="annotations-loading">
@@ -72,17 +78,43 @@ export default ((opts?: Partial<AnnotationsOverviewOptions>) => {
                   const listEl = document.getElementById('annotations-list');
 
                   try {
-                    // Search for annotations on this site
-                    const response = await fetch(
-                      \`\${HYPOTHESIS_API}/search?limit=\${LIMIT}&uri=*\${SITE_URL}*&sort=updated&order=desc\`
-                    );
+                    // Try multiple search strategies
+                    const searchUrls = [
+                      // Search by wildcard domain
+                      \`\${HYPOTHESIS_API}/search?limit=\${LIMIT}&wildcard_uri=https://\${SITE_URL}/*&sort=updated&order=desc\`,
+                      // Fallback: search by exact domain
+                      \`\${HYPOTHESIS_API}/search?limit=\${LIMIT}&uri=https://\${SITE_URL}&sort=updated&order=desc\`,
+                      // Fallback: search with http
+                      \`\${HYPOTHESIS_API}/search?limit=\${LIMIT}&wildcard_uri=http://\${SITE_URL}/*&sort=updated&order=desc\`
+                    ];
 
-                    if (!response.ok) {
-                      throw new Error('Failed to fetch annotations');
+                    let data = null;
+                    let lastError = null;
+
+                    for (const url of searchUrls) {
+                      try {
+                        console.log('Trying Hypothesis API:', url);
+                        const response = await fetch(url);
+
+                        if (response.ok) {
+                          data = await response.json();
+                          console.log('Got annotations:', data.total || 0);
+                          if (data.rows && data.rows.length > 0) {
+                            break; // Found annotations, stop searching
+                          }
+                        }
+                      } catch (err) {
+                        lastError = err;
+                        console.warn('API request failed:', err);
+                      }
                     }
 
-                    const data = await response.json();
+                    if (!data || !data.rows) {
+                      throw lastError || new Error('No data received from API');
+                    }
+
                     allAnnotations = data.rows || [];
+                    console.log('Total annotations loaded:', allAnnotations.length);
 
                     loadingEl.style.display = 'none';
                     renderAnnotations();
@@ -93,8 +125,12 @@ export default ((opts?: Partial<AnnotationsOverviewOptions>) => {
                     console.error('Error fetching annotations:', error);
                     loadingEl.innerHTML = \`
                       <div class="error">
-                        Fehler beim Laden der Annotationen.
-                        <button onclick="location.reload()">Erneut versuchen</button>
+                        <p>Fehler beim Laden der Annotationen.</p>
+                        <p style="font-size: 0.9rem; color: var(--gray);">
+                          Möglicherweise gibt es noch keine öffentlichen Annotationen auf dieser Website.
+                          Erstelle deine erste Annotation, indem du Text auf einer Seite markierst!
+                        </p>
+                        <button onclick="location.reload()" style="margin-top: 1rem;">Erneut versuchen</button>
                       </div>
                     \`;
                   }

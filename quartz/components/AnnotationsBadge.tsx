@@ -36,7 +36,9 @@ export default ((opts?: Partial<AnnotationsBadgeOptions>) => {
           >
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
           </svg>
-          <span class="annotations-count" id="annotations-count" style="display: none;">0</span>
+          <span class="annotations-count" id="annotations-count" style="display: none;">
+            0
+          </span>
         </div>
 
         <script
@@ -58,16 +60,30 @@ export default ((opts?: Partial<AnnotationsBadgeOptions>) => {
                 async function checkNewAnnotations() {
                   try {
                     const lastSeen = getLastSeen();
-                    const response = await fetch(
-                      \`\${HYPOTHESIS_API}/search?limit=200&uri=*\${SITE_URL}*&sort=created&order=desc\`
-                    );
 
-                    if (!response.ok) {
-                      return;
+                    // Try multiple search strategies
+                    const searchUrls = [
+                      \`\${HYPOTHESIS_API}/search?limit=200&wildcard_uri=https://\${SITE_URL}/*&sort=created&order=desc\`,
+                      \`\${HYPOTHESIS_API}/search?limit=200&uri=https://\${SITE_URL}&sort=created&order=desc\`,
+                      \`\${HYPOTHESIS_API}/search?limit=200&wildcard_uri=http://\${SITE_URL}/*&sort=created&order=desc\`
+                    ];
+
+                    let annotations = [];
+
+                    for (const url of searchUrls) {
+                      try {
+                        const response = await fetch(url);
+                        if (response.ok) {
+                          const data = await response.json();
+                          if (data.rows && data.rows.length > 0) {
+                            annotations = data.rows;
+                            break;
+                          }
+                        }
+                      } catch (err) {
+                        console.warn('Badge API request failed:', err);
+                      }
                     }
-
-                    const data = await response.json();
-                    const annotations = data.rows || [];
 
                     // Count new annotations
                     const newCount = annotations.filter(annotation => {

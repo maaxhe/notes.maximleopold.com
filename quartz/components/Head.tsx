@@ -101,57 +101,69 @@ export default (() => {
         {/* Hypothesis.is for collaborative annotations */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.hypothesisConfig = function () {
-              return {
-                showHighlights: 'always',
-                openSidebar: false,
-                theme: 'clean'
-              };
-            };`,
-          }}
-        />
-        <script src="https://hypothes.is/embed.js"></script>
-        {/* Reinitialize Hypothesis on SPA navigation */}
-        <script
-          dangerouslySetInnerHTML={{
             __html: `
+              // Configure Hypothesis before it loads
+              window.hypothesisConfig = function () {
+                return {
+                  showHighlights: 'always',
+                  openSidebar: false,
+                  theme: 'clean',
+                  // Enable highlights on page load
+                  enableExperimentalNewNoteButton: true
+                };
+              };
+
+              // Load Hypothesis synchronously and ensure it's ready
               (function() {
-                // Function to ensure Hypothesis is loaded
-                function ensureHypothesis() {
-                  if (window.hypothesisEmbed && typeof window.hypothesisEmbed === 'function') {
-                    // Hypothesis is ready
-                    return;
+                // Create script element
+                var script = document.createElement('script');
+                script.src = 'https://hypothes.is/embed.js';
+                script.async = false; // Force synchronous loading
+                script.defer = false;
+
+                // Track when Hypothesis is fully loaded
+                var hypothesisReady = false;
+
+                // Check if Hypothesis has loaded and initialized
+                function checkHypothesisReady() {
+                  if (window.hypothesisEmbed || (window.Hypothesis && window.Hypothesis.host)) {
+                    hypothesisReady = true;
+                    console.log('Hypothesis loaded and ready');
+
+                    // Trigger a custom event when ready
+                    window.dispatchEvent(new CustomEvent('hypothesisReady'));
+
+                    return true;
                   }
-                  // Wait for Hypothesis to load
-                  if (!window.hypothesisWaiting) {
-                    window.hypothesisWaiting = true;
-                    const checkInterval = setInterval(function() {
-                      if (window.hypothesisEmbed) {
-                        clearInterval(checkInterval);
-                        window.hypothesisWaiting = false;
-                      }
-                    }, 100);
-                  }
+                  return false;
                 }
 
-                // Initial load
-                if (document.readyState === 'loading') {
-                  document.addEventListener('DOMContentLoaded', ensureHypothesis);
-                } else {
-                  ensureHypothesis();
-                }
-
-                // Handle SPA navigation
-                document.addEventListener('nav', function() {
-                  ensureHypothesis();
-                  // Trigger Hypothesis to check for annotations on new page
-                  if (window.hypothesisEmbed) {
-                    setTimeout(function() {
-                      window.dispatchEvent(new Event('hypothesisUpdate'));
-                    }, 100);
+                // Monitor for Hypothesis to be ready
+                var checkInterval = setInterval(function() {
+                  if (checkHypothesisReady()) {
+                    clearInterval(checkInterval);
                   }
-                });
+                }, 50);
+
+                // Insert script into head
+                document.head.appendChild(script);
+
+                // Also check on script load
+                script.onload = function() {
+                  setTimeout(checkHypothesisReady, 100);
+                };
               })();
+
+              // Handle SPA navigation - ensure Hypothesis works on new pages
+              document.addEventListener('nav', function() {
+                console.log('SPA navigation detected, refreshing Hypothesis');
+                setTimeout(function() {
+                  if (window.Hypothesis && window.Hypothesis.host) {
+                    // Hypothesis API to refresh annotations
+                    window.postMessage({ type: 'hypothesis-refresh' }, '*');
+                  }
+                }, 200);
+              });
             `,
           }}
         />
