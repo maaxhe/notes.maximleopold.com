@@ -97,6 +97,19 @@ export default (() => {
             return resource
           }
         })}
+
+        {/* Hypothesis.is for collaborative annotations */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.hypothesisConfig = function () {
+              return {
+                showHighlights: 'always',
+                openSidebar: false
+              };
+            };`,
+          }}
+        />
+        <script async src="https://hypothes.is/embed.js"></script>
       </head>
     )
   }

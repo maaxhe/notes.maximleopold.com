@@ -66,7 +66,10 @@ export default ((opts?: Partial<BacklinksOptions>) => {
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
         </button>
-        <OverflowList id={id} class={isCollapsed ? "collapsed backlinks-content" : "backlinks-content"}>
+        <OverflowList
+          id={id}
+          class={isCollapsed ? "collapsed backlinks-content" : "backlinks-content"}
+        >
           {backlinkFiles.length > 0 ? (
             backlinkFiles.map((f) => (
               <li>

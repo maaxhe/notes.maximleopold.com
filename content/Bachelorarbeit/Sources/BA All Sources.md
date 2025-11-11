@@ -334,6 +334,7 @@ Frühholz, S., Gschwind, M., & Grandjean, D. (2015). Bilateral dorsal and ventra
 - Especially the dorsal pathway seems strongly left lateralized (Hickok and Poeppel, 2007). The ventral pathways convey sound-invariant meaning (Belin and Zatorre, 2000b; Rauschecker and Scott, 2009), such as speech semantics (Hagoort, 2005). 
 - The dorsal pathways serve sound-to-motor mapping (Saur et al., 2008) and the processing of temporal auditory sequences (Belin and Zatorre, 2000b; Rauschecker and Scott, 2009), which are also necessary for the understanding of speech syntax (Friederici et al., 2006).
 - Compared to a predominant role of the left brain for syntacto-semantic processing (Specht, 2014), the emotional  intonation in speech, that is the affective prosody, strongly, but not exclusively, activates regions in right STG and IFG (e.g. Alba-Ferrara et al., 2011; Beaucousin et al., 2007; Ethofer et al., 2006; Fruhholz et al., 2012).
+- Ventral and dorsal pathways, for example, are supposed to originate in multiple STG seed regions (Friederici, 2011; Fruhholz et al., 2012). Furthermore, these pathways probably terminate in the anterior as well as in the posterior IFG (Fruhholz and Grandjean, 2013b)
 
 
 [[Was bedeuten die Vergleiche aus Glasser SUPPL]]
