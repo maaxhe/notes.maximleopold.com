@@ -41,6 +41,7 @@ import NewBadge from "./NewBadge"
 import OpenFeedback from "./OpenFeedback"
 import AnnotationsOverview from "./AnnotationsOverview"
 import AnnotationsBadge from "./AnnotationsBadge"
+import HypothesisSPA from "./HypothesisSPA"
 
 export {
   ArticleTitle,
@@ -86,4 +87,5 @@ export {
   OpenFeedback,
   AnnotationsOverview,
   AnnotationsBadge,
+  HypothesisSPA,
 }

@@ -18,7 +18,25 @@ export default ((opts?: Partial<AnnotationsOverviewOptions>) => {
   const AnnotationsOverview: QuartzComponent = ({ cfg, displayClass }: QuartzComponentProps) => {
     return (
       <div class={classNames(displayClass, "annotations-overview")}>
-        <h1>Alle Annotationen</h1>
+        <div class="annotations-header">
+          <a href="/" class="back-button" title="Zurück zur Startseite">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Zurück
+          </a>
+          <h1>Alle Annotationen</h1>
+        </div>
         <p class="annotations-description">
           Hier findest du alle öffentlichen Annotationen auf dieser Website. Neue Annotationen
           werden mit einem Badge markiert.
@@ -271,6 +289,40 @@ export default ((opts?: Partial<AnnotationsOverviewOptions>) => {
       max-width: 900px;
       margin: 0 auto;
       padding: 1rem;
+    }
+
+    .annotations-header {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .annotations-header h1 {
+      margin: 0;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      margin-bottom: 1rem;
+      background: var(--lightgray);
+      color: var(--darkgray);
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+
+    .back-button:hover {
+      background: var(--secondary);
+      color: white;
+      transform: translateX(-2px);
+    }
+
+    .back-button svg {
+      width: 18px;
+      height: 18px;
     }
 
     .annotations-description {
