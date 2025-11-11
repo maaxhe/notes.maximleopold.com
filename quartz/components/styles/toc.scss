@@ -43,9 +43,28 @@ ul.toc-content.overflow {
   position: relative;
   margin: 0.5rem 0;
   padding: 0;
-  max-height: calc(100% - 2rem);
+  max-height: calc(100vh - 12rem);
+  overflow-y: auto;
   overscroll-behavior: contain;
   list-style: none;
+
+  /* Custom scrollbar styling */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--gray);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--darkgray);
+  }
 
   & > li > a {
     color: var(--dark);

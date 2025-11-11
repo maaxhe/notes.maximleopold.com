@@ -41,9 +41,26 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Explorer(),
   ],
   right: [
-    Component.Graph({
-      localGraph: { showTags: false },
-      globalGraph: { showTags: false },
+    Component.ConditionalRender({
+      component: Component.Graph({
+        localGraph: {
+          showTags: false,
+          depth: -1, // Show all nodes on home page
+          scale: 0.9,
+          repelForce: 0.5,
+          centerForce: 0.2,
+          focusOnHover: true,
+        },
+        globalGraph: { showTags: false },
+      }),
+      condition: (page) => page.fileData.slug === "index",
+    }),
+    Component.ConditionalRender({
+      component: Component.Graph({
+        localGraph: { showTags: false },
+        globalGraph: { showTags: false },
+      }),
+      condition: (page) => page.fileData.slug !== "index",
     }),
     Component.FilteredToggleList({
       summary: "#stream/dorsal",
