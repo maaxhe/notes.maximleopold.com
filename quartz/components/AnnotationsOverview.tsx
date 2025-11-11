@@ -64,43 +64,65 @@ export default ((opts?: Partial<AnnotationsOverviewOptions>) => {
                 const GROUP_ID = '7DzYpr4y';
                 const API_URL = 'https://api.hypothes.is/api/search';
 
+                console.log('Loading annotations for group:', GROUP_ID);
+
                 try {
-                  const response = await fetch(\`\${API_URL}?group=\${GROUP_ID}&limit=20&sort=updated&order=desc\`);
+                  const url = API_URL + '?group=' + GROUP_ID + '&limit=20&sort=updated&order=desc';
+                  console.log('Fetching from:', url);
+
+                  const response = await fetch(url);
+                  console.log('Response status:', response.status);
+
                   const data = await response.json();
+                  console.log('API response:', data);
 
                   const listEl = document.getElementById('annotations-list');
-                  if (!listEl) return;
+                  if (!listEl) {
+                    console.error('annotations-list element not found');
+                    return;
+                  }
 
                   if (!data.rows || data.rows.length === 0) {
+                    console.log('No annotations found');
                     listEl.innerHTML = '<p class="no-annotations">Noch keine Annotationen in dieser Gruppe.</p>';
                     return;
                   }
 
+                  console.log('Found', data.rows.length, 'annotations');
+
                   const html = data.rows.map(ann => {
                     const date = new Date(ann.created);
-                    const user = ann.user.split(':')[1]?.split('@')[0] || 'Unbekannt';
-                    const quote = ann.target?.[0]?.selector?.find(s => s.type === 'TextQuoteSelector')?.exact || '';
+                    const userParts = ann.user.split(':');
+                    const user = userParts.length > 1 ? userParts[1].split('@')[0] : 'Unbekannt';
+
+                    let quote = '';
+                    if (ann.target && ann.target[0] && ann.target[0].selector) {
+                      const selector = ann.target[0].selector.find(s => s.type === 'TextQuoteSelector');
+                      if (selector) quote = selector.exact;
+                    }
+
                     const text = ann.text || '';
                     const url = ann.uri.replace('https://notes.maximleopold.com', '');
 
-                    return \`
-                      <div class="annotation-item">
-                        <div class="annotation-meta">
-                          <strong>\${user}</strong>
-                          <span class="date">\${date.toLocaleDateString('de-DE')}</span>
-                        </div>
-                        \${quote ? \`<blockquote>\${quote}</blockquote>\` : ''}
-                        \${text ? \`<p class="annotation-text">\${text}</p>\` : ''}
-                        <a href="\${url}" class="page-link">→ Zur Seite</a>
-                      </div>
-                    \`;
+                    return '<div class="annotation-item">' +
+                      '<div class="annotation-meta">' +
+                        '<strong>' + user + '</strong>' +
+                        '<span class="date">' + date.toLocaleDateString('de-DE') + '</span>' +
+                      '</div>' +
+                      (quote ? '<blockquote>' + quote + '</blockquote>' : '') +
+                      (text ? '<p class="annotation-text">' + text + '</p>' : '') +
+                      '<a href="' + url + '" class="page-link">→ Zur Seite</a>' +
+                    '</div>';
                   }).join('');
 
                   listEl.innerHTML = html;
+                  console.log('Annotations rendered successfully');
                 } catch (err) {
                   console.error('Failed to load annotations:', err);
-                  document.getElementById('annotations-list').innerHTML =
-                    '<p class="error">Fehler beim Laden der Annotationen.</p>';
+                  const listEl = document.getElementById('annotations-list');
+                  if (listEl) {
+                    listEl.innerHTML = '<p class="error">Fehler beim Laden der Annotationen: ' + err.message + '</p>';
+                  }
                 }
               })();
             `,
