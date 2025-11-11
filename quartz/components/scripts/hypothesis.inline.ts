@@ -1,29 +1,81 @@
-// Hypothesis SPA navigation handler
-// Ensures Hypothesis works on FIRST page load and after SPA navigation
+// Hypothesis initialization and SPA handler
+// CRITICAL: Ensures Hypothesis is fully ready on first page load
 
 let lastUrl = location.href
+let hypothesisInitialized = false
 
-// Trigger Hypothesis to re-scan the page
-function triggerHypothesisRefresh() {
-  // Hypothesis watches for these events to re-scan content
-  if (window.hypothesisEmbed) {
-    setTimeout(() => {
+// Wait until Hypothesis is fully loaded and initialized
+function ensureHypothesisReady() {
+  return new Promise((resolve) => {
+    // Check if Hypothesis is already loaded
+    if (
+      window.hypothesisEmbed ||
+      document.querySelector("hypothesis-sidebar") ||
+      document.querySelector(".hypothesis-sidebar")
+    ) {
+      hypothesisInitialized = true
+      console.log("✓ Hypothesis ready on first load")
+      resolve(true)
+      return
+    }
+
+    // Poll until Hypothesis is ready (max 20 seconds)
+    let attempts = 0
+    const maxAttempts = 200 // 20 seconds with 100ms intervals
+
+    const checkInterval = setInterval(() => {
+      attempts++
+
+      if (
+        window.hypothesisEmbed ||
+        document.querySelector("hypothesis-sidebar") ||
+        document.querySelector(".hypothesis-sidebar")
+      ) {
+        clearInterval(checkInterval)
+        hypothesisInitialized = true
+        console.log(`✓ Hypothesis ready after ${attempts * 100}ms`)
+        resolve(true)
+      } else if (attempts >= maxAttempts) {
+        clearInterval(checkInterval)
+        console.error("✗ Hypothesis failed to load after 20 seconds")
+        resolve(false)
+      }
+    }, 100)
+  })
+}
+
+// Trigger Hypothesis to re-scan page content
+function refreshHypothesis() {
+  if (!hypothesisInitialized) return
+
+  setTimeout(() => {
+    if (window.hypothesisEmbed) {
       window.dispatchEvent(new Event("hypothesisReady"))
       document.dispatchEvent(new Event("DOMContentLoaded"))
-    }, 200)
-  }
+    }
+  }, 300)
 }
 
 // Handle Quartz SPA navigation
-function handleNavigation() {
+async function handleNavigation() {
   const currentUrl = location.href
 
   if (currentUrl !== lastUrl) {
+    console.log("→ Navigation detected")
     lastUrl = currentUrl
-    // Wait for new content to load, then trigger Hypothesis refresh
-    setTimeout(triggerHypothesisRefresh, 400)
+
+    // Ensure Hypothesis is ready before refreshing
+    if (!hypothesisInitialized) {
+      await ensureHypothesisReady()
+    }
+
+    // Wait for new content, then refresh
+    setTimeout(refreshHypothesis, 500)
   }
 }
 
-// Listen for Quartz's navigation event
+// Initialize on page load - CRITICAL for first page load
+ensureHypothesisReady()
+
+// Listen for Quartz navigation
 document.addEventListener("nav", handleNavigation)

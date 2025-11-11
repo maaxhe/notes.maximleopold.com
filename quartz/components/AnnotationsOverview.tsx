@@ -48,7 +48,6 @@ export default ((opts?: Partial<AnnotationsOverviewOptions>) => {
           </a>
         </div>
 
-
         <div class="usage-instructions">
           <h3>Wie funktioniert's?</h3>
           <ol>
