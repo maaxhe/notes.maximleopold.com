@@ -20,7 +20,7 @@
     "check:types": "tsc --noEmit",
     "format": "npx prettier . --write",
     "deploy": "echo 'Use CI/CD for deployment'",
-    "publish:quick": "git add . && git commit && git push",
+    "publish:quick": "git add . && git commit -m 'Auto-update notes' && git push",
     "quartz": "./quartz/bootstrap-cli.mjs",
     "prepare": "husky install"
   },
