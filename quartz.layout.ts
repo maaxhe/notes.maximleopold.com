@@ -96,7 +96,6 @@ export const defaultContentPageLayout: PageLayout = {
       condition: (page) => page.fileData.slug?.toLowerCase().endsWith("dashboard-ba") ?? false,
     }),
     Component.Backlinks(),
-    Component.LinkSuggestions(),
     Component.PageNavigation(),
   ],
 }

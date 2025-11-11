@@ -24,7 +24,6 @@ import MobileOnly from "./MobileOnly"
 import RecentNotes from "./RecentNotes"
 import FilteredToggleList from "./FilteredToggleList"
 import ImageLightbox from "./ImageLightbox"
-import LinkSuggestions from "./LinkSuggestions"
 import Breadcrumbs from "./Breadcrumbs"
 import Comments from "./Comments"
 import Flex from "./Flex"
@@ -66,7 +65,6 @@ export {
   RecentNotes,
   FilteredToggleList,
   ImageLightbox,
-  LinkSuggestions,
   NotFound,
   Breadcrumbs,
   Comments,
