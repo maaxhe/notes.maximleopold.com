@@ -7,17 +7,16 @@ needsFeedback: true
 tags:
   - ba
 ---
-
-## Kapitel 1
+## Kapitel 1 
 
 Test Kapitel 1
 
-### see also
 
+### see also
 Type:
-Tags:
-Status:
-Location:
+Tags: 
+Status: 
+Location: 
 Created: 2025-11-11 17:02
 
 ### Source

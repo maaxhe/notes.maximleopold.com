@@ -5,7 +5,7 @@ import * as Component from "./quartz/components"
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
-  afterBody: [],
+  afterBody: [Component.ImageLightbox()],
   footer: Component.Footer({
     links: {
       GitHub: "https://github.com/jackyzha0/quartz",
@@ -96,6 +96,7 @@ export const defaultContentPageLayout: PageLayout = {
       condition: (page) => page.fileData.slug?.toLowerCase().endsWith("dashboard-ba") ?? false,
     }),
     Component.Backlinks(),
+    Component.LinkSuggestions(),
     Component.PageNavigation(),
   ],
 }
