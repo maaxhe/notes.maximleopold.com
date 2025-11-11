@@ -26,7 +26,7 @@ export const AnnotationsPage: QuartzEmitterPlugin = () => {
     },
     async *emit(ctx, _content, resources) {
       const cfg = ctx.cfg.configuration
-      const slug = "annotations" as FullSlug
+      const slug = "Bachelorarbeit/Annotationen" as FullSlug
 
       const url = new URL(`https://${cfg.baseUrl ?? "example.com"}`)
       const path = url.pathname as FullSlug

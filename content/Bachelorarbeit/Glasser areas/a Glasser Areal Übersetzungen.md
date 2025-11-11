@@ -1,12 +1,11 @@
-### Glasser vs andere Atlanten und Regionen
+### Glasser vs andere Atlanten und Regionen 
 
-A1 -> BA41 (Neuroscience, Paradiso, 2016), located im STG
-
-#### DORSAL
-
+A1 -> BA41 (Neuroscience, Paradiso, 2016), located im STG 
+#### DORSAL 
 TPOJ1, TPOJ2 -> IPL (BA39)
 
-### Alte Bezeichnungen
+
+### Alte Bezeichnungen 
 
 | Alte Bezeichnung | Funktion | Glasser Übers.                                   | Brodmann | Stream |
 | ---------------- | -------- | ------------------------------------------------ | -------- | ------ |
