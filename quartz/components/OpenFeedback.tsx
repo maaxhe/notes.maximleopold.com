@@ -134,8 +134,8 @@ export default ((opts?: Partial<OpenFeedbackOptions>) => {
             erscheint hier automatisch.
           </p>
           <p>
-            Optional: Füge <code>feedbackNote: "Deine Frage"</code> hinzu, um spezifisches
-            Feedback anzufragen.
+            Optional: Füge <code>feedbackNote: "Deine Frage"</code> hinzu, um spezifisches Feedback
+            anzufragen.
           </p>
         </div>
       </div>
