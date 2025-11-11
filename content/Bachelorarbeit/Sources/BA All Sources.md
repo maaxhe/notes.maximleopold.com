@@ -1,3 +1,10 @@
+---
+title: "BA All Sources"
+aliases:
+  - BA All Sources
+  - BA-All-Sources
+---
+
 ## Paper Zitate & Kommentare 
 
 
@@ -486,4 +493,3 @@ preferential connectivity
 
 
 Created: 2025-08-19 12:50
-

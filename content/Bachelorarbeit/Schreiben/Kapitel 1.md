@@ -2,7 +2,7 @@
 title: Kapitel 1 – Einleitung
 chapterNumber: 1
 status: draft
-progress: 70
+progress: 10
 needsFeedback: true
 tags:
   - ba
