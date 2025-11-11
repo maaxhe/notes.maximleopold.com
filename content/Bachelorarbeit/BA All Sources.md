@@ -1,10 +1,14 @@
 ## Paper Kommentare & Summaries 
 
 
-### Decoding Object-Based Auditory Attention from SourceReconstructed MEG Alpha Oscillations - de Vries, Baldauf 
+### De Vries & Baldauf (2021) - Journal of Neuroscience
+
+De Vries, I. E. J., Marinato, G., & Baldauf, D. (2021). Decoding Object-Based Auditory Attention from Source-Reconstructed MEG Alpha Oscillations. _The Journal of Neuroscience_, _41_(41), 8603–8617. [https://doi.org/10.1523/JNEUROSCI.0583-21.2021](https://doi.org/10.1523/JNEUROSCI.0583-21.2021) 
 
 
-### Rauschecker, J. P. (2011). An expanded role for the dorsal auditory pathway in sensorimotor control and integration. _Hearing Research_, _271_(1–2), 16–25. [https://doi.org/10.1016/j.heares.2010.09.001](https://doi.org/10.1016/j.heares.2010.09.001)
+### Rauschecker (2011) - Hearing Research
+
+Rauschecker, J. P. (2011). An expanded role for the dorsal auditory pathway in sensorimotor control and integration. _Hearing Research_, _271_(1–2), 16–25. [https://doi.org/10.1016/j.heares.2010.09.001](https://doi.org/10.1016/j.heares.2010.09.001)
 
 - [x] Paper durchgelesen?
 
@@ -19,7 +23,9 @@ in monkeys:
 - In rhesus monkeys, core areas A1 and R (the “primary” and “rostral” fields, respectively), are surrounded by secondary belt areas (Kaas and Hackett, 2000). Both lateral and medial belt (LB and MB) neurons respond better to band-passed noise bursts than to pure tones (Kusmierek and Rauschecker, 2009; Rauschecker et al., 1995). Comparing core and belt, spatially tuned neurons are present in A1 but are found at a much higher density in the caudo-medial belt field (CM) (Rauschecker et al., 1997; Recanzone, 2000). When monkeys are trained in an auditory localization task, the firing rate of neurons in CM correlates more tightly with behavioral performance than that of neurons in A1, which is a strong indication that CM plays an important role in sound localization (Recanzone et al., 2000). Such localization is most likely accomplished on the basis of a population code (Miller and Recanzone, 2009).
 - Connectivity studies in rhesus monkeys (Rauschecker et al., 1997) have shown that at least one of the caudal belt regions receives its subcortical input via a separate pathway than core areas A1 and R.
 
-### Rauschecker, J. P., & Afsahi, R. K. (2023). Anatomy of the auditory cortex then and now. _Journal of Comparative Neurology_, _531_(18), 1883–1892. [https://doi.org/10.1002/cne.25560](https://doi.org/10.1002/cne.25560)
+### Rauschecker & Afsahi (2023) - Journal of Comparative Neurology
+
+Rauschecker, J. P., & Afsahi, R. K. (2023). Anatomy of the auditory cortex then and now. _Journal of Comparative Neurology_, _531_(18), 1883–1892. [https://doi.org/10.1002/cne.25560](https://doi.org/10.1002/cne.25560)
 
 - [x] Paper durchgelesen?
 
@@ -39,7 +45,9 @@ postero-dorsal
 - Some of these and other studies also demonstrated a participation of DLPFC in spatial hearing (Belin et al., 2002; Lewald et al., 2008; Weeks et al., 2000)
 - The current dorsal-stream model postulates that posterior parietal areas may serve as a relay station between auditory centers and the PMC
 
-### Rolls, E. T., Rauschecker, J. P., Deco, G., Huang, C.-C., & Feng, J. (2023). Auditory cortical connectivity in humans. _Cerebral Cortex_, _33_(10), 6207–6227. [https://doi.org/10.1093/cercor/bhac496](https://doi.org/10.1093/cercor/bhac496)
+### Rolls et al. (2023) - Cerebral Cortex
+
+Rolls, E. T., Rauschecker, J. P., Deco, G., Huang, C.-C., & Feng, J. (2023). Auditory cortical connectivity in humans. _Cerebral Cortex_, _33_(10), 6207–6227. [https://doi.org/10.1093/cercor/bhac496](https://doi.org/10.1093/cercor/bhac496)
 
 - [x] Paper durchgelesen?
 
@@ -86,7 +94,9 @@ PFC
 	- Moreover, neurons can respond to auditory stimuli such as vocalization both in the STS regions (Baylis et al. 1987) and in the orbitofrontal cortex, which receives connections from the STS (Rolls et al. 2006). The connectivity described here helps to provide a functional framework for the processing streams involved in these types of function.
 	- Inputs related to reward and punishment from, for example, the ventromedial prefrontal cortex (vmPFC) (10r, 10v, 10d), and orbitofrontal cortex (a47r) (Rolls et al. 2022g) reach STS auditory–visual cortical regions where objects, faces, and their semantic meaning are represented (Rolls et al. 2022e), rather than earlier stages of auditory cortical processing (Figs. 2-4). Correspondingly, STS regions have effective connectivity with some orbitofrontal/vmPFC regions in which neurons respond to vocalization and the face movements that produce them
 
-### Ahveninen, J., Jääskeläinen, I. P., Raij, T., Bonmassar, G., Devore, S., Hämäläinen, M., Levänen, S., Lin, F.-H., Sams, M., Shinn-Cunningham, B. G., Witzel, T., & Belliveau, J. W. (2006). Task-modulated “what” and “where” pathways in human auditory cortex. _Proceedings of the National Academy of Sciences_, _103_(39), 14608–14613. [https://doi.org/10.1073/pnas.0510480103](https://doi.org/10.1073/pnas.0510480103)
+### Ahveninen et al. (2006) - PNAS
+
+Ahveninen, J., Jääskeläinen, I. P., Raij, T., Bonmassar, G., Devore, S., Hämäläinen, M., Levänen, S., Lin, F.-H., Sams, M., Shinn-Cunningham, B. G., Witzel, T., & Belliveau, J. W. (2006). Task-modulated "what" and "where" pathways in human auditory cortex. _Proceedings of the National Academy of Sciences_, _103_(39), 14608–14613. [https://doi.org/10.1073/pnas.0510480103](https://doi.org/10.1073/pnas.0510480103)
 
 - [x] Paper durchgelesen?
 
@@ -101,7 +111,9 @@ PFC
 
 
 
-### Hickok, G., & Poeppel, D. (2004). Dorsal and ventral streams: A framework for understanding aspects of the functional anatomy of language. _Cognition_, _92_(1–2), 67–99. [https://doi.org/10.1016/j.cognition.2003.10.011](https://doi.org/10.1016/j.cognition.2003.10.011)
+### Hickok & Poeppel (2004) - Cognition
+
+Hickok, G., & Poeppel, D. (2004). Dorsal and ventral streams: A framework for understanding aspects of the functional anatomy of language. _Cognition_, _92_(1–2), 67–99. [https://doi.org/10.1016/j.cognition.2003.10.011](https://doi.org/10.1016/j.cognition.2003.10.011)
 
 _The functional anatomic framework for language which is presented in this paper is based on a rather old insight in language research dating back at least to the 19th century (e.g. Wernicke, 1874/1969), namely that sensory speech codes must minimally interface with two systems: a conceptual system and a motor–articulatory system._
 
@@ -139,8 +151,9 @@ _The functional anatomic framework for language which is presented in this paper
 - these data suggest a possible role for anterior temporal cortex in aspects of grammatical processing
 
 
-### De Vries, I. E. J., Marinato, G., & Baldauf, D. (2021). Decoding Object-Based Auditory Attention from Source-Reconstructed MEG Alpha Oscillations. _The Journal of Neuroscience_, _41_(41), 8603–8617. [https://doi.org/10.1523/JNEUROSCI.0583-21.2021](https://doi.org/10.1523/JNEUROSCI.0583-21.2021)
+### De Vries et al. (2021) - Journal of Neuroscience
 
+De Vries, I. E. J., Marinato, G., & Baldauf, D. (2021). Decoding Object-Based Auditory Attention from Source-Reconstructed MEG Alpha Oscillations. _The Journal of Neuroscience_, _41_(41), 8603–8617. [https://doi.org/10.1523/JNEUROSCI.0583-21.2021](https://doi.org/10.1523/JNEUROSCI.0583-21.2021)
 
 We thus demonstrate anticipatory alpha oscillations to underlie top-down control of object-based auditory attention in complex naturalistic scenes.
 
@@ -149,8 +162,9 @@ subjects who were better prepared (i.e., attended better to the correct stream r
 - paper could show alpha connections from IFJ to auditory cortex -> Figure 3d
 
 
-### Romanski, L. M., Tian, B., Fritz, J., Mishkin, M., Goldman-Rakic, P. S., & Rauschecker, J. P. (1999). Dual streams of auditory afferents target multiple domains in the primate prefrontal cortex. _Nature Neuroscience_, _2_(12), 1131–1136. [https://doi.org/10.1038/16056](https://doi.org/10.1038/16056)
+### Romanski et al. (1999) - Nature Neuroscience
 
+Romanski, L. M., Tian, B., Fritz, J., Mishkin, M., Goldman-Rakic, P. S., & Rauschecker, J. P. (1999). Dual streams of auditory afferents target multiple domains in the primate prefrontal cortex. _Nature Neuroscience_, _2_(12), 1131–1136. [https://doi.org/10.1038/16056](https://doi.org/10.1038/16056)
 
 - separate auditory streams originate in caudal and rostral auditory cortex and target spatial and non-spatial domains of the frontal lobe
 - three cochleotopically organized fields separated by frequency reversals, termed anterolateral (AL), middle-lateral (ML) and caudolateral (CL) areas, are mapped within the lateral belt17. Electrophysiological studies of the superior temporal region in nonhuman primates suggests that its anterior and posterior aspects may differ functionally
@@ -173,7 +187,9 @@ discussion
 - Our results substantiate findings of a connection between the ventral prefrontal cortex and anterior auditory cortical regions
 - Ventrolateral frontal lobe regions 12 and 45, which make up the inferior convexity in the nonhuman primate, are situated just anterior to area 6, the premotor cortex43; it is suggested, on the basis of anatomical location and connections, that they represent the macaque homolog of Broca’s area4
 
-### Cohen, Y. E., Bennur, S., Christison-Lagay, K., Gifford, A. M., & Tsunada, J. (2016). Functional Organization of the Ventral Auditory Pathway. In P. Van Dijk, D. Başkent, E. Gaudrain, E. De Kleine, A. Wagner, & C. Lanting (Eds.), _Physiology, Psychoacoustics and Cognition in Normal and Impaired Hearing_ (Vol. 894, pp. 381–388). Springer International Publishing. [https://doi.org/10.1007/978-3-319-25474-6_40](https://doi.org/10.1007/978-3-319-25474-6_40)
+### Cohen et al. (2016) - Springer
+
+Cohen, Y. E., Bennur, S., Christison-Lagay, K., Gifford, A. M., & Tsunada, J. (2016). Functional Organization of the Ventral Auditory Pathway. In P. Van Dijk, D. Başkent, E. Gaudrain, E. De Kleine, A. Wagner, & C. Lanting (Eds.), _Physiology, Psychoacoustics and Cognition in Normal and Impaired Hearing_ (Vol. 894, pp. 381–388). Springer International Publishing. [https://doi.org/10.1007/978-3-319-25474-6_40](https://doi.org/10.1007/978-3-319-25474-6_40)
 
 - [ ] paper gelesen?
 
@@ -202,17 +218,20 @@ their model
   
   ich glaube, das bezieht sich alles auf monkeys. 
 
-### Scott, B. H., Saleem, K. S., Kikuchi, Y., Fukushima, M., Mishkin, M., & Saunders, R. C. (2017). Thalamic connections of the core auditory cortex and rostral supratemporal plane in the macaque monkey. _Journal of Comparative Neurology_, _525_(16), 3488–3513. [https://doi.org/10.1002/cne.24283](https://doi.org/10.1002/cne.24283)
+### Scott et al. (2017) - Journal of Comparative Neurology
+
+Scott, B. H., Saleem, K. S., Kikuchi, Y., Fukushima, M., Mishkin, M., & Saunders, R. C. (2017). Thalamic connections of the core auditory cortex and rostral supratemporal plane in the macaque monkey. _Journal of Comparative Neurology_, _525_(16), 3488–3513. [https://doi.org/10.1002/cne.24283](https://doi.org/10.1002/cne.24283)
 
 - [x] gelesen
 
 ventral stream in macaque monkeys includes the entirety of the supratemporal plane (STP) and adjacent superior temporal gyrus (STG), extending rostrally into the dorsal temporal pole (Poremba et al., 2003; Poremba et al., 2004; Petkov et al., 2008; Kikuchi et al., 2010; Ng et al., 2013; Fukushima et al., 2014; Scott et al., 2014).
 
 
-### Rauschecker, J. P., & Scott, S. K. (2009). Maps and streams in the auditory cortex: Nonhuman primates illuminate human speech processing. _Nature Neuroscience_, _12_(6), 718–724. [https://doi.org/10.1038/nn.2331](https://doi.org/10.1038/nn.2331)
+### Rauschecker & Scott (2009) - Nature Neuroscience
 
+Rauschecker, J. P., & Scott, S. K. (2009). Maps and streams in the auditory cortex: Nonhuman primates illuminate human speech processing. _Nature Neuroscience_, _12_(6), 718–724. [https://doi.org/10.1038/nn.2331](https://doi.org/10.1038/nn.2331)
 
-The inferior parietal lobule (IPL), particularly the angular and supramarginal gyri (Brodmann areas 39 and 40), has also been linked to linguistic functions59, such as the ‘phonological-articulatory loop’60. Functional imaging has confirmed this role, though activity varies with working memory task load61,62. However, the IPL does not seem to be driven by acoustic processing of speech: the angular gyrus (together with extensive prefrontal activation) is recruited when higher-order linguistic factors improve speech comprehension
+The inferior parietal lobule (IPL), particularly the angular and supramarginal gyri (Brodmann areas 39 and 40), has also been linked to linguistic functions59, such as the 'phonological-articulatory loop'60. Functional imaging has confirmed this role, though activity varies with working memory task load61,62. However, the IPL does not seem to be driven by acoustic processing of speech: the angular gyrus (together with extensive prefrontal activation) is recruited when higher-order linguistic factors improve speech comprehension
 
 
 IPL -> PGi
@@ -257,8 +276,8 @@ from supplementary material:
 - A meta-analysis  of altogether 38 human imaging studies provided evidence that the vast majority  of auditory spatial studies involved activation of the postero-dorsal pathway (pST,  IPL, and SFS), whereas only two activated antero-ventral areas (aST, IFC)
 - Imaging studies in humans have demonstrated specific  activation in pST with auditory motion24, 25 near the location of visual motion  areas MT and MST. Imaging studies that have tested moving auditory stimuli in  addition to stationary ones have reported that auditory motion leads to activation  in areas of pST and posterior parietal cortex that are adjacent to each other, with  motion being the more powerful stimulus14.
 
-### Griffiths, T. D., Rees, G., Rees, A., Green, G. G. R., Witton, C., Rowe, D., Büchel, C., Turner, R., & Frackowiak, R. S. J. (1998). Right parietal cortex is involved in the perception of sound movement in humans. _Nature Neuroscience_, _1_(1), 74–79. [https://doi.org/10.1038/276](https://doi.org/10.1038/276)
-
+### Griffiths et al. (1998)
+Griffiths, T. D., Rees, G., Rees, A., Green, G. G. R., Witton, C., Rowe, D., Büchel, C., Turner, R., & Frackowiak, R. S. J. (1998). Right parietal cortex is involved in the perception of sound movement in humans. _Nature Neuroscience_, _1_(1), 74–79. [https://doi.org/10.1038/276](https://doi.org/10.1038/276)
 
 we have demonstrated human brain areas that are active specifically during the perception of sound movement. Both functional magnetic resonance imaging (fMRI) and positron emission tomography (PET) demonstrated the involvement of the right parietal cortex in sound movement perception with these stimuli.
 
