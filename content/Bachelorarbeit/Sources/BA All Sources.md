@@ -142,7 +142,7 @@ _The functional anatomic framework for language which is presented in this paper
 - We also propose bi-directionality in both the dorsal and ventral pathways. Thus, in the ventral stream, pITL networks mediate the relation between sound and meaning both for perception and production
 - Our claim is simply that there exists a cortical network which performs a mapping between (or binds) acoustic –phonetic representations on the one hand, and conceptual – semantic representations on the other.
 	- we hypothesize that sectors of the left STG participate not only in sub-lexical aspects of the perception of speech, but also in sub-lexical aspects of the production of speech (again, perhaps non-symmetrically).
-- In the dorsal stream, we suggest that temporal –parietal systems can map auditory speech representations onto motor representations
+- In the dorsal stream, we suggest that temporal –parietal systems can map auditory speech representations onto motor representations ^a92df4
 - When the neural organization of speech perception (or acoustic –phonetic processing, we will use these terms interchangeably) is examined from the perspective of auditory comprehension tasks, the picture that emerges is one in which acoustic –phonetic processing is carried out in the STG bilaterally (although asymmetrically) and then interfaces with conceptual systems via a left-dominant network in posterior inferior temporal regions (e.g. MTG, ITG, and perhaps extending to regions around the temporal parietal – occipital boundary). The arguments supporting this claim follow in Sections 4.1 and 4.2. Sentence-level processes may additionally involve anterior temporal regions (see Section 4.4).
 - while Wernicke’s area is classically associated with the left STG, Wernicke himself indicates that both hemispheres can represent “sound images” of speech. According to Wernicke (1874/1969), the left STG becomes dominant for language processes by virtue of its connection with the left-lateralized motor speech area
 - Another line of evidence comes from imaging studies of “semantic processing” (typically lexical semantics) which generally implicate inferior posterior temporal regions and posterior parietal cortex (Binder et al., 1997).9 This distribution of activation corresponds quite well to the distribution of lesions associated with transcortical sensory aphasia (TSA) which lends support to the claim of meaning-based integration networks in posterior ITL (again perhaps extending to regions around the temporal –parietal – occipital junction).
@@ -326,6 +326,14 @@ more about [[STSdp]]:
 Frühholz, S., Gschwind, M., & Grandjean, D. (2015). Bilateral dorsal and ventral fiber pathways for the processing of affective prosody identified by probabilistic fiber tracking. _NeuroImage_, _109_, 27–34. [https://doi.org/10.1016/j.neuroimage.2015.01.016](https://doi.org/10.1016/j.neuroimage.2015.01.016)
 
 - Dorsal and ventral pathways for syntacto-semantic speech processing in the left hemisphere are represented in the dual-stream model of auditory processing.
+- The results also suggest the existence of a dual-stream processing in the right hemisphere, and a general predominance of the dorsal pathways in both hemispheres underlying the neural processing of affective prosody in an extended temporo-frontal network.
+
+- Recent studies (Friederici et al., 2006; Rauschecker and Scott, 2009; Saur et al., 2008) have predominantly identified left hemispheric processing pathways within a dual-stream model of auditory processing (Hickok and Poeppel, 2007). They include ventral pathways from anterior superior temporal gyrus (STG) to the anterior inferior frontal gyrus (IFG) and dorsal pathways, which project to the posterior IFG via the posterior STG (Hickok and Poeppel, 2007; Rauschecker and Scott, 2009).
+	- bestätigt, was wir eh schon wissen
+
+- Especially the dorsal pathway seems strongly left lateralized (Hickok and Poeppel, 2007). The ventral pathways convey sound-invariant meaning (Belin and Zatorre, 2000b; Rauschecker and Scott, 2009), such as speech semantics (Hagoort, 2005). 
+- The dorsal pathways serve sound-to-motor mapping (Saur et al., 2008) and the processing of temporal auditory sequences (Belin and Zatorre, 2000b; Rauschecker and Scott, 2009), which are also necessary for the understanding of speech syntax (Friederici et al., 2006).
+- Compared to a predominant role of the left brain for syntacto-semantic processing (Specht, 2014), the emotional  intonation in speech, that is the affective prosody, strongly, but not exclusively, activates regions in right STG and IFG (e.g. Alba-Ferrara et al., 2011; Beaucousin et al., 2007; Ethofer et al., 2006; Fruhholz et al., 2012).
 
 
 [[Was bedeuten die Vergleiche aus Glasser SUPPL]]

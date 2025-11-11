@@ -5,10 +5,11 @@
   flex-direction: column;
   overflow-y: visible;
   min-height: 1.4rem;
-  flex: 0 1 auto;
-  max-height: none;
+  flex: 0 0 auto;
+  max-height: 400px; // Begrenzt die Höhe des gesamten TOC
   &:has(button.toc-header.collapsed) {
     flex: 0 1 1.4rem;
+    max-height: 1.4rem;
   }
 }
 
@@ -44,8 +45,10 @@ ul.toc-content.overflow {
   position: relative;
   margin: 0.5rem 0;
   padding: 0;
-  max-height: calc(100vh - 12rem);
+  padding-right: 0.5rem;
+  max-height: 350px; // Feste maximale Höhe für die Liste
   overflow-y: auto;
+  overflow-x: hidden;
   overscroll-behavior: contain;
   list-style: none;
 
@@ -66,6 +69,10 @@ ul.toc-content.overflow {
   &::-webkit-scrollbar-thumb:hover {
     background: var(--darkgray);
   }
+
+  /* Firefox scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--gray) transparent;
 
   & > li > a {
     color: var(--dark);

@@ -45,19 +45,19 @@ export default ((opts?: Partial<ContentMetaOptions>) => {
             timeAgo = `vor ${diffDays} Tagen`
           } else if (diffDays < 30) {
             const weeks = Math.floor(diffDays / 7)
-            timeAgo = `vor ${weeks} ${weeks === 1 ? 'Woche' : 'Wochen'}`
+            timeAgo = `vor ${weeks} ${weeks === 1 ? "Woche" : "Wochen"}`
           } else if (diffDays < 365) {
             const months = Math.floor(diffDays / 30)
-            timeAgo = `vor ${months} ${months === 1 ? 'Monat' : 'Monaten'}`
+            timeAgo = `vor ${months} ${months === 1 ? "Monat" : "Monaten"}`
           } else {
             const years = Math.floor(diffDays / 365)
-            timeAgo = `vor ${years} ${years === 1 ? 'Jahr' : 'Jahren'}`
+            timeAgo = `vor ${years} ${years === 1 ? "Jahr" : "Jahren"}`
           }
 
           segments.push(
             <span class="last-modified">
               📝 Zuletzt geändert: <DateComponent date={date} locale={cfg.locale} /> ({timeAgo})
-            </span>
+            </span>,
           )
         }
       }

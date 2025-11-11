@@ -30,9 +30,7 @@ export default ((opts?: Partial<BibliographyOptions>) => {
         <h3>
           {options.title}
           {options.showCount && (sources || bibliography) && (
-            <span class="bib-count">
-              ({sources?.length || bibliography?.length || 0} Quellen)
-            </span>
+            <span class="bib-count">({sources?.length || bibliography?.length || 0} Quellen)</span>
           )}
         </h3>
         <div class="bibliography-content">
