@@ -10,7 +10,7 @@ Tags: #cognitivescience/neuroscience #science #stream/ventral
 *Superlink:* [[050 🧠Neuroscience]] 
 ![[Glasser HCP-MMP1 human brain lateral view.png]]
 ## Source
-[[BA All Sources#Glasser et al. (2016) - Nature 621d35]]
+[[Glasser et al. (2016) - Nature]]
 
 
 Created: 2025-11-11 13:03

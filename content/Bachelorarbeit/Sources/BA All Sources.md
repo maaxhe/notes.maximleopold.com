@@ -14,7 +14,7 @@ aliases:
 [[De Vries & Baldauf (2021) - Journal of Neuroscience]]
 [[Friederici (2011) - Physiological Reviews]]
 [[Frühholz (2015) - NeuroImage]]
-[[Glasser et al. (2016) - Nature ^621d35]]
+[[Glasser et al. (2016) - Nature]]
 [[Griffiths et al. (1998)]]
 [[Hickok & Poeppel (2004) - Cognition]]
 [[Scott et al. (2017) - Journal of Comparative Neurology]]

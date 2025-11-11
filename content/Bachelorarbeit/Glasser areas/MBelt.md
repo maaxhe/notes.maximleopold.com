@@ -3,7 +3,7 @@
 
 ### Function 
 
-more activated in the Emotion faces-shapes contrast, less in math-story contrast (Glasser, 2016, SUPPL)-> [[MBelt#^e86137]]
+more activated in the Emotion faces-shapes contrast, less in math-story contrast (Glasser, 2016, SUPPL)-> [[Glasser et al. (2016) - Nature]]
 
 
 
@@ -13,7 +13,7 @@ Tags: #cognitivescience/neuroscience #science
 *Superlink:* [[050 🧠Neuroscience]] 
 ![[Glasser HCP-MMP1 human brain lateral view.png]]
 ## Source
-Quelle: [[BA All Sources#Glasser et al. (2016) - Nature]] ^e86137
+Quelle: [[Glasser et al. (2016) - Nature]]
 
 
 

@@ -4,6 +4,7 @@
 - activated in LANGUAGE STORY, STORY-MATH contrast 
 - less in FACE-SHAPES
 - realtive to STSva more myelin, realtive more in TOM-RANDOM, working memory, GAMBLING, EMOTION
+Quelle: [[Glasser et al. (2016) - Nature]]
 
 ## see also
 Tags: #cognitivescience/neuroscience #science 

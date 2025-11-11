@@ -4,7 +4,7 @@
 ### Functions
 - more myelin than PI and [[STGa]]
 - is activated vs deactivated in the LANGAUGE MATH (Panel E) and STORY (Panel F) contrasts
-- 
+Quelle: [[Glasser et al. (2016) - Nature]]
 
 ## see also
 Tags: #cognitivescience/neuroscience #science 
