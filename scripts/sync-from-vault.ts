@@ -112,14 +112,12 @@ function normalizeTags(tagValue: unknown): string[] {
   const clean = (value: string) => value.replace(/^#+/, "").trim().toLowerCase()
 
   const fromString = (value: string): string[] =>
-    value
-      .split(/[,;]/)
-      .flatMap((segment) =>
-        segment
-          .split(/\s+/)
-          .map(clean)
-          .filter((token) => token.length > 0),
-      )
+    value.split(/[,;]/).flatMap((segment) =>
+      segment
+        .split(/\s+/)
+        .map(clean)
+        .filter((token) => token.length > 0),
+    )
 
   if (Array.isArray(tagValue)) {
     return tagValue
@@ -134,18 +132,30 @@ function normalizeTags(tagValue: unknown): string[] {
   return []
 }
 
-function hasRequiredTag(frontmatter: Frontmatter): boolean {
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+}
+
+function hasRequiredTag(frontmatter: Frontmatter, body: string): boolean {
   const requiredTag = CONFIG.REQUIRED_FRONTMATTER_TAG?.toLowerCase()
   if (!requiredTag) return true
 
-  const tags = normalizeTags(frontmatter?.tags ?? frontmatter?.tag)
-  return tags.includes(requiredTag)
+  const tags = normalizeTags(
+    frontmatter?.tags ?? frontmatter?.tag ?? frontmatter?.Tags ?? frontmatter?.Tag,
+  )
+  if (tags.includes(requiredTag)) return true
+
+  const inlineRegex = new RegExp(`(^|[\\s,;:])#${escapeRegExp(requiredTag)}(?![\\w/])`, "i")
+  return inlineRegex.test(body)
 }
 
 function removeSensitiveSections(content: string): string {
   if (!Array.isArray(CONFIG.SENSITIVE_SECTION_PATTERNS)) return content
 
-  return CONFIG.SENSITIVE_SECTION_PATTERNS.reduce((acc, pattern) => acc.replace(pattern, ""), content)
+  return CONFIG.SENSITIVE_SECTION_PATTERNS.reduce(
+    (acc, pattern) => acc.replace(pattern, ""),
+    content,
+  )
 }
 
 /**
@@ -323,7 +333,7 @@ function syncContent(assetsMap: Map<string, string>): SyncStats {
           return
         }
 
-        if (!hasRequiredTag(frontmatter)) {
+        if (!hasRequiredTag(frontmatter, parsed.content)) {
           stats.filesSkipped++
           console.log(
             `  ⊗ Missing tag "${CONFIG.REQUIRED_FRONTMATTER_TAG}": ${path.basename(filePath)}`,
