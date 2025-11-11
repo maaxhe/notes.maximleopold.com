@@ -19,6 +19,15 @@ const defaultOptions: ContentMetaOptions = {
   showComma: true,
 }
 
+const MS_PER_DAY = 1000 * 60 * 60 * 24
+const startOfLocalDay = (date: Date) => new Date(date.getFullYear(), date.getMonth(), date.getDate())
+const differenceInCalendarDays = (a: Date, b: Date) => {
+  const startA = startOfLocalDay(a)
+  const startB = startOfLocalDay(b)
+  const diff = startA.getTime() - startB.getTime()
+  return Math.max(0, Math.floor(diff / MS_PER_DAY))
+}
+
 export default ((opts?: Partial<ContentMetaOptions>) => {
   // Merge options with defaults
   const options: ContentMetaOptions = { ...defaultOptions, ...opts }
@@ -33,8 +42,7 @@ export default ((opts?: Partial<ContentMetaOptions>) => {
         const date = getDate(cfg, fileData)
         if (date) {
           const now = new Date()
-          const diffTime = Math.abs(now.getTime() - date.getTime())
-          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+          const diffDays = differenceInCalendarDays(now, date)
 
           let timeAgo = ""
           if (diffDays === 0) {

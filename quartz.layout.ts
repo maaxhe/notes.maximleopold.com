@@ -46,6 +46,8 @@ export const defaultContentPageLayout: PageLayout = {
   right: [
     Component.ConditionalRender({
       component: Component.Graph({
+        collapsible: false,
+        showTitle: false,
         localGraph: {
           showTags: false,
           depth: -1, // Show all nodes on home page
@@ -60,6 +62,8 @@ export const defaultContentPageLayout: PageLayout = {
     }),
     Component.ConditionalRender({
       component: Component.Graph({
+        collapsible: false,
+        showTitle: false,
         localGraph: { showTags: false },
         globalGraph: { showTags: false },
       }),
@@ -69,7 +73,6 @@ export const defaultContentPageLayout: PageLayout = {
       summary: "#stream/dorsal",
       emptyLabel: "Keine freigegebenen Notizen für diesen Stream.",
       limit: 8,
-      collapsible: false,
       filter: (page) =>
         (page.frontmatter?.tags ?? []).some(
           (tag) => typeof tag === "string" && tag.toLowerCase() === "stream/dorsal",
@@ -79,7 +82,6 @@ export const defaultContentPageLayout: PageLayout = {
       summary: "#stream/ventral",
       emptyLabel: "Keine freigegebenen Notizen für diesen Stream.",
       limit: 8,
-      collapsible: false,
       filter: (page) =>
         (page.frontmatter?.tags ?? []).some(
           (tag) => typeof tag === "string" && tag.toLowerCase() === "stream/ventral",

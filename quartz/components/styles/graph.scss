@@ -38,6 +38,15 @@
     }
   }
 
+  .graph-header-static {
+    display: flex;
+    align-items: center;
+    h3 {
+      font-size: 1rem;
+      margin: 0;
+    }
+  }
+
   & > .graph-outer {
     border-radius: 5px;
     border: 1px solid var(--lightgray);

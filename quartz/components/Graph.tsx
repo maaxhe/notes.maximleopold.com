@@ -24,6 +24,8 @@ export interface D3Config {
 interface GraphOptions {
   localGraph: Partial<D3Config> | undefined
   globalGraph: Partial<D3Config> | undefined
+  collapsible?: boolean
+  showTitle?: boolean
 }
 
 const defaultOptions: GraphOptions = {
@@ -63,25 +65,41 @@ export default ((opts?: Partial<GraphOptions>) => {
   const Graph: QuartzComponent = ({ displayClass, cfg }: QuartzComponentProps) => {
     const localGraph = { ...defaultOptions.localGraph, ...opts?.localGraph }
     const globalGraph = { ...defaultOptions.globalGraph, ...opts?.globalGraph }
+    const collapsible = opts?.collapsible ?? true
+    const showTitle = opts?.showTitle ?? true
+
     return (
       <div class={classNames(displayClass, "graph")}>
-        <button type="button" class="graph-header" aria-controls="graph-outer" aria-expanded="true">
-          <h3>{i18n(cfg.locale).components.graph.title}</h3>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="fold"
+        {collapsible ? (
+          <button
+            type="button"
+            class="graph-header"
+            aria-controls="graph-outer"
+            aria-expanded="true"
           >
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </button>
+            {showTitle && <h3>{i18n(cfg.locale).components.graph.title}</h3>}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="fold"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        ) : (
+          showTitle && (
+            <div class="graph-header graph-header-static">
+              <h3>{i18n(cfg.locale).components.graph.title}</h3>
+            </div>
+          )
+        )}
         <div class="graph-outer" id="graph-outer">
           <div class="graph-container" data-cfg={JSON.stringify(localGraph)}></div>
           <button class="global-graph-icon" aria-label="Global Graph">

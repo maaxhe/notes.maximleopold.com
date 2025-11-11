@@ -33,14 +33,8 @@
 > Sie wurden im HCP S1200 Reference Manual und in *Glasser et al. (2016, Nature)* verwendet, um funktionelle Parzellierungen zu validieren.
 
 
-Hier stehen die ganzen Vergleiche drin und was genau die Begriffe bedeuten:
-
-<iframe
-  src="/a-Literatur-Notizen/PDFs/HCP_S1200_Release_Reference_Manual.pdf"
-  title="HCP S1200 Release Manual"
-  loading="lazy"
-  style="width: 100%; min-height: 480px; border: 1px solid var(--lightgray); border-radius: 8px"
-></iframe>
+Hier stehen die ganzen Vergleiche drin und was genau die Begriffe bedeuten: 
+![[HCP_S1200_Release_Reference_Manual.pdf]]
 
 [📄 HCP S1200 Reference Manual als PDF herunterladen](/a-Literatur-Notizen/PDFs/HCP_S1200_Release_Reference_Manual.pdf)
 ## see also
