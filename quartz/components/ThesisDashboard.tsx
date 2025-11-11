@@ -11,7 +11,7 @@ interface ThesisDashboardOptions {
 
 const defaultOptions: ThesisDashboardOptions = {
   title: "Bachelorarbeit - Übersicht",
-  folderPath: "Bachelorarbeit",
+  folderPath: "Schreiben",
   showProgress: true,
 }
 
@@ -24,7 +24,7 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
       .filter(
         (file) =>
           file.slug?.startsWith(options.folderPath!) ||
-          file.frontmatter?.tags?.includes("bachelorarbeit"),
+          file.frontmatter?.tags?.includes("ba"),
       )
       .filter((file) => file.slug !== fileData.slug) // Don't show current page
       .sort((a, b) => {

@@ -85,13 +85,13 @@ export const defaultContentPageLayout: PageLayout = {
     }),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Bibliography(),
-    Component.Backlinks(),
   ],
   afterBody: [
     Component.ConditionalRender({
       component: Component.ThesisDashboard(),
-      condition: (page) => page.fileData.slug === "index",
+      condition: (page) => page.fileData.slug === "dashboard-ba",
     }),
+    Component.Backlinks(),
     Component.PageNavigation(),
   ],
 }

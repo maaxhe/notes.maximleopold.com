@@ -42,7 +42,10 @@
     margin: 0.5em 0;
     position: relative;
     overflow: hidden;
-    transition: height 0.3s ease, margin 0.3s ease, opacity 0.3s ease;
+    transition:
+      height 0.3s ease,
+      margin 0.3s ease,
+      opacity 0.3s ease;
 
     &.collapsed {
       height: 0;

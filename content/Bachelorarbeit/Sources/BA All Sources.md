@@ -336,6 +336,10 @@ Frühholz, S., Gschwind, M., & Grandjean, D. (2015). Bilateral dorsal and ventra
 - Compared to a predominant role of the left brain for syntacto-semantic processing (Specht, 2014), the emotional  intonation in speech, that is the affective prosody, strongly, but not exclusively, activates regions in right STG and IFG (e.g. Alba-Ferrara et al., 2011; Beaucousin et al., 2007; Ethofer et al., 2006; Fruhholz et al., 2012).
 - Ventral and dorsal pathways, for example, are supposed to originate in multiple STG seed regions (Friederici, 2011; Fruhholz et al., 2012). Furthermore, these pathways probably terminate in the anterior as well as in the posterior IFG (Fruhholz and Grandjean, 2013b)
 
+STG-Regionen: 
+- The right compared with left IFG showed a sensitivity to speech prosody during implicit attention, while left IFG subregions responded to affective prosody during both attentional conditions. All STG subregions showed a sensitivity to speech prosody both for the explicit and implicit attention condition, but right mid STG (mSTG) and left anterior STG (aSTG) showed stronger sensitivity during the explicit attention condition, whereby the latter regions showed a general main effect for the explicit compared with the implicit task, and thus might reflect a rather general evaluation of voices independent of the emotion. Furthermore, regions in the right posterior STG (fundus of the posterior superior temporal sulcus (fpSTS), posterior STG (pSTG)) and all left STG subregions were sensitive to the pitch and intensity variations in affective prosody, which are one of the main acoustic features of affective prosody (Banse and Scherer, 1996; Patel et al., 2011).
+
+![[Fruehholz 2015 Figure 1.png]]
 
 [[Was bedeuten die Vergleiche aus Glasser SUPPL]]
 ### Andere Aussagen aus paper

@@ -65,12 +65,7 @@ export default ((opts?: Partial<GraphOptions>) => {
     const globalGraph = { ...defaultOptions.globalGraph, ...opts?.globalGraph }
     return (
       <div class={classNames(displayClass, "graph")}>
-        <button
-          type="button"
-          class="graph-header"
-          aria-controls="graph-outer"
-          aria-expanded="true"
-        >
+        <button type="button" class="graph-header" aria-controls="graph-outer" aria-expanded="true">
           <h3>{i18n(cfg.locale).components.graph.title}</h3>
           <svg
             xmlns="http://www.w3.org/2000/svg"

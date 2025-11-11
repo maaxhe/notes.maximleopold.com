@@ -59,7 +59,8 @@ export default ((opts?: Partial<ContentMetaOptions>) => {
 
           segments.push(
             <span class="last-modified">
-              📝 Zuletzt geändert: <DateComponent date={date} locale={cfg.locale} /> ({timeAgo}){isNew && <span class="new-indicator"> 🆕</span>}
+              📝 Zuletzt geändert: <DateComponent date={date} locale={cfg.locale} /> ({timeAgo})
+              {isNew && <span class="new-indicator"> 🆕</span>}
             </span>,
           )
         }
