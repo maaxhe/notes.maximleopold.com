@@ -56,6 +56,10 @@
     border-left-color: #f39c12;
   }
 
+  &.approved {
+    border-left-color: #1abc9c;
+  }
+
   .stat-number {
     font-size: 2.5rem;
     font-weight: bold;

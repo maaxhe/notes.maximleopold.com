@@ -9,19 +9,33 @@ aliases:
 ## Paper Zitate & Kommentare 
 
 [[Ahveninen et al. (2006) - PNAS]]
+
 [[Cohen et al. (2016) - Springer]]
+
 [[De Vries et al. (2021) - Journal of Neuroscience]]
+
 [[De Vries & Baldauf (2021) - Journal of Neuroscience]]
+
 [[Friederici (2011) - Physiological Reviews]]
+
 [[Frühholz (2015) - NeuroImage]]
+
 [[Glasser et al. (2016) - Nature]]
+
 [[Griffiths et al. (1998)]]
+
 [[Hickok & Poeppel (2004) - Cognition]]
+
 [[Scott et al. (2017) - Journal of Comparative Neurology]]
+
 [[Rauschecker (2011) - Hearing Research]]
+
 [[Rauschecker & Afsahi (2023) - Journal of Comparative Neurology]]
+
 [[Rauschecker & Scott (2009) - Nature Neuroscience]]
+
 [[Rolls et al. (2023) - Cerebral Cortex]]
+
 [[Romanski et al. (1999) - Nature Neuroscience]]
 
 

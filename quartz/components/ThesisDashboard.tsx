@@ -52,11 +52,12 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
 
     // Calculate overall statistics
     const totalFiles = thesisFiles.length
-    const completedFiles = thesisFiles.filter(
-      (f) => f.frontmatter?.status === "final" || f.frontmatter?.status === "approved",
-    ).length
-    const inReviewFiles = thesisFiles.filter((f) => f.frontmatter?.status === "review").length
-    const draftFiles = thesisFiles.filter((f) => f.frontmatter?.status === "draft").length
+    const statusOf = (f: typeof thesisFiles[number]) =>
+      typeof f.frontmatter?.status === "string" ? f.frontmatter.status.toLowerCase() : undefined
+    const finalFiles = thesisFiles.filter((f) => statusOf(f) === "final").length
+    const approvedFiles = thesisFiles.filter((f) => statusOf(f) === "approved").length
+    const inReviewFiles = thesisFiles.filter((f) => statusOf(f) === "review").length
+    const draftFiles = thesisFiles.filter((f) => statusOf(f) === "draft").length
 
     const averageProgress =
       thesisFiles.length > 0
@@ -84,7 +85,7 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
             <div class="stat-label">Gesamt Seiten</div>
           </div>
           <div class="stat-card completed">
-            <div class="stat-number">{completedFiles}</div>
+            <div class="stat-number">{finalFiles}</div>
             <div class="stat-label">Fertig</div>
           </div>
           <div class="stat-card review">
@@ -94,6 +95,10 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
           <div class="stat-card draft">
             <div class="stat-number">{draftFiles}</div>
             <div class="stat-label">Entwürfe</div>
+          </div>
+          <div class="stat-card approved">
+            <div class="stat-number">{approvedFiles}</div>
+            <div class="stat-label">Genehmigt</div>
           </div>
         </div>
 
