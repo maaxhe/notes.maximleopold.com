@@ -1,0 +1,117 @@
+@use "../../styles/variables.scss" as *;
+
+.review-status {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: var(--lightgray);
+  border-radius: 8px;
+  border-left: 4px solid var(--secondary);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  width: fit-content;
+
+  &.draft {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+
+  &.review {
+    background-color: #cfe2ff;
+    color: #084298;
+  }
+
+  &.needs-revision {
+    background-color: #ffe5d0;
+    color: #984c0c;
+  }
+
+  &.final {
+    background-color: #d1e7dd;
+    color: #0a3622;
+  }
+
+  &.approved {
+    background-color: #d1e7dd;
+    color: #0a3622;
+  }
+
+  .status-icon {
+    font-size: 1.1rem;
+  }
+
+  .status-label {
+    font-weight: 500;
+  }
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .progress-bar {
+    flex: 1;
+    height: 8px;
+    background-color: var(--lightgray);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--gray);
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--secondary), var(--tertiary));
+      transition: width 0.3s ease;
+    }
+  }
+
+  .progress-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--darkgray);
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .review-status {
+    background-color: var(--light);
+  }
+
+  .status-badge {
+    &.draft {
+      background-color: #664d03;
+      color: #fff3cd;
+    }
+
+    &.review {
+      background-color: #052c65;
+      color: #cfe2ff;
+    }
+
+    &.needs-revision {
+      background-color: #653208;
+      color: #ffe5d0;
+    }
+
+    &.final,
+    &.approved {
+      background-color: #051b11;
+      color: #d1e7dd;
+    }
+  }
+
+  .progress-container .progress-bar {
+    background-color: var(--light);
+  }
+}

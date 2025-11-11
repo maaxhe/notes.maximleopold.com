@@ -24,6 +24,11 @@ import Breadcrumbs from "./Breadcrumbs"
 import Comments from "./Comments"
 import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
+import ReviewStatus from "./ReviewStatus"
+import ExportButton from "./ExportButton"
+import Bibliography from "./Bibliography"
+import PageNavigation from "./PageNavigation"
+import Hypothesis from "./Hypothesis"
 
 export {
   ArticleTitle,
@@ -52,4 +57,9 @@ export {
   Comments,
   Flex,
   ConditionalRender,
+  ReviewStatus,
+  ExportButton,
+  Bibliography,
+  PageNavigation,
+  Hypothesis,
 }

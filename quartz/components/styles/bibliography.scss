@@ -1,0 +1,104 @@
+@use "../../styles/variables.scss" as *;
+
+.bibliography {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background-color: var(--lightgray);
+  border-radius: 8px;
+  border-left: 4px solid var(--secondary);
+
+  h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .bib-count {
+      font-size: 0.85rem;
+      font-weight: normal;
+      color: var(--darkgray);
+      opacity: 0.8;
+    }
+  }
+
+  .bibliography-content {
+    font-size: 0.9rem;
+  }
+
+  .sources-list,
+  .bibliography-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .source-item,
+  .bib-entry {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .source-number,
+  .bib-number {
+    font-weight: 600;
+    color: var(--secondary);
+    flex-shrink: 0;
+    font-size: 0.85rem;
+  }
+
+  .source-text {
+    color: var(--darkgray);
+  }
+
+  .bib-details {
+    color: var(--darkgray);
+
+    .bib-author {
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .bib-year {
+      color: var(--darkgray);
+    }
+
+    .bib-title {
+      color: var(--dark);
+    }
+
+    .bib-journal {
+      color: var(--darkgray);
+    }
+
+    .bib-url {
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--tertiary);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  @media print {
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .bibliography {
+    background-color: var(--light);
+  }
+}
