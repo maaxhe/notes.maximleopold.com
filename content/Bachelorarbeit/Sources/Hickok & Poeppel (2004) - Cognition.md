@@ -36,3 +36,5 @@ _The functional anatomic framework for language which is presented in this paper
 - Taken together, these observations (including those from SD) are consistent with our claim of a sound –meaning mapping system in posterior ITL.
 - Finally, Indefrey and Levelt (this volume), in their meta-analysis of a large number of functional imaging studies, have identified the middle portion of the MTG as a site which plays a role in “conceptually-driven lexical retrieval” during speech production; this region was also shown to be consistently active during speech perception in their analysis. This stage in processing is compatible with our sound – meaning interface.
 - these data suggest a possible role for anterior temporal cortex in aspects of grammatical processing
+
+![[Hickok and Poeppel - 2004 - Dorsal and ventral streams a framework for understanding aspects of the functional anatomy of langu.pdf]]
