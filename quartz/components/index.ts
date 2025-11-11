@@ -2,6 +2,8 @@ import Content from "./pages/Content"
 import TagContent from "./pages/TagContent"
 import FolderContent from "./pages/FolderContent"
 import NotFound from "./pages/404"
+import ThesisDashboardPage from "./pages/ThesisDashboardPage"
+import RecentChangesPage from "./pages/RecentChangesPage"
 import ArticleTitle from "./ArticleTitle"
 import Darkmode from "./Darkmode"
 import ReaderMode from "./ReaderMode"
@@ -29,12 +31,17 @@ import ExportButton from "./ExportButton"
 import Bibliography from "./Bibliography"
 import PageNavigation from "./PageNavigation"
 import Hypothesis from "./Hypothesis"
+import ThesisDashboard from "./ThesisDashboard"
+import RecentChanges from "./RecentChanges"
+import FeedbackBadge from "./FeedbackBadge"
 
 export {
   ArticleTitle,
   Content,
   TagContent,
   FolderContent,
+  ThesisDashboardPage,
+  RecentChangesPage,
   Darkmode,
   ReaderMode,
   Head,
@@ -62,4 +69,7 @@ export {
   Bibliography,
   PageNavigation,
   Hypothesis,
+  ThesisDashboard,
+  RecentChanges,
+  FeedbackBadge,
 }

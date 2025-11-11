@@ -21,14 +21,11 @@ button.backlinks-header {
   color: var(--dark);
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
 
   & h3 {
     font-size: 1rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+    display: inline-block;
     margin: 0;
 
     .backlinks-count {
@@ -36,6 +33,7 @@ button.backlinks-header {
       font-weight: normal;
       color: var(--darkgray);
       opacity: 0.8;
+      margin-left: 0.25rem;
     }
   }
 
@@ -43,15 +41,10 @@ button.backlinks-header {
     margin-left: 0.5rem;
     transition: transform 0.3s ease;
     opacity: 0.8;
-    flex-shrink: 0;
   }
 
   &.collapsed .fold {
     transform: rotateZ(-90deg);
-  }
-
-  &:hover {
-    opacity: 0.7;
   }
 }
 
