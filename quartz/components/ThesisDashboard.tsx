@@ -23,8 +23,7 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
     const thesisFiles = allFiles
       .filter(
         (file) =>
-          file.slug?.startsWith(options.folderPath!) ||
-          file.frontmatter?.tags?.includes("ba"),
+          file.slug?.startsWith(options.folderPath!) || file.frontmatter?.tags?.includes("ba"),
       )
       .filter((file) => file.slug !== fileData.slug) // Don't show current page
       .sort((a, b) => {

@@ -341,8 +341,19 @@ STG-Regionen:
 
 ![[Fruehholz 2015 Figure 1.png]]
 
-[[Was bedeuten die Vergleiche aus Glasser SUPPL]]
+
+Und hier ventral/dorsal pathways according to Frühholz: 
+![[Fruehholz 2015 Figure 2.png]]
+
+Results: 
+- The anterior STG (aSTG) was connected to the IFG via a strong ventral pathway consisting of the inferior longitudinal fasciculus (ILF) and the inferior fronto-occipital fasciculus (IFOF) in its posterior portion, and the extreme capsule (EmC) in the anterior portion (Fig. 5A), as confirmed with a standard white matter atlas
+
+Methods used by Frühholz: 
+- In order to estimate the relative connectivity of the dorsal and the ventral pathways, we then conducted two additional analyses on the second stage. We included waypoint masks for the dorsal and the ventral pathway, which constrained the tracking algorithm to fibers that only passed through the respective masks (Fig. 2). These dorsal and ventral waypoint masks were generated as follows. First, we defined superior longitudinal fasciculus (SLF) masks taken from the JHU white-matter tractography atlas at a probability threshold of 100% (Hua et al., 2008). The SLF is the main dorsal longitudinal fiber bundle connecting posterior and anterior brain regions, as has been frequently reported to contain fiber connections between regions involved in auditory communication (Hua et al., 2008) (Fig. 2A). Furthermore, we defined a white-matter mask by combining the inferior longitudinal fasciculus (ILF) and the inferior fronto-occipital fasciculus (IFOF) taken from the JHU atlas, as the main ventral longitudinal fiber bundles (Friederici, 2011; Saur et al., 2008). Subsequently, we created a general white-matter pathway mask by summing up all fiber pathways from all seed and target regions across all participants. The spatial overlap between this general fiber pathway mask and the SLF mask resulting from the procedure in the first step served the definition of the dorsal pathway (Fig. 2B). The overlap between the general fiber pathway mask and the combined ILF/IFOF mask served the definition of the ventral fiber pathways.
+
+
 ### Andere Aussagen aus paper
+[[Was bedeuten die Vergleiche aus Glasser SUPPL]]
 
 
 Alpha-frequency tagging
