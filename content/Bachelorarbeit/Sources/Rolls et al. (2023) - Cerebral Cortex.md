@@ -46,3 +46,5 @@ PFC
 - OFC/vmPFC
 	- Moreover, neurons can respond to auditory stimuli such as vocalization both in the STS regions (Baylis et al. 1987) and in the orbitofrontal cortex, which receives connections from the STS (Rolls et al. 2006). The connectivity described here helps to provide a functional framework for the processing streams involved in these types of function.
 	- Inputs related to reward and punishment from, for example, the ventromedial prefrontal cortex (vmPFC) (10r, 10v, 10d), and orbitofrontal cortex (a47r) (Rolls et al. 2022g) reach STS auditory–visual cortical regions where objects, faces, and their semantic meaning are represented (Rolls et al. 2022e), rather than earlier stages of auditory cortical processing (Figs. 2-4). Correspondingly, STS regions have effective connectivity with some orbitofrontal/vmPFC regions in which neurons respond to vocalization and the face movements that produce them
+
+![[Rolls et al. - 2023 - Auditory cortical connectivity in humans.pdf]]

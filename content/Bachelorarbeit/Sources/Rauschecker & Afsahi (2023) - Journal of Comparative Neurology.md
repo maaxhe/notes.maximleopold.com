@@ -19,3 +19,5 @@ postero-dorsal
 - participation of posterior temporal and parietal cortices in auditory space processing
 - Some of these and other studies also demonstrated a participation of DLPFC in spatial hearing (Belin et al., 2002; Lewald et al., 2008; Weeks et al., 2000)
 - The current dorsal-stream model postulates that posterior parietal areas may serve as a relay station between auditory centers and the PMC
+
+![[Rauschecker and Afsahi - 2023 - Anatomy of the auditory cortex then and now.pdf]]

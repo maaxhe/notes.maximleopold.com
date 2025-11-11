@@ -28,3 +28,6 @@ their model
 - vlPFC neurons represent the valence of food-related calls (e.g., high quality food vs. low quality food) (Gifford et al. 2005). That is, vlPFC neurons encode the “referential” information that is transmitted by vocalizations, independent of differences in their acoustic properties.
   
   ich glaube, das bezieht sich alles auf monkeys. 
+
+
+![[Cohen et al. - 2016 - Functional Organization of the Ventral Auditory Pathway.pdf]]

@@ -15,3 +15,5 @@ frequencies:
 
 results: 
 - PAC in the left and the right hemispheres are responding to speech and tonal pitch, but they appear to have different computational preferences, with the left PAC reacting specifically to speech sounds characteristics and the right PAC to characteristics of tonal pitch (265). The relative specialization of the two auditory cortices for these stimulus types, which differ in their temporal and spectral characteristics, is described as a specialization for rapidly changing information with a limited frequency resolution in the left hemisphere and a system with reverse characteristics in the right hemisphere.
+
+![[Friederici - 2011 - The Brain Basis of Language Processing From Structure to Function.pdf]]

@@ -46,3 +46,5 @@ from supplementary material:
 - Caudal belt and Tpt’s preferential frontal lobe connections are with the caudal  arcuate cortex (area 8a)9-11, which some authors have termed an “auditory  spatial zone
 - A meta-analysis  of altogether 38 human imaging studies provided evidence that the vast majority  of auditory spatial studies involved activation of the postero-dorsal pathway (pST,  IPL, and SFS), whereas only two activated antero-ventral areas (aST, IFC)
 - Imaging studies in humans have demonstrated specific  activation in pST with auditory motion24, 25 near the location of visual motion  areas MT and MST. Imaging studies that have tested moving auditory stimuli in  addition to stationary ones have reported that auditory motion leads to activation  in areas of pST and posterior parietal cortex that are adjacent to each other, with  motion being the more powerful stimulus14.
+
+![[Rauschecker and Scott - 2009 - Maps and streams in the auditory cortex nonhuman primates illuminate human speech processing.pdf]]

@@ -22,3 +22,6 @@ discussion
 - In addition to this dorsal (and potentially ‘spatial’) auditory pathway, we present evidence for a second auditory stream originating in the anterior belt and parabelt region and terminating in the rostral and ventral frontal lobe. Neuroimaging studies demonstrate involvement of the frontal pole (area 10) of the rostral frontal lobe in verb generation, auditory working memory and musical consonance
 - Our results substantiate findings of a connection between the ventral prefrontal cortex and anterior auditory cortical regions
 - Ventrolateral frontal lobe regions 12 and 45, which make up the inferior convexity in the nonhuman primate, are situated just anterior to area 6, the premotor cortex43; it is suggested, on the basis of anatomical location and connections, that they represent the macaque homolog of Broca’s area4
+
+
+![[Romanski et al. - 1999 - Dual streams of auditory afferents target multiple domains in the primate prefrontal cortex.pdf]]

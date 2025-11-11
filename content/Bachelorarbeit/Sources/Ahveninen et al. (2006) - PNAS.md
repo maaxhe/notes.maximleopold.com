@@ -12,3 +12,5 @@ Ahveninen, J., Jääskeläinen, I. P., Raij, T., Bonmassar, G., Devore, S., Häm
 - **‘‘where’’ stream is activated significantly earlier ( 30 ms in ECD models) than the anterior ‘‘what’’ stream.**
 	- the posterior auditory ‘‘where’’ pathway could accomplish rapid and coarse stimulus analysis required for shifting and maintaining attention to the features of a relevant auditory object (50), thus enabling the human brain to use top-down spatial information in auditory object perception.
 	- anterolateral HG, parts of the anterior STG, and PP process auditory object identity and that regions posterior to HG, including parts of PT and posterior STG, process sound location features (see Fig. 2). ^dfae6d
+
+![[Ahveninen et al. - 2006 - Task-modulated “what” and “where” pathways in human auditory cortex.pdf]]
