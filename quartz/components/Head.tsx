@@ -104,12 +104,57 @@ export default (() => {
             __html: `window.hypothesisConfig = function () {
               return {
                 showHighlights: 'always',
-                openSidebar: false
+                openSidebar: false,
+                theme: 'clean'
               };
             };`,
           }}
         />
-        <script async src="https://hypothes.is/embed.js"></script>
+        <script src="https://hypothes.is/embed.js"></script>
+        {/* Reinitialize Hypothesis on SPA navigation */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                // Function to ensure Hypothesis is loaded
+                function ensureHypothesis() {
+                  if (window.hypothesisEmbed && typeof window.hypothesisEmbed === 'function') {
+                    // Hypothesis is ready
+                    return;
+                  }
+                  // Wait for Hypothesis to load
+                  if (!window.hypothesisWaiting) {
+                    window.hypothesisWaiting = true;
+                    const checkInterval = setInterval(function() {
+                      if (window.hypothesisEmbed) {
+                        clearInterval(checkInterval);
+                        window.hypothesisWaiting = false;
+                      }
+                    }, 100);
+                  }
+                }
+
+                // Initial load
+                if (document.readyState === 'loading') {
+                  document.addEventListener('DOMContentLoaded', ensureHypothesis);
+                } else {
+                  ensureHypothesis();
+                }
+
+                // Handle SPA navigation
+                document.addEventListener('nav', function() {
+                  ensureHypothesis();
+                  // Trigger Hypothesis to check for annotations on new page
+                  if (window.hypothesisEmbed) {
+                    setTimeout(function() {
+                      window.dispatchEvent(new Event('hypothesisUpdate'));
+                    }, 100);
+                  }
+                });
+              })();
+            `,
+          }}
+        />
       </head>
     )
   }

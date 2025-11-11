@@ -5,6 +5,7 @@ import NotFound from "./pages/404"
 import ThesisDashboardPage from "./pages/ThesisDashboardPage"
 import RecentChangesPage from "./pages/RecentChangesPage"
 import OpenFeedbackPage from "./pages/OpenFeedbackPage"
+import AnnotationsOverviewPage from "./pages/AnnotationsOverviewPage"
 import ArticleTitle from "./ArticleTitle"
 import Darkmode from "./Darkmode"
 import ReaderMode from "./ReaderMode"
@@ -38,6 +39,8 @@ import RecentChanges from "./RecentChanges"
 import FeedbackBadge from "./FeedbackBadge"
 import NewBadge from "./NewBadge"
 import OpenFeedback from "./OpenFeedback"
+import AnnotationsOverview from "./AnnotationsOverview"
+import AnnotationsBadge from "./AnnotationsBadge"
 
 export {
   ArticleTitle,
@@ -47,6 +50,7 @@ export {
   ThesisDashboardPage,
   RecentChangesPage,
   OpenFeedbackPage,
+  AnnotationsOverviewPage,
   Darkmode,
   ReaderMode,
   Head,
@@ -80,4 +84,6 @@ export {
   FeedbackBadge,
   NewBadge,
   OpenFeedback,
+  AnnotationsOverview,
+  AnnotationsBadge,
 }
