@@ -1,0 +1,17 @@
+### Research
+
+- [ ] Areale in Dorsal/ventral einteilen
+  - [x] wo ist der Herschl Gyrus? alles dahinter soll where pathway sein -> Herschl == A1
+    - Herschl Gyrus == A1
+  - [ ] schauen wo die einzelnen areale im Glasser Atlas sind -> [[BA All Sources#^dfae6d]]
+  - [ ] welche Areale sind auf dem Poeppel paper lateral view zu sehen?
+- [ ] Mehr Quellen finden
+- [ ] wie wichtig sind functions? ist der auditory cortex involved in decisions?-> ist diese frage überhaupt relevant?
+- [ ] check AL ML in monkeys, womit lässt sich das im Menschen vergleichen?
+- [ ] Talairch for Brainstorm -> Wie soll ich das umrechnen?
+- [ ] müssen wir beachten, dass auditory spatial processing eher right lateralized ist?
+- [ ] Glasser Atlas nach Auditory Cortex absuchen
+- [ ] Ahveninen Suppl. anschauen
+- [ ] lieber functional vs dorsal/ventral anschauen
+  - [ ] space vs semantic?
+  - [ ] Was heißt eigentlich "Language" in dem stream kontext?

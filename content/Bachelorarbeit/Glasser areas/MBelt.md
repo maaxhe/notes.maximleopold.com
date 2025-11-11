@@ -8,6 +8,7 @@ more activated in the Emotion faces-shapes contrast, less in math-story contrast
 
 Tags: #cognitivescience/neuroscience #science
 _Superlink:_ [[050 🧠Neuroscience]]
+![[Glasser HCP-MMP1 human brain lateral view.png]]
 
 ## Source
 
