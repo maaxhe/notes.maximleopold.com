@@ -7,7 +7,7 @@
 
 Frühholz, S., Gschwind, M., & Grandjean, D. (2015). Bilateral dorsal and ventral fiber pathways for the processing of affective prosody identified by probabilistic fiber tracking. _NeuroImage_, _109_, 27–34. [https://doi.org/10.1016/j.neuroimage.2015.01.016](https://doi.org/10.1016/j.neuroimage.2015.01.016)
 
-- Dorsal and ventral pathways for syntacto-semantic speech processing in the left hemisphere are represented in the dual-stream model of auditory processing.
+- Dorsal and ventral pathways for syntacto-semantic speech processing in the left hemisphere are represented in the dual-stream model of auditory processing. ^9b3ca9
 - The results also suggest the existence of a dual-stream processing in the right hemisphere, and a general predominance of the dorsal pathways in both hemispheres underlying the neural processing of affective prosody in an extended temporo-frontal network.
 
 - Recent studies (Friederici et al., 2006; Rauschecker and Scott, 2009; Saur et al., 2008) have predominantly identified left hemispheric processing pathways within a dual-stream model of auditory processing (Hickok and Poeppel, 2007). They include ventral pathways from anterior superior temporal gyrus (STG) to the anterior inferior frontal gyrus (IFG) and dorsal pathways, which project to the posterior IFG via the posterior STG (Hickok and Poeppel, 2007; Rauschecker and Scott, 2009).

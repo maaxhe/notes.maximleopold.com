@@ -29,7 +29,10 @@ async function mouseEnterHandler(
     popoverElement.classList.add("active-popover")
     setPosition(popoverElement as HTMLElement)
 
-    if (hash !== "") {
+    // Only scroll for header links, not for block references
+    // Block references have their own popover with just the block content
+    const isBlockRef = hash.startsWith("#^")
+    if (hash !== "" && !isBlockRef) {
       const popoverInner = popoverElement.querySelector(".popover-inner") as HTMLElement | null
       if (popoverInner) {
         const targetAnchor = `#popover-internal-${hash.slice(1)}`
@@ -37,9 +40,6 @@ async function mouseEnterHandler(
         if (heading) {
           // leave ~12px of buffer when scrolling to a heading
           popoverInner.scroll({ top: heading.offsetTop - 12, behavior: "instant" })
-        } else {
-          // If target not found, scroll to top
-          popoverInner.scroll({ top: 0, behavior: "instant" })
         }
       }
     }
@@ -49,7 +49,8 @@ async function mouseEnterHandler(
   const hash = decodeURIComponent(targetUrl.hash)
   targetUrl.hash = ""
   targetUrl.search = ""
-  const popoverId = `popover-${link.pathname}`
+  // Include hash in popover ID so each block reference gets its own popover
+  const popoverId = hash ? `popover-${link.pathname}${hash}` : `popover-${link.pathname}`
   const prevPopoverElement = document.getElementById(popoverId)
 
   // dont refetch if there's already a popover

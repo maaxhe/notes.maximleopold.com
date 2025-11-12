@@ -7,6 +7,8 @@
 ### Left hemisphere
 - left is stronger in understanding emotions according to word meanings
 	- Quelle: [[Brain Hemispheres#Effekte beim Hören auf Sätze mit emotionalem Gehalt (vgl. Carlson & Birkett, 2022, p. 360)]]
+- for syntacto-semantic speech processing
+	- Quelle: [[Frühholz (2015) - NeuroImage#^9b3ca9]]
 
 - left PAC -> speech sounds -> [[A1]]
 	- Quelle: [[Friederici (2011) - Physiological Reviews#^58fcfc]]
