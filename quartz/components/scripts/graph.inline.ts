@@ -166,7 +166,7 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
 
   // we virtualize the simulation and use pixi to actually render it
   const simulation: Simulation<NodeData, LinkData> = forceSimulation<NodeData>(graphData.nodes)
-    .force("charge", forceManyBody().strength(-100 * repelForce))
+    .force("charge", forceManyBody().strength(-50 * repelForce))
     .force("center", forceCenter().strength(centerForce))
     .force("link", forceLink(graphData.links).distance(linkDistance))
     .force("collide", forceCollide<NodeData>((n) => nodeRadius(n)).iterations(3))
@@ -663,6 +663,155 @@ document.addEventListener("nav", async (e: CustomEventMap["nav"]) => {
     icon.addEventListener("click", renderGlobalGraph)
     window.addCleanup(() => icon.removeEventListener("click", renderGlobalGraph))
   })
+
+  // Settings panel functionality
+  const settingsPanel = document.querySelector(".graph-settings-panel") as HTMLElement | null
+  const settingsIcon = document.querySelector(".graph-settings-icon") as HTMLElement | null
+  const settingsClose = document.querySelector(".graph-settings-close") as HTMLElement | null
+
+  function showSettings() {
+    settingsPanel?.classList.add("active")
+  }
+
+  function hideSettings() {
+    settingsPanel?.classList.remove("active")
+  }
+
+  if (settingsIcon) {
+    settingsIcon.addEventListener("click", showSettings)
+    window.addCleanup(() => settingsIcon.removeEventListener("click", showSettings))
+  }
+
+  if (settingsClose) {
+    settingsClose.addEventListener("click", hideSettings)
+    window.addCleanup(() => settingsClose.removeEventListener("click", hideSettings))
+  }
+
+  // Load saved settings from localStorage
+  const savedSettings = localStorage.getItem("graph-settings")
+  let currentSettings = savedSettings ? JSON.parse(savedSettings) : {}
+
+  // Get the graph container to update its config
+  const graphContainer = document.querySelector(".graph-container") as HTMLElement | null
+
+  if (graphContainer && settingsPanel) {
+    const initialConfig = JSON.parse(graphContainer.dataset["cfg"]!) as D3Config
+
+    // Merge saved settings with initial config
+    const mergedConfig = { ...initialConfig, ...currentSettings }
+
+    // Update all slider and checkbox values from merged config
+    const sliders = settingsPanel.querySelectorAll("input[type='range']")
+    sliders.forEach((slider) => {
+      const setting = (slider as HTMLInputElement).dataset.setting
+      if (setting && mergedConfig[setting as keyof D3Config] !== undefined) {
+        ;(slider as HTMLInputElement).value = String(mergedConfig[setting as keyof D3Config])
+        const valueDisplay = settingsPanel.querySelector(
+          `.graph-setting-value[data-setting="${setting}"]`,
+        )
+        if (valueDisplay) {
+          valueDisplay.textContent = String(mergedConfig[setting as keyof D3Config])
+        }
+      }
+    })
+
+    const checkboxes = settingsPanel.querySelectorAll("input[type='checkbox']")
+    checkboxes.forEach((checkbox) => {
+      const setting = (checkbox as HTMLInputElement).dataset.setting
+      if (setting && mergedConfig[setting as keyof D3Config] !== undefined) {
+        ;(checkbox as HTMLInputElement).checked = Boolean(mergedConfig[setting as keyof D3Config])
+      }
+    })
+
+    // Function to update graph config and re-render
+    function updateGraphConfig(setting: string, value: number | boolean) {
+      currentSettings[setting] = value
+      const newConfig = { ...initialConfig, ...currentSettings }
+      graphContainer.dataset["cfg"] = JSON.stringify(newConfig)
+
+      // Save to localStorage
+      localStorage.setItem("graph-settings", JSON.stringify(currentSettings))
+
+      // Re-render the local graph
+      void renderLocalGraph()
+    }
+
+    // Handle slider changes
+    sliders.forEach((slider) => {
+      const input = slider as HTMLInputElement
+      const setting = input.dataset.setting
+      if (!setting) return
+
+      const valueDisplay = settingsPanel.querySelector(
+        `.graph-setting-value[data-setting="${setting}"]`,
+      )
+
+      const updateValue = () => {
+        const value = parseFloat(input.value)
+        if (valueDisplay) {
+          valueDisplay.textContent = String(value)
+        }
+        updateGraphConfig(setting, value)
+      }
+
+      input.addEventListener("input", updateValue)
+      window.addCleanup(() => input.removeEventListener("input", updateValue))
+    })
+
+    // Handle checkbox changes
+    checkboxes.forEach((checkbox) => {
+      const input = checkbox as HTMLInputElement
+      const setting = input.dataset.setting
+      if (!setting) return
+
+      const updateValue = () => {
+        updateGraphConfig(setting, input.checked)
+      }
+
+      input.addEventListener("change", updateValue)
+      window.addCleanup(() => input.removeEventListener("change", updateValue))
+    })
+
+    // Handle reset button
+    const resetButton = settingsPanel.querySelector(".graph-settings-reset")
+    if (resetButton) {
+      const handleReset = () => {
+        currentSettings = {}
+        localStorage.removeItem("graph-settings")
+        graphContainer.dataset["cfg"] = JSON.stringify(initialConfig)
+
+        // Reset all slider values
+        sliders.forEach((slider) => {
+          const input = slider as HTMLInputElement
+          const setting = input.dataset.setting
+          if (setting && initialConfig[setting as keyof D3Config] !== undefined) {
+            input.value = String(initialConfig[setting as keyof D3Config])
+            const valueDisplay = settingsPanel.querySelector(
+              `.graph-setting-value[data-setting="${setting}"]`,
+            )
+            if (valueDisplay) {
+              valueDisplay.textContent = String(initialConfig[setting as keyof D3Config])
+            }
+          }
+        })
+
+        // Reset all checkbox values
+        checkboxes.forEach((checkbox) => {
+          const input = checkbox as HTMLInputElement
+          const setting = input.dataset.setting
+          if (setting && initialConfig[setting as keyof D3Config] !== undefined) {
+            input.checked = Boolean(initialConfig[setting as keyof D3Config])
+          }
+        })
+
+        // Re-render the graph
+        void renderLocalGraph()
+      }
+
+      resetButton.addEventListener("click", handleReset)
+      window.addCleanup(() => resetButton.removeEventListener("click", handleReset))
+    }
+  }
 
   document.addEventListener("keydown", shortcutHandler)
   window.addCleanup(() => {

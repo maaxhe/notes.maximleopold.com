@@ -214,6 +214,21 @@ async function setupExplorer(currentSlug: FullSlug) {
 
       fragment.appendChild(node)
     }
+
+    // Add Annotations link at the bottom
+    const annotationsLi = document.createElement("li")
+    annotationsLi.style.borderTop = "1px solid var(--lightgray)"
+    annotationsLi.style.marginTop = "0.5rem"
+    annotationsLi.style.paddingTop = "0.5rem"
+
+    const annotationsLink = document.createElement("a")
+    annotationsLink.href = "/annotations"
+    annotationsLink.textContent = "💬 Alle Annotationen"
+    annotationsLink.style.fontWeight = "600"
+
+    annotationsLi.appendChild(annotationsLink)
+    fragment.appendChild(annotationsLi)
+
     explorerUl.insertBefore(fragment, explorerUl.firstChild)
 
     // restore explorer scrollTop position if it exists
