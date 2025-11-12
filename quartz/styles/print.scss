@@ -4,24 +4,40 @@
   .darkmode,
   .search,
   .explorer,
+  div.explorer,
+  .explorer-content,
+  .explorer-ul,
+  button.mobile-explorer,
+  button.desktop-explorer,
   .graph,
   .backlinks,
   footer,
   .export-button,
+  .export-button-container,
   .page-navigation,
   .comments,
   nav,
+  header,
   button,
   .sidebar,
+  .left,
+  .right,
   .left.sidebar,
   .right.sidebar,
+  aside,
   .toc,
   .breadcrumbs,
+  .breadcrumb-container,
   .tag-list,
+  .tags,
   .annotations-badge,
+  .annotations-badge-link,
   .reader-mode,
+  .readermode,
   .feedback-badge,
+  .feedback-badge-container,
   .review-status,
+  .content-meta,
   /* Hide embedded PDFs and iframes */
   iframe,
   embed,
@@ -32,44 +48,67 @@
   .hypothesis-sidebar,
   /* Hide floating elements */
   .popover,
-  .lightbox {
+  .lightbox,
+  .popover-hint {
     display: none !important;
+    visibility: hidden !important;
   }
 
   /* Optimize page layout for print - only show center content */
   body {
-    background: white;
-    color: black;
+    background: white !important;
+    color: black !important;
     font-size: 11pt;
     line-height: 1.5;
-    margin: 0;
-    padding: 0;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   /* Force single column layout - only center content */
-  #quartz-body,
-  .page {
+  html,
+  body,
+  #quartz-root,
+  .page,
+  #quartz-body {
     display: block !important;
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 !important;
-    padding: 1cm !important;
+    padding: 0 !important;
   }
 
+  /* Center content takes full width */
   .center,
-  article {
+  article,
+  main,
+  .popover-hint,
+  .page-listing {
     max-width: 100% !important;
     width: 100% !important;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 1cm !important;
     float: none !important;
   }
 
   /* Ensure article content is displayed */
   .article-content,
   .page-content,
-  article > * {
+  article > *,
+  .center > * {
     display: block !important;
+    max-width: 100% !important;
+  }
+
+  /* Hide all sidebars completely */
+  .left,
+  .right,
+  aside,
+  .sidebar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    visibility: hidden !important;
   }
 
   /* Better typography for print */

@@ -106,6 +106,8 @@ export default (() => {
         />
         {/* Load Hypothesis with defer to ensure DOM is ready but script loads early */}
         <script defer src="https://hypothes.is/embed.js"></script>
+        {/* Dedicated print stylesheet - loaded last to override everything */}
+        <link rel="stylesheet" href="./static/print-override.css" media="print" />
       </head>
     )
   }
