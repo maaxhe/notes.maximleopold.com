@@ -1,6 +1,6 @@
 /* Print styles for better PDF export */
 @media print {
-  /* Hide navigation and UI elements */
+  /* Hide ALL navigation, UI elements, sidebars, and embedded content */
   .darkmode,
   .search,
   .explorer,
@@ -12,22 +12,64 @@
   .comments,
   nav,
   button,
-  .sidebar {
+  .sidebar,
+  .left.sidebar,
+  .right.sidebar,
+  .toc,
+  .breadcrumbs,
+  .tag-list,
+  .annotations-badge,
+  .reader-mode,
+  .feedback-badge,
+  .review-status,
+  /* Hide embedded PDFs and iframes */
+  iframe,
+  embed,
+  object,
+  /* Hide Hypothesis elements */
+  hypothesis-sidebar,
+  hypothesis-notebook,
+  .hypothesis-sidebar,
+  /* Hide floating elements */
+  .popover,
+  .lightbox {
     display: none !important;
   }
 
-  /* Optimize page layout for print */
+  /* Optimize page layout for print - only show center content */
   body {
     background: white;
     color: black;
     font-size: 11pt;
     line-height: 1.5;
-  }
-
-  article {
-    max-width: 100%;
     margin: 0;
     padding: 0;
+  }
+
+  /* Force single column layout - only center content */
+  #quartz-body,
+  .page {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1cm !important;
+  }
+
+  .center,
+  article {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    float: none !important;
+  }
+
+  /* Ensure article content is displayed */
+  .article-content,
+  .page-content,
+  article > * {
+    display: block !important;
   }
 
   /* Better typography for print */
@@ -59,9 +101,7 @@
   ul,
   ol,
   blockquote,
-  pre,
-  .review-status,
-  .bibliography {
+  pre {
     page-break-inside: avoid;
   }
 
@@ -109,30 +149,13 @@
     page-break-after: always;
   }
 
-  /* Review status and bibliography */
-  .review-status,
-  .bibliography {
-    border: 1px solid #ccc;
-    padding: 12pt;
-    margin: 12pt 0;
-    background: #f9f9f9;
-  }
-
-  /* Content meta */
+  /* Content meta - keep but simplify */
   .content-meta {
     font-size: 9pt;
     color: #666;
     margin-bottom: 12pt;
     padding-bottom: 6pt;
     border-bottom: 1px solid #ccc;
-  }
-
-  /* Table of contents */
-  .toc {
-    border: 1px solid #ccc;
-    padding: 12pt;
-    margin: 12pt 0;
-    background: #f9f9f9;
   }
 
   /* Ensure all colors are printer-friendly */
@@ -143,10 +166,7 @@
     text-shadow: none !important;
   }
 
-  /* Keep some colored elements */
-  .review-status,
-  .bibliography,
-  .toc,
+  /* Keep code blocks with background */
   pre,
   code {
     background: #f9f9f9 !important;
