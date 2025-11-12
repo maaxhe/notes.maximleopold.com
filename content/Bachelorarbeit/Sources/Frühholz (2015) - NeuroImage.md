@@ -9,7 +9,7 @@ Frühholz, S., Gschwind, M., & Grandjean, D. (2015). Bilateral dorsal and ventra
 
 - Dorsal and ventral pathways for syntacto-semantic speech processing in the left hemisphere are represented in the dual-stream model of auditory processing. ^9b3ca9
 - The results also suggest the existence of a dual-stream processing in the right hemisphere, and a general predominance of the dorsal pathways in both hemispheres underlying the neural processing of affective prosody in an extended temporo-frontal network.
-
+ ^099d6d
 - Recent studies (Friederici et al., 2006; Rauschecker and Scott, 2009; Saur et al., 2008) have predominantly identified left hemispheric processing pathways within a dual-stream model of auditory processing (Hickok and Poeppel, 2007). They include ventral pathways from anterior superior temporal gyrus (STG) to the anterior inferior frontal gyrus (IFG) and dorsal pathways, which project to the posterior IFG via the posterior STG (Hickok and Poeppel, 2007; Rauschecker and Scott, 2009).
 	- bestätigt, was wir eh schon wissen
 

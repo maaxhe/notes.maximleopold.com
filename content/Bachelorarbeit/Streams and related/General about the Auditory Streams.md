@@ -26,6 +26,8 @@ Siehe auch: [[Lateralization in Auditory Stream]]
 
 - dorsal pathway activates earlier than ventral -> top down spatial information for object recognition
 	- Quelle: [[Ahveninen et al. (2006) - PNAS#^0e5b5f]]
+- Dorsal ist mehr für affective prosody zuständig
+	- Quelle: [[Frühholz (2015) - NeuroImage#^099d6d]]
 
 
 #### Funktion: Spatial vs Semantic (vs. etwas anderem?)
