@@ -42,9 +42,6 @@ Also hier ordnen wir nach Funktion:
 Tags: #cognitivescience/neuroscience #science 
 *Superlink:* [[050 🧠Neuroscience]] 
 
-auch interessant:
-[[Brain Hemispheres]]
-[[A theory of why we have contralateral hemispheres]]
 
 ## Source
 
