@@ -1,6 +1,10 @@
 ### Friederici (2011) - Physiological Reviews
 Friederici, A. D. (2011). The Brain Basis of Language Processing: From Structure to Function. _Physiological Reviews_, _91_(4), 1357–1392. [https://doi.org/10.1152/physrev.00006.2011](https://doi.org/10.1152/physrev.00006.2011)
 
+- [ ] Paper gelesen?
+	- [x] -> eher überflogen
+- [ ] Infos rausgeschrieben?
+
 - Networks involving the temporal cortex and the inferior frontal cortex with a clear left lateralization were shown to support syntactic processes, whereas less lateralized temporo-frontal networks subserve semantic processes.
 
 ![[Friederici 2011 Figure 3.png]]

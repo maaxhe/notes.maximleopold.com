@@ -7,6 +7,8 @@ Quelle: [[Ahveninen et al. (2006) - PNAS#^0e5b5f]]
 - spatial processing 
 - Spatial information as a grouping cue for segregating into discrete sounds. 
 	- Quelle: [[Cohen et al. (2016) - Springer#^05cbf9]]
+- the dorsal pathway also contributes to auditory perception; consistent with that notion, activity in the human parietal lobe is modulated by listeners' choices (Cusack 2005).
+	- Quelle: [[Cohen et al. (2016) - Springer#^59d7b2]]
 
 [[Attention in the auditory stream]]
 
