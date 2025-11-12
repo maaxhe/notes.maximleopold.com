@@ -1,85 +1,52 @@
 // Hypothesis SPA navigation handler
-// Completely reloads Hypothesis after navigation to ensure annotations work
+// Notifies Hypothesis of new page content without full reload
 
 let lastUrl = location.href
 let isReloading = false
 
-// Wait for Hypothesis to be fully loaded and ready
-function waitForHypothesis() {
-  return new Promise((resolve) => {
-    let attempts = 0
-    const maxAttempts = 50 // 5 seconds max
-
-    const checkInterval = setInterval(() => {
-      attempts++
-
-      // Check if Hypothesis sidebar exists and is fully initialized
-      const sidebar = document.querySelector("hypothesis-sidebar")
-      const hasEmbed = window.hypothesisEmbed
-
-      if ((sidebar || hasEmbed) && window.hypothesis) {
-        clearInterval(checkInterval)
-        console.log(`✓ Hypothesis: Ready after ${attempts * 100}ms`)
-        resolve(true)
-      } else if (attempts >= maxAttempts) {
-        clearInterval(checkInterval)
-        console.warn("⚠ Hypothesis: Timeout waiting for initialization")
-        resolve(false)
-      }
-    }, 100)
-  })
-}
-
-// Completely reload Hypothesis after SPA navigation
-async function reloadHypothesis() {
+// Notify Hypothesis of new page content (without full reload)
+async function notifyHypothesis() {
   if (isReloading) {
-    console.log("⏳ Hypothesis: Already reloading, skipping...")
+    console.log("⏳ Hypothesis: Already processing, skipping...")
     return
   }
 
   isReloading = true
-  console.log("→ Hypothesis: Reloading for new page...")
+  console.log("→ Hypothesis: Notifying of new page content...")
 
-  // Step 1: Destroy existing Hypothesis instance
+  // Wait a moment for new content to render
+  await new Promise((resolve) => setTimeout(resolve, 500))
+
   try {
-    // Remove all Hypothesis elements
-    const hypothesisElements = document.querySelectorAll(
-      'hypothesis-sidebar, hypothesis-notebook, link[href*="hypothes.is"], script[src*="hypothes.is"]',
-    )
-    hypothesisElements.forEach((el) => el.remove())
+    // Method 1: Dispatch standard DOM events
+    console.log("→ Hypothesis: Dispatching DOM events...")
+    window.dispatchEvent(new Event("hashchange"))
+    window.dispatchEvent(new Event("popstate"))
+    document.dispatchEvent(new Event("DOMContentLoaded"))
 
-    // Clear Hypothesis from window
-    delete window.hypothesisEmbed
-    delete window.hypothesis
+    // Method 2: If Hypothesis guest API is available, use it
+    if (window.hypothesis && window.hypothesis.guest) {
+      console.log("→ Hypothesis: Calling guest.anchor()...")
+      try {
+        await window.hypothesis.guest.anchor()
+        console.log("✓ Hypothesis: Guest API called successfully")
+      } catch (e) {
+        console.log("→ Hypothesis: Guest API not ready:", e)
+      }
+    }
 
-    console.log("→ Hypothesis: Destroyed old instance")
+    // Method 3: Trigger Hypothesis-specific events
+    if (window.hypothesisEmbed) {
+      console.log("→ Hypothesis: Triggering hypothesisReady event...")
+      window.dispatchEvent(new Event("hypothesisReady"))
+    }
+
+    console.log("✓ Hypothesis: Notification complete")
   } catch (e) {
-    console.warn("⚠ Hypothesis: Error destroying instance:", e)
-  }
-
-  // Step 2: Wait for DOM to settle
-  await new Promise((resolve) => setTimeout(resolve, 300))
-
-  // Step 3: Reload embed.js
-  console.log("→ Hypothesis: Loading new instance...")
-
-  const script = document.createElement("script")
-  script.src = `https://hypothes.is/embed.js?t=${Date.now()}`
-  script.async = false // Load synchronously for reliable initialization
-
-  script.onload = async () => {
-    console.log("→ Hypothesis: Script loaded, waiting for initialization...")
-    // Wait for Hypothesis to be fully ready
-    await waitForHypothesis()
+    console.error("✗ Hypothesis: Error during notification:", e)
+  } finally {
     isReloading = false
   }
-
-  script.onerror = () => {
-    console.error("✗ Hypothesis: Failed to reload")
-    isReloading = false
-  }
-
-  document.head.appendChild(script)
 }
 
 // Handle Quartz SPA navigation
@@ -90,7 +57,7 @@ function handleNavigation(e) {
     console.log("→ Hypothesis: Navigation detected", currentUrl)
     console.log("→ Hypothesis: Event details:", e)
     lastUrl = currentUrl
-    reloadHypothesis()
+    notifyHypothesis()
   }
 }
 
