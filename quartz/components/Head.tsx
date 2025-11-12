@@ -98,12 +98,14 @@ export default (() => {
           }
         })}
 
-        {/* Hypothesis configuration - embed.js will be loaded dynamically by hypothesis.inline.ts */}
+        {/* Hypothesis configuration */}
         <script
           dangerouslySetInnerHTML={{
             __html: `window.hypothesisConfig = function () { return { showHighlights: 'always', openSidebar: false, enableExperimentalNewNoteButton: true }; };`,
           }}
         />
+        {/* Load Hypothesis with defer to ensure DOM is ready but script loads early */}
+        <script defer src="https://hypothes.is/embed.js"></script>
       </head>
     )
   }
