@@ -4,6 +4,7 @@
 - [ ] Annotation in Quartz direkt sichtbar machen und auch global anzeigen lassen - und ich will sehen, wo etwas neu annotiert wurde
 
 #### Phase 1 
+- [ ] Informationen streamlinen und in die Areale packen
 - [ ] Alle auditory areale für beide streams überprüfen. Für jedes Areal
 	- [ ] anatomische Lage (vor Glasser eroieren)
 		- [ ] frühere Begriffe auf Glasser mappen
