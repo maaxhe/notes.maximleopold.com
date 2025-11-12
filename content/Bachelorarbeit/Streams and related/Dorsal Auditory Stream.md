@@ -1,6 +1,7 @@
 ## Dorsal Auditory Stream
 
-
+starts in planum polare -> pSTG
+Quelle: [[Ahveninen et al. (2006) - PNAS#^0e5b5f]]
 
 ### Function
 
