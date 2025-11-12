@@ -1,32 +1,50 @@
 // Hypothesis SPA navigation handler
-// embed.js is loaded via <script defer> in Head.tsx
+// Completely reloads Hypothesis after navigation to ensure annotations work
 
 let lastUrl = location.href
 
-// Force Hypothesis to re-scan page content after SPA navigation
-function notifyHypothesis() {
-  // Wait for new content to fully render
-  setTimeout(() => {
-    if (window.hypothesisEmbed) {
-      console.log("→ Hypothesis: Triggering refresh for new content")
+// Completely reload Hypothesis after SPA navigation
+function reloadHypothesis() {
+  console.log("→ Hypothesis: Reloading for new page...")
 
-      // Method 1: Dispatch multiple events
-      window.dispatchEvent(new Event("hypothesisReady"))
-      document.dispatchEvent(new Event("DOMContentLoaded"))
+  // Step 1: Destroy existing Hypothesis instance
+  if (window.hypothesisEmbed) {
+    try {
+      // Remove all Hypothesis elements
+      const hypothesisElements = document.querySelectorAll(
+        'hypothesis-sidebar, hypothesis-notebook, link[href*="hypothes.is"], script[src*="hypothes.is"]'
+      )
+      hypothesisElements.forEach((el) => el.remove())
 
-      // Method 2: Try to access the Hypothesis API directly if available
-      if (window.hypothesis && window.hypothesis.guest) {
-        try {
-          // Force Hypothesis to rescan the page
-          window.hypothesis.guest.anchor()
-        } catch (e) {
-          console.log("→ Hypothesis: Direct API not available, using events")
-        }
-      }
-    } else {
-      console.warn("⚠ Hypothesis not loaded yet")
+      // Clear Hypothesis from window
+      delete window.hypothesisEmbed
+      delete window.hypothesis
+
+      console.log("→ Hypothesis: Destroyed old instance")
+    } catch (e) {
+      console.warn("⚠ Hypothesis: Error destroying instance:", e)
     }
-  }, 300) // Increased timeout to ensure content is rendered
+  }
+
+  // Step 2: Wait for DOM to settle, then reload
+  setTimeout(() => {
+    console.log("→ Hypothesis: Loading new instance...")
+
+    // Reload embed.js with cache buster to force fresh load
+    const script = document.createElement("script")
+    script.src = `https://hypothes.is/embed.js?t=${Date.now()}`
+    script.async = true
+
+    script.onload = () => {
+      console.log("✓ Hypothesis: Reloaded successfully")
+    }
+
+    script.onerror = () => {
+      console.error("✗ Hypothesis: Failed to reload")
+    }
+
+    document.head.appendChild(script)
+  }, 500) // Wait for content to fully render
 }
 
 // Handle Quartz SPA navigation
@@ -36,7 +54,7 @@ function handleNavigation() {
   if (currentUrl !== lastUrl) {
     console.log("→ Hypothesis: Navigation detected", currentUrl)
     lastUrl = currentUrl
-    notifyHypothesis()
+    reloadHypothesis()
   }
 }
 
