@@ -1,4 +1,8 @@
-### Rauschecker (2011) - Hearing Research
+---
+modified: 2025-11-12
+---
+
+## Rauschecker (2011) - Hearing Research
 
 Rauschecker, J. P. (2011). An expanded role for the dorsal auditory pathway in sensorimotor control and integration. _Hearing Research_, _271_(1–2), 16–25. [https://doi.org/10.1016/j.heares.2010.09.001](https://doi.org/10.1016/j.heares.2010.09.001)
 
@@ -16,3 +20,13 @@ in monkeys:
 - Connectivity studies in rhesus monkeys (Rauschecker et al., 1997) have shown that at least one of the caudal belt regions receives its subcortical input via a separate pathway than core areas A1 and R.
 
 ![[Rauschecker - 2011 - An expanded role for the dorsal auditory pathway in sensorimotor control and integration.pdf]]
+
+
+
+## see also
+Tags: #cognitivescience/neuroscience #science #source 
+*Superlink:* [[050 🧠Neuroscience]] 
+
+
+
+Created: 2025-11-12 22:17

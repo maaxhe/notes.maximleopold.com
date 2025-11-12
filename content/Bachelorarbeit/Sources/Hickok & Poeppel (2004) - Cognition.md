@@ -1,4 +1,8 @@
-### Hickok & Poeppel (2004) - Cognition
+---
+modified: 2025-11-12
+---
+
+## Hickok & Poeppel (2004) - Cognition
 
 Hickok, G., & Poeppel, D. (2004). Dorsal and ventral streams: A framework for understanding aspects of the functional anatomy of language. _Cognition_, _92_(1–2), 67–99. [https://doi.org/10.1016/j.cognition.2003.10.011](https://doi.org/10.1016/j.cognition.2003.10.011)
 
@@ -38,3 +42,13 @@ _The functional anatomic framework for language which is presented in this paper
 - these data suggest a possible role for anterior temporal cortex in aspects of grammatical processing
 
 ![[Hickok and Poeppel - 2004 - Dorsal and ventral streams a framework for understanding aspects of the functional anatomy of langu.pdf]]
+
+
+
+## see also
+Tags: #cognitivescience/neuroscience #science #source 
+*Superlink:* [[050 🧠Neuroscience]] 
+
+
+
+Created: 2025-11-12 22:16

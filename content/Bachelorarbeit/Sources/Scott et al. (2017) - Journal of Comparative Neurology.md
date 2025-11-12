@@ -1,4 +1,8 @@
-### Scott et al. (2017) - Journal of Comparative Neurology
+---
+modified: 2025-11-12
+---
+
+## Scott et al. (2017) - Journal of Comparative Neurology
 
 Scott, B. H., Saleem, K. S., Kikuchi, Y., Fukushima, M., Mishkin, M., & Saunders, R. C. (2017). Thalamic connections of the core auditory cortex and rostral supratemporal plane in the macaque monkey. _Journal of Comparative Neurology_, _525_(16), 3488–3513. [https://doi.org/10.1002/cne.24283](https://doi.org/10.1002/cne.24283)
 
@@ -8,3 +12,11 @@ ventral stream in macaque monkeys includes the entirety of the supratemporal pla
 
 
 ![[Scott et al. - 2017 - Thalamic connections of the core auditory cortex and rostral supratemporal plane in the macaque monk.pdf]]
+
+
+## see also
+Tags: #cognitivescience/neuroscience #science #source 
+*Superlink:* [[050 🧠Neuroscience]] 
+
+
+Created: 2025-11-12 22:19

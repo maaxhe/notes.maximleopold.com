@@ -1,4 +1,8 @@
-### Rauschecker & Afsahi (2023) - Journal of Comparative Neurology
+---
+modified: 2025-11-12
+---
+
+## Rauschecker & Afsahi (2023) - Journal of Comparative Neurology
 
 Rauschecker, J. P., & Afsahi, R. K. (2023). Anatomy of the auditory cortex then and now. _Journal of Comparative Neurology_, _531_(18), 1883–1892. [https://doi.org/10.1002/cne.25560](https://doi.org/10.1002/cne.25560)
 
@@ -21,3 +25,12 @@ postero-dorsal
 - The current dorsal-stream model postulates that posterior parietal areas may serve as a relay station between auditory centers and the PMC
 
 ![[Rauschecker and Afsahi - 2023 - Anatomy of the auditory cortex then and now.pdf]]
+
+
+## see also
+Tags: #cognitivescience/neuroscience #science #source 
+*Superlink:* [[050 🧠Neuroscience]] 
+
+
+
+Created: 2025-11-12 22:17

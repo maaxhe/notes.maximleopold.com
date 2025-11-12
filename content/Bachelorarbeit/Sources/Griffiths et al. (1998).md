@@ -1,4 +1,8 @@
-### Griffiths et al. (1998)
+---
+modified: 2025-11-12
+---
+
+## Griffiths et al. (1998)
 Griffiths, T. D., Rees, G., Rees, A., Green, G. G. R., Witton, C., Rowe, D., Büchel, C., Turner, R., & Frackowiak, R. S. J. (1998). Right parietal cortex is involved in the perception of sound movement in humans. _Nature Neuroscience_, _1_(1), 74–79. [https://doi.org/10.1038/276](https://doi.org/10.1038/276)
 
 we have demonstrated human brain areas that are active specifically during the perception of sound movement. Both functional magnetic resonance imaging (fMRI) and positron emission tomography (PET) demonstrated the involvement of the right parietal cortex in sound movement perception with these stimuli.
@@ -13,3 +17,13 @@ Parietal Cortex:
 - The prefrontal areas receive projections from both ventral parietal cortex (area 7)33 and from area 7a/LIP in the monkey33,34. We suggest that the parietal areas, in conjunction with the prefrontal areas that we have demonstrated in the fMRI experiment, form a network involved in sound spatial perception and selective attention.
 
 ![[Griffiths et al. - 1998 - Right parietal cortex is involved in the perception of sound movement in humans.pdf]]
+
+
+## see also
+Tags: #cognitivescience/neuroscience #science #source 
+*Superlink:* [[050 🧠Neuroscience]] 
+
+
+
+
+Created: 2025-11-12 22:15

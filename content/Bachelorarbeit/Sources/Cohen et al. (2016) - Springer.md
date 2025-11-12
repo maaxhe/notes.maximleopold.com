@@ -1,4 +1,8 @@
-### Cohen et al. (2016) - Springer
+---
+modified: 2025-11-12
+---
+
+## Cohen et al. (2016) - Springer
 
 Cohen, Y. E., Bennur, S., Christison-Lagay, K., Gifford, A. M., & Tsunada, J. (2016). Functional Organization of the Ventral Auditory Pathway. In P. Van Dijk, D. Başkent, E. Gaudrain, E. De Kleine, A. Wagner, & C. Lanting (Eds.), _Physiology, Psychoacoustics and Cognition in Normal and Impaired Hearing_ (Vol. 894, pp. 381–388). Springer International Publishing. [https://doi.org/10.1007/978-3-319-25474-6_40](https://doi.org/10.1007/978-3-319-25474-6_40)
 
@@ -32,3 +36,12 @@ their model
 
 
 ![[Cohen et al. - 2016 - Functional Organization of the Ventral Auditory Pathway.pdf]]
+
+
+## see also
+Tags: #cognitivescience/neuroscience #science #source
+*Superlink:* [[050 🧠Neuroscience]] 
+
+
+
+Created: 2025-11-12 22:11

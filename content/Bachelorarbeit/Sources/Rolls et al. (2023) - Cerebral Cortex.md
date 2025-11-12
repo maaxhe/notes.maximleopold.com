@@ -1,4 +1,8 @@
-### Rolls et al. (2023) - Cerebral Cortex
+---
+modified: 2025-11-12
+---
+
+## Rolls et al. (2023) - Cerebral Cortex
 
 Rolls, E. T., Rauschecker, J. P., Deco, G., Huang, C.-C., & Feng, J. (2023). Auditory cortical connectivity in humans. _Cerebral Cortex_, _33_(10), 6207–6227. [https://doi.org/10.1093/cercor/bhac496](https://doi.org/10.1093/cercor/bhac496)
 
@@ -48,3 +52,12 @@ PFC
 	- Inputs related to reward and punishment from, for example, the ventromedial prefrontal cortex (vmPFC) (10r, 10v, 10d), and orbitofrontal cortex (a47r) (Rolls et al. 2022g) reach STS auditory–visual cortical regions where objects, faces, and their semantic meaning are represented (Rolls et al. 2022e), rather than earlier stages of auditory cortical processing (Figs. 2-4). Correspondingly, STS regions have effective connectivity with some orbitofrontal/vmPFC regions in which neurons respond to vocalization and the face movements that produce them
 
 ![[Rolls et al. - 2023 - Auditory cortical connectivity in humans.pdf]]
+
+
+## see also
+Tags: #cognitivescience/neuroscience #science #source 
+*Superlink:* [[050 🧠Neuroscience]] 
+
+
+
+Created: 2025-11-12 22:18

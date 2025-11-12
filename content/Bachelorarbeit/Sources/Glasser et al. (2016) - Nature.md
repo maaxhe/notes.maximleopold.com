@@ -1,4 +1,8 @@
-### Glasser et al. (2016) - Nature
+---
+modified: 2025-11-12
+---
+
+## Glasser et al. (2016) - Nature
 
 Glasser, M. F., Coalson, T. S., Robinson, E. C., Hacker, C. D., Harwell, J., Yacoub, E., Ugurbil, K., Andersson, J., Beckmann, C. F., Jenkinson, M., Smith, S. M., & Van Essen, D. C. (2016). A multi-modal parcellation of human cerebral cortex. _Nature_, _536_(7615), 171–178.
 
@@ -32,3 +36,12 @@ more about [[STSdp]]:
 ![[Glasser et al. - 2016 - A multi-modal parcellation of human cerebral cortex SUPPL.pdf]]
 
 ![[Glasser et al. - 2016 - A multi-modal parcellation of human cerebral cortex 1.pdf]]
+
+
+## see also
+Tags: #cognitivescience/neuroscience #science #source 
+*Superlink:* [[050 🧠Neuroscience]] 
+
+
+
+Created: 2025-11-12 22:14

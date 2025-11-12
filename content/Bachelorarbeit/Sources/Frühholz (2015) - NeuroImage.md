@@ -1,4 +1,4 @@
-### Frühholz (2015) - NeuroImage 
+## Frühholz (2015) - NeuroImage 
 
 - [x] Paper gelesen?
 - [ ] Infos rausgeschrieben?
@@ -43,3 +43,13 @@ voice-sensitive cortex:
 - We took three subregions in the voice-sensitive cortex of the left hemisphere (pSTG [MNI xyz − 68 − 27 6], planum polare (PPo) [− 50 −10 4], aSTG [−56 11 − 10]), and two IFG subre- gions, one located more posterior in the frontal operculum (fOP; BA 44; [− 51 13 14]), and one more anterior in the IFG (BA 47; [− 44 29 0]) (Fig. 2B). In the right hemisphere we used the previously found four STG subregions (fpSTS [45 −34 4], pSTG [69 −22 4], mSTG [66 −3 2], PPo [53 −4 −4]), and two IFC subregions, one located more posteriorly in the fOP (BA 44; [48 13 −2], and one more anteriorly in the IFG (BA 47, [51 32 −2]) (Fig. 3B). Note that all four right STG subregions except PPo, were located in the voice-sensitive cortex, as defined by a standard voice localizer scan (see Belin and Zatorre, 2000a ^8f603e
 
 ![[Frühholz et al. - 2015 - Bilateral dorsal and ventral fiber pathways for the processing of affective prosody identified by pr.pdf]]
+
+
+
+## see also
+Tags: #cognitivescience/neuroscience #science #source 
+*Superlink:* [[050 🧠Neuroscience]] 
+
+
+
+Created: 2025-11-12 22:14

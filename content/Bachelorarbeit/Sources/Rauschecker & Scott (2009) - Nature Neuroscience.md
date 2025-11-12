@@ -1,4 +1,8 @@
-### Rauschecker & Scott (2009) - Nature Neuroscience
+---
+modified: 2025-11-12
+---
+
+## Rauschecker & Scott (2009) - Nature Neuroscience
 
 Rauschecker, J. P., & Scott, S. K. (2009). Maps and streams in the auditory cortex: Nonhuman primates illuminate human speech processing. _Nature Neuroscience_, _12_(6), 718–724. [https://doi.org/10.1038/nn.2331](https://doi.org/10.1038/nn.2331)
 
@@ -48,3 +52,12 @@ from supplementary material:
 - Imaging studies in humans have demonstrated specific  activation in pST with auditory motion24, 25 near the location of visual motion  areas MT and MST. Imaging studies that have tested moving auditory stimuli in  addition to stationary ones have reported that auditory motion leads to activation  in areas of pST and posterior parietal cortex that are adjacent to each other, with  motion being the more powerful stimulus14.
 
 ![[Rauschecker and Scott - 2009 - Maps and streams in the auditory cortex nonhuman primates illuminate human speech processing.pdf]]
+
+
+## see also
+Tags: #cognitivescience/neuroscience #science #source
+*Superlink:* [[050 🧠Neuroscience]] 
+
+
+
+Created: 2025-11-12 22:18

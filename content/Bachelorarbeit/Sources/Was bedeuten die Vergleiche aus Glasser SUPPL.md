@@ -1,3 +1,7 @@
+---
+modified: 2025-11-12
+---
+
 ## Was bedeuten die Vergleiche aus Glasser SUPPL
 
 
@@ -36,11 +40,11 @@
 Hier stehen die ganzen Vergleiche drin und was genau die Begriffe bedeuten: 
 ![[HCP_S1200_Release_Reference_Manual.pdf]]
 ## see also
-Tags: #cognitivescience/neuroscience #science 
+Tags: #cognitivescience/neuroscience #science #source
 *Superlink:* [[050 🧠Neuroscience]] 
 
 ## Source
-
+[[Glasser et al. (2016) - Nature]]
 
 
 Created: 2025-11-10 23:48

@@ -1,4 +1,8 @@
-### De Vries et al. (2021) - Journal of Neuroscience
+---
+modified: 2025-11-12
+---
+
+## De Vries et al. (2021) - Journal of Neuroscience
 
 
 - [x] Paper gelesen
@@ -14,3 +18,12 @@ subjects who were better prepared (i.e., attended better to the correct stream r
 
 
 ![[Marinato and Baldauf - 2019 - Object-based attention in complex, naturalistic auditory streams.pdf]]
+
+
+## see also
+Tags: #cognitivescience/neuroscience #science #source 
+*Superlink:* [[050 🧠Neuroscience]] 
+
+
+
+Created: 2025-11-12 22:12

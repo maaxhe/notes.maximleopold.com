@@ -1,4 +1,8 @@
-### Ahveninen et al. (2006) - PNAS
+---
+modified: 2025-11-12
+---
+
+## Ahveninen et al. (2006) - PNAS
 
 Ahveninen, J., Jääskeläinen, I. P., Raij, T., Bonmassar, G., Devore, S., Hämäläinen, M., Levänen, S., Lin, F.-H., Sams, M., Shinn-Cunningham, B. G., Witzel, T., & Belliveau, J. W. (2006). Task-modulated "what" and "where" pathways in human auditory cortex. _Proceedings of the National Academy of Sciences_, _103_(39), 14608–14613. [https://doi.org/10.1073/pnas.0510480103](https://doi.org/10.1073/pnas.0510480103)
 
@@ -16,3 +20,10 @@ Ahveninen, J., Jääskeläinen, I. P., Raij, T., Bonmassar, G., Devore, S., Häm
 	- anterolateral HG, parts of the anterior STG, and PP process auditory object identity and that regions posterior to HG, including parts of PT and posterior STG, process sound location features (see Fig. 2). ^dfae6d
 
 ![[Ahveninen et al. - 2006 - Task-modulated “what” and “where” pathways in human auditory cortex.pdf]]
+
+## see also
+Tags: #cognitivescience/neuroscience #science #source
+*Superlink:* [[050 🧠Neuroscience]] 
+
+
+Created: 2025-11-12 22:11
