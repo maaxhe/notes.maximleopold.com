@@ -1,5 +1,8 @@
 ### Frühholz (2015) - NeuroImage 
 
+- [x] Paper gelesen?
+- [ ] Infos rausgeschrieben?
+
 ^0ead40
 
 Frühholz, S., Gschwind, M., & Grandjean, D. (2015). Bilateral dorsal and ventral fiber pathways for the processing of affective prosody identified by probabilistic fiber tracking. _NeuroImage_, _109_, 27–34. [https://doi.org/10.1016/j.neuroimage.2015.01.016](https://doi.org/10.1016/j.neuroimage.2015.01.016)

@@ -7,11 +7,11 @@ TPOJ1, TPOJ2 -> IPL (BA39)
 
 ### Alte Bezeichnungen 
 
-| Alte Bezeichnung | Funktion | Glasser Übers.                                   | Brodmann | Stream |
-| ---------------- | -------- | ------------------------------------------------ | -------- | ------ |
-| [[STS]]          |          | STSvp, STSdp???                                  |          |        |
-| pST              |          | A4/A5 ??                                         |          |        |
-| STG              |          |                                                  |          |        |
-| IFG              |          |                                                  |          |        |
-| IPL              |          | PGi, PSL, STV -> BA40 //<br>TPOJ1, TPOJ2 -> BA39 | BA 39/40 | Dorsal |
-|                  |          |                                                  |          |        |
+| Alte Bezeichnung | Funktion | Glasser Übers.                                   | Brodmann | Stream                     |
+| ---------------- | -------- | ------------------------------------------------ | -------- | -------------------------- |
+| [[STS]]          |          | [[STSvp]], [[STSdp]]???                          |          |                            |
+| pST              |          | [[A4]]/[[A5]] ??                                 |          |                            |
+| [[STG]]          |          |                                                  |          |                            |
+| IFG              |          |                                                  |          |                            |
+| IPL              |          | PGi, PSL, STV -> BA40 //<br>TPOJ1, TPOJ2 -> BA39 | BA 39/40 | [[Dorsal Auditory Stream]] |
+|                  |          |                                                  |          |                            |
