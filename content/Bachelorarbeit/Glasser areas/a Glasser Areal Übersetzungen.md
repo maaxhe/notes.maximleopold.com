@@ -9,7 +9,7 @@ TPOJ1, TPOJ2 -> IPL (BA39)
 
 | Alte Bezeichnung | Funktion | Glasser Übers.                                   | Brodmann | Stream |
 | ---------------- | -------- | ------------------------------------------------ | -------- | ------ |
-| STS              |          |                                                  |          |        |
+| [[STS]]          |          | STSvp, STSdp???                                  |          |        |
 | pST              |          | A4/A5 ??                                         |          |        |
 | STG              |          |                                                  |          |        |
 | IFG              |          |                                                  |          |        |

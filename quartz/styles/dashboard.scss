@@ -68,7 +68,8 @@
    ───────────────────────────────────────────────────────────────── */
 .content .ba-dash,
 article .ba-dash {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color: var(--ba-text-1);
   line-height: 1.6;
   padding: var(--ba-gap);
@@ -89,28 +90,36 @@ article .ba-dash {
 }
 
 /* ─────────────────────────────────────────────────────────────────
-   4. Responsive Card Grid
+   4. Responsive Card Grid (optimiert für 6 Kacheln)
    ───────────────────────────────────────────────────────────────── */
 .ba-dash > .ba-cards,
 .ba-dash .ba-cards {
   display: grid;
-  gap: var(--ba-gap);
+  gap: 12px;
   grid-template-columns: 1fr;
 }
 
-/* 2 columns at tablet */
-@media (min-width: 640px) {
+/* 2 columns at mobile landscape */
+@media (min-width: 480px) {
   .ba-dash > .ba-cards,
   .ba-dash .ba-cards {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* 3 columns at desktop */
-@media (min-width: 1024px) {
+/* 3 columns at tablet */
+@media (min-width: 768px) {
   .ba-dash > .ba-cards,
   .ba-dash .ba-cards {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 6 columns at large desktop (ideal für 6 Kacheln nebeneinander) */
+@media (min-width: 1400px) {
+  .ba-dash > .ba-cards,
+  .ba-dash .ba-cards {
+    grid-template-columns: repeat(6, 1fr);
   }
 }
 
@@ -120,12 +129,13 @@ article .ba-dash {
 .ba-card {
   background: var(--ba-bg-2);
   border: 1px solid var(--ba-border);
-  border-radius: var(--ba-radius);
-  padding: 24px;
+  border-radius: 12px;
+  padding: 16px;
   box-shadow: 0 2px 8px var(--ba-shadow);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
+  min-width: 0; /* Verhindert Overflow bei langen Texten */
 
   &:hover {
     transform: translateY(-2px);
@@ -134,25 +144,30 @@ article .ba-dash {
 }
 
 .ba-card__head {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   color: var(--ba-text-2);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .ba-card__body {
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 700;
   color: var(--ba-brand);
-  margin: 12px 0;
+  margin: 8px 0;
+  line-height: 1.2;
 }
 
 .ba-card__foot {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: var(--ba-text-3);
-  margin-top: 8px;
+  margin-top: 6px;
+  line-height: 1.3;
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -300,11 +315,26 @@ article .ba-dash {
 /* ─────────────────────────────────────────────────────────────────
    9. Utility Classes
    ───────────────────────────────────────────────────────────────── */
-.is-compact {
+.ba-card.is-compact {
   padding: 12px !important;
+
+  .ba-card__body {
+    font-size: 1.5rem !important;
+    margin: 6px 0 !important;
+  }
+
+  .ba-card__head {
+    font-size: 0.65rem !important;
+    margin-bottom: 4px !important;
+  }
+
+  .ba-card__foot {
+    font-size: 0.7rem !important;
+    margin-top: 4px !important;
+  }
 }
 
-.is-spacious {
+.ba-card.is-spacious {
   padding: 32px !important;
 }
 

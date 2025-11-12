@@ -7,9 +7,11 @@ Dieses Beispiel zeigt, wie du deine **bestehende** DataviewJS-Logik mit den neue
 ### ✅ Installation
 
 **Obsidian:**
+
 1. Aktiviere `dashboard-theme.css` in Settings → Appearance → CSS Snippets
 
 **Quartz:**
+
 1. `dashboard.scss` liegt bereits in `quartz/styles/`
 2. Quartz kompiliert es automatisch beim Build
 
@@ -68,15 +70,15 @@ dv.paragraph(`
 // ─── Helper-Funktion: Status → CSS-Klasse ───
 function statusBadge(status) {
   const map = {
-    draft: 'is-draft',
-    in_review: 'is-review',
-    needs_revision: 'is-needsrev',
-    final: 'is-final',
-    approved: 'is-approved'
-  };
-  const cls = map[status] || 'is-draft';
-  const label = status?.replace('_', ' ') || 'draft';
-  return `<span class="ba-badge ${cls}">${label}</span>`;
+    draft: "is-draft",
+    in_review: "is-review",
+    needs_revision: "is-needsrev",
+    final: "is-final",
+    approved: "is-approved",
+  }
+  const cls = map[status] || "is-draft"
+  const label = status?.replace("_", " ") || "draft"
+  return `<span class="ba-badge ${cls}">${label}</span>`
 }
 ```
 
@@ -209,24 +211,26 @@ dv.paragraph(`
 Alle Farben sind als CSS-Variablen definiert. Um die Palette zu ändern, überschreibe die Variablen:
 
 ### Obsidian
+
 Erstelle `.obsidian/snippets/dashboard-custom-colors.css`:
 
 ```css
 :root {
-  --ba-brand: #FF6B6B;      /* Deine Primärfarbe */
-  --ba-accent: #4ECDC4;     /* Deine Akzentfarbe */
-  --ba-success: #95E1D3;    /* etc. */
+  --ba-brand: #ff6b6b; /* Deine Primärfarbe */
+  --ba-accent: #4ecdc4; /* Deine Akzentfarbe */
+  --ba-success: #95e1d3; /* etc. */
 }
 ```
 
 ### Quartz
+
 In `quartz/styles/custom.scss`:
 
 ```scss
 :root {
-  --ba-brand: #FF6B6B;
-  --ba-accent: #4ECDC4;
-  --ba-success: #95E1D3;
+  --ba-brand: #ff6b6b;
+  --ba-accent: #4ecdc4;
+  --ba-success: #95e1d3;
 }
 ```
 
@@ -262,11 +266,11 @@ In `quartz/styles/custom.scss`:
 
 ```js
 // ✅ GUT
-const result = myComplexCalculation();
-dv.paragraph(`<div class="ba-card">${result}</div>`);
+const result = myComplexCalculation()
+dv.paragraph(`<div class="ba-card">${result}</div>`)
 
 // ❌ SCHLECHT - Logik verändert
-const result = `<div class="ba-card">${myComplexCalculation()}</div>`;
+const result = `<div class="ba-card">${myComplexCalculation()}</div>`
 ```
 
 Die Berechnungen, Filter, Mappings etc. bleiben **exakt wie sie sind**. Nur das HTML-Template drum herum wird ergänzt.
