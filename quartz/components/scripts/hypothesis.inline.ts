@@ -1,15 +1,29 @@
 // Hypothesis initialization and SPA handler
-// Uses contentReady Promise to signal Hypothesis when content is available
+// Dynamically loads embed.js after content is ready
 
 let lastUrl = location.href
 let hypothesisInitialized = false
+let hypothesisScriptLoaded = false
 
-// Signal Hypothesis that content is ready
-function signalContentReady() {
-  if (window.hypothesisContentReady && window.hypothesisContentReady.resolve) {
-    window.hypothesisContentReady.resolve()
-    console.log("✓ Signaled Hypothesis that content is ready")
-  }
+// Load Hypothesis embed.js dynamically
+function loadHypothesisScript() {
+  if (hypothesisScriptLoaded) return Promise.resolve()
+
+  return new Promise((resolve) => {
+    const script = document.createElement("script")
+    script.src = "https://hypothes.is/embed.js"
+    script.async = false // Load synchronously to ensure proper initialization
+    script.onload = () => {
+      hypothesisScriptLoaded = true
+      console.log("✓ Hypothesis script loaded")
+      resolve(true)
+    }
+    script.onerror = () => {
+      console.error("✗ Failed to load Hypothesis script")
+      resolve(false)
+    }
+    document.head.appendChild(script)
+  })
 }
 
 // Wait until Hypothesis is fully loaded and initialized
@@ -72,13 +86,14 @@ async function handleNavigation() {
     console.log("→ Navigation detected")
     lastUrl = currentUrl
 
-    // Ensure Hypothesis is ready before refreshing
+    // Ensure Hypothesis is loaded and ready
+    if (!hypothesisScriptLoaded) {
+      await loadHypothesisScript()
+    }
+
     if (!hypothesisInitialized) {
       await ensureHypothesisReady()
     }
-
-    // Signal content is ready for the new page
-    signalContentReady()
 
     // Wait for new content, then refresh
     setTimeout(refreshHypothesis, 500)
@@ -86,11 +101,21 @@ async function handleNavigation() {
 }
 
 // Initialize on page load - CRITICAL for first page load
-// Signal that content is ready immediately since DOM is loaded when this script runs
-signalContentReady()
+// Load Hypothesis script after DOM is ready
+async function initializeHypothesis() {
+  console.log("→ Initializing Hypothesis...")
 
-// Then wait for Hypothesis to initialize
-ensureHypothesisReady()
+  // Load the script first
+  await loadHypothesisScript()
+
+  // Then wait for it to initialize
+  await ensureHypothesisReady()
+
+  console.log("✓ Hypothesis fully initialized and ready")
+}
+
+// Start initialization
+initializeHypothesis()
 
 // Listen for Quartz navigation
 document.addEventListener("nav", handleNavigation)

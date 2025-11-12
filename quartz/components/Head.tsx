@@ -98,30 +98,12 @@ export default (() => {
           }
         })}
 
-        {/* Hypothesis configuration with contentReady Promise */}
+        {/* Hypothesis configuration - embed.js will be loaded dynamically by hypothesis.inline.ts */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `
-// Create a Promise that will be resolved when content is ready
-window.hypothesisContentReady = {};
-window.hypothesisContentReady.promise = new Promise(function(resolve) {
-  window.hypothesisContentReady.resolve = resolve;
-});
-
-window.hypothesisConfig = function () {
-  return {
-    showHighlights: 'always',
-    openSidebar: false,
-    theme: 'clean',
-    enableExperimentalNewNoteButton: true,
-    // Signal Hypothesis when content is ready
-    contentReady: window.hypothesisContentReady.promise
-  };
-};`,
+            __html: `window.hypothesisConfig = function () { return { showHighlights: 'always', openSidebar: false, enableExperimentalNewNoteButton: true }; };`,
           }}
         />
-        {/* Load Hypothesis synchronously to ensure it's ready on first page load */}
-        <script src="https://hypothes.is/embed.js"></script>
       </head>
     )
   }
