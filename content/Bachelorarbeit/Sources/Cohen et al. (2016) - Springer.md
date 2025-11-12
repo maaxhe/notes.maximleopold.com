@@ -4,7 +4,7 @@ Cohen, Y. E., Bennur, S., Christison-Lagay, K., Gifford, A. M., & Tsunada, J. (2
 
 - [x] paper gelesen?
 
-- in latter parts of the auditory cortex, neurons encode the sensory evidence that forms an auditory decision and are causally involved in the decision process. Finally, in the prefrontal cortex, which receives input from the auditory cortex, neural activity reflects the actual perceptual decision. Together, these studies indicate that the ventral pathway contains hierarchical circuits that are specialized for auditory perception and scene analysis.
+- in latter parts of the auditory cortex, neurons encode the sensory evidence that forms an auditory decision and are causally involved in the decision process. Finally, in the prefrontal cortex, which receives input from the auditory cortex, neural activity reflects the actual perceptual decision. Together, these studies indicate that the ventral pathway contains hierarchical circuits that are specialized for auditory perception and scene analysis. ^de2ca8
 
 monkey: 
 - In rhesus monkeys, this pathway begins in core auditory cortex—specifically, primary auditory cortex (A1) and the rostral field. These core areas project to the middle lateral (ML) and anterolateral belt (AL) regions of auditory cortex. In turn, these belt regions project directly and indirectly to the ventrolateral prefrontal cortex (vlPFC).

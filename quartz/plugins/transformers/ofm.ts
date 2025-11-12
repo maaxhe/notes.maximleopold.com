@@ -197,7 +197,8 @@ export const ObsidianFlavoredMarkdown: QuartzTransformerPlugin<Partial<Options>>
           const displayAnchor = anchor ? `#${blockRef}${anchor.trim().replace(/^#+/, "")}` : ""
           // For block references, don't use the block ID as alias - let the filename show instead
           const isBlockRef = rawHeader?.startsWith("#^")
-          const displayAlias = rawAlias ?? (!isBlockRef && rawHeader ? rawHeader.replace("#", "|") : "") ?? ""
+          const displayAlias =
+            rawAlias ?? (!isBlockRef && rawHeader ? rawHeader.replace("#", "|") : "") ?? ""
           const embedDisplay = value.startsWith("!") ? "!" : ""
 
           if (rawFp?.match(externalLinkRegex)) {

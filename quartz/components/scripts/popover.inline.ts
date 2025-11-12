@@ -96,10 +96,42 @@ async function mouseEnterHandler(
         const targetID = `popover-internal-${el.id}`
         el.id = targetID
       })
-      const elts = [...html.getElementsByClassName("popover-hint")]
-      if (elts.length === 0) return
 
-      elts.forEach((elt) => popoverInner.appendChild(elt))
+      // Check if this is a block reference (starts with #^)
+      const isBlockRef = hash.startsWith("#^")
+
+      if (isBlockRef && hash.length > 2) {
+        // For block references, only show the specific block
+        const blockId = hash.slice(2) // Remove #^
+        const blockElement = html.querySelector(`[id="${blockId}"], [id="popover-internal-${blockId}"]`)
+
+        if (blockElement) {
+          // Clone the block element and its parent context
+          const blockContainer = document.createElement("div")
+          blockContainer.classList.add("popover-block-ref")
+
+          // Get the block element (could be a paragraph, list item, etc.)
+          let elementToShow = blockElement.cloneNode(true) as HTMLElement
+
+          // If it's just the marker span, get the parent element
+          if (elementToShow.tagName === "SPAN" && elementToShow.classList.contains("block-ref-anchor")) {
+            elementToShow = (blockElement.parentElement?.cloneNode(true) as HTMLElement) || elementToShow
+          }
+
+          blockContainer.appendChild(elementToShow)
+          popoverInner.appendChild(blockContainer)
+        } else {
+          // Fallback: show the full content if block not found
+          const elts = [...html.getElementsByClassName("popover-hint")]
+          if (elts.length === 0) return
+          elts.forEach((elt) => popoverInner.appendChild(elt))
+        }
+      } else {
+        // For normal links or header links, show the full content
+        const elts = [...html.getElementsByClassName("popover-hint")]
+        if (elts.length === 0) return
+        elts.forEach((elt) => popoverInner.appendChild(elt))
+      }
   }
 
   if (!!document.getElementById(popoverId)) {
