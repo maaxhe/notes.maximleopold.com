@@ -54,10 +54,11 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
     const totalFiles = thesisFiles.length
     const statusOf = (f: (typeof thesisFiles)[number]) =>
       typeof f.frontmatter?.status === "string" ? f.frontmatter.status.toLowerCase() : undefined
+    const draftFiles = thesisFiles.filter((f) => statusOf(f) === "draft").length
+    const inReviewFiles = thesisFiles.filter((f) => statusOf(f) === "review").length
+    const needsRevisionFiles = thesisFiles.filter((f) => statusOf(f) === "needs-revision").length
     const finalFiles = thesisFiles.filter((f) => statusOf(f) === "final").length
     const approvedFiles = thesisFiles.filter((f) => statusOf(f) === "approved").length
-    const inReviewFiles = thesisFiles.filter((f) => statusOf(f) === "review").length
-    const draftFiles = thesisFiles.filter((f) => statusOf(f) === "draft").length
 
     const averageProgress =
       thesisFiles.length > 0
@@ -84,17 +85,21 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
             <div class="stat-number">{totalFiles}</div>
             <div class="stat-label">Gesamt Seiten</div>
           </div>
-          <div class="stat-card completed">
-            <div class="stat-number">{finalFiles}</div>
-            <div class="stat-label">Fertig</div>
+          <div class="stat-card draft">
+            <div class="stat-number">{draftFiles}</div>
+            <div class="stat-label">Draft</div>
           </div>
           <div class="stat-card review">
             <div class="stat-number">{inReviewFiles}</div>
             <div class="stat-label">In Review</div>
           </div>
-          <div class="stat-card draft">
-            <div class="stat-number">{draftFiles}</div>
-            <div class="stat-label">Entwürfe</div>
+          <div class="stat-card needs-revision">
+            <div class="stat-number">{needsRevisionFiles}</div>
+            <div class="stat-label">Überarbeitung</div>
+          </div>
+          <div class="stat-card completed">
+            <div class="stat-number">{finalFiles}</div>
+            <div class="stat-label">Final</div>
           </div>
           <div class="stat-card approved">
             <div class="stat-number">{approvedFiles}</div>

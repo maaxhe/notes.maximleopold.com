@@ -2,7 +2,7 @@
 
 Cohen, Y. E., Bennur, S., Christison-Lagay, K., Gifford, A. M., & Tsunada, J. (2016). Functional Organization of the Ventral Auditory Pathway. In P. Van Dijk, D. Başkent, E. Gaudrain, E. De Kleine, A. Wagner, & C. Lanting (Eds.), _Physiology, Psychoacoustics and Cognition in Normal and Impaired Hearing_ (Vol. 894, pp. 381–388). Springer International Publishing. [https://doi.org/10.1007/978-3-319-25474-6_40](https://doi.org/10.1007/978-3-319-25474-6_40)
 
-- [ ] paper gelesen?
+- [x] paper gelesen?
 
 - in latter parts of the auditory cortex, neurons encode the sensory evidence that forms an auditory decision and are causally involved in the decision process. Finally, in the prefrontal cortex, which receives input from the auditory cortex, neural activity reflects the actual perceptual decision. Together, these studies indicate that the ventral pathway contains hierarchical circuits that are specialized for auditory perception and scene analysis.
 
@@ -10,7 +10,7 @@ monkey:
 - In rhesus monkeys, this pathway begins in core auditory cortex—specifically, primary auditory cortex (A1) and the rostral field. These core areas project to the middle lateral (ML) and anterolateral belt (AL) regions of auditory cortex. In turn, these belt regions project directly and indirectly to the ventrolateral prefrontal cortex (vlPFC).
 
 meta about dorsal: 
-- It is important to briefly comment on the contribution of the dorsal (“spatial”) pathway to auditory perception (Rauschecker 2012; Cloutman 2013). Spatial information can act as a grouping cue to assist the segregation of an acoustic stimulus into discrete sounds. For example, when a rhythmic sequence of identical sound bursts is presented from a single location, it is often perceived as one source.
+- It is important to briefly comment on the contribution of the dorsal (“spatial”) pathway to auditory perception (Rauschecker 2012; Cloutman 2013). Spatial information can act as a grouping cue to assist the segregation of an acoustic stimulus into discrete sounds. For example, when a rhythmic sequence of identical sound bursts is presented from a single location, it is often perceived as one source. ^05cbf9
 
 A1 controversial: 
 - A1's role in auditory perception is controversial. Part of that controversy stems from the putative role of A1 in processing auditory “objects” (Nelken 2008). We will take the position that auditory objects are analogous to perceptual representations (i.e., sounds) (Bizley and Cohen 2013).

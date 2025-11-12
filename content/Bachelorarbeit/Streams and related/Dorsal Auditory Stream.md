@@ -1,8 +1,11 @@
 ## Dorsal Auditory Stream
 
 
-Poeppel 2004: 
-![[BA All Sources#^a92df4]]
+### Function
+
+- Spatial information as a grouping cue for segregating into discrete sounds. 
+	- Quelle: [[Cohen et al. (2016) - Springer#^05cbf9]]
+
 
 
 

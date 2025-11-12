@@ -44,16 +44,20 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
-  &.completed {
-    border-left-color: #2ecc71;
+  &.draft {
+    border-left-color: #f39c12;
   }
 
   &.review {
     border-left-color: #3498db;
   }
 
-  &.draft {
-    border-left-color: #f39c12;
+  &.needs-revision {
+    border-left-color: #e67e22;
+  }
+
+  &.completed {
+    border-left-color: #2ecc71;
   }
 
   &.approved {
