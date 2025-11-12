@@ -103,7 +103,9 @@ async function mouseEnterHandler(
       if (isBlockRef && hash.length > 2) {
         // For block references, only show the specific block
         const blockId = hash.slice(2) // Remove #^
-        const blockElement = html.querySelector(`[id="${blockId}"], [id="popover-internal-${blockId}"]`)
+        const blockElement = html.querySelector(
+          `[id="${blockId}"], [id="popover-internal-${blockId}"]`,
+        )
 
         if (blockElement) {
           // Clone the block element and its parent context
@@ -114,8 +116,12 @@ async function mouseEnterHandler(
           let elementToShow = blockElement.cloneNode(true) as HTMLElement
 
           // If it's just the marker span, get the parent element
-          if (elementToShow.tagName === "SPAN" && elementToShow.classList.contains("block-ref-anchor")) {
-            elementToShow = (blockElement.parentElement?.cloneNode(true) as HTMLElement) || elementToShow
+          if (
+            elementToShow.tagName === "SPAN" &&
+            elementToShow.classList.contains("block-ref-anchor")
+          ) {
+            elementToShow =
+              (blockElement.parentElement?.cloneNode(true) as HTMLElement) || elementToShow
           }
 
           blockContainer.appendChild(elementToShow)

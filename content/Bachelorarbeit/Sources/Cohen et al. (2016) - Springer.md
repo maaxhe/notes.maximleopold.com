@@ -14,9 +14,9 @@ meta about dorsal:
 
 A1 controversial: 
 - A1's role in auditory perception is controversial. Part of that controversy stems from the putative role of A1 in processing auditory “objects” (Nelken 2008). We will take the position that auditory objects are analogous to perceptual representations (i.e., sounds) (Bizley and Cohen 2013).
-
+ ^4d67e6
 - human-imaging studies have revealed that regions of core auditory cortex are modulated by listener's reports of the identity of an ambiguous speech sound.
-- choice-related activity may not reflect a casual contribution of the auditory cortex to decision-making but may simply reflect feedback from higher choice-sensitive areas (Nienborg and Cumming 2009) or the structure of the correlated noise (Nienborg et al. 2012).
+- choice-related activity may not reflect a casual contribution of the auditory cortex to decision-making but may simply reflect feedback from higher choice-sensitive areas (Nienborg and Cumming 2009) or the structure of the correlated noise (Nienborg et al. 2012). ^9041cd
 - We found that neither ML nor AL activity was modulated by the monkeys' choices
 - Interestingly, as noted above, the dorsal pathway also contributes to auditory perception; consistent with that notion, activity in the human parietal lobe is modulated by listeners' choices (Cusack 2005).
 
