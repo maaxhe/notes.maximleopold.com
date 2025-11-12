@@ -1,8 +1,16 @@
 // Hypothesis initialization and SPA handler
-// CRITICAL: Ensures Hypothesis is fully ready on first page load
+// Uses contentReady Promise to signal Hypothesis when content is available
 
 let lastUrl = location.href
 let hypothesisInitialized = false
+
+// Signal Hypothesis that content is ready
+function signalContentReady() {
+  if (window.hypothesisContentReady && window.hypothesisContentReady.resolve) {
+    window.hypothesisContentReady.resolve()
+    console.log("✓ Signaled Hypothesis that content is ready")
+  }
+}
 
 // Wait until Hypothesis is fully loaded and initialized
 function ensureHypothesisReady() {
@@ -69,12 +77,19 @@ async function handleNavigation() {
       await ensureHypothesisReady()
     }
 
+    // Signal content is ready for the new page
+    signalContentReady()
+
     // Wait for new content, then refresh
     setTimeout(refreshHypothesis, 500)
   }
 }
 
 // Initialize on page load - CRITICAL for first page load
+// Signal that content is ready immediately since DOM is loaded when this script runs
+signalContentReady()
+
+// Then wait for Hypothesis to initialize
 ensureHypothesisReady()
 
 // Listen for Quartz navigation

@@ -98,10 +98,26 @@ export default (() => {
           }
         })}
 
-        {/* Hypothesis configuration */}
+        {/* Hypothesis configuration with contentReady Promise */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.hypothesisConfig = function () { return { showHighlights: 'always', openSidebar: false, theme: 'clean', enableExperimentalNewNoteButton: true }; };`,
+            __html: `
+// Create a Promise that will be resolved when content is ready
+window.hypothesisContentReady = {};
+window.hypothesisContentReady.promise = new Promise(function(resolve) {
+  window.hypothesisContentReady.resolve = resolve;
+});
+
+window.hypothesisConfig = function () {
+  return {
+    showHighlights: 'always',
+    openSidebar: false,
+    theme: 'clean',
+    enableExperimentalNewNoteButton: true,
+    // Signal Hypothesis when content is ready
+    contentReady: window.hypothesisContentReady.promise
+  };
+};`,
           }}
         />
         {/* Load Hypothesis synchronously to ensure it's ready on first page load */}
