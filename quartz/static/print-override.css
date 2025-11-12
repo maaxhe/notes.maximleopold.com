@@ -1,57 +1,75 @@
-/* Dedicated print stylesheet - forces clean PDF export */
+/* Dedicated print stylesheet - forces clean PDF export with maximum specificity */
 @media print {
-  /* NUCLEAR OPTION: Hide everything except center content */
-  body * {
+  /* NUCLEAR OPTION: Hide ALL sidebars with maximum specificity */
+  body #quartz-root #quartz-body .left.sidebar,
+  body #quartz-root #quartz-body div.left.sidebar,
+  body #quartz-root #quartz-body .right.sidebar,
+  body #quartz-root #quartz-body div.right.sidebar,
+  body div#quartz-body > div.left.sidebar,
+  body div#quartz-body > div.right.sidebar,
+  #quartz-root #quartz-body .left.sidebar,
+  #quartz-root #quartz-body .right.sidebar,
+  #quartz-body .left.sidebar,
+  #quartz-body .right.sidebar,
+  #quartz-body > .left,
+  #quartz-body > .right,
+  div.left.sidebar,
+  div.right.sidebar,
+  .left.sidebar,
+  .right.sidebar {
+    display: none !important;
     visibility: hidden !important;
+    position: absolute !important;
+    left: -99999px !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
   }
 
-  /* Show only the article/center content */
-  article,
-  article *,
-  .center,
-  .center *,
-  main,
-  main *,
-  .page-content,
-  .page-content *,
-  .article-content,
-  .article-content * {
-    visibility: visible !important;
-  }
-
-  /* Force hide sidebars and navigation with extreme prejudice */
+  /* Hide ALL UI elements inside sidebars */
   .explorer,
   .explorer *,
   div.explorer,
-  div.explorer *,
-  .sidebar,
-  .sidebar *,
-  .left,
-  .left *,
-  .right,
-  .right *,
+  button.explorer-toggle,
+  .explorer-content,
+  .explorer-ul,
   .graph,
   .graph *,
-  nav,
-  nav *,
-  header,
-  header *,
-  footer,
-  footer *,
-  button,
+  .graph-outer,
+  .graph-container,
+  .backlinks,
   .toc,
-  .toc *,
+  .breadcrumbs,
+  .breadcrumb-container,
+  .tags,
+  .tag-list,
+  .search,
+  .search-container,
+  header,
+  footer,
+  nav,
+  button,
+  .darkmode,
+  .readermode,
+  .annotations-badge,
+  .annotations-badge-link,
+  .export-button-container,
+  .export-button,
+  .page-navigation,
+  .content-meta,
+  .giscus,
+  .page-footer,
   iframe,
   embed,
   object {
     display: none !important;
     visibility: hidden !important;
-    width: 0 !important;
-    height: 0 !important;
-    overflow: hidden !important;
+    position: absolute !important;
+    left: -99999px !important;
   }
 
-  /* Full width for content */
+  /* Force full page width */
   html,
   body {
     width: 100% !important;
@@ -59,16 +77,68 @@
     margin: 0 !important;
     padding: 0 !important;
     background: white !important;
-    color: black !important;
+    overflow-x: visible !important;
   }
 
-  article,
-  .center,
-  main {
+  /* Force quartz containers to full width */
+  body #quartz-root,
+  body #quartz-body,
+  body .page,
+  #quartz-root,
+  #quartz-body,
+  .page {
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 !important;
-    padding: 1cm !important;
+    padding: 0 !important;
+    display: block !important;
+    flex-direction: column !important;
+  }
+
+  /* Center content takes FULL width with maximum specificity */
+  body #quartz-root #quartz-body .center,
+  body #quartz-body .center,
+  #quartz-body .center,
+  div.center,
+  .center {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1.5cm 2cm !important;
+    float: none !important;
+    display: block !important;
+    flex: none !important;
+  }
+
+  /* Article full width */
+  .center article,
+  article,
+  .page-header {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+
+  /* Show only article title and content */
+  article h1,
+  article h2,
+  article h3,
+  article h4,
+  article h5,
+  article h6,
+  article p,
+  article ul,
+  article ol,
+  article blockquote,
+  article pre,
+  article code,
+  article img,
+  article table {
+    display: block !important;
+    visibility: visible !important;
+    position: static !important;
   }
 
   /* Clean typography */
@@ -78,17 +148,33 @@
   }
 
   h1 {
-    font-size: 24pt;
+    font-size: 24pt !important;
+    page-break-after: avoid;
   }
   h2 {
-    font-size: 18pt;
+    font-size: 18pt !important;
+    page-break-after: avoid;
   }
   h3 {
-    font-size: 14pt;
+    font-size: 14pt !important;
+    page-break-after: avoid;
   }
 
   img {
     max-width: 100% !important;
     page-break-inside: avoid;
+  }
+
+  p,
+  ul,
+  ol {
+    page-break-inside: avoid;
+  }
+
+  /* Keep code blocks readable */
+  pre,
+  code {
+    background: #f5f5f5 !important;
+    border: 1px solid #ddd !important;
   }
 }
