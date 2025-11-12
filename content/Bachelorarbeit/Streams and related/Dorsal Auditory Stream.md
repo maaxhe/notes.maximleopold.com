@@ -1,3 +1,7 @@
+---
+modified: 2025-11-12
+---
+
 ## Dorsal Auditory Stream
 
 starts in planum polare -> pSTG
@@ -20,7 +24,7 @@ Quelle: [[Ahveninen et al. (2006) - PNAS#^f05bb5]]
 ## see also
 Tags: #cognitivescience/neuroscience #science  #stream/dorsal 
 *Superlink:* [[050 🧠Neuroscience]] 
-
+[[General about the Auditory Streams]]
 ## Source
 
 
