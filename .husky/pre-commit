@@ -3,13 +3,9 @@
 
 echo "🔍 Running pre-commit checks..."
 
-# Sync from Obsidian vault
-echo "🔄 Syncing from Obsidian vault..."
-npm run sync
-
-# Format code
-echo "📝 Formatting code..."
-npm run format
+# Update frontmatter dates
+echo "📅 Updating frontmatter dates..."
+node scripts/update-frontmatter.cjs
 
 # Check for secrets in staged files
 echo "🔐 Checking for potential secrets..."
