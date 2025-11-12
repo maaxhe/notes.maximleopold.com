@@ -1,5 +1,12 @@
+---
+modified: 2025-11-12
+---
+
 ## STG
 
+### MNI Coordinates 
+Subregion fpSTS MNI: [45 -34 4]
+- Quelle: [[Frühholz (2015) - NeuroImage]]
 
 ### Functions
 
