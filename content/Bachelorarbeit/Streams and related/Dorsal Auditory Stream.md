@@ -1,6 +1,7 @@
 ## Dorsal Auditory Stream
 
 
+
 ### Function
 
 - Spatial information as a grouping cue for segregating into discrete sounds. 
