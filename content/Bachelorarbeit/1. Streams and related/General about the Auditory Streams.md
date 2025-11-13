@@ -1,3 +1,8 @@
+---
+title: General about the Auditory Streams
+created: '2025-11-13'
+modified: 2025-11-13
+---
 
 ### Was wir überhaupt machen wollen
 Die Frage, die wir beantworten wollen: 

@@ -1,7 +1,8 @@
 ---
+title: fOP
+created: '2025-11-13'
 modified: 2025-11-13
 ---
-
 # fOP
 
 **Stream:** #stream/dorsal 
@@ -24,7 +25,7 @@ Siehe [[BA44#MNI Coordinates]]
 
 
 ## Connectivity
-
+- from [[PPo]] ([[Frühholz (2015) - NeuroImage#^5b4da1]])
 
 ### Projections
 

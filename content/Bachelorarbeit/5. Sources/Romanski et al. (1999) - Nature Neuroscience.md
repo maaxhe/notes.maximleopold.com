@@ -1,3 +1,8 @@
+---
+title: Romanski et al. (1999) - Nature Neuroscience
+created: '2025-11-13'
+modified: 2025-11-13
+---
 ## Romanski et al. (1999) - Nature Neuroscience
 
 Romanski, L. M., Tian, B., Fritz, J., Mishkin, M., Goldman-Rakic, P. S., & Rauschecker, J. P. (1999). Dual streams of auditory afferents target multiple domains in the primate prefrontal cortex. _Nature Neuroscience_, _2_(12), 1131–1136. [https://doi.org/10.1038/16056](https://doi.org/10.1038/16056)

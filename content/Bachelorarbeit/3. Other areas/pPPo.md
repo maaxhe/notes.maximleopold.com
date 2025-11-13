@@ -1,21 +1,17 @@
 ---
-title: Herschl's Gyrus
+title: pPPo
 created: '2025-11-13'
 modified: 2025-11-13
 ---
-## Herschl's Gyrus
-
-
-### Location 
-- Today's [[A1]] dorsal STG, BA41
+## posterior Planum Polare (pPPo)
 
 
 ## see also
 Tags: #cognitivescience/neuroscience #science 
 *Superlink:* [[050 🧠Neuroscience]] 
-
+[[PPo]]
 ## Source
 
 
 
-Created: 2025-11-12 09:51
+Created: 2025-11-12 14:37

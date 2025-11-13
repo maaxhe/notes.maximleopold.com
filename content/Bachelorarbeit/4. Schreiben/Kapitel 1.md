@@ -6,6 +6,8 @@ progress: 10
 needsFeedback: true
 tags:
   - ba
+created: '2025-11-13'
+modified: 2025-11-13
 ---
 ## Kapitel 1 
 

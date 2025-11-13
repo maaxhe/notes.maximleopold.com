@@ -1,3 +1,8 @@
+---
+title: Griffiths et al. (1998)
+created: '2025-11-13'
+modified: 2025-11-13
+---
 ## Griffiths et al. (1998)
 Griffiths, T. D., Rees, G., Rees, A., Green, G. G. R., Witton, C., Rowe, D., Büchel, C., Turner, R., & Frackowiak, R. S. J. (1998). Right parietal cortex is involved in the perception of sound movement in humans. _Nature Neuroscience_, _1_(1), 74–79. [https://doi.org/10.1038/276](https://doi.org/10.1038/276)
 

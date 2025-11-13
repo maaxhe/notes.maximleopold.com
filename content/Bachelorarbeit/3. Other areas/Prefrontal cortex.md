@@ -1,3 +1,8 @@
+---
+title: Prefrontal cortex
+created: '2025-11-13'
+modified: 2025-11-13
+---
 ## Prefrontal cortex
 
 Der Präfrontalkortex ist Teil des [[cortex]]

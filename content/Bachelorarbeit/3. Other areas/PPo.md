@@ -1,18 +1,46 @@
-## Planum Polare (PPo)
+---
+title: PPo
+created: '2025-11-13'
+modified: 2025-11-13
+---
+# PPo
 
-### MNI Coordinates
-LH MNI: [-50 -10 4] ([[Frühholz (2015) - NeuroImage]])
+**Stream:** 
+**Classical equivalent:** 
+**Mapped to Glasser:** ???
 
-RH MNI: [53 -4 -4] ([[Frühholz (2015) - NeuroImage]])
-### Location
-A region located posterior, the planum temporale (PT), a region anterolateral to HG called planum polare (PP)
+---
+
+## MNI Coordinates
+- **Right:**  MNI: [53 -4 -4] ([[Frühholz (2015) - NeuroImage]])
+- **Left:**  MNI: [-50 -10 4] ([[Frühholz (2015) - NeuroImage]])
+
+## Anatomical location
+A region located posterior, the planum temporale (PT), a region anterolateral to [[Herschl's Gyrus]] called planum polare (PP)
+
+## Function(s)
+
+
+## Connectivity
+- left PPo connected to both [[IFG]] and [[fOP]] via [[Dorsal Auditory Stream]] ([[Frühholz (2015) - NeuroImage#^5b4da1]])
+- right PPo connected only to [[fOP]] via [[Dorsal Auditory Stream]] ([[Frühholz (2015) - NeuroImage#^e58a74]])
+
+### Projections
+
+
+### PFC targets
+
+
+##  Summary
+
+
 
 ## see also
-Tags: #cognitivescience/neuroscience #science 
+- Verwandte Areale:
+- wichtige Seiten:
+- Tags: #cognitivescience/neuroscience #science 
+
+
 *Superlink:* [[050 🧠Neuroscience]] 
-[[posterior Planum Polare]]
-## Source
+Created: 2025-11-13 11:23
 
-
-
-Created: 2025-11-12 16:17

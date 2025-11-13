@@ -1,3 +1,8 @@
+---
+title: Dorsal Auditory Stream
+created: '2025-11-13'
+modified: 2025-11-13
+---
 ## Dorsal Auditory Stream
 
 ### Location 

@@ -1,3 +1,8 @@
+---
+title: Rolls et al. (2023) - Cerebral Cortex
+created: '2025-11-13'
+modified: 2025-11-13
+---
 ## Rolls et al. (2023) - Cerebral Cortex
 
 Rolls, E. T., Rauschecker, J. P., Deco, G., Huang, C.-C., & Feng, J. (2023). Auditory cortical connectivity in humans. _Cerebral Cortex_, _33_(10), 6207–6227. [https://doi.org/10.1093/cercor/bhac496](https://doi.org/10.1093/cercor/bhac496)

@@ -1,3 +1,8 @@
+---
+title: Frühholz (2015) - NeuroImage
+created: '2025-11-13'
+modified: '2025-11-13'
+---
 ## Frühholz (2015) - NeuroImage 
 
 - [x] Paper gelesen?
@@ -30,9 +35,9 @@ Und hier ventral/dorsal pathways according to Frühholz:
 Results: 
 - The anterior STG (aSTG) was connected to the IFG via a strong ventral pathway consisting of the inferior longitudinal fasciculus (ILF) and the inferior fronto-occipital fasciculus (IFOF) in its posterior portion, and the extreme capsule (EmC) in the anterior portion (Fig. 5A), as confirmed with a standard white matter atlas ^0b4b98
 - The aSTG was also connected to the IFG via a dorsal pathway, but the aSTG–IFG connectivity displayed a higher pathway probability (PP) via the ventral compared with the dorsal pathway (t14 = 18.874, P = 2.35 × 10−11) (Fig. 3D). ^b33417
-- The aSTG finally showed a connection to the left frontal operculum (fOP) by dorsal pathways. Unlike the aSTG, the left polare plane (PPo) and the posterior STG (pSTG) were connected to both the IFG and the fOP only via dorsal pathways. The strongest CP originating from the STG seed regions was actually found for the pSTG and targeting all frontal regions (main effect for the factor temporal seed: F1.44,20.16 = 7.469, P = 0.007, GreenhouseGeisser (GG) corrected), especially for the comparison of the pSTG compared with the PPo (planned posthoc comparison: P = 7.74 × 10−4).
-- we found that while all subregions in the STG were connected to the right fOP via dorsal pathways, only the most posterior region in the right fundus of the posterior superior temporal sulcus (fpSTS) was connected to the right IFG via equally strong dorsal and ventral pathways (i.e. indicated by a nonsignificant effect of for the comparison of the dorsal and ventral PP; t14 = 0.023, P = 0.982) as well as to the fOP via a dorsal pathway.
-- The right PPo, mid STG (mSTG), and pSTG were connected only to the fOP via dorsal pathways. The least CP was found for the mSTG, especially as compared with the pSTG and the PPo
+- The aSTG finally showed a connection to the left frontal operculum (fOP) by dorsal pathways. Unlike the aSTG, the left polare plane (PPo) and the posterior STG (pSTG) were connected to both the IFG and the fOP only via dorsal pathways. The strongest CP originating from the STG seed regions was actually found for the pSTG and targeting all frontal regions (main effect for the factor temporal seed: F1.44,20.16 = 7.469, P = 0.007, GreenhouseGeisser (GG) corrected), especially for the comparison of the pSTG compared with the PPo (planned posthoc comparison: P = 7.74 × 10−4). ^5b4da1
+- we found that while all subregions in the STG were connected to the right fOP via dorsal pathways, only the most posterior region in the right fundus of the posterior superior temporal sulcus (fpSTS) was connected to the right IFG via equally strong dorsal and ventral pathways (i.e. indicated by a nonsignificant effect of for the comparison of the dorsal and ventral PP; t14 = 0.023, P = 0.982) as well as to the fOP via a dorsal pathway. ^e9e9e7
+- The right PPo, mid STG (mSTG), and pSTG were connected only to the fOP via dorsal pathways. The least CP was found for the mSTG, especially as compared with the pSTG and the PPo ^e58a74
 - we revealed some left-hemispheric temporofrontal connections for affective prosody processing, especially dorsal connection between the anterior STG and the inferior frontal cortex, in addition to those described recently for auditory processing of vocalizations and speech (Ethofer et al., 2012; Glasser and Rilling, 2008; Rauschecker and Scott, 2009; Saur et al., 2008)
 - we now provide quantitative description as well as evidence for the specific subregions in STC and IFC, which are structurally connected by the right ventral pathway. Second, we found an overall bilateral predominance of the dorsal pathway for processing affective prosody.
 

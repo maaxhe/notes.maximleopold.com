@@ -1,3 +1,8 @@
+---
+title: IFG
+created: '2025-11-13'
+modified: 2025-11-13
+---
 ## IFG (Inferior Frontal Gyrus)
 
 ### MNI Coordinates 

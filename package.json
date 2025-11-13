@@ -22,7 +22,8 @@
     "deploy": "echo 'Use CI/CD for deployment'",
     "publish:quick": "git add . && git commit -m 'Auto-update notes' && git push",
     "quartz": "./quartz/bootstrap-cli.mjs",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "frontmatter:add": "tsx scripts/add-frontmatter.ts"
   },
   "engines": {
     "npm": ">=10.9.2",

@@ -1,3 +1,8 @@
+---
+title: Meeting 07.11.2025
+created: '2025-11-13'
+modified: 2025-11-13
+---
 ## Meeting 07.11.2025 
 
 in MNI übertragen 

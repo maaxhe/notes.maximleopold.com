@@ -1,3 +1,8 @@
+---
+title: pSTG
+created: '2025-11-13'
+modified: 2025-11-13
+---
 ## pSTG
 
 ### MNI Coordinates
@@ -6,10 +11,12 @@ LH MNI [-68 -27 6]  ([[Frühholz (2015) - NeuroImage]])
 RH MNI [69 -22 4] ([[Frühholz (2015) - NeuroImage]])
 ### Location 
 
-### Function 
+### Function(s)
 - voice-sensitive ([[Frühholz (2015) - NeuroImage]])
 - ![[STG#^df0223]]
 
+### Connectivity 
+- strongest CP from [[STG]] targeting all frontal regions ([[Frühholz (2015) - NeuroImage#^5b4da1]])
 
 ## see also
 Tags: #cognitivescience/neuroscience #science 

@@ -1,11 +1,12 @@
 ---
+title: Ventral Auditory Stream
+created: '2025-11-13'
 modified: 2025-11-13
 ---
-
 ## Ventral Auditory Stream
 
 ### Location
-- starts in anterolateral [[Herschl's Gyrus]] -> [[STGa]] -> [[posterior Planum Polare]] ([[Ahveninen et al. (2006) - PNAS#^0e5b5f]])
+- starts in anterolateral [[Herschl's Gyrus]] -> [[STGa]] -> [[pPPo]] ([[Ahveninen et al. (2006) - PNAS#^0e5b5f]])
 - originate in multiple [[STG]] seed regions and prob. terminate in anterior/posterior [[IFG]] (Fruhholz and Grandjean, 2013b) ([[Frühholz (2015) - NeuroImage#^bd4989]])
 
 ### Areas 

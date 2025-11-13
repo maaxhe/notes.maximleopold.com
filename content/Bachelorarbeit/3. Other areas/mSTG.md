@@ -1,3 +1,8 @@
+---
+title: mSTG
+created: '2025-11-13'
+modified: 2025-11-13
+---
 ## mSTG
 
 ### MNI Coordinates

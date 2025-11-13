@@ -1,7 +1,14 @@
+---
+title: STG
+created: '2025-11-13'
+modified: 2025-11-13
+---
 ## STG
 
 ### MNI Coordinates 
 Subregion fpSTS MNI: [45 -34 4] ([[Frühholz (2015) - NeuroImage]])
+
+### Anatomical Location 
 
 ### Functions
 - STG organized by speech sounds ([[Cohen et al. (2016) - Springer]])
@@ -14,6 +21,10 @@ Subregion fpSTS MNI: [45 -34 4] ([[Frühholz (2015) - NeuroImage]])
 
 
 ![[Frühholz 2015 Figure 1.png]]
+### Connectivity
+- all subregions are connected to the right [[fOP]] via [[Dorsal Auditory Stream]] ([[Frühholz (2015) - NeuroImage#^e9e9e7]])
+- only subregion fpSTS connects to right [[IFG]] equally strong via [[Dorsal Auditory Stream]] and [[Ventral Auditory Stream]] ([[Frühholz (2015) - NeuroImage#^e9e9e7]])
+- 
 
 ## see also
 Tags: #cognitivescience/neuroscience #science 
