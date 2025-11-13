@@ -1,8 +1,7 @@
 ---
-title: pSTG
-created: '2025-11-13'
 modified: 2025-11-13
 ---
+
 ## pSTG
 
 ### MNI Coordinates

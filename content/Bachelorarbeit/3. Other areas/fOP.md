@@ -1,8 +1,7 @@
 ---
-title: fOP
-created: '2025-11-13'
 modified: 2025-11-13
 ---
+
 # fOP
 
 **Stream:** #stream/dorsal 

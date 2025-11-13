@@ -1,8 +1,7 @@
 ---
-title: Ahveninen et al. (2006) - PNAS
-created: '2025-11-13'
 modified: 2025-11-13
 ---
+
 ## Ahveninen et al. (2006) - PNAS
 
 Ahveninen, J., Jääskeläinen, I. P., Raij, T., Bonmassar, G., Devore, S., Hämäläinen, M., Levänen, S., Lin, F.-H., Sams, M., Shinn-Cunningham, B. G., Witzel, T., & Belliveau, J. W. (2006). Task-modulated "what" and "where" pathways in human auditory cortex. _Proceedings of the National Academy of Sciences_, _103_(39), 14608–14613. [https://doi.org/10.1073/pnas.0510480103](https://doi.org/10.1073/pnas.0510480103)

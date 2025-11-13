@@ -6,6 +6,7 @@ import ThesisDashboardPage from "./pages/ThesisDashboardPage"
 import RecentChangesPage from "./pages/RecentChangesPage"
 import OpenFeedbackPage from "./pages/OpenFeedbackPage"
 import AnnotationsOverviewPage from "./pages/AnnotationsOverviewPage"
+import TagCloudPage from "./pages/TagCloudPage"
 import ArticleTitle from "./ArticleTitle"
 import Darkmode from "./Darkmode"
 import ReaderMode from "./ReaderMode"
@@ -42,6 +43,7 @@ import OpenFeedback from "./OpenFeedback"
 import AnnotationsOverview from "./AnnotationsOverview"
 import AnnotationsBadge from "./AnnotationsBadge"
 import HypothesisSPA from "./HypothesisSPA"
+import TagCloud from "./TagCloud"
 
 export {
   ArticleTitle,
@@ -52,6 +54,7 @@ export {
   RecentChangesPage,
   OpenFeedbackPage,
   AnnotationsOverviewPage,
+  TagCloudPage,
   Darkmode,
   ReaderMode,
   Head,
@@ -88,4 +91,5 @@ export {
   AnnotationsOverview,
   AnnotationsBadge,
   HypothesisSPA,
+  TagCloud,
 }

@@ -1,8 +1,7 @@
 ---
-title: STSvp
-created: '2025-11-13'
 modified: 2025-11-13
 ---
+
 ## STSvp
 - anterior MTG
 ### Functions

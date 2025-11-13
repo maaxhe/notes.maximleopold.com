@@ -1,8 +1,3 @@
----
-title: Frühholz (2015) - NeuroImage
-created: '2025-11-13'
-modified: '2025-11-13'
----
 ## Frühholz (2015) - NeuroImage 
 
 - [x] Paper gelesen?

@@ -1,8 +1,7 @@
 ---
-title: Evolution of the Brain
-created: '2025-11-13'
 modified: 2025-11-13
 ---
+
 ## Evolution of the Brain 
 
 In this week's workgroup, we discussed Paul Cisek's talk on the evolution of the brain. He highlighted that each brain module is involved in multiple tasks. Given the brain's distributed representations and parallel processes, Cisek suggests that studying individual concepts like "decision-making" or "planning" may be impractical. 

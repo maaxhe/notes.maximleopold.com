@@ -120,10 +120,16 @@ button.desktop-explorer {
     padding: 0;
     overscroll-behavior: contain;
 
+    & li {
+      margin-bottom: 0.4rem; // Mehr Abstand zwischen verschiedenen Dateien
+    }
+
     & li > a {
       color: var(--dark);
       opacity: 0.75;
       pointer-events: all;
+      line-height: 1.2; // Kompaktere Zeilenumbrüche innerhalb eines Titels
+      display: block; // Damit line-height wirkt
 
       &.active {
         opacity: 1;
@@ -159,13 +165,14 @@ button.desktop-explorer {
   display: flex;
   align-items: center;
   user-select: none;
+  margin-bottom: 0.4rem; // Mehr Abstand zwischen verschiedenen Ordnern
 
   & div > a {
     color: var(--secondary);
     font-family: var(--headerFont);
     font-size: 0.95rem;
     font-weight: $semiBoldWeight;
-    line-height: 1.5rem;
+    line-height: 1.2; // Kompaktere Zeilenumbrüche
     display: inline-block;
   }
 
@@ -191,7 +198,7 @@ button.desktop-explorer {
       color: var(--secondary);
       font-weight: $semiBoldWeight;
       margin: 0;
-      line-height: 1.5rem;
+      line-height: 1.2; // Kompaktere Zeilenumbrüche
       pointer-events: none;
     }
   }

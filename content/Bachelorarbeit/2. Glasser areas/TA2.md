@@ -1,8 +1,7 @@
 ---
-title: TA2
-created: '2025-11-13'
 modified: 2025-11-13
 ---
+
 ## TA2
 
 

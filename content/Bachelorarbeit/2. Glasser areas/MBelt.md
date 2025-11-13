@@ -1,8 +1,7 @@
 ---
-title: MBelt
-created: '2025-11-13'
 modified: 2025-11-13
 ---
+
 ## MBelt
 
 

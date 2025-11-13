@@ -14,15 +14,37 @@ async function notifyHypothesis() {
   isReloading = true
   console.log("→ Hypothesis: Notifying of new page content...")
 
-  // Wait a moment for new content to render
-  await new Promise((resolve) => setTimeout(resolve, 500))
+  // Wait longer for content to fully render and Hypothesis to be ready
+  await new Promise((resolve) => setTimeout(resolve, 1000))
 
   try {
-    // Method 1: Dispatch standard DOM events
-    console.log("→ Hypothesis: Dispatching DOM events...")
-    window.dispatchEvent(new Event("hashchange"))
-    window.dispatchEvent(new Event("popstate"))
-    document.dispatchEvent(new Event("DOMContentLoaded"))
+    // Method 1: If Hypothesis guest API is available, destroy and recreate
+    if (window.hypothesis && window.hypothesis.destroy) {
+      console.log("→ Hypothesis: Destroying old instance...")
+      try {
+        await window.hypothesis.destroy()
+      } catch (e) {
+        console.log("→ Hypothesis: Destroy failed (expected):", e)
+      }
+    }
+
+    // Reload the Hypothesis client if available
+    if (window.hypothesisConfig) {
+      console.log("→ Hypothesis: Triggering reload...")
+
+      // Remove old iframe if exists
+      const oldFrame = document.querySelector('iframe[name="hyp-sidebar"]')
+      if (oldFrame) {
+        oldFrame.remove()
+      }
+
+      // Dispatch events to notify Hypothesis
+      window.dispatchEvent(new Event("hashchange"))
+      window.dispatchEvent(new Event("popstate"))
+
+      // Wait a bit more for Hypothesis to reinitialize
+      await new Promise((resolve) => setTimeout(resolve, 500))
+    }
 
     // Method 2: If Hypothesis guest API is available, use it
     if (window.hypothesis && window.hypothesis.guest) {
@@ -33,12 +55,6 @@ async function notifyHypothesis() {
       } catch (e) {
         console.log("→ Hypothesis: Guest API not ready:", e)
       }
-    }
-
-    // Method 3: Trigger Hypothesis-specific events
-    if (window.hypothesisEmbed) {
-      console.log("→ Hypothesis: Triggering hypothesisReady event...")
-      window.dispatchEvent(new Event("hypothesisReady"))
     }
 
     console.log("✓ Hypothesis: Notification complete")

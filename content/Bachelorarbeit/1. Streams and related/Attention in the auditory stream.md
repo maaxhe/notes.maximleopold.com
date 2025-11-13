@@ -1,8 +1,7 @@
 ---
-title: Attention in the auditory stream
-created: '2025-11-13'
 modified: 2025-11-13
 ---
+
 ## Attention in the auditory stream
 
 - selective attention might increase short-team neuron's selectivity for relevant information ([[Ahveninen et al. (2006) - PNAS#^5060f9]])

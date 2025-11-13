@@ -1,8 +1,7 @@
 ---
-title: Dashboard BA
-created: '2025-11-12'
 modified: 2025-11-13
 ---
+
 so werden die Seiten markiert:
 - draft (🟡 Entwurf)
 - review (🔵 Review)

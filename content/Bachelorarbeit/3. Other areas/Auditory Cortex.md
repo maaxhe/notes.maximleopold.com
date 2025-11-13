@@ -1,8 +1,7 @@
 ---
-title: Auditory Cortex
-created: '2025-11-13'
 modified: 2025-11-13
 ---
+
 ## Auditory Cortex
 
 The primary auditory area is the first to receive all auditory information. 

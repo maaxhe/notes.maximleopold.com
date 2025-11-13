@@ -1,8 +1,7 @@
 ---
-title: Meeting 24.10.25
-created: '2025-11-13'
 modified: 2025-11-13
 ---
+
 ## Meeting 24.10.25 
 
 pöppel 2004 what and where 

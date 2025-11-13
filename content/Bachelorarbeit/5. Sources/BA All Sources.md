@@ -1,10 +1,9 @@
 ---
-title: BA All Sources
+title: "BA All Sources"
 permalink: Bachelorarbeit/Sources/BA-All-Sources
 aliases:
   - BA All Sources
   - BA-All-Sources
-created: '2025-11-13'
 modified: 2025-11-13
 ---
 

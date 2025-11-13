@@ -51,6 +51,10 @@ export default ((opts?: Partial<AnnotationsOverviewOptions>) => {
         <div class="usage-instructions">
           <h3>Wie funktioniert's?</h3>
           <ol>
+            <li>
+              <strong>⚠️ Wichtig:</strong> Lade die Seite neu (F5 / Cmd+R), um Hypothesis zu
+              aktivieren
+            </li>
             <li>Markiere Text auf einer beliebigen Seite</li>
             <li>
               Klicke auf "Annotate" im Hypothesis-Popup (erscheint automatisch beim Markieren)

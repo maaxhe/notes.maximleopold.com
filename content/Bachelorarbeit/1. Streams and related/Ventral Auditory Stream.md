@@ -1,8 +1,7 @@
 ---
-title: Ventral Auditory Stream
-created: '2025-11-13'
 modified: 2025-11-13
 ---
+
 ## Ventral Auditory Stream
 
 ### Location

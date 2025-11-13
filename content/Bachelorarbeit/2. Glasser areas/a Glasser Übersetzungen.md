@@ -1,8 +1,3 @@
----
-title: a Glasser Übersetzungen
-created: '2025-11-13'
-modified: '2025-11-13'
----
 ### Glasser vs andere Atlanten und Regionen 
 
 A1 -> BA41 (Neuroscience, Paradiso, 2016), located im STG 

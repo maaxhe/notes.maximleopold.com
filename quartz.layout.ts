@@ -8,8 +8,9 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [Component.ImageLightbox(), Component.HypothesisSPA()],
   footer: Component.Footer({
     links: {
-      GitHub: "https://github.com/jackyzha0/quartz",
-      "Discord Community": "https://discord.gg/cRFFHYye7t",
+      "Mein GitHub": "https://github.com/maaxhe",
+      "Website": "https://maximleopold.com",
+      "Feedback": "mailto:deine-email@example.com",
     },
   }),
 }

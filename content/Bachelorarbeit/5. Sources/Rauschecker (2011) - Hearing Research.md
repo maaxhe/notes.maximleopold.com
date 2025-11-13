@@ -1,8 +1,7 @@
 ---
-title: Rauschecker (2011) - Hearing Research
-created: '2025-11-13'
 modified: 2025-11-13
 ---
+
 ## Rauschecker (2011) - Hearing Research
 
 Rauschecker, J. P. (2011). An expanded role for the dorsal auditory pathway in sensorimotor control and integration. _Hearing Research_, _271_(1–2), 16–25. [https://doi.org/10.1016/j.heares.2010.09.001](https://doi.org/10.1016/j.heares.2010.09.001)

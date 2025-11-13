@@ -1,6 +1,5 @@
 ---
 title: Willkommen zu meinem digitalen Garten
-created: '2025-11-12'
 modified: 2025-11-13
 ---
 
@@ -31,16 +30,20 @@ Viel Spaß beim Durchstöbern! :D
 
 ## Forschungshypothese
 
-We hypothesize that the functional connections of the auditory What and Where streams are cross-modal within the prefrontal cortex. Specifically, the dorsal stream, carrying spatial and motion-related information, is expected to project preferentially to the Frontal Eye Field (FEF) complex, while the ventral stream, encoding object identity, should converge primarily in the Inferior Frontal Junction (IFJ).
+We hypothesize that the functional connections of the auditory what and where streams are cross-modal within the prefrontal cortex.
+In detail:
+The dorsal auditory stream (spatial and motion-related information) should project preferentially to the Frontal Eye Field (FEF)
+The ventral stream (object identity) should project primarily to the Inferior Frontal Junction (IFJ).
 
-We further expect this organization to be frequency-specific, with beta and theta rhythms coordinating the two streams—reflecting not only a structural but also a rhythmically gated functional segregation.
+We expect this organization to be frequency-specific, with alpha and beta rhythms coordinating the two streams. Showing that not there is a structural and also a rhythmically gated functional segregation.
 
-Because both FEF and IFJ are known to mediate top-down attentional control in the visual domain, we propose that they may play an analogous role for auditory attention—modulating auditory processing along the Where and What pathways through frequency-specific feedback signals.
+Because both FEF and IFJ are known to direct top-down attentional control in the visual domain, we propose that they may play an analogous role for auditory attention as well along the where and what pathways.
 
-In essence, we test whether the prefrontal cortex mirrors the visual system's division of labor, but in the auditory domain—where time and rhythm replace space as the key organizing principles.
+In summary we test whether the prefrontal cortex shows the same division of attention direction in the auditory stream as is found in the visual stream.
 
 ## Schnellzugriffe
 
 - [📋 Dashboard Bachelorarbeit](Bachelorarbeit/Dashboard-BA)
 - [✅ To-Do's](Bachelorarbeit/To-Do's)
 - [💬 Alle Annotationen](/annotations)
+- [🏷️ Alle Tags](/alle-tags)

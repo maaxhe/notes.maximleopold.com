@@ -1,8 +1,7 @@
 ---
-title: Herschl's Gyrus
-created: '2025-11-13'
 modified: 2025-11-13
 ---
+
 ## Herschl's Gyrus
 
 

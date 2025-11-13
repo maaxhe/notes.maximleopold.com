@@ -1,8 +1,7 @@
 ---
-title: Was bedeuten die Vergleiche aus Glasser SUPPL
-created: '2025-11-13'
 modified: 2025-11-13
 ---
+
 ## Was bedeuten die Vergleiche aus Glasser SUPPL
 
 

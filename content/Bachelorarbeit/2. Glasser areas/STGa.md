@@ -1,8 +1,7 @@
 ---
-title: STGa
-created: '2025-11-13'
 modified: 2025-11-13
 ---
+
 ## STGa
 
 ### MNI Coodinates

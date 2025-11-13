@@ -1,8 +1,7 @@
 ---
-title: A theory of why we have contralateral hemispheres
-created: '2025-11-13'
 modified: 2025-11-13
 ---
+
 ## A theory of why we have contralateral hemispheres
 
 When I first learned about the brain, you are being told that the left hemisphere controls the right side of the body and vice versa. Back then I just accepted this fact. 
