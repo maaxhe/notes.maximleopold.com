@@ -1,49 +1,46 @@
 import { QuartzEmitterPlugin } from "../types"
 import { QuartzComponentProps } from "../../components/types"
-import HeaderConstructor from "../../components/Header"
 import BodyConstructor from "../../components/Body"
 import { pageResources, renderPage } from "../../components/renderPage"
-import { ProcessedContent, defaultProcessedContent } from "../vfile"
 import { FullPageLayout } from "../../cfg"
-import path from "path"
-import { FilePath, FullSlug } from "../../util/path"
-import { sharedPageComponents } from "../../../quartz.layout"
-import TagCloudPageComponent from "../../components/pages/TagCloudPage"
+import { FullSlug } from "../../util/path"
+import { sharedPageComponents, defaultListPageLayout } from "../../../quartz.layout"
+import { TagCloud } from "../../components"
+import { defaultProcessedContent } from "../vfile"
+import { write } from "./helpers"
 
 export const TagCloudPage: QuartzEmitterPlugin = () => {
   const opts: FullPageLayout = {
     ...sharedPageComponents,
-    pageBody: TagCloudPageComponent(),
-    beforeBody: [],
-    left: [],
-    right: [],
+    ...defaultListPageLayout,
+    pageBody: TagCloud(),
   }
 
-  const { head: Head, header, beforeBody, pageBody, afterBody, left, right, footer: Footer } = opts
-  const Header = HeaderConstructor()
+  const { head: Head, pageBody, footer: Footer } = opts
   const Body = BodyConstructor()
 
   return {
     name: "TagCloudPage",
     getQuartzComponents() {
-      return [Head, Header, Body, ...header, ...beforeBody, pageBody, ...afterBody, ...left, ...right, Footer]
+      return [Head, Body, pageBody, Footer]
     },
-    async getDependencyGraph() {
-      return new Map()
-    },
-    async emit(ctx, content, resources): Promise<FilePath[]> {
+    async *emit(ctx, content, resources) {
       const cfg = ctx.cfg.configuration
       const slug = "alle-tags" as FullSlug
 
-      const externalResources = pageResources(slug, resources)
+      const url = new URL(`https://${cfg.baseUrl ?? "example.com"}`)
+      const path = url.pathname as FullSlug
+      const title = "Alle Tags"
+      const description = "Übersicht aller Tags und deren Häufigkeit"
+
       const [tree, vfile] = defaultProcessedContent({
         slug,
-        frontmatter: {
-          title: "Alle Tags",
-          tags: [],
-        },
+        text: title,
+        description: description,
+        frontmatter: { title, tags: [] },
       })
 
+      const externalResources = pageResources(path, resources)
       const componentData: QuartzComponentProps = {
         ctx,
         fileData: vfile.data,
@@ -54,9 +51,13 @@ export const TagCloudPage: QuartzEmitterPlugin = () => {
         allFiles: content.map((c) => c[1].data),
       }
 
-      return [
-        await renderPage(cfg, slug, componentData, opts, externalResources),
-      ]
+      yield write({
+        ctx,
+        content: renderPage(cfg, slug, componentData, opts, externalResources),
+        slug,
+        ext: ".html",
+      })
     },
+    async *partialEmit() {},
   }
 }

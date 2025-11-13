@@ -6,7 +6,6 @@ import ThesisDashboardPage from "./pages/ThesisDashboardPage"
 import RecentChangesPage from "./pages/RecentChangesPage"
 import OpenFeedbackPage from "./pages/OpenFeedbackPage"
 import AnnotationsOverviewPage from "./pages/AnnotationsOverviewPage"
-import TagCloudPage from "./pages/TagCloudPage"
 import ArticleTitle from "./ArticleTitle"
 import Darkmode from "./Darkmode"
 import ReaderMode from "./ReaderMode"
@@ -54,7 +53,6 @@ export {
   RecentChangesPage,
   OpenFeedbackPage,
   AnnotationsOverviewPage,
-  TagCloudPage,
   Darkmode,
   ReaderMode,
   Head,
