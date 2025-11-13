@@ -1,3 +1,7 @@
+---
+modified: 2025-11-13
+---
+
 ## STGa
 
 ### MNI Coodinates
@@ -15,8 +19,10 @@
 #### left STGa
 - showed a general main effect for the explicit compared with the implicit task, and thus might reflect a rather general evaluation of voices independent of the emotion ([[Frühholz (2015) - NeuroImage#^7e7cff]])
 
-### Connections 
-- 
+### Connectivity 
+- to [[IFG]] via strong [[Ventral Auditory Stream]] consisting of the inferior longitudinal fasciculus (ILF) and the inferior fronto-occipital fasciculus (IFOF) in its posterior portion, and the extreme capsule (EmC) in the anterior portion ([[Frühholz (2015) - NeuroImage#^0b4b98]])
+- to [[IFG]] also via [[Dorsal Auditory Stream]], but higher pathway probability via ventral compared to dorsal ([[Frühholz (2015) - NeuroImage#^b33417]])
+- to left 
 
 ## see also
 Tags: #cognitivescience/neuroscience #science #stream/ventral

@@ -1,3 +1,7 @@
+---
+modified: 2025-11-13
+---
+
 ## Ventral Auditory Stream
 
 ### Location
@@ -24,7 +28,7 @@ IFJa
 
 
 ## see also
-Tags: #cognitivescience/neuroscience #science 
+Tags: #cognitivescience/neuroscience #science #stream/ventral 
 *Superlink:* [[050 🧠Neuroscience]] 
 [[General about the Auditory Streams]]
 ## Source
