@@ -1,13 +1,16 @@
+---
+modified: 2025-11-13
+---
+
 ## STSdp
 
 
 ### Function
-- STSdp vs STSvp: more myelin + different FC
-- STSdp vs STSvp: more activation in LANGUAGE MATH, TOM-RANDOM (esp. RH), and MOTOR CUE-AVG
-- STSdp vs STSda: more myelin + distinct activation profile
-- STSdp vs STSda: more activation in CUE-AVG, RELATIONAL MATCH, working memory, SOCIAL TOM and other primary contrasts
-- STSdp vs STSda: less activation in STORY-MATH
-Quelle: [[Glasser et al. (2016) - Nature]]
+- STSdp vs STSvp: more myelin + different FC ([[Glasser et al. (2016) - Nature]])
+- STSdp vs STSvp: more activation in LANGUAGE MATH, TOM-RANDOM (esp. RH), and MOTOR CUE-AVG ([[Glasser et al. (2016) - Nature]])
+- STSdp vs STSda: more myelin + distinct activation profile ([[Glasser et al. (2016) - Nature]])
+- STSdp vs STSda: more activation in CUE-AVG, RELATIONAL MATCH, working memory, SOCIAL TOM and other primary contrasts ([[Glasser et al. (2016) - Nature]])
+- STSdp vs STSda: less activation in STORY-MATH ([[Glasser et al. (2016) - Nature]])
 
 
 [[Was bedeuten die Vergleiche aus Glasser SUPPL]]

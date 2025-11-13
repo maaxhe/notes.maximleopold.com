@@ -16,9 +16,14 @@ Subregion more anterior:
 
 
 ### Function(s)
+- right IFG: sensitive to speech prosody during implicit attention ([[Frühholz (2015) - NeuroImage#^7e7cff]])
+- left IFG: responds to affective prosody during both attentional conditions ([[Frühholz (2015) - NeuroImage#^7e7cff]])
 
+
+![[Frühholz 2015 Figure 1.png]]
 
 ### Connectivity
+
 
 ## see also
 Tags: #cognitivescience/neuroscience #science 

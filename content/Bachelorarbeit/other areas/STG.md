@@ -5,16 +5,18 @@ modified: 2025-11-13
 ## STG
 
 ### MNI Coordinates 
-Subregion fpSTS MNI: [45 -34 4]
-- Quelle: [[Frühholz (2015) - NeuroImage]]
+Subregion fpSTS MNI: [45 -34 4] ([[Frühholz (2015) - NeuroImage]])
 
 ### Functions
+- STG organized by speech sounds ([[Cohen et al. (2016) - Springer]])
+- phoneme categories are found in the middle aspect ([[Cohen et al. (2016) - Springer]])
+- word categories in the anterior-superior aspect ([[Cohen et al. (2016) - Springer]])
+- phrases in the most anterior aspect --> [[STGa]]?? ([[Cohen et al. (2016) - Springer#^5686c0]]) 
+- all STG regions are sensitive to speech prosody ([[Frühholz (2015) - NeuroImage#^7e7cff]])
+- right [[mSTG]] and left [[STGa]] showed stronger sensitivity during the explicit attention condition 
 
-- STG organized by speech sounds
-- phoneme categories are found in the middle aspect
-- word categories in the anterior-superior aspect
-- phrases in the most anterior aspect --> [[STGa]]??
-	- Quelle: [[Cohen et al. (2016) - Springer#^5686c0]]
+
+![[Frühholz 2015 Figure 1.png]]
 
 ## see also
 Tags: #cognitivescience/neuroscience #science 

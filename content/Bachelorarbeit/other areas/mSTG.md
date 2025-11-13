@@ -10,7 +10,7 @@ RH MNI: [66 -3 2] ([[Frühholz (2015) - NeuroImage]])
 ## see also
 Tags: #cognitivescience/neuroscience #science 
 *Superlink:* [[050 🧠Neuroscience]] 
-
+[[STG]]
 ## Source
 
 

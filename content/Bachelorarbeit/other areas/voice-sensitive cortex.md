@@ -8,11 +8,10 @@ Siehe -> [[Frühholz (2015) - NeuroImage#^8f603e]]
 
 Dazu sollen gehören: 
 Left hemisphere: 
-[[pSTG]], [[PPo]], [[STGa]], [[BA44]], [[BA47]]
-- Quelle: [[Frühholz (2015) - NeuroImage]]
+[[pSTG]], [[PPo]], [[STGa]], [[BA44]], [[BA47]] ([[Frühholz (2015) - NeuroImage]])
 
 Right hemisphere: 
-fpSTS, [[pSTG]], [[mSTG]], [[BA44]], [[BA47]]
+fpSTS, [[pSTG]], [[mSTG]], [[BA44]], [[BA47]] ([[Frühholz (2015) - NeuroImage]])
 ## see also
 Tags: #cognitivescience/neuroscience #science 
 *Superlink:* [[050 🧠Neuroscience]] 

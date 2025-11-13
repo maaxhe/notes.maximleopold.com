@@ -1,8 +1,11 @@
+---
+modified: 2025-11-13
+---
+
 ## TGv
 
 ### Functions
-- TGv vs [[TGd]]: deaactivated vs activated in MOTOR CUE-AVG 
-Quelle: [[Glasser et al. (2016) - Nature]]
+- TGv vs [[TGd]]: deaactivated vs activated in MOTOR CUE-AVG ([[Glasser et al. (2016) - Nature]])
 ## see also
 Tags: #cognitivescience/neuroscience #science #stream/ventral 
 *Superlink:* [[050 🧠Neuroscience]] 

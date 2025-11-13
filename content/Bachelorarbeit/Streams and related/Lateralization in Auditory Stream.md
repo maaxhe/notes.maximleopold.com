@@ -10,7 +10,8 @@ modified: 2025-11-13
 ### Left hemisphere
 - left is stronger in understanding emotions according to word meanings 
 	- siehe: [[Brain Hemispheres#Effekte beim Hören auf Sätze mit emotionalem Gehalt (vgl. Carlson & Birkett, 2022, p. 360)]]
-- for syntacto-semantic speech processing ([[Frühholz (2015) - NeuroImage#^9b3ca9]])
+- for syntacto-semantic speech processing (Specht, 2014) ([[Frühholz (2015) - NeuroImage#^9b3ca9]])
+- emotional intonation in speech, affective prosody -> activates right STG and IFG ([[Frühholz (2015) - NeuroImage#^46141b]])
 
 - left PAC -> speech sounds -> [[A1]]  ([[Friederici (2011) - Physiological Reviews#^58fcfc]])
 
