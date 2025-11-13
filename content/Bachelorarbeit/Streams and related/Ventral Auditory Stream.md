@@ -10,6 +10,16 @@ modified: 2025-11-13
 
 ### Areas 
 
+mögliche Areas: 
+LBelt
+PBelt
+[[STGa]]
+STSva/[[STSvp]]
+[[TGv]]
+BA45
+IFJa
+
+![[ventral auditory pathway regions.png]]
 
 ### Function
 - the ventral pathway contains hierarchical circuits that are specialized for auditory perception and scene analysis.

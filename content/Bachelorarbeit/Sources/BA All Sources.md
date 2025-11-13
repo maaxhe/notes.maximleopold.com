@@ -47,41 +47,8 @@ So soll meine Tabelle auch aussehen:
 ![[Soyuhos Baldauf 2022 Tabelle Ventral, dorsal stream.png]]
 
 
-### Ventral Regions 
-LBelt
-PBelt
-STGa
-STSva/STSvp
-TGv
-BA45
-IFJa
-
-![[ventral auditory pathway regions.png]]
-
-### Dorsal Regions
-![[dorsal auditory stream reagions.png]]
-PBelt*
-[[MBelt]]/LBelt*
-[[A4]]
-A5
-MT
-MST
-BA44
-FEF
-TPOJ1
-STV
-PSL
-TGv
-TGd
-PGi
-7AL
-7PC
-PFcm
-
-
 [[a Glasser Übersetzungen]]
 
-### VENTRAL
 
 ## see also
 Tags: #cognitivescience/neuroscience #science 
@@ -100,31 +67,9 @@ https://www.uni-osnabrueck.de/fb8/ikw/institut/personal
 
 - [x] schauen wir uns Working Memory and oder rein resting-state? 
 - [x] unterschied zwischen functional connectivity und effective connectivity und diffusion tractography --> ist das relevant? 
-- [x] ![[BA All Sources#^579d43]]
-- [ ] 
 ## Source
 Rolls, E. T., Rauschecker, J. P., Deco, G., Huang, C.-C., & Feng, J. (2023). Auditory cortical connectivity in humans. _Cerebral Cortex_, _33_(10), 6207–6227. [https://doi.org/10.1093/cercor/bhac496](https://doi.org/10.1093/cercor/bhac496)
 
-
-
-Meeting 24.10. 
-
-pöppel 2004 what and where 
-PNAS 2006 
-
-Liste liefern, welche Areale zu What and Where gehören 
-die spezifisch auf auditory stimuli reagieren 
-
-
-Werden nicht Glasser nutzen - schauen, wo es ist im gehirn
-
-6 Paper wären schon gut 
-
-high PFC mehr untereinander und weniger zu gabelung von what and where 
-
-hauptsächlich functional connectivity
-
-preferential connectivity 
 
 
 
