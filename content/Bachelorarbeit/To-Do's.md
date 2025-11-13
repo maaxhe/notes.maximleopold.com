@@ -1,7 +1,11 @@
+---
+modified: 2025-11-13
+---
+
 ### Meine nächsten Schritte
 
 #### Andere ToDo's 
-- [ ] Annotation in Quartz direkt sichtbar machen und auch global anzeigen lassen - und ich will sehen, wo etwas neu annotiert wurde
+- [ ] 
 
 #### Phase 1 
 - [ ] Informationen streamlinen und in die Areale packen
