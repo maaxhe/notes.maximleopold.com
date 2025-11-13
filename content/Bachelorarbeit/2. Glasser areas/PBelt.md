@@ -1,17 +1,13 @@
 ---
+title: "PBelt"
+created: "2025-11-13"
 modified: 2025-11-13
 ---
-
-  ---
-  title: "PBelt"
-  created: "2025-11-13"
 # PBelt
 
-**Stream:** 
-**Classical equivalent:** 
+**Stream:**
+**Classical equivalent:**
 **Mapped to Glasser:** ???
-
----
 
 ## MNI Coordinates
 - **Right:**  

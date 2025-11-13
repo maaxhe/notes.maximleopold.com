@@ -1,17 +1,13 @@
 ---
+title: "Auditory Association Cortex"
+created: "2025-11-13"
 modified: 2025-11-13
 ---
-
-  ---
-  title: "Auditory Association Cortex"
-  created: "2025-11-13"
 # Auditory Association Cortex
 
-**Stream:** 
-**Classical equivalent:** 
+**Stream:**
+**Classical equivalent:**
 **Mapped to Glasser:** These areas are part of the Auditory Association Cortex: [[A4]], [[A5]], [[STSdp]], STSda, [[STSvp]], STSva, [[STGa]], and [[TA2]] ([[Glasser et al. (2016) - Nature#^eb989b]])
-
----
 
 ## MNI Coordinates
 - **Right:**  
