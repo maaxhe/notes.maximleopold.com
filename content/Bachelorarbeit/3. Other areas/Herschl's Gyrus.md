@@ -10,7 +10,7 @@ modified: 2025-11-13
 
 
 ## see also
-Tags: #cognitivescience/neuroscience #science 
+Tags: #cognitivescience/neuroscience #science #brainregion
 *Superlink:* [[050 🧠Neuroscience]] 
 
 ## Source

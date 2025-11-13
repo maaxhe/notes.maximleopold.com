@@ -26,7 +26,7 @@ Subregion more anterior:
 
 
 ## see also
-Tags: #cognitivescience/neuroscience #science 
+Tags: #cognitivescience/neuroscience #science #brainregion
 *Superlink:* [[050 🧠Neuroscience]] 
 
 ## Source

@@ -25,7 +25,7 @@ modified: 2025-11-13
 - to left [[fOP]] by [[Dorsal Auditory Stream]] 
 
 ## see also
-Tags: #cognitivescience/neuroscience #science #stream/ventral
+Tags: #cognitivescience/neuroscience #science #stream/ventral #brainregion
 *Superlink:* [[050 🧠Neuroscience]] 
 ![[Glasser HCP-MMP1 human brain lateral view.png]]
 ## Source

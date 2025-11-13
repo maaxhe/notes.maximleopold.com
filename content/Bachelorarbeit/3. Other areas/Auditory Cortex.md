@@ -36,8 +36,7 @@ neben dem [[Somatosensory Cortex]]
 ## see also
 [[Layer 3]]
 [[Neocortex]]
-Tags: #cognitivescience/neuroscience #science #gehirnregion 
-Status: #status/offen 
+Tags: #cognitivescience/neuroscience #science #brainregion 
 *Superlink:* [[050 🧠Neuroscience]] 
 [[superior oliva]]
 ## Quellen

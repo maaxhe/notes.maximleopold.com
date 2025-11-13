@@ -1,5 +1,7 @@
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import { classNames } from "../util/lang"
+import { FullSlug, resolveRelative, simplifySlug } from "../util/path"
+import { getAllSegmentPrefixes } from "../util/path"
 
 interface AnnotationsOverviewOptions {
   limit?: number
@@ -12,7 +14,49 @@ const defaultOptions: AnnotationsOverviewOptions = {
 export default ((opts?: Partial<AnnotationsOverviewOptions>) => {
   const options: AnnotationsOverviewOptions = { ...defaultOptions, ...opts }
 
-  const AnnotationsOverview: QuartzComponent = ({ cfg, displayClass }: QuartzComponentProps) => {
+  const AnnotationsOverview: QuartzComponent = ({
+    cfg,
+    displayClass,
+    allFiles,
+    fileData,
+  }: QuartzComponentProps) => {
+    // Tag display mapping - transform certain tags for display
+    const displayTagName = (tag: string): string => {
+      const tagMap: Record<string, string> = {
+        "stream/dorsal": "dorsalstream",
+        "stream/ventral": "ventralstream",
+      }
+      return tagMap[tag] || tag
+    }
+
+    // Collect all tags and their counts
+    const tagCounts = new Map<string, number>()
+
+    for (const file of allFiles) {
+      const tags = file.frontmatter?.tags ?? []
+      const normalizedTags = Array.isArray(tags)
+        ? tags.map((tag) => (typeof tag === "string" ? tag.toLowerCase() : ""))
+        : typeof tags === "string"
+          ? [tags.toLowerCase()]
+          : []
+
+      for (const tag of normalizedTags) {
+        if (!tag) continue
+        tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1)
+      }
+    }
+
+    // Sort tags by count (descending) then alphabetically
+    const sortedTags = Array.from(tagCounts.entries()).sort((a, b) => {
+      if (b[1] !== a[1]) return b[1] - a[1] // Sort by count descending
+      return a[0].localeCompare(b[0]) // Then alphabetically
+    })
+
+    const tagPageUrl = (tag: string) => {
+      const slug = simplifySlug(`tags/${tag}` as FullSlug)
+      return resolveRelative(fileData.slug!, slug)
+    }
+
     return (
       <div class={classNames(displayClass, "annotations-overview")}>
         <div class="annotations-header">
@@ -46,6 +90,35 @@ export default ((opts?: Partial<AnnotationsOverviewOptions>) => {
             </svg>
             Alle Annotationen in Hypothesis ansehen
           </a>
+        </div>
+
+        <div class="tags-section">
+          <div class="tags-section-header">
+            <h2>Alle Tags</h2>
+            <span class="tags-count">
+              {sortedTags.length} Tags · {allFiles.length} Notizen
+            </span>
+          </div>
+
+          <div class="tags-container">
+            {sortedTags.slice(0, 20).map(([tag, count]) => {
+              const displayTag = displayTagName(tag)
+              return (
+                <a href={tagPageUrl(tag)} class="tag-item" title={`${count} Notizen`}>
+                  <span class="tag-name">#{displayTag}</span>
+                  <span class="tag-badge">{count}</span>
+                </a>
+              )
+            })}
+          </div>
+
+          {sortedTags.length > 20 && (
+            <div class="show-all-tags">
+              <a href="/tags" class="show-all-link">
+                Alle {sortedTags.length} Tags ansehen →
+              </a>
+            </div>
+          )}
         </div>
 
         <div class="usage-instructions">
@@ -275,6 +348,107 @@ export default ((opts?: Partial<AnnotationsOverviewOptions>) => {
       font-style: italic;
     }
 
+    .tags-section {
+      margin: 3rem 0;
+      padding: 2rem;
+      background: var(--lightgray);
+      border-radius: 12px;
+      border-left: 4px solid var(--secondary);
+    }
+
+    .tags-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .tags-section-header h2 {
+      margin: 0;
+      color: var(--dark);
+      font-size: 1.75rem;
+    }
+
+    .tags-count {
+      color: var(--gray);
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tag-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1rem;
+      background: var(--light);
+      border: 2px solid var(--lightgray);
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .tag-item:hover {
+      background: var(--secondary);
+      border-color: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .tag-item:hover .tag-name {
+      color: white;
+    }
+
+    .tag-item:hover .tag-badge {
+      background: white;
+      color: var(--secondary);
+    }
+
+    .tag-name {
+      color: var(--secondary);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .tag-badge {
+      background: var(--secondary);
+      color: white;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      min-width: 1.5rem;
+      text-align: center;
+    }
+
+    .show-all-tags {
+      text-align: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--gray);
+    }
+
+    .show-all-link {
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.2s ease;
+    }
+
+    .show-all-link:hover {
+      color: var(--tertiary);
+      text-decoration: underline;
+    }
+
     @media (max-width: 768px) {
       .annotations-overview {
         padding: 1rem 0.5rem;
@@ -290,6 +464,28 @@ export default ((opts?: Partial<AnnotationsOverviewOptions>) => {
 
       .usage-instructions {
         padding: 1.5rem;
+      }
+
+      .tags-section {
+        padding: 1.5rem;
+      }
+
+      .tags-section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .tags-section-header h2 {
+        font-size: 1.5rem;
+      }
+
+      .tags-container {
+        gap: 0.5rem;
+      }
+
+      .tag-item {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
       }
     }
   `

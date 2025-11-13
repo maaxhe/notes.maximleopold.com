@@ -10,7 +10,7 @@ modified: 2025-11-13
 - realtive to STSva more myelin, realtive more in TOM-RANDOM, working memory, GAMBLING, EMOTION ([[Glasser et al. (2016) - Nature]])
 
 ## see also
-Tags: #cognitivescience/neuroscience #science #stream/ventral 
+Tags: #cognitivescience/neuroscience #science #stream/ventral #brainregion
 *Superlink:* [[050 🧠Neuroscience]] 
 ![[Glasser HCP-MMP1 human brain lateral view.png]]
 

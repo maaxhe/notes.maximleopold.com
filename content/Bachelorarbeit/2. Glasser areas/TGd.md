@@ -7,7 +7,7 @@ modified: 2025-11-13
 
 
 ## see also
-Tags: #cognitivescience/neuroscience #science #stream/ventral 
+Tags: #cognitivescience/neuroscience #science #stream/ventral #brainregion
 *Superlink:* [[050 🧠Neuroscience]] 
 
 ## Source

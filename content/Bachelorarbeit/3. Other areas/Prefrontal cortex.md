@@ -20,7 +20,7 @@ Der Präfrontalkortex ist Teil des [[cortex]]
 [[Ventromedial PFC]]
 [[dorsolateral PFC]]
 [[Layer 3]]
-Tags: #gehirnregion #cognitivescience/neuroscience #science 
-Status: #status/offen
+Tags: #brainregion  #cognitivescience/neuroscience #science 
+Status: 
 [[050 🧠Neuroscience]]
 

@@ -15,7 +15,7 @@ DLPFC, a region in the depth of the left superior frontal sulcus (SFS), shows bo
 [[Tasks that pair well]]
 [[Prefrontal cortex]]
 [[Ventromedial PFC]]
-Tags: #cognitivescience/neuroscience #science #gehirnregion 
+Tags: #cognitivescience/neuroscience #science #brainregion
 *Superlink:* [[050 🧠Neuroscience]] 
 
 ## Quellen

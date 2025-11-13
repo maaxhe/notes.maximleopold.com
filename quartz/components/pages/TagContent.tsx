@@ -29,6 +29,15 @@ export default ((opts?: Partial<TagContentOptions>) => {
       throw new Error(`Component "TagContent" tried to render a non-tag page: ${slug}`)
     }
 
+    // Tag display mapping - transform certain tags for display
+    const displayTagName = (tag: string): string => {
+      const tagMap: Record<string, string> = {
+        "stream/dorsal": "dorsalstream",
+        "stream/ventral": "ventralstream",
+      }
+      return tagMap[tag] || tag
+    }
+
     const tag = simplifySlug(slug.slice("tags/".length) as FullSlug)
     const allPagesWithTag = (tag: string) =>
       allFiles.filter((file) =>
@@ -126,17 +135,18 @@ export default ((opts?: Partial<TagContentOptions>) => {
               const tagListingPage = `/tags/${tag}` as FullSlug
               const href = resolveRelative(fileData.slug!, tagListingPage)
               const fontSize = getFontSize(pages.length)
+              const displayTag = displayTagName(tag)
 
               return (
                 <a
                   href={href}
                   class="tag-cloud-item internal"
                   style={`font-size: ${fontSize}rem;`}
-                  data-tag={tag}
+                  data-tag={displayTag}
                   data-count={pages.length}
                   title={`${pages.length} ${pages.length === 1 ? "Notiz" : "Notizen"}`}
                 >
-                  #{tag}
+                  #{displayTag}
                   <span class="tag-count">({pages.length})</span>
                 </a>
               )
@@ -161,13 +171,14 @@ export default ((opts?: Partial<TagContentOptions>) => {
 
               const tagListingPage = `/tags/${tag}` as FullSlug
               const href = resolveRelative(fileData.slug!, tagListingPage)
+              const displayTag = displayTagName(tag)
 
               return (
-                <div class="tag-list-item" data-tag={tag}>
+                <div class="tag-list-item" data-tag={displayTag}>
                   <div class="tag-list-header">
                     <h2>
                       <a class="internal tag-link" href={href}>
-                        #{tag}
+                        #{displayTag}
                       </a>
                     </h2>
                     <span class="tag-badge">{pages.length}</span>

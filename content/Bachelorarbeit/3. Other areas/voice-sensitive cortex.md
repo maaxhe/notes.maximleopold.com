@@ -13,7 +13,7 @@ Left hemisphere:
 Right hemisphere: 
 fpSTS, [[pSTG]], [[mSTG]], [[BA44]], [[BA47]] ([[Frühholz (2015) - NeuroImage]])
 ## see also
-Tags: #cognitivescience/neuroscience #science 
+Tags: #cognitivescience/neuroscience #science #brainregion
 *Superlink:* [[050 🧠Neuroscience]] 
 
 ## Source

@@ -26,7 +26,7 @@ Subregion fpSTS MNI: [45 -34 4] ([[Frühholz (2015) - NeuroImage]])
 - 
 
 ## see also
-Tags: #cognitivescience/neuroscience #science 
+Tags: #cognitivescience/neuroscience #science #brainregion
 *Superlink:* [[050 🧠Neuroscience]] 
 
 ## Source

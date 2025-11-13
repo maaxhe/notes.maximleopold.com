@@ -10,7 +10,7 @@ modified: 2025-11-13
 - is activated vs deactivated in the LANGAUGE MATH (Panel E) and STORY (Panel F) contrasts ([[Glasser et al. (2016) - Nature]])
 
 ## see also
-Tags: #cognitivescience/neuroscience #science 
+Tags: #cognitivescience/neuroscience #science #brainregion
 *Superlink:* [[050 🧠Neuroscience]] 
 ![[Glasser HCP-MMP1 human brain lateral view.png]]
 ## Source

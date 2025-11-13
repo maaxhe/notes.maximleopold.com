@@ -39,7 +39,7 @@ Siehe [[BA44#MNI Coordinates]]
 ## see also
 - Verwandte Areale:
 - wichtige Seiten:
-- Tags: #cognitivescience/neuroscience #science 
+- Tags: #cognitivescience/neuroscience #science #brainregion
 
 
 *Superlink:* [[050 🧠Neuroscience]] 

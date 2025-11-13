@@ -18,7 +18,7 @@ RH MNI [69 -22 4] ([[Frühholz (2015) - NeuroImage]])
 - strongest CP from [[STG]] targeting all frontal regions ([[Frühholz (2015) - NeuroImage#^5b4da1]])
 
 ## see also
-Tags: #cognitivescience/neuroscience #science 
+Tags: #cognitivescience/neuroscience #science #brainregion
 *Superlink:* [[050 🧠Neuroscience]] 
 [[voice-sensitive cortex]]
 ## Source

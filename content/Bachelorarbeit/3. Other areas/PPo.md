@@ -37,7 +37,7 @@ A region located posterior, the planum temporale (PT), a region anterolateral to
 ## see also
 - Verwandte Areale:
 - wichtige Seiten:
-- Tags: #cognitivescience/neuroscience #science 
+- Tags: #cognitivescience/neuroscience #science #brainregion
 
 
 *Superlink:* [[050 🧠Neuroscience]] 
