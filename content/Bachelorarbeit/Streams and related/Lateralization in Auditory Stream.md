@@ -1,24 +1,24 @@
+---
+modified: 2025-11-13
+---
+
 ## Lateralization in Auditory Stream
 
 - Rechte und linke Hemisphäre haben unterschiedliche Funktionen bzw. Gewichtungen. 
-- arbeiten wohl auch in verschiedenen Frequenzen
-	- Quelle: [[Friederici (2011) - Physiological Reviews#^1a77f7]]
+- arbeiten wohl auch in verschiedenen Frequenzen ([[Friederici (2011) - Physiological Reviews#^1a77f7]])
 
 ### Left hemisphere
-- left is stronger in understanding emotions according to word meanings
-	- Quelle: [[Brain Hemispheres#Effekte beim Hören auf Sätze mit emotionalem Gehalt (vgl. Carlson & Birkett, 2022, p. 360)]]
-- for syntacto-semantic speech processing
-	- Quelle: [[Frühholz (2015) - NeuroImage#^9b3ca9]]
+- left is stronger in understanding emotions according to word meanings 
+	- siehe: [[Brain Hemispheres#Effekte beim Hören auf Sätze mit emotionalem Gehalt (vgl. Carlson & Birkett, 2022, p. 360)]]
+- for syntacto-semantic speech processing ([[Frühholz (2015) - NeuroImage#^9b3ca9]])
 
-- left PAC -> speech sounds -> [[A1]]
-	- Quelle: [[Friederici (2011) - Physiological Reviews#^58fcfc]]
+- left PAC -> speech sounds -> [[A1]]  ([[Friederici (2011) - Physiological Reviews#^58fcfc]])
 
 ### Right hemisphere
 - Emotionaler Gehalt einer Stimme wird nur rechtsseitig verarbeitet.
-	- Quelle: [[Brain Hemispheres#^f41c24]]
+	- siehe: [[Brain Hemispheres#^f41c24]]
 
-- PAC rather tonal pitch -> [[A1]]
-	- Quelle: [[Friederici (2011) - Physiological Reviews#^58fcfc]]
+- PAC rather tonal pitch -> [[A1]]  ([[Friederici (2011) - Physiological Reviews#^58fcfc]])
 
 
 ## see also

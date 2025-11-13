@@ -1,20 +1,17 @@
 ---
-modified: 2025-11-12
+modified: 2025-11-13
 ---
 
 ## pSTG
 
 ### MNI Coordinates
-LH MNI [-68 -27 6] 
-- Quelle: [[Frühholz (2015) - NeuroImage]]
+LH MNI [-68 -27 6]  ([[Frühholz (2015) - NeuroImage]])
 
-RH MNI [69 -22 4]
-- Quelle: [[Frühholz (2015) - NeuroImage]]
+RH MNI [69 -22 4] ([[Frühholz (2015) - NeuroImage]])
 ### Location 
 
 ### Function 
-- voice-sensitive
-	- Quelle: [[Frühholz (2015) - NeuroImage]]
+- voice-sensitive ([[Frühholz (2015) - NeuroImage]])
 
 
 ## see also

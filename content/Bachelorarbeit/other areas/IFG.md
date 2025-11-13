@@ -1,5 +1,5 @@
 ---
-modified: 2025-11-12
+modified: 2025-11-13
 ---
 
 ## IFG (Inferior Frontal Gyrus)
@@ -12,10 +12,13 @@ Subregion more anterior:
 ![[BA47#^d9b907]]
 ![[BA47#^99391d]]
 
-### Location
+### Anatomical Location
 
 
-### Function
+### Function(s)
+
+
+### Connectivity
 
 ## see also
 Tags: #cognitivescience/neuroscience #science 

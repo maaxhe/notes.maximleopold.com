@@ -1,12 +1,11 @@
 ---
-modified: 2025-11-12
+modified: 2025-11-13
 ---
 
 ## mSTG
 
 ### MNI Coordinates
-RH MNI: [66 -3 2]
-- Quelle: [[Frühholz (2015) - NeuroImage]]
+RH MNI: [66 -3 2] ([[Frühholz (2015) - NeuroImage]])
 
 ## see also
 Tags: #cognitivescience/neuroscience #science 

@@ -1,3 +1,7 @@
+---
+modified: 2025-11-13
+---
+
 
 ### Was wir überhaupt machen wollen
 Die Frage, die wir beantworten wollen: 
@@ -14,9 +18,7 @@ Und diese attention wird durch alpha oscillations directed
 ![[Friederici 2011 Figure 3.png]]
 
 ### Function 
-- phonetic vs spatial sound changes 
-
-Quelle: [[Ahveninen et al. (2006) - PNAS#^0e5b5f]]
+- phonetic vs spatial sound changes ([[Ahveninen et al. (2006) - PNAS#^0e5b5f]])
 ### Aufteilung 
 Siehe auch: [[Lateralization in Auditory Stream]]
 
@@ -24,10 +26,8 @@ Siehe auch: [[Lateralization in Auditory Stream]]
 [[Dorsal Auditory Stream]]
 [[Ventral Auditory Stream]]
 
-- dorsal pathway activates earlier than ventral -> top down spatial information for object recognition
-	- Quelle: [[Ahveninen et al. (2006) - PNAS#^0e5b5f]]
-- Dorsal ist mehr für affective prosody zuständig
-	- Quelle: [[Frühholz (2015) - NeuroImage#^099d6d]]
+- dorsal pathway activates earlier than ventral -> top down spatial information for object recognition ([[Ahveninen et al. (2006) - PNAS#^0e5b5f]])
+- Dorsal ist mehr für affective prosody zuständig ([[Frühholz (2015) - NeuroImage#^099d6d]])
 
 
 #### Funktion: Spatial vs Semantic (vs. etwas anderem?)
@@ -36,8 +36,7 @@ Also hier ordnen wir nach Funktion:
 
 ##### Nach Sprache
 
-- A region located posterior, the planum temporale (PT), a region anterolateral to HG called planum polare (PP), and a region at the lateral convexity of the cortex in the STG extending to the superior temporal sulcus (STS). All these regions are involved in the acoustic analysis of speech.
-	- Quelle: [[Friederici (2011) - Physiological Reviews#^d103c0]]
+- A region located posterior, the planum temporale (PT), a region anterolateral to HG called planum polare (PP), and a region at the lateral convexity of the cortex in the STG extending to the superior temporal sulcus (STS). All these regions are involved in the acoustic analysis of speech. ([[Friederici (2011) - Physiological Reviews#^d103c0]])
 
 
 ## see also
