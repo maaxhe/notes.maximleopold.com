@@ -46,6 +46,7 @@ Die Struktur folgt den inhaltlichen Schwerpunkten meiner Arbeit:
 - **Other areas**: Ergänzende Areale von vor der Zeit des Glasser-Atlasses
 - **Schreiben**: Kapitelentwürfe und Textbausteine
 - **Sources**: Paper-Zusammenfassungen, annotierte Literatur, Referenzen
+- **Further Related**: Interessante Hintergrund-Infos, die aber weniger relevant sind
 - **Meeting Notes**: Notizen aus Besprechungen zur Bachelorarbeit
 - **To-Do's & Dashboard**: Fortschrittstracking und offene Aufgaben
 
