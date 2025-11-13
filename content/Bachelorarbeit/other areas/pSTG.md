@@ -12,6 +12,7 @@ RH MNI [69 -22 4] ([[Frühholz (2015) - NeuroImage]])
 
 ### Function 
 - voice-sensitive ([[Frühholz (2015) - NeuroImage]])
+- ![[STG#^df0223]]
 
 
 ## see also

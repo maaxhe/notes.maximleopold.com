@@ -14,6 +14,7 @@ Subregion fpSTS MNI: [45 -34 4] ([[Frühholz (2015) - NeuroImage]])
 - phrases in the most anterior aspect --> [[STGa]]?? ([[Cohen et al. (2016) - Springer#^5686c0]]) 
 - all STG regions are sensitive to speech prosody ([[Frühholz (2015) - NeuroImage#^7e7cff]])
 - right [[mSTG]] and left [[STGa]] showed stronger sensitivity during the explicit attention condition 
+- regions in the right posterior STG ([[pSTG]]) (fundus of the posterior superior temporal sulcus (fpSTS), posterior STG ([[pSTG]]) and all left STG subregions were sensitive to the pitch and intensity variations in affective prosody, which are one of the main acoustic features of affective prosody (Banse and Scherer, 1996; Patel et al., 2011). ([[Frühholz (2015) - NeuroImage#^7e7cff]]) ^df0223
 
 
 ![[Frühholz 2015 Figure 1.png]]
