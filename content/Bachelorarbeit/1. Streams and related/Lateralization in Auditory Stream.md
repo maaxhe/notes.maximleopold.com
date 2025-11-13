@@ -12,6 +12,8 @@ modified: 2025-11-13
 	- siehe: [[Brain Hemispheres#Effekte beim Hören auf Sätze mit emotionalem Gehalt (vgl. Carlson & Birkett, 2022, p. 360)]]
 - for syntacto-semantic speech processing (Specht, 2014) ([[Frühholz (2015) - NeuroImage#^9b3ca9]])
 - emotional intonation in speech, affective prosody -> activates right STG and IFG ([[Frühholz (2015) - NeuroImage#^46141b]])
+- left-hemispheric temporo-frontal connections for affective prosody processing ([[Frühholz (2015) - NeuroImage#^19f5db]])
+	- especially dorsal for the [[STGa]] and [[IFG]] ([[Frühholz (2015) - NeuroImage#^19f5db]]) -> [[Dorsal Auditory Stream]]
 
 - left PAC -> speech sounds -> [[A1]]  ([[Friederici (2011) - Physiological Reviews#^58fcfc]])
 

@@ -18,7 +18,7 @@ PBelt*
 [[A5]]
 MT
 MST
-[[BA44]]
+[[BA44, 44]]
 FEF
 TPOJ1
 STV
@@ -36,12 +36,13 @@ PFcm
 - the dorsal pathway also contributes to auditory perception; consistent with that notion, activity in the human parietal lobe is modulated by listeners' choices (Cusack 2005). ([[Cohen et al. (2016) - Springer#^59d7b2]])
 - sound-to-motor-mapping (Saur et al, 2008) ([[Frühholz (2015) - NeuroImage#^2be230]])
 - processing of temporal auditory sequences (Belin and Zatorre, 2000b; [[Rauschecker & Scott (2009) - Nature Neuroscience]]) ([[Frühholz (2015) - NeuroImage#^2be230]])
+- overall bilateral predominance of the dorsal pathway for processing affective prosody ([[Frühholz (2015) - NeuroImage#^950abd]])
 
 [[Attention in the auditory stream]]
 
 
 ## see also
-Tags: #cognitivescience/neuroscience #science  #stream/dorsal 
+Tags: #cognitivescience/neuroscience #science  #stream/dorsal #function/spatialprocessing #function/prosody 
 *Superlink:* [[050 🧠Neuroscience]] 
 [[General about the Auditory Streams]]
 ## Source

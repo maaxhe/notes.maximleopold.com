@@ -7,10 +7,10 @@ modified: 2025-11-13
 ### MNI Coordinates 
 
 Subregion in the frontal operculum: 
-![[BA44#^dc80a0]]
+![[BA44, 44#^dc80a0]]
 Subregion more anterior: 
-![[BA47#^d9b907]]
-![[BA47#^99391d]]
+![[BA47l, 47l#^d9b907]]
+![[BA47l, 47l#^99391d]]
 
 ### Anatomical Location
 

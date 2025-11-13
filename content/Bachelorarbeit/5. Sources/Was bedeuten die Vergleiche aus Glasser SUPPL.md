@@ -6,7 +6,6 @@ modified: 2025-11-13
 
 
 **Hier eine schnelle Zusammenfassung von ChatGPT - keine Gewähr, ich habe die Daten nicht überprüft!**
-
 #chatbot 
 ### HCP Task fMRI Contrasts (S1200)
 

@@ -8,16 +8,16 @@ Glasser, M. F., Coalson, T. S., Robinson, E. C., Hacker, C. D., Harwell, J., Yac
 
 [https://doi.org/10.1038/nature18933](https://doi.org/10.1038/nature18933)
 
-- The early auditory areas include A1, LBelt (Lateral Belt), MBelt (Medial Belt), PBelt (Para-Belt), and the retro-insular cortex (RI). These areas are surrounded by areas, OP2-3, OP1, PFcm, PSL, A4, Ig, and TA2.
-- A1 is very heavily myelinated, even relative to its heavily myelinated surrounding neighbors
+- The early auditory areas include A1, LBelt (Lateral Belt), MBelt (Medial Belt), PBelt (Para-Belt), and the retro-insular cortex (RI). These areas are surrounded by areas, OP2-3, OP1, PFcm, PSL, A4, Ig, and TA2. ^a10247
+- A1 is very heavily myelinated, even relative to its heavily myelinated surrounding neighbors ^7dc1ba
 
 --> jetzt verstehe ich auch, warum die Belt regions so langgezogen sind. Sie umgeben einfach den A1 - das macht sie so langgezogen uns der ganze bereich hat eben sehr ähnliche connectivity. 
 
-- Relative to its antero-medial neighbor area 52, the MBelt complex has more myelin (Panel B), is thicker (Panel D), and is activated vs deactivated in the LANGUAGE MATH and STORY contrasts (Panel J). Relative to its antero-lateral neighbor area TA2, MBelt has more myelin (Panel B), is thinner (Panel D), and is more activated in the LANGUAGE MATH and STORY contrasts (Panel J). Relative to its lateral neighbor PBelt, the MBelt complex has more myelin (Panel C) and is less activated in the language MATH and STORY contrasts (Panel J) and more activated in the EMOTION FACES-SHAPES contrast.
-- We identified auditory association cortex as a region mainly on the superior temporal gyrus and within the superior temporal sulcus that is activated in the LANGUAGE STORY, MATH, and STORY-MATH contrasts. 
-- It is strongly functionally connected with the inferior frontal gyrus, including areas 44, 45, and 47l.
-- This auditory region likely becomes progressively less purely auditory and more multi-modal as one progresses inferiorly, anteriorly, and posteriorly (away from early auditory cortex, e.g. Main Text Figure 3).
-- A4, A5, STSdp, STSda, STSvp, STSva, STGa, and TA2
+- Relative to its antero-medial neighbor area 52, the MBelt complex has more myelin (Panel B), is thicker (Panel D), and is activated vs deactivated in the LANGUAGE MATH and STORY contrasts (Panel J). Relative to its antero-lateral neighbor area TA2, MBelt has more myelin (Panel B), is thinner (Panel D), and is more activated in the LANGUAGE MATH and STORY contrasts (Panel J). Relative to its lateral neighbor PBelt, the MBelt complex has more myelin (Panel C) and is less activated in the language MATH and STORY contrasts (Panel J) and more activated in the EMOTION FACES-SHAPES contrast. ^2669a1
+- We identified auditory association cortex as a region mainly on the superior temporal gyrus and within the superior temporal sulcus that is activated in the LANGUAGE STORY, MATH, and STORY-MATH contrasts.  ^476d27
+- It is strongly functionally connected with the inferior frontal gyrus, including areas 44, 45, and 47l. ^826543
+- This auditory region likely becomes progressively less purely auditory and more multi-modal as one progresses inferiorly, anteriorly, and posteriorly (away from early auditory cortex, e.g. Main Text Figure 3). ^68a319
+- A4, A5, STSdp, STSda, STSvp, STSva, STGa, and TA2 ^eb989b
 - we have introduced largely novel terminology here, except that TA2 is based on the Von Economo and Koskinas parcellation (Triarhou, 2007a, b; von Economo and Koskinas, 1925). These areas are surrounded by PBelt, MBelt, PI, TGd, TE1a, TE1m, TE1p, PHT, TPOJ1, STV, and PSL.
 
 
@@ -37,7 +37,7 @@ more about [[STSdp]]:
 
 ![[Glasser et al. - 2016 - A multi-modal parcellation of human cerebral cortex 1.pdf]]
 
-
+--> [[Was bedeuten die Vergleiche aus Glasser SUPPL]]
 ## see also
 Tags: #cognitivescience/neuroscience #science #source 
 *Superlink:* [[050 🧠Neuroscience]] 
