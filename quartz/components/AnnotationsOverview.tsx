@@ -20,15 +20,6 @@ export default ((opts?: Partial<AnnotationsOverviewOptions>) => {
     allFiles,
     fileData,
   }: QuartzComponentProps) => {
-    // Tag display mapping - transform certain tags for display
-    const displayTagName = (tag: string): string => {
-      const tagMap: Record<string, string> = {
-        "stream/dorsal": "dorsalstream",
-        "stream/ventral": "ventralstream",
-      }
-      return tagMap[tag] || tag
-    }
-
     // Collect all tags and their counts
     const tagCounts = new Map<string, number>()
 
@@ -101,15 +92,12 @@ export default ((opts?: Partial<AnnotationsOverviewOptions>) => {
           </div>
 
           <div class="tags-container">
-            {sortedTags.slice(0, 20).map(([tag, count]) => {
-              const displayTag = displayTagName(tag)
-              return (
-                <a href={tagPageUrl(tag)} class="tag-item" title={`${count} Notizen`}>
-                  <span class="tag-name">#{displayTag}</span>
-                  <span class="tag-badge">{count}</span>
-                </a>
-              )
-            })}
+            {sortedTags.slice(0, 20).map(([tag, count]) => (
+              <a href={tagPageUrl(tag)} class="tag-item" title={`${count} Notizen`}>
+                <span class="tag-name">#{tag}</span>
+                <span class="tag-badge">{count}</span>
+              </a>
+            ))}
           </div>
 
           {sortedTags.length > 20 && (
