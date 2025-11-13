@@ -52,7 +52,7 @@ export default ((opts?: Partial<AnnotationsOverviewOptions>) => {
           <h3>Wie funktioniert's?</h3>
           <ol>
             <li>
-              <strong>⚠️ Wichtig:</strong> Lade die Seite neu (F5 / Cmd+R), um Hypothesis zu
+              <strong>⚠️ Wichtig:</strong> Lade jede Seite neu (F5 / Cmd+R), um Hypothesis zu
               aktivieren
             </li>
             <li>Markiere Text auf einer beliebigen Seite</li>
