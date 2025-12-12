@@ -1,7 +1,7 @@
 // Auto-detect API URL based on environment
 const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
   ? "http://localhost:3030"
-  : "https://rag-server-production.up.railway.app" // TODO: Nach Railway-Deployment mit echter URL ersetzen!
+  : "https://notesmaximleopoldcom-production.up.railway.app"
 
 // Get current page info (dynamically updated)
 let currentPageTitle = document.querySelector("h1.article-title")?.textContent || "aktuelle Seite"

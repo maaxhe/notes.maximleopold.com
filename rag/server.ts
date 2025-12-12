@@ -5,8 +5,10 @@ import Anthropic from "@anthropic-ai/sdk"
 import OpenAI from "openai"
 import dotenv from "dotenv"
 
-// Lade .env Datei
-dotenv.config()
+// Lade .env Datei (nur lokal, auf Railway werden ENV vars direkt gesetzt)
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config()
+}
 
 const app = express()
 const PORT = process.env.PORT || 3030
@@ -15,7 +17,23 @@ const PORT = process.env.PORT || 3030
 app.use(cors())
 app.use(express.json())
 
+// Debug: Log ob API Keys verfügbar sind (ohne sie preiszugeben!)
+console.log("🔑 Environment Check:")
+console.log("  ANTHROPIC_API_KEY:", process.env.ANTHROPIC_API_KEY ? "✅ Set" : "❌ Missing")
+console.log("  OPENAI_API_KEY:", process.env.OPENAI_API_KEY ? "✅ Set" : "❌ Missing")
+console.log("  NODE_ENV:", process.env.NODE_ENV || "development")
+
 // Initialisiere APIs
+if (!process.env.ANTHROPIC_API_KEY) {
+  console.error("❌ ANTHROPIC_API_KEY nicht gesetzt!")
+  process.exit(1)
+}
+
+if (!process.env.OPENAI_API_KEY) {
+  console.error("❌ OPENAI_API_KEY nicht gesetzt!")
+  process.exit(1)
+}
+
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 })
