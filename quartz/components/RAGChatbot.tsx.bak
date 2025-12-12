@@ -1,0 +1,356 @@
+import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
+import { classNames } from "../util/lang"
+// @ts-ignore
+import script from "./scripts/ragChatbot.inline"
+
+interface Message {
+  role: "user" | "assistant"
+  content: string
+  sources?: Array<{
+    title?: string
+    category?: string
+    type: string
+    score: number
+    excerpt: string
+  }>
+}
+
+interface Options {
+  collapsed: boolean
+}
+
+const defaultOptions: Options = {
+  collapsed: true,
+}
+
+export default ((opts?: Partial<Options>) => {
+  const options = { ...defaultOptions, ...opts }
+
+  const RAGChatbot: QuartzComponent = ({ displayClass, fileData }: QuartzComponentProps) => {
+    const currentFileName = fileData.frontmatter?.title || fileData.slug || "diese Seite"
+
+    return (
+      <div class={classNames(displayClass, "rag-chatbot-container")}>
+        {/* Floating Chat Button - ALWAYS VISIBLE */}
+        <button
+          type="button"
+          class="rag-chat-fab"
+          id="rag-chat-fab"
+          aria-label="Open Mika Chatbot"
+          style={{
+            position: "fixed",
+            bottom: "2rem",
+            right: "2rem",
+            width: "70px",
+            height: "70px",
+            borderRadius: "50%",
+            background: "#2563eb",
+            color: "white",
+            border: "3px solid white",
+            fontSize: "2.5rem",
+            cursor: "pointer",
+            boxShadow: "0 8px 24px rgba(37, 99, 235, 0.5)",
+            zIndex: 999999,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          🧠
+        </button>
+
+        {/* Chat Overlay */}
+        <div class="rag-chat-overlay hidden" id="rag-chat-overlay">
+          <div class="rag-chat-panel">
+            {/* Header */}
+            <div class="rag-chat-header">
+              <div class="rag-chat-title">
+                <span class="rag-chat-icon">🧠</span>
+                <div>
+                  <h3>Mika</h3>
+                  <p class="rag-chat-subtitle">Dein BA-Assistent</p>
+                </div>
+              </div>
+              <button class="rag-chat-close" id="rag-chat-close" aria-label="Close">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+
+            {/* Quick Actions */}
+            <div class="rag-quick-actions">
+              <button class="rag-quick-btn" data-prompt="Fasse {currentFile} zusammen" data-type="summary">
+                📄 Diese Seite zusammenfassen
+              </button>
+              <button class="rag-quick-btn" data-prompt="Erkläre die Hauptpunkte aus {currentFile}" data-type="explain">
+                💡 Hauptpunkte erklären
+              </button>
+              <button class="rag-quick-btn" data-prompt="Welche Quellen werden in {currentFile} referenziert?" data-type="sources">
+                📚 Quellen finden
+              </button>
+            </div>
+
+            {/* Messages */}
+            <div class="rag-chat-messages" id="rag-messages">
+              <div class="rag-message assistant">
+                <div class="rag-message-content">
+                  Hallo! Ich bin Mika, dein Bachelorarbeit-Assistent. Nutze die Buttons oben für schnelle Aktionen oder stelle mir eine Frage!
+                </div>
+              </div>
+            </div>
+
+            {/* Input */}
+            <div class="rag-chat-input-container">
+              <textarea
+                id="rag-input"
+                class="rag-chat-input"
+                placeholder="Frage zu deiner Bachelorarbeit..."
+                rows={2}
+              ></textarea>
+              <button id="rag-send" class="rag-chat-send">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </div>
+
+            <div class="rag-chat-status" id="rag-status"></div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  RAGChatbot.afterDOMLoaded = `
+    const API_URL = 'http://localhost:3030'
+
+    // Get current page info
+    const currentPageTitle = document.querySelector('h1.article-title')?.textContent || 'aktuelle Seite'
+
+    // Toggle chat overlay
+    const fab = document.getElementById('rag-chat-fab')
+    const overlay = document.getElementById('rag-chat-overlay')
+    const closeBtn = document.getElementById('rag-chat-close')
+
+    function openChat() {
+      overlay?.classList.remove('hidden')
+      document.body.style.overflow = 'hidden' // Prevent background scroll
+    }
+
+    function closeChat() {
+      overlay?.classList.add('hidden')
+      document.body.style.overflow = '' // Restore scroll
+    }
+
+    fab?.addEventListener('click', openChat)
+    closeBtn?.addEventListener('click', closeChat)
+
+    // Close on overlay click (outside panel)
+    overlay?.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        closeChat()
+      }
+    })
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !overlay?.classList.contains('hidden')) {
+        closeChat()
+      }
+    })
+
+    // Quick action buttons
+    const quickBtns = document.querySelectorAll('.rag-quick-btn')
+    quickBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const prompt = btn.getAttribute('data-prompt')?.replace('{currentFile}', currentPageTitle) || ''
+        const inputField = document.getElementById('rag-input')
+        if (inputField && prompt) {
+          inputField.value = prompt
+          inputField.focus()
+          // Auto-send
+          sendMessage()
+        }
+      })
+    })
+
+    let conversationHistory = []
+
+    const messagesContainer = document.getElementById('rag-messages')
+    const inputField = document.getElementById('rag-input')
+    const sendButton = document.getElementById('rag-send')
+    const statusDiv = document.getElementById('rag-status')
+
+    function addMessage(role, content, sources = null) {
+      const messageDiv = document.createElement('div')
+      messageDiv.className = \`rag-message \${role}\`
+
+      const contentDiv = document.createElement('div')
+      contentDiv.className = 'rag-message-content'
+      contentDiv.textContent = content
+      messageDiv.appendChild(contentDiv)
+
+      // Füge Quellen hinzu, falls vorhanden
+      if (sources && sources.length > 0) {
+        const sourcesDiv = document.createElement('div')
+        sourcesDiv.className = 'rag-message-sources'
+
+        const sourcesTitle = document.createElement('div')
+        sourcesTitle.className = 'rag-sources-title'
+        sourcesTitle.textContent = '📚 Quellen:'
+        sourcesDiv.appendChild(sourcesTitle)
+
+        sources.forEach((source, idx) => {
+          const sourceItem = document.createElement('div')
+          sourceItem.className = 'rag-source-item'
+
+          const sourceTitle = source.title || 'Unbekannt'
+          const sourceCategory = source.category || ''
+          const relevance = Math.round(source.score * 100)
+
+          sourceItem.innerHTML = \`
+            <span class="rag-source-number">[\${idx + 1}]</span>
+            <span class="rag-source-title">\${sourceTitle}</span>
+            <span class="rag-source-meta">\${sourceCategory} • \${relevance}% relevant</span>
+          \`
+          sourcesDiv.appendChild(sourceItem)
+        })
+
+        messageDiv.appendChild(sourcesDiv)
+      }
+
+      if (messagesContainer) {
+        messagesContainer.appendChild(messageDiv)
+        messagesContainer.scrollTop = messagesContainer.scrollHeight
+      }
+    }
+
+    function setStatus(message, type = 'info') {
+      if (!statusDiv) return
+      if (message) {
+        statusDiv.textContent = message
+        statusDiv.className = \`rag-chatbot-status \${type}\`
+        statusDiv.style.display = 'block'
+      } else {
+        statusDiv.style.display = 'none'
+      }
+    }
+
+    function setLoading(isLoading) {
+      if (!sendButton || !inputField) return
+      sendButton.disabled = isLoading
+      inputField.disabled = isLoading
+
+      if (isLoading) {
+        sendButton.innerHTML = '<span class="rag-loading-spinner"></span> Denke nach...'
+      } else {
+        sendButton.innerHTML = \`
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+          Senden
+        \`
+      }
+    }
+
+    async function sendMessage() {
+      if (!inputField) return
+      const message = inputField.value.trim()
+
+      if (!message) return
+
+      // Zeige User-Nachricht
+      addMessage('user', message)
+      inputField.value = ''
+      setLoading(true)
+      setStatus('Suche relevante Informationen...')
+
+      try {
+        // Überprüfe Server-Status
+        const healthCheck = await fetch(\`\${API_URL}/health\`)
+        if (!healthCheck.ok) {
+          throw new Error('Server ist nicht erreichbar')
+        }
+
+        setStatus('Generiere Antwort...')
+
+        // Sende Chat-Anfrage
+        const response = await fetch(\`\${API_URL}/chat\`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message,
+            conversationHistory,
+          }),
+        })
+
+        if (!response.ok) {
+          const error = await response.json()
+          throw new Error(error.error || 'Unbekannter Fehler')
+        }
+
+        const data = await response.json()
+
+        // Zeige Assistenten-Antwort
+        addMessage('assistant', data.response, data.sources)
+
+        // Update Konversationshistorie
+        conversationHistory.push(
+          { role: 'user', content: message },
+          { role: 'assistant', content: data.response }
+        )
+
+        setStatus('')
+      } catch (error) {
+        console.error('Error:', error)
+        addMessage(
+          'assistant',
+          \`❌ Fehler: \${error.message}\\n\\nStelle sicher, dass der RAG-Server läuft (npm run rag:server).\`
+        )
+        setStatus('Fehler bei der Verbindung zum Server', 'error')
+
+        setTimeout(() => setStatus(''), 3000)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    // Event Listeners
+    sendButton?.addEventListener('click', sendMessage)
+
+    inputField?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault()
+        sendMessage()
+      }
+    })
+
+    // Auto-resize textarea
+    inputField?.addEventListener('input', () => {
+      if (inputField) {
+        inputField.style.height = 'auto'
+        inputField.style.height = inputField.scrollHeight + 'px'
+      }
+    })
+
+    // Überprüfe Server-Status beim Laden
+    fetch(\`\${API_URL}/health\`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.vectorStore !== 'loaded') {
+          setStatus('⚠️ Vector Store nicht geladen. Führe zuerst "npm run rag:index" aus.', 'warning')
+        }
+      })
+      .catch(() => {
+        setStatus('⚠️ RAG-Server ist offline. Starte ihn mit "npm run rag:server".', 'warning')
+      })
+  `
+
+  return RAGChatbot
+}) satisfies QuartzComponentConstructor

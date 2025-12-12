@@ -1,10 +1,10 @@
 ---
-modified: 2025-11-13
+tags:
+modified: 2025-12-12
 ---
-
 # fOP
 
-**Stream:** #stream/dorsal 
+**Stream:** #stream/dorsal #stream/where
 **Classical equivalent:** 
 **Mapped to Glasser:** ???
 

@@ -1,0 +1,352 @@
+.auditory-streams-map {
+  max-width: 100%;
+  margin: 2rem 0;
+
+  .function-tags-legend {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: var(--light);
+    border: 1px solid var(--lightgray);
+    border-radius: 8px;
+
+    h3 {
+      margin: 0 0 1rem 0;
+      color: var(--darkgray);
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .legend-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+
+      .legend-tag {
+        display: inline-block;
+        padding: 0.4rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: #000;
+
+        &.semantic {
+          background: rgba(255, 165, 0, 0.3);
+          color: #000;
+        }
+
+        &.spatialprocessing {
+          background: rgba(34, 139, 34, 0.3);
+          color: #000;
+        }
+
+        &.language {
+          background: rgba(220, 20, 60, 0.3);
+          color: #000;
+        }
+
+        &.prosody {
+          background: rgba(221, 160, 221, 0.3);
+          color: #000;
+        }
+
+        &.workingmemory {
+          background: rgba(135, 206, 250, 0.3);
+          color: #000;
+        }
+
+        &.visual {
+          background: rgba(65, 105, 225, 0.3);
+          color: #000;
+        }
+
+        &.motion {
+          background: rgba(144, 238, 144, 0.3);
+          color: #000;
+        }
+
+        &.nonspatial {
+          background: rgba(255, 192, 203, 0.3);
+          color: #000 !important;
+        }
+      }
+    }
+  }
+
+  // Extra spezifische Regel für nonspatial
+  .function-tags-legend .legend-tags .legend-tag.nonspatial {
+    color: #000000 !important;
+  }
+
+  .stream-section {
+    margin-bottom: 3rem;
+    padding: 1.5rem;
+    background: var(--light);
+    border: 1px solid var(--lightgray);
+    border-radius: 8px;
+
+    .pfc-subgroup {
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: rgba(var(--lightgray-rgb, 204, 204, 204), 0.1);
+      border-radius: 6px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .pfc-subgroup-title {
+        margin: 0 0 1rem 0;
+        color: var(--secondary);
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-transform: none;
+        letter-spacing: normal;
+        border-bottom: 2px solid var(--secondary);
+        padding-bottom: 0.5rem;
+      }
+    }
+
+    .stream-header {
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--secondary);
+      padding-bottom: 0.75rem;
+
+      h2 {
+        margin: 0 0 0.5rem 0;
+        color: var(--secondary);
+        font-size: 1.5rem;
+      }
+
+      .stream-subtitle {
+        margin: 0;
+        color: var(--darkgray);
+        font-size: 0.9rem;
+        font-style: italic;
+      }
+    }
+
+    .region-group {
+      margin-bottom: 1.5rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      h4 {
+        margin: 0 0 0.75rem 0;
+        color: var(--darkgray);
+        font-size: 1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .region-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .region-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.5rem 0.75rem;
+        background: var(--highlight);
+        border: 1px solid var(--lightgray);
+        border-radius: 20px;
+        font-size: 0.9rem;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        color: var(--darkgray);
+
+        &.safe {
+          border-color: var(--secondary);
+
+          .certainty-icon {
+            color: var(--secondary);
+          }
+        }
+
+        &.uncertain {
+          border-style: dashed;
+          border-color: var(--gray);
+
+          .certainty-icon {
+            color: var(--gray);
+          }
+        }
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          border-color: var(--secondary);
+          background: var(--light);
+        }
+
+        .certainty-icon {
+          font-weight: bold;
+          font-size: 1rem;
+        }
+
+        .region-label {
+          font-weight: 500;
+        }
+
+        .function-badge {
+          font-size: 0.75rem;
+          padding: 0.15rem 0.4rem;
+          border-radius: 10px;
+          font-weight: 500;
+          margin-left: 0.2rem;
+          color: #000;
+
+          &.semantic {
+            background: rgba(255, 165, 0, 0.3);
+            color: #000;
+          }
+
+          &.spatialprocessing {
+            background: rgba(34, 139, 34, 0.3);
+            color: #000;
+          }
+
+          &.language {
+            background: rgba(220, 20, 60, 0.3);
+            color: #000;
+          }
+
+          &.prosody {
+            background: rgba(221, 160, 221, 0.3);
+            color: #000;
+          }
+
+          &.workingmemory {
+            background: rgba(135, 206, 250, 0.3);
+            color: #000;
+          }
+
+          &.visual {
+            background: rgba(65, 105, 225, 0.3);
+            color: #000;
+          }
+
+          &.motion {
+            background: rgba(144, 238, 144, 0.3);
+            color: #000;
+          }
+
+          &.nonspatial {
+            background: rgba(255, 192, 203, 0.3);
+            color: #000 !important;
+          }
+
+          // Fallback for any custom function tags
+          &:not(.semantic):not(.spatialprocessing):not(.language):not(.prosody):not(.workingmemory):not(.visual):not(.motion):not(.nonspatial) {
+            background: rgba(255, 215, 0, 0.3);
+            color: #b8860b;
+          }
+        }
+      }
+    }
+  }
+
+  // Extra spezifische Regel für nonspatial in function-badges
+  .region-pill .function-badge.nonspatial {
+    color: #000000 !important;
+  }
+
+  // Mobile responsiveness
+  @media (max-width: 768px) {
+    margin: 1rem 0;
+
+    .function-tags-legend {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+
+      h3 {
+        font-size: 0.9rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .legend-tags {
+        gap: 0.5rem;
+
+        .legend-tag {
+          padding: 0.5rem 0.75rem;
+          font-size: 0.9rem;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .stream-section {
+      padding: 1rem;
+      margin-bottom: 2rem;
+
+      .stream-header {
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+
+        h2 {
+          font-size: 1.25rem;
+          margin-bottom: 0.4rem;
+        }
+
+        .stream-subtitle {
+          font-size: 0.85rem;
+          line-height: 1.4;
+        }
+      }
+
+      .region-group {
+        margin-bottom: 1.25rem;
+
+        h4 {
+          font-size: 0.9rem;
+          margin-bottom: 0.6rem;
+        }
+
+        .region-pills {
+          gap: 0.5rem;
+        }
+
+        .region-pill {
+          padding: 0.6rem 0.85rem;
+          font-size: 0.95rem;
+          min-height: 44px; // iOS recommended touch target
+          display: inline-flex;
+          align-items: center;
+
+          .certainty-icon {
+            font-size: 1.1rem;
+          }
+
+          .region-label {
+            font-weight: 600;
+          }
+
+          .function-badge {
+            font-size: 0.8rem;
+            padding: 0.2rem 0.5rem;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+
+  // Extra small screens (phones in portrait)
+  @media (max-width: 480px) {
+    .stream-section {
+      padding: 0.75rem;
+
+      .region-pill {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+  }
+}

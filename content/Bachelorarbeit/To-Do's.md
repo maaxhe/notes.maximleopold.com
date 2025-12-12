@@ -1,5 +1,5 @@
 ---
-modified: 2025-11-13
+modified: 2025-12-12
 ---
 
 ### Meine nächsten Schritte
@@ -9,6 +9,7 @@ modified: 2025-11-13
 
 #### Phase 1 
 - [ ] Informationen streamlinen und in die Areale packen
+	- [ ] schauen, wo pST genau sit und welche Areale es abdeckt
 - [ ] Alle auditory areale für beide streams überprüfen. Für jedes Areal
 	- [ ] anatomische Lage (vor Glasser eroieren)
 		- [ ] frühere Begriffe auf Glasser mappen

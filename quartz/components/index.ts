@@ -43,6 +43,11 @@ import AnnotationsOverview from "./AnnotationsOverview"
 import AnnotationsBadge from "./AnnotationsBadge"
 import HypothesisSPA from "./HypothesisSPA"
 import TagCloud from "./TagCloud"
+import SidebarToggle from "./SidebarToggle"
+import ExportAllButton from "./ExportAllButton"
+import AuditoryStreamsMap from "./AuditoryStreamsMap"
+import StreamBadge from "./StreamBadge"
+import RAGChatbot from "./RAGChatbot"
 
 export {
   ArticleTitle,
@@ -90,4 +95,9 @@ export {
   AnnotationsBadge,
   HypothesisSPA,
   TagCloud,
+  SidebarToggle,
+  ExportAllButton,
+  AuditoryStreamsMap,
+  StreamBadge,
+  RAGChatbot,
 }

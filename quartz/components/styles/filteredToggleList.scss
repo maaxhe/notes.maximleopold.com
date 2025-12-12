@@ -1,10 +1,10 @@
 .filtered-toggle-list {
   border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 8px;
-  padding: 0.4rem 0.8rem;
-  margin: 0.5rem 0;
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  margin: 0.4rem 0;
   background-color: var(--light, #f8f8f8);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
 }
 
 .filtered-toggle-list summary,
@@ -15,8 +15,9 @@
   color: var(--gray);
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.25rem;
   margin: 0;
+  font-size: 0.8rem;
 }
 
 .filtered-toggle-list.static .summary-label {
@@ -45,16 +46,20 @@
 .filtered-toggle-list ul {
   list-style: none;
   padding-left: 0;
-  margin: 0.4rem 0 0;
+  margin: 0.3rem 0 0;
 }
 
 .filtered-toggle-list li {
-  margin: 0.2rem 0;
+  margin: 0.15rem 0;
+  font-size: 0.8rem;
 }
 
 .filtered-toggle-list a.internal {
   color: inherit;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .filtered-toggle-list a.internal:hover {
@@ -63,4 +68,19 @@
 
 .filtered-toggle-list .empty {
   color: var(--gray);
+}
+
+.filtered-toggle-list .stream-indicator {
+  display: inline-block;
+  font-size: 0.75rem;
+  line-height: 1;
+  margin-left: 0.25rem;
+}
+
+.filtered-toggle-list .stream-indicator.safe {
+  color: #28a745;
+}
+
+.filtered-toggle-list .stream-indicator.uncertain {
+  color: #ffc107;
 }

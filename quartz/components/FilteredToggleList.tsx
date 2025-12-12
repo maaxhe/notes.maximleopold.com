@@ -47,11 +47,25 @@ export default ((userOpts: Options) => {
           {pages.slice(0, limit).map((page) => {
             const title = page.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title
             const href = resolveRelative(fileData.slug!, page.slug!)
+            const tags = page.frontmatter?.tags ?? []
+
+            // Check for stream safety tags
+            const isSafe = tags.some(tag => tag === 'stream/safe')
+            const isUncertain = tags.some(tag => tag === 'stream/uncertain')
+            const showStreamBadge = isSafe || isUncertain
 
             return (
               <li>
                 <a href={href} class="internal">
                   {title}
+                  {showStreamBadge && (
+                    <span
+                      class={`stream-indicator ${isSafe ? 'safe' : 'uncertain'}`}
+                      title={isSafe ? 'Safe' : 'Uncertain'}
+                    >
+                      {isSafe ? '✓' : '?'}
+                    </span>
+                  )}
                 </a>
               </li>
             )

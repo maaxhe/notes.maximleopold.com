@@ -4,12 +4,15 @@ permalink: Bachelorarbeit/Sources/BA-All-Sources
 aliases:
   - BA All Sources
   - BA-All-Sources
-modified: 2025-11-13
+modified: 2025-12-12
 ---
 
 ## Paper Zitate & Kommentare 
 
 [[Ahveninen et al. (2006) - PNAS]]
+[[Bedini (2023) - Brain Structure]]
+[[Bedini (n.d.)]]
+[[Bedini & Baldauf (2021)]]
 [[Cohen et al. (2016) - Springer]]
 [[De Vries et al. (2021) - Journal of Neuroscience]]
 [[De Vries & Baldauf (2021) - Journal of Neuroscience]]
@@ -18,12 +21,18 @@ modified: 2025-11-13
 [[Glasser et al. (2016) - Nature]]
 [[Griffiths et al. (1998)]]
 [[Hickok & Poeppel (2004) - Cognition]]
+[[Hickok & Poeppel 2007 - Nature]]
 [[Scott et al. (2017) - Journal of Comparative Neurology]]
 [[Rauschecker (2011) - Hearing Research]]
 [[Rauschecker & Afsahi (2023) - Journal of Comparative Neurology]]
 [[Rauschecker & Scott (2009) - Nature Neuroscience]]
 [[Rolls et al. (2023) - Cerebral Cortex]]
 [[Romanski et al. (1999) - Nature Neuroscience]]
+[[Veniero (2021) - Nature Comm.]]
+
+
+#### Leseliste
+- [ ] Hickok Poeppel 2007
 
 
 ### Andere Aussagen aus paper

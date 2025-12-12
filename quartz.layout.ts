@@ -5,7 +5,12 @@ import * as Component from "./quartz/components"
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
-  afterBody: [Component.ImageLightbox(), Component.HypothesisSPA()],
+  afterBody: [
+    Component.ImageLightbox(),
+    Component.HypothesisSPA(),
+    Component.SidebarToggle(),
+    Component.RAGChatbot({ collapsed: true }),
+  ],
   footer: Component.Footer({
     links: {
       "Mein GitHub": "https://github.com/maaxhe",
@@ -32,12 +37,9 @@ export const defaultContentPageLayout: PageLayout = {
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
+    Component.Search(),
     Component.Flex({
       components: [
-        {
-          Component: Component.Search(),
-          grow: true,
-        },
         { Component: Component.AnnotationsBadge() },
         { Component: Component.Darkmode() },
         { Component: Component.ReaderMode() },
@@ -54,8 +56,8 @@ export const defaultContentPageLayout: PageLayout = {
           showTags: false,
           depth: -1, // Show all nodes on home page
           scale: 0.9,
-          repelForce: 0.5,
-          centerForce: 0.2,
+          repelForce: 1.8,
+          centerForce: 1.3,
           focusOnHover: true,
         },
         globalGraph: { showTags: false },
@@ -66,33 +68,36 @@ export const defaultContentPageLayout: PageLayout = {
       component: Component.Graph({
         collapsible: false,
         showTitle: false,
-        localGraph: { showTags: false },
+        localGraph: {
+          showTags: false,
+          scale: 0.9,
+          repelForce: 1.5,
+          centerForce: 0.1,
+          focusOnHover: true,
+        },
         globalGraph: { showTags: false },
       }),
       condition: (page) => page.fileData.slug !== "index",
     }),
-    Component.FilteredToggleList({
-      summary: "#stream/dorsal",
-      emptyLabel: "Keine freigegebenen Notizen für diesen Stream.",
-      limit: 8,
-      filter: (page) =>
-        (page.frontmatter?.tags ?? []).some(
-          (tag) => typeof tag === "string" && tag.toLowerCase() === "stream/dorsal",
-        ),
-    }),
-    Component.FilteredToggleList({
-      summary: "#stream/ventral",
-      emptyLabel: "Keine freigegebenen Notizen für diesen Stream.",
-      limit: 8,
-      filter: (page) =>
-        (page.frontmatter?.tags ?? []).some(
-          (tag) => typeof tag === "string" && tag.toLowerCase() === "stream/ventral",
-        ),
-    }),
+    Component.StreamBadge(),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Bibliography(),
   ],
   afterBody: [
+    Component.ImageLightbox(),
+    Component.HypothesisSPA(),
+    Component.SidebarToggle(),
+    Component.ConditionalRender({
+      component: Component.ExportAllButton(),
+      condition: (page) => page.fileData.slug === "index",
+    }),
+    Component.ConditionalRender({
+      component: Component.AuditoryStreamsMap(),
+      condition: (page) =>
+        page.fileData.slug === "auditory-streams" ||
+        page.fileData.slug === "Bachelorarbeit/auditory-streams" ||
+        page.fileData.slug === "Bachelorarbeit/Auditory-Streams-Overview",
+    }),
     Component.ConditionalRender({
       component: Component.ThesisDashboard(),
       condition: (page) => page.fileData.slug?.toLowerCase().endsWith("dashboard-ba") ?? false,
@@ -112,6 +117,7 @@ export const defaultContentPageLayout: PageLayout = {
     }),
     Component.Backlinks(),
     Component.PageNavigation(),
+    Component.RAGChatbot({ collapsed: true }),
   ],
 }
 
@@ -121,12 +127,9 @@ export const defaultListPageLayout: PageLayout = {
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
+    Component.Search(),
     Component.Flex({
       components: [
-        {
-          Component: Component.Search(),
-          grow: true,
-        },
         { Component: Component.AnnotationsBadge() },
         { Component: Component.Darkmode() },
       ],

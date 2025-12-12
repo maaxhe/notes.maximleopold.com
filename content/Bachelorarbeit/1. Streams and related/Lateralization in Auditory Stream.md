@@ -1,5 +1,5 @@
 ---
-modified: 2025-11-13
+modified: 2025-12-12
 ---
 
 ## Lateralization in Auditory Stream
@@ -13,7 +13,7 @@ modified: 2025-11-13
 - for syntacto-semantic speech processing (Specht, 2014) ([[Frühholz (2015) - NeuroImage#^9b3ca9]])
 - emotional intonation in speech, affective prosody -> activates right STG and IFG ([[Frühholz (2015) - NeuroImage#^46141b]])
 - left-hemispheric temporo-frontal connections for affective prosody processing ([[Frühholz (2015) - NeuroImage#^19f5db]])
-	- especially dorsal for the [[STGa]] and [[IFG]] ([[Frühholz (2015) - NeuroImage#^19f5db]]) -> [[Dorsal Auditory Stream]]
+	- especially dorsal for the [[STGa]] and [[IFG]] ([[Frühholz (2015) - NeuroImage#^19f5db]]) -> [[Auditory Where-Stream (Dorsal)]]
 
 - left PAC -> speech sounds -> [[A1]]  ([[Friederici (2011) - Physiological Reviews#^58fcfc]])
 

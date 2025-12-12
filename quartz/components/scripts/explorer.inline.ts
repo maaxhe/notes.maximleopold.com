@@ -229,6 +229,16 @@ async function setupExplorer(currentSlug: FullSlug) {
     annotationsLi.appendChild(annotationsLink)
     fragment.appendChild(annotationsLi)
 
+    // Add Tags link at the bottom
+    const tagsLi = document.createElement("li")
+    const tagsLink = document.createElement("a")
+    tagsLink.href = "/alle-tags"
+    tagsLink.textContent = "🏷️ Alle Tags"
+    tagsLink.style.fontWeight = "600"
+
+    tagsLi.appendChild(tagsLink)
+    fragment.appendChild(tagsLi)
+
     explorerUl.insertBefore(fragment, explorerUl.firstChild)
 
     // restore explorer scrollTop position if it exists

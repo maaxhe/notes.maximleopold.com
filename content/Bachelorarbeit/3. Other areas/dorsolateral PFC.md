@@ -1,5 +1,5 @@
 ---
-modified: 2025-11-13
+modified: 2025-12-12
 ---
 
 ## dorsolateral PFC
@@ -13,7 +13,7 @@ DLPFC, a region in the depth of the left superior frontal sulcus (SFS), shows bo
 ## see also
 [[Layer 3]]
 [[Tasks that pair well]]
-[[Prefrontal cortex]]
+[[PFC]]
 [[Ventromedial PFC]]
 Tags: #cognitivescience/neuroscience #science #brainregion
 *Superlink:* [[050 🧠Neuroscience]] 

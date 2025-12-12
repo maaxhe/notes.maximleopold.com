@@ -70,6 +70,11 @@ export const PageList: QuartzComponent = ({ cfg, fileData, allFiles, limit, sort
         const title = page.frontmatter?.title
         const tags = page.frontmatter?.tags ?? []
 
+        // Check for stream safety tags
+        const isSafe = tags.some(tag => tag === 'stream/safe')
+        const isUncertain = tags.some(tag => tag === 'stream/uncertain')
+        const showStreamBadge = isSafe || isUncertain
+
         return (
           <li class="section-li">
             <div class="section">
@@ -80,6 +85,14 @@ export const PageList: QuartzComponent = ({ cfg, fileData, allFiles, limit, sort
                 <h3>
                   <a href={resolveRelative(fileData.slug!, page.slug!)} class="internal">
                     {title}
+                    {showStreamBadge && (
+                      <span
+                        class={`stream-indicator ${isSafe ? 'safe' : 'uncertain'}`}
+                        title={isSafe ? 'Safe' : 'Uncertain'}
+                      >
+                        {isSafe ? '✓' : '?'}
+                      </span>
+                    )}
                   </a>
                 </h3>
               </div>
@@ -108,7 +121,28 @@ PageList.css = `
   margin: 0;
 }
 
+.section h3 a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
 .section > .tags {
   margin: 0;
+}
+
+.stream-indicator {
+  display: inline-block;
+  font-size: 0.85rem;
+  line-height: 1;
+  margin-left: 0.25rem;
+}
+
+.stream-indicator.safe {
+  color: #28a745;
+}
+
+.stream-indicator.uncertain {
+  color: #ffc107;
 }
 `

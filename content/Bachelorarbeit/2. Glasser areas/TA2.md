@@ -1,20 +1,47 @@
 ---
-modified: 2025-11-13
+  title: "TA2"
+  created: "2025-11-17"
+modified: 2025-12-12
+---
+# TA2
+
+**Stream:** 
+**Classical equivalent:** 
+**Mapped to Glasser:** ???
+
 ---
 
-## TA2
+## MNI Coordinates
+- **Right:**  
+- **Left:**  
+- **Source:** (Paper, Jahr)
 
 
-### Functions
-- more myelin than PI and [[STGa]]
+## Anatomical location
+
+
+## Function(s)
+- more myelin than PI and [[STGa]] ([[Glasser et al. (2016) - Nature]])
 - is activated vs deactivated in the LANGAUGE MATH (Panel E) and STORY (Panel F) contrasts ([[Glasser et al. (2016) - Nature]])
 
+## Connectivity
+
+
+### Projections
+
+
+### PFC targets
+
+
+##  Summary
+
+
+
 ## see also
-Tags: #cognitivescience/neuroscience #science #brainregion
+- Verwandte Areale:
+- wichtige Seiten:
+- Tags: #cognitivescience/neuroscience #science #brainregion
+
+
 *Superlink:* [[050 🧠Neuroscience]] 
-![[Glasser HCP-MMP1 human brain lateral view.png]]
-## Source
-
-
-
-Created: 2025-11-11 13:05
+Created: 2025-11-17 10:28

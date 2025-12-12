@@ -1,0 +1,5 @@
+# Vector Store (großes File, sollte lokal neu erstellt werden)
+vector-store.json
+
+# Environment Variables
+.env

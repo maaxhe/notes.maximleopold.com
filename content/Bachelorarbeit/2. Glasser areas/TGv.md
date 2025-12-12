@@ -1,16 +1,52 @@
 ---
-modified: 2025-11-13
+  title: "TGv"
+  created: "2025-11-17"
+modified: 2025-12-12
+---
+# TGv
+
+**Stream:** #stream/ventral #stream/what #stream/safe 
+**Classical equivalent:** 
+**Mapped to Glasser:** ???
+
 ---
 
-## TGv
+## MNI Coordinates
+- **Right:**  
+- **Left:**  
 
-### Functions
-- TGv vs [[TGd]]: deaactivated vs activated in MOTOR CUE-AVG ([[Glasser et al. (2016) - Nature]])
+
+## Anatomical location
+
+
+## Function(s)
+#function/semantic #function/language 
+- language-related semantic functions ([[Rolls et al. (2023) - Cerebral Cortex#^49fcb6]])
+
+## Connectivity
+- effective connectivity with [[STS]] ([[Rolls et al. (2023) - Cerebral Cortex#^49fcb6]])
+- along with [[TPOJ1]], [[STV]], [[PSL]], [[TGv]], [[TGd]], [[PGi]] ([[Rolls et al. (2023) - Cerebral Cortex#^49fcb6]])
+- part of the [[Auditory What-Stream (Ventral)]] ([[Rolls et al. (2023) - Cerebral Cortex#^49fcb6]])
+
+### Projections
+- part of the language-related semantic system ([[Rolls et al. (2023) - Cerebral Cortex#^49fcb6]])
+
+### PFC targets
+- Broca's Area [[BA45, 45]] ([[Rolls et al. (2023) - Cerebral Cortex#^49fcb6]])
+
+##  Summary
+
+
+
 ## see also
-Tags: #cognitivescience/neuroscience #science #stream/ventral #brainregion
+- Verwandte Areale:
+- wichtige Seiten:
+- Tags: #cognitivescience/neuroscience #science #brainregion
+
+
 *Superlink:* [[050 🧠Neuroscience]] 
+Created: 2025-11-17 10:25
 ![[Glasser HCP-MMP1 human brain lateral view.png]]
-## Source
 
 
 

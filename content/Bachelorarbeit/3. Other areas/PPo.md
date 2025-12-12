@@ -1,12 +1,15 @@
 ---
-modified: 2025-11-13
+tags:
+  - stream/where
+  - stream/safe
+  - region/classical
+modified: 2025-12-12
 ---
-
-# PPo
+# PPo (Parietal Operculum )
 
 **Stream:** 
 **Classical equivalent:** 
-**Mapped to Glasser:** ???
+**Mapped to Glasser:** 43, FOP1
 
 ---
 
@@ -15,14 +18,15 @@ modified: 2025-11-13
 - **Left:**  MNI: [-50 -10 4] ([[Frühholz (2015) - NeuroImage]])
 
 ## Anatomical location
-A region located posterior, the planum temporale (PT), a region anterolateral to [[Herschl's Gyrus]] called planum polare (PP)
+A region located posterior, the planum temporale ([[PT]]), a region anterolateral to [[Herschl's Gyrus]] called planum polare (PP)
 
+![[PPO MNI location left hemisphere.png]]
 ## Function(s)
 
 
 ## Connectivity
-- left PPo connected to both [[IFG]] and [[fOP]] via [[Dorsal Auditory Stream]] ([[Frühholz (2015) - NeuroImage#^5b4da1]])
-- right PPo connected only to [[fOP]] via [[Dorsal Auditory Stream]] ([[Frühholz (2015) - NeuroImage#^e58a74]])
+- left PPo connected to both [[IFG]] and [[fOP]] via [[Auditory Where-Stream (Dorsal)]] ([[Frühholz (2015) - NeuroImage#^5b4da1]])
+- right PPo connected only to [[fOP]] via [[Auditory Where-Stream (Dorsal)]] ([[Frühholz (2015) - NeuroImage#^e58a74]])
 
 ### Projections
 

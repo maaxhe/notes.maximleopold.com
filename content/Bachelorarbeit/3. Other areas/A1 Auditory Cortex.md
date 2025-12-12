@@ -1,14 +1,9 @@
----
-modified: 2025-11-13
----
+## A1 Auditory Cortex
 
-## Auditory Cortex
-
-The primary auditory area is the first to receive all auditory information. 
-Then secondary auditory areas light up (adjacent to the primary sensory cortex)
-Then many temporal lobe regions.
-Then finally the Broca's area simultaneously with the tip of the temporal lobe. 
-{{primary auditory}} ^70dfb8
+- has a core, then a belt and then parabelt fields (which have several subfields) ([[Rolls et al. (2023) - Cerebral Cortex#^fced2c]])
+- Then secondary auditory areas light up (adjacent to the primary sensory cortex) (n.n.)
+- Then many temporal lobe regions. (n.n.)
+- Then finally the Broca's area simultaneously with the tip of the temporal lobe. (n.n.)
 
 
 Structure: 
@@ -19,8 +14,8 @@ Structure:
 ![[frequency map auditory cortex.png]]
 
 ### Primary auditory area 
-
-Hier kommen erstmal alle Informationen von den Ohren an.
+- The primary auditory area is the first to receive all auditory information. (n.n.)
+- Hier kommen erstmal alle Informationen von den Ohren an.
 
 ### Secondary auditory area 
 

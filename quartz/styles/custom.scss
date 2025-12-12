@@ -1,7 +1,35 @@
 @use "./base.scss";
 @use "./dashboard.scss";
+@use "../components/styles/ragChatbot.scss";
 
 // put your custom CSS here!
+
+/* Make the entire page wider with more space for content */
+.page {
+  max-width: 1400px !important; /* Optimale Breite für gute Lesbarkeit */
+}
+
+/* Make middle section expand when sidebars are hidden */
+.page > #quartz-body {
+  transition: grid-template-columns 0.3s ease;
+}
+
+/* When left sidebar is hidden */
+.sidebar.left.sidebar-hidden ~ * #quartz-body,
+body:has(.sidebar.left.sidebar-hidden) .page > #quartz-body {
+  grid-template-columns: 0 auto 220px !important;
+}
+
+/* When right sidebar is hidden */
+.sidebar.right.sidebar-hidden ~ * #quartz-body,
+body:has(.sidebar.right.sidebar-hidden) .page > #quartz-body {
+  grid-template-columns: 220px auto 0 !important;
+}
+
+/* When both sidebars are hidden */
+body:has(.sidebar.left.sidebar-hidden):has(.sidebar.right.sidebar-hidden) .page > #quartz-body {
+  grid-template-columns: 0 auto 0 !important;
+}
 
 /* Fix for TOC and Backlinks scrolling in right sidebar */
 .sidebar.right {
@@ -9,6 +37,9 @@
   overflow-x: hidden !important;
   height: 100vh !important;
   max-height: 100vh !important;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
 
   /* Custom scrollbar for sidebar */
   &::-webkit-scrollbar {
@@ -31,6 +62,30 @@
   /* Firefox */
   scrollbar-width: thin;
   scrollbar-color: var(--gray) transparent;
+
+  &.sidebar-hidden {
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.sidebar.left {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  overflow-x: hidden !important; // Verhindert horizontales Überlaufen
+
+  &.sidebar-hidden {
+    transform: translateX(-100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  // Flex-Container innerhalb der linken Sidebar
+  .flex-component {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 }
 
 /* Ensure TOC and Backlinks have proper overflow */
@@ -38,9 +93,204 @@
 .backlinks,
 .graph {
   overflow: visible !important;
+  flex-shrink: 0;
 }
 
 .toc-content,
 .backlinks-content {
   overflow-y: auto !important;
+}
+
+/* FilteredToggleList should expand downwards and push content below */
+.filtered-toggle-list {
+  flex-shrink: 0;
+  overflow: visible !important;
+
+  & ul {
+    overflow: visible !important;
+  }
+}
+
+/* Graph - keep it simple */
+.graph {
+  min-height: 250px;
+  flex-shrink: 1;
+}
+
+/* Sidebar Toggle Buttons */
+.sidebar-toggle {
+  position: fixed;
+  top: 1rem;
+  z-index: 99999;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 5px;
+  padding: 0.35rem 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+  &:hover {
+    background: var(--highlight);
+    border-color: var(--secondary);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--darkgray);
+    transition: stroke 0.2s ease;
+  }
+
+  &:hover svg {
+    stroke: var(--secondary);
+  }
+
+  &.left-toggle {
+    left: 0.75rem;
+  }
+
+  &.right-toggle {
+    right: 0.75rem;
+  }
+
+  /* Hide on mobile */
+  @media all and (max-width: 768px) {
+    display: none;
+  }
+}
+
+/* Explorer Hover Effect */
+.explorer ul li a:hover,
+.explorer ul li .folder-button:hover {
+  background-color: var(--lightgray);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.explorer ul li a {
+  padding: 0.2rem 0.5rem;
+  display: block;
+  transition: background-color 0.2s ease;
+}
+
+/* PDF Container Styles */
+.pdf-container {
+  margin: 1.5rem 0;
+  border: 1px solid var(--lightgray);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--light);
+
+  .pdf-controls {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: var(--lightgray);
+    border-bottom: 1px solid var(--gray);
+
+    .pdf-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex: 1;
+      padding: 0.5rem 0.75rem;
+      text-decoration: none;
+      color: var(--darkgray);
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      border-radius: 4px;
+      background: var(--light);
+
+      &:hover {
+        background: var(--highlight);
+        color: var(--secondary);
+      }
+
+      svg {
+        flex-shrink: 0;
+      }
+
+      span {
+        flex: 1;
+      }
+    }
+  }
+
+  iframe.pdf {
+    width: 100%;
+    min-height: 600px;
+    border: none;
+    display: block;
+  }
+}
+
+/* Export All Button */
+.export-all-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--secondary);
+  color: var(--light);
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+
+  &:hover:not([disabled]) {
+    background: var(--tertiary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &[disabled] {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+
+  .export-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    .progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: var(--tertiary);
+      transition: width 0.3s ease;
+      opacity: 0.3;
+    }
+
+    .progress-text {
+      position: relative;
+      z-index: 1;
+      font-size: 0.85rem;
+      color: white;
+      font-weight: 500;
+    }
+  }
 }

@@ -1,13 +1,16 @@
 ---
-title: "MBelt"
-created: "2025-11-13"
-modified: 2025-11-13
+title: MBelt
+created: 2025-11-13
+tags:
+  - region/core
+  - stream/safe
+modified: 2025-12-12
 ---
 # MBelt
 
 **Stream:**
 **Classical equivalent:**
-**Mapped to Glasser:** ???
+**Mapped to Glasser:** MBelt
 
 ## MNI Coordinates
 - **Right:**  

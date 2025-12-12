@@ -40,6 +40,31 @@ export default (() => {
       <head>
         <title>{title}</title>
         <meta charSet="utf-8" />
+        {/* Vault authentication - inline check and overlay injection */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+(function() {
+  function isTokenValid() {
+    try {
+      const token = localStorage.getItem('vault_auth_token');
+      const timestamp = localStorage.getItem('vault_auth_timestamp');
+      if (!token || !timestamp) return false;
+      const daysSince = (Date.now() - parseInt(timestamp, 10)) / (1000 * 60 * 60 * 24);
+      return daysSince < 30;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  if (!isTokenValid()) {
+    document.write('<style id="vault-overlay-style">body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a0a;z-index:999998;}</style>');
+  }
+})();
+            `,
+          }}
+        />
+        <script src="./static/vault-auth.js"></script>
         {cfg.theme.cdnCaching && cfg.theme.fontOrigin === "googleFonts" && (
           <>
             <link rel="preconnect" href="https://fonts.googleapis.com" />

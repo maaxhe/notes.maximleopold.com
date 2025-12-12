@@ -23,7 +23,11 @@
     "publish:quick": "git add . && git commit -m 'Auto-update notes' && git push",
     "quartz": "./quartz/bootstrap-cli.mjs",
     "prepare": "husky install",
-    "frontmatter:add": "tsx scripts/add-frontmatter.ts"
+    "frontmatter:add": "tsx scripts/add-frontmatter.ts",
+    "rag:index": "tsx rag/index-documents.ts",
+    "rag:server": "tsx rag/server.ts",
+    "rag:test": "tsx rag/test-keys.ts",
+    "rag:debug": "tsx rag/debug-env.ts"
   },
   "engines": {
     "npm": ">=10.9.2",
@@ -41,6 +45,7 @@
     "quartz": "./quartz/bootstrap-cli.mjs"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
     "@clack/prompts": "^0.11.0",
     "@floating-ui/dom": "^1.7.4",
     "@myriaddreamin/rehype-typst": "^0.6.0",
@@ -49,8 +54,11 @@
     "ansi-truncate": "^1.4.0",
     "async-mutex": "^0.5.0",
     "cli-spinner": "^0.2.10",
+    "cors": "^2.8.5",
     "d3": "^7.9.0",
+    "dotenv": "^17.2.3",
     "esbuild-sass-plugin": "^3.3.1",
+    "express": "^4.22.1",
     "flexsearch": "^0.8.205",
     "github-slugger": "^2.0.0",
     "globby": "^15.0.0",
@@ -66,6 +74,8 @@
     "mdast-util-to-string": "^4.0.0",
     "micromorph": "^0.4.5",
     "minimatch": "^10.1.1",
+    "openai": "^6.10.0",
+    "pdf-parse": "^1.1.4",
     "pixi.js": "^8.14.0",
     "preact": "^10.27.2",
     "preact-render-to-string": "^6.6.3",
@@ -103,10 +113,13 @@
     "yargs": "^18.0.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/d3": "^7.4.3",
+    "@types/express": "^5.0.6",
     "@types/hast": "^3.0.4",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^24.10.0",
+    "@types/pdf-parse": "^1.1.5",
     "@types/pretty-time": "^1.1.5",
     "@types/source-map-support": "^0.5.10",
     "@types/ws": "^8.18.1",
