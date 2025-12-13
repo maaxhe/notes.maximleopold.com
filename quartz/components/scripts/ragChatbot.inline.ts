@@ -1,7 +1,7 @@
 // Auto-detect API URL based on environment
 const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
   ? "http://localhost:3030"
-  : "https://notesmaximleopoldcom-production.up.railway.app"
+  : "https://server.maximleopold.com"
 
 // Get current page info (dynamically updated)
 let currentPageTitle = document.querySelector("h1.article-title")?.textContent || "aktuelle Seite"
