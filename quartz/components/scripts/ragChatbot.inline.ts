@@ -110,6 +110,47 @@ clearBtn?.addEventListener("click", () => {
 // Re-index button
 const reindexBtn = document.getElementById("rag-reindex-btn")
 
+// Helper function to poll for indexing completion
+async function pollForIndexingCompletion(initialChunks: number) {
+  const maxAttempts = 60 // 5 minutes (60 * 5 seconds)
+  let attempts = 0
+
+  const checkInterval = setInterval(async () => {
+    attempts++
+
+    try {
+      const response = await fetch(`${API_URL}/health`)
+      const data = await response.json()
+
+      // Check if vector store is loaded and chunks count changed
+      if (data.vectorStore === "loaded" && data.chunks !== initialChunks) {
+        clearInterval(checkInterval)
+
+        // Show success message
+        addMessage(
+          "assistant",
+          `✅ Re-Indexierung abgeschlossen! Vector Store neu geladen mit ${data.chunks} Chunks.`,
+        )
+
+        // Visual feedback
+        setStatus("Re-Indexierung erfolgreich abgeschlossen!", "info")
+        setTimeout(() => setStatus(""), 3000)
+      }
+
+      // Timeout after 5 minutes
+      if (attempts >= maxAttempts) {
+        clearInterval(checkInterval)
+        addMessage(
+          "assistant",
+          "⏱️ Re-Indexierung läuft noch. Bitte später den Status prüfen.",
+        )
+      }
+    } catch (error) {
+      console.error("Polling error:", error)
+    }
+  }, 5000) // Check every 5 seconds
+}
+
 reindexBtn?.addEventListener("click", async () => {
   if (!reindexBtn) return
 
@@ -120,6 +161,11 @@ reindexBtn?.addEventListener("click", async () => {
   if (span) span.textContent = "Indizierung läuft..."
 
   try {
+    // Get current chunk count before re-indexing
+    const healthResponse = await fetch(`${API_URL}/health`)
+    const healthData = await healthResponse.json()
+    const initialChunks = healthData.chunks || 0
+
     const response = await fetch(`${API_URL}/reindex`, {
       method: "POST",
       headers: {
@@ -131,13 +177,16 @@ reindexBtn?.addEventListener("click", async () => {
 
     if (response.ok) {
       // Show success message
-      if (span) span.textContent = "✅ Erfolgreich gestartet!"
+      if (span) span.textContent = "✅ Gestartet!"
 
       // Add message to chat
       addMessage(
         "assistant",
-        "Re-Indexierung wurde gestartet. Dies kann einige Minuten dauern. Der Vector Store wird automatisch neu geladen, sobald die Indexierung abgeschlossen ist.",
+        "Re-Indexierung wurde gestartet. Dies kann 3-5 Minuten dauern. Ich benachrichtige dich, sobald sie abgeschlossen ist...",
       )
+
+      // Start polling for completion
+      pollForIndexingCompletion(initialChunks)
 
       // Reset button after 3 seconds
       setTimeout(() => {
