@@ -5,7 +5,7 @@ tags:
   - region/classical
 title: pPPo
 created: 2025-11-25
-modified: 2025-12-12
+modified: 2025-12-13
 ---
 # pPPo (posterior Planum Polare)
 

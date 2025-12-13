@@ -1,0 +1,10 @@
+// Ersetze Zeile 17 in rag/server.ts mit:
+
+app.use(cors({
+  origin: [
+    'https://notes.maximleopold.com',
+    'http://localhost:3000',
+    'http://localhost:4000'
+  ],
+  credentials: true
+}))

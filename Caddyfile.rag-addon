@@ -1,0 +1,4 @@
+# Füge diese Zeile zur Caddyfile hinzu (vor "# 3) Frontend"):
+
+  # RAG Server API
+  reverse_proxy /rag/* localhost:3030
