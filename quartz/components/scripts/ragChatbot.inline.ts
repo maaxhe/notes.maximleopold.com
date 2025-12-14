@@ -3,6 +3,59 @@ const API_URL = window.location.hostname === "localhost" || window.location.host
   ? "http://localhost:3030"
   : "https://server.maximleopold.com/rag"
 
+const apiBaseCandidates = (() => {
+  const normalized = API_URL.replace(/\/+$/, "")
+  const candidates = [normalized]
+  if (normalized.endsWith("/rag")) {
+    candidates.push(normalized.replace(/\/rag$/, ""))
+  } else {
+    candidates.push(`${normalized}/rag`)
+  }
+  return Array.from(new Set(candidates))
+})()
+
+let activeApiBase = apiBaseCandidates[0]
+
+type FetchApiOptions = {
+  retryOn404?: boolean
+}
+
+async function fetchApi(path: string, init?: RequestInit, options: FetchApiOptions = {}) {
+  const { retryOn404 = true } = options
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`
+  const orderedBases = [activeApiBase, ...apiBaseCandidates.filter(base => base !== activeApiBase)]
+  let lastError: any = null
+  let lastResponse: Response | null = null
+
+  for (const base of orderedBases) {
+    const url = `${base}${normalizedPath}`
+    try {
+      const response = await fetch(url, init)
+      if (response.status === 404 && retryOn404 && base !== orderedBases[orderedBases.length - 1]) {
+        lastResponse = response
+        continue
+      }
+      if (response.ok) {
+        activeApiBase = base
+      }
+      return response
+    } catch (error) {
+      lastError = error
+      continue
+    }
+  }
+
+  if (lastResponse) {
+    return lastResponse
+  }
+
+  if (lastError) {
+    throw lastError
+  }
+
+  throw new Error("Server ist nicht erreichbar")
+}
+
 // Get current page info (dynamically updated)
 let currentPageTitle = document.querySelector("h1.article-title")?.textContent || "aktuelle Seite"
 
@@ -222,7 +275,7 @@ Gruppiere die Papers nach Dekaden und zeige die wichtigsten Entwicklungen:
 
 Zeige echte Papers aus meinen Notizen, sortiert nach Publikationsjahr.`
 
-    const response = await fetch(`${API_URL}/chat`, {
+    const response = await fetchApi("/chat", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -330,7 +383,7 @@ Zeige die wichtigsten Connections und Beziehungen:
 
 Nutze Informationen aus meinen Notizen über ${center}.`
 
-    const response = await fetch(`${API_URL}/chat`, {
+    const response = await fetchApi("/chat", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -519,7 +572,7 @@ Suche nach:
 
 Sei spezifisch und zitiere die betroffenen Notizen.`
 
-    const response = await fetch(`${API_URL}/chat`, {
+    const response = await fetchApi("/chat", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -605,7 +658,7 @@ Erstelle eine strukturierte Gap Analysis mit folgenden Kategorien:
 
 Sei spezifisch und zitiere Beispiele aus meinen Notizen.`
 
-    const response = await fetch(`${API_URL}/chat`, {
+    const response = await fetchApi("/chat", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -720,7 +773,7 @@ Erstelle eine strukturierte Vergleichstabelle mit folgenden Kategorien:
 
 Zitiere relevante Quellen mit [[source name]].`
 
-    const response = await fetch(`${API_URL}/chat`, {
+    const response = await fetchApi("/chat", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -949,7 +1002,7 @@ async function pollForIndexingCompletion(initialChunks: number) {
     attempts++
 
     try {
-      const response = await fetch(`${API_URL}/health`)
+      const response = await fetchApi("/health")
       const data = await response.json()
 
       // Check if vector store is loaded and chunks count changed
@@ -992,11 +1045,11 @@ reindexBtn?.addEventListener("click", async () => {
 
   try {
     // Get current chunk count before re-indexing
-    const healthResponse = await fetch(`${API_URL}/health`)
+    const healthResponse = await fetchApi("/health")
     const healthData = await healthResponse.json()
     const initialChunks = healthData.chunks || 0
 
-    const response = await fetch(`${API_URL}/reindex`, {
+    const response = await fetchApi("/reindex", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1883,7 +1936,7 @@ async function runWritingRequest(message: string, options: { resetHistory?: bool
   }
 
   try {
-    const response = await fetch(`${API_URL}/chat-stream`, {
+    const response = await fetchApi("/chat-stream", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -2009,7 +2062,7 @@ async function writingFallbackToChat(message: string) {
   if (!writingOutput) return false
   try {
     writingOutput.innerHTML = '<div class="rag-writing-loading">Streaming nicht verfügbar – nutze Backup-Endpunkt…</div>'
-    const response = await fetch(`${API_URL}/chat`, {
+    const response = await fetchApi("/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -2104,7 +2157,7 @@ async function loadFiles(force = false) {
   filesLoading = true
   writingSourceFilter?.setAttribute("disabled", "true")
   try {
-    const response = await fetch(`${API_URL}/files`)
+    const response = await fetchApi("/files")
     const data = await response.json()
     availableFiles = Array.isArray(data.files) ? data.files : []
     filesLoaded = true
@@ -2915,7 +2968,7 @@ async function sendMessage() {
 
   try {
     // Überprüfe Server-Status
-    const healthCheck = await fetch(`${API_URL}/health`)
+    const healthCheck = await fetchApi("/health")
     if (!healthCheck.ok) {
       throw new Error("Server ist nicht erreichbar")
     }
@@ -2980,7 +3033,7 @@ async function sendMessage() {
 
     try {
       // Sende Streaming-Request
-      const response = await fetch(`${API_URL}/chat-stream`, {
+      const response = await fetchApi("/chat-stream", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -3152,7 +3205,7 @@ async function sendMessage() {
 async function fallbackToChatEndpoint(enrichedMessage: string, userMessage: string) {
   try {
     setStatus("Streaming nicht verfügbar – nutze Backup-Endpunkt", "warning")
-    const response = await fetch(`${API_URL}/chat`, {
+    const response = await fetchApi("/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -3236,7 +3289,7 @@ inputField?.addEventListener("input", () => {
 })
 
 // Überprüfe Server-Status beim Laden
-fetch(`${API_URL}/health`)
+fetchApi("/health")
   .then((res) => res.json())
   .then((data) => {
     if (data.vectorStore !== "loaded") {
