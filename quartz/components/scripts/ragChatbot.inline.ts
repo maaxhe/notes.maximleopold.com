@@ -2702,6 +2702,130 @@ function setLoading(isLoading: boolean) {
   }
 }
 
+function flattenTextValue(value: any): string {
+  const visited = new WeakSet<object>()
+  const prioritizedKeys = ["text", "content", "value", "message", "delta", "data", "response"]
+
+  function inner(val: any): string {
+    if (val === null || val === undefined) {
+      return ""
+    }
+
+    if (typeof val === "string") {
+      return val
+    }
+
+    if (typeof val === "number" || typeof val === "boolean") {
+      return String(val)
+    }
+
+    if (Array.isArray(val)) {
+      return val.map(inner).join("")
+    }
+
+    if (typeof val === "object") {
+      if (visited.has(val)) {
+        return ""
+      }
+      visited.add(val)
+
+      for (const key of prioritizedKeys) {
+        if (key in val) {
+          const nested = inner((val as Record<string, any>)[key])
+          if (nested) {
+            return nested
+          }
+        }
+      }
+
+      if ("choices" in val && Array.isArray((val as any).choices)) {
+        return (val as any).choices
+          .map((choice: any) =>
+            inner(choice.delta?.content ?? choice.delta?.text ?? choice.message?.content ?? choice.text ?? choice.content ?? choice),
+          )
+          .join("")
+      }
+
+      if ("parts" in val && Array.isArray((val as any).parts)) {
+        return inner((val as any).parts)
+      }
+
+      return Object.entries(val)
+        .filter(([key]) => key !== "type" && key !== "event")
+        .map(([, nested]) => inner(nested))
+        .join("")
+    }
+
+    return ""
+  }
+
+  return inner(value)
+}
+
+function extractTextFromPayload(payload: any, eventHint: string): string {
+  if (payload === null || payload === undefined) {
+    return ""
+  }
+
+  if (typeof payload === "string" || typeof payload === "number" || typeof payload === "boolean") {
+    return String(payload)
+  }
+
+  if (Array.isArray(payload)) {
+    return flattenTextValue(payload)
+  }
+
+  if (typeof payload !== "object") {
+    return ""
+  }
+
+  const normalizedEvent = (eventHint ?? "").toLowerCase()
+  if (normalizedEvent === "sources" || normalizedEvent === "done" || normalizedEvent === "error") {
+    return ""
+  }
+
+  if ("error" in payload) {
+    return ""
+  }
+
+  if ("token" in payload) {
+    const token = flattenTextValue(payload.token)
+    if (token) return token
+  }
+
+  if ("delta" in payload) {
+    const token = flattenTextValue(payload.delta)
+    if (token) return token
+  }
+
+  if ("choices" in payload) {
+    const token = flattenTextValue(payload.choices)
+    if (token) return token
+  }
+
+  if ("content" in payload || "text" in payload || "message" in payload) {
+    const token = flattenTextValue(payload.content ?? payload.text ?? payload.message)
+    if (token) return token
+  }
+
+  if ("data" in payload) {
+    const token = flattenTextValue(payload.data)
+    if (token) return token
+  }
+
+  if ("response" in payload) {
+    const token = flattenTextValue(payload.response)
+    if (token) return token
+  }
+
+  if ("result" in payload) {
+    const token = flattenTextValue(payload.result)
+    if (token) return token
+  }
+
+  return flattenTextValue(payload)
+}
+
 async function sendMessage() {
   if (!inputField) return
   let userMessage = inputField.value.trim()
@@ -2819,13 +2943,13 @@ async function sendMessage() {
             const parsed = JSON.parse(data)
             const eventType = (parsed.event ?? parsed.type ?? currentEvent ?? "").toLowerCase()
 
-            if (eventType === 'token' || parsed.token || parsed.content) {
-              const token = parsed.token ?? parsed.content ?? parsed.message ?? ''
-              if (!token) continue
-              fullResponse += token
+            if (eventType === 'sources' || parsed.sources) {
+              sources = normalizeSourcesList(parsed.sources || [])
               const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
               contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
-              messagesContainer!.scrollTop = messagesContainer!.scrollHeight
+              if (messagesContainer) {
+                messagesContainer.scrollTop = messagesContainer.scrollHeight
+              }
               continue
             }
 
@@ -2841,22 +2965,18 @@ async function sendMessage() {
               continue
             }
 
-            if (eventType === 'sources' || parsed.sources) {
-              sources = normalizeSourcesList(parsed.sources || [])
-              const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
-              contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
-              continue
-            }
-
             if (parsed.error || eventType === 'error') {
               throw new Error(parsed.error ?? 'Unbekannter Fehler')
             }
 
-            if (parsed.content || parsed.message) {
-              fullResponse += parsed.content ?? parsed.message ?? ''
+            const textDelta = extractTextFromPayload(parsed, eventType)
+            if (textDelta) {
+              fullResponse += textDelta
               const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
               contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
-              messagesContainer!.scrollTop = messagesContainer!.scrollHeight
+              if (messagesContainer) {
+                messagesContainer.scrollTop = messagesContainer.scrollHeight
+              }
             }
           } catch (e) {
             // Ignoriere Parse-Fehler für unvollständige Chunks
