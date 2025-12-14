@@ -1048,6 +1048,34 @@
     word-wrap: break-word;
     position: relative;
 
+    table.rag-md-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0;
+      font-size: 0.9rem;
+      background: color-mix(in srgb, var(--light) 90%, transparent);
+      border: 1px solid color-mix(in srgb, var(--lightgray) 80%, transparent);
+      overflow: hidden;
+      border-radius: 8px;
+
+      th,
+      td {
+        border: 1px solid color-mix(in srgb, var(--lightgray) 80%, transparent);
+        padding: 0.45rem 0.6rem;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        font-weight: 600;
+        background: color-mix(in srgb, var(--secondary) 8%, transparent);
+      }
+
+      tbody tr:nth-child(odd) {
+        background: color-mix(in srgb, var(--lightgray) 35%, transparent);
+      }
+    }
+
     // Markdown formatting
     h1 {
       font-size: 1.5rem;

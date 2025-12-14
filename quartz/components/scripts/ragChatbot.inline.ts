@@ -1434,6 +1434,8 @@ function formatMarkdown(content: string, sources: any[] = []): string {
     return `<a href="/${slug}" class="rag-wikilink" data-link="${linkText}">${linkText}</a>`
   })
 
+  formatted = convertMarkdownTables(formatted)
+
   // Formatiere Quellen-Zitate [Source Name] zu klickbaren Links
   // Wichtig: NUR Single-Bracket-Zitate, NICHT [[Wikilinks]]
   if (sourceEntries.length > 0) {
@@ -1472,8 +1474,72 @@ function formatMarkdown(content: string, sources: any[] = []): string {
   formatted = formatted.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
   formatted = formatted.replace(/(?<!\w)_(.+?)_(?!\w)/g, '<em>$1</em>')
   formatted = formatted.replace(/\n/g, '<br>')
+  formatted = formatted.replace(/<table([\s\S]*?)<\/table>/g, table =>
+    table.replace(/<br>/g, '')
+  )
 
   return formatted
+}
+
+function convertMarkdownTables(content: string): string {
+  const lines = content.split('\n')
+  const result: string[] = []
+
+  const isTableRow = (line: string) => /^\s*\|.*\|\s*$/.test(line.trim())
+  const isSeparatorRow = (line: string) =>
+    /^\s*\|?(?:\s*:?-{3,}:?\s*\|)+\s*:?-{3,}:?\s*\|?\s*$/.test(line.trim())
+
+  const parseRow = (line: string) =>
+    line
+      .trim()
+      .replace(/^\|/, '')
+      .replace(/\|$/, '')
+      .split('|')
+      .map(cell => cell.trim())
+
+  let i = 0
+  while (i < lines.length) {
+    if (isTableRow(lines[i])) {
+      const tableLines: string[] = []
+      while (i < lines.length && isTableRow(lines[i])) {
+        tableLines.push(lines[i])
+        i++
+      }
+
+      if (tableLines.length >= 2 && isSeparatorRow(tableLines[1])) {
+        const headers = parseRow(tableLines[0])
+        const rows = tableLines.slice(2).map(parseRow)
+
+        const tableHtml = [
+          '<table class="rag-md-table">',
+          '<thead><tr>',
+          ...headers.map(head => `<th>${head || '&nbsp;'}</th>`),
+          '</tr></thead>',
+          '<tbody>',
+          ...rows
+            .filter(row => row.some(cell => cell.length > 0))
+            .map(row => {
+              const padded = [...row]
+              while (padded.length < headers.length) {
+                padded.push('')
+              }
+              return `<tr>${padded.map(cell => `<td>${cell || '&nbsp;'}</td>`).join('')}</tr>`
+            }),
+          '</tbody>',
+          '</table>',
+        ].join('')
+
+        result.push(tableHtml)
+      } else {
+        result.push(tableLines.join('\n'))
+      }
+    } else {
+      result.push(lines[i])
+      i++
+    }
+  }
+
+  return result.join('\n')
 }
 
 // Hilfsfunktion: Füge Quellen zur Nachricht hinzu
