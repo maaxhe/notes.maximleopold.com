@@ -239,7 +239,10 @@ export default ((opts?: Partial<Options>) => {
             <div class="rag-citation-panel hidden" id="rag-citation-panel">
               <div class="rag-citation-header">
                 <h4>📖 Citation Manager</h4>
-                <button class="rag-citation-close" id="rag-citation-close" aria-label="Close">×</button>
+                <div class="rag-citation-header-actions">
+                  <button class="rag-citation-home" id="rag-citation-home" aria-label="Zurück zum Vault">↩ Vault</button>
+                  <button class="rag-citation-close" id="rag-citation-close" aria-label="Close">×</button>
+                </div>
               </div>
               <div class="rag-citation-stats" id="rag-citation-stats">
                 {/* Dynamisch gefüllt */}

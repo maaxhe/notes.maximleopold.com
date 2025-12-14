@@ -217,6 +217,7 @@ historyClose?.addEventListener("click", () => {
 const citationManagerBtn = document.getElementById("rag-citation-manager-btn")
 const citationPanel = document.getElementById("rag-citation-panel")
 const citationClose = document.getElementById("rag-citation-close")
+const citationHome = document.getElementById("rag-citation-home")
 const citationStats = document.getElementById("rag-citation-stats")
 const citationList = document.getElementById("rag-citation-list")
 
@@ -234,6 +235,10 @@ citationManagerBtn?.addEventListener("click", () => {
 
 citationClose?.addEventListener("click", () => {
   citationPanel?.classList.add("hidden")
+})
+
+citationHome?.addEventListener("click", () => {
+  window.location.href = "/"
 })
 
 // Timeline View panel

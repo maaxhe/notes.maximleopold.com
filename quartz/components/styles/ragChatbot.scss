@@ -586,6 +586,28 @@
         color: #ffffff !important;
       }
 
+      .rag-citation-header-actions {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+
+        .rag-citation-home {
+          background: rgba(255, 255, 255, 0.15);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          color: #ffffff !important;
+          padding: 0.35rem 0.75rem;
+          border-radius: 6px;
+          cursor: pointer;
+          font-weight: 600;
+          transition: background 0.2s, transform 0.2s;
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-1px);
+          }
+        }
+      }
+
       .rag-citation-close {
         background: transparent;
         border: none;
