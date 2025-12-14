@@ -1895,6 +1895,59 @@ async function runWritingRequest(message: string, options: { resetHistory?: bool
       }),
     })
 
+    const contentType = response.headers.get("content-type") || ""
+
+    if (!contentType.includes("text/event-stream")) {
+      let payload: any = null
+      if (contentType.includes("application/json")) {
+        try {
+          payload = await response.json()
+        } catch {
+          payload = null
+        }
+      } else {
+        const textFallback = await response.text()
+        try {
+          payload = JSON.parse(textFallback)
+        } catch {
+          payload = { response: textFallback }
+        }
+      }
+
+      if (!response.ok) {
+        throw new Error(payload?.error ?? "Fehler beim Schreiben")
+      }
+
+      if (!payload) {
+        throw new Error("Server hat keine Antwort gesendet.")
+      }
+
+      if (payload.error) {
+        throw new Error(payload.error)
+      }
+
+      const assistantText = payload.response ?? payload.content ?? payload.message ?? ""
+      if (writingOutput) {
+        writingOutput.innerHTML = `
+          <div class="rag-writing-result">
+            ${formatMarkdown(assistantText || "Ich konnte keine relevanten Informationen finden.")}
+          </div>
+          <button class="rag-copy-writing" onclick="navigator.clipboard.writeText(\`${(assistantText || "").replace(/`/g, '\\`')}\`)">
+            📋 Kopieren
+          </button>
+        `
+      }
+
+      writingConversationHistory = [
+        ...writingConversationHistory,
+        { role: "user", content: message },
+        { role: "assistant", content: assistantText },
+      ]
+
+      showWritingFollowup(true)
+      return
+    }
+
     if (!response.ok) throw new Error("Fehler beim Schreiben")
 
     const reader = response.body?.getReader()
@@ -2938,6 +2991,51 @@ async function sendMessage() {
           language: currentLanguage,
         }),
       })
+
+      const contentType = response.headers.get("content-type") || ""
+
+      if (!contentType.includes("text/event-stream")) {
+        let payload: any = null
+        if (contentType.includes("application/json")) {
+          try {
+            payload = await response.json()
+          } catch {
+            payload = null
+          }
+        } else {
+          const textFallback = await response.text()
+          try {
+            payload = JSON.parse(textFallback)
+          } catch {
+            payload = { response: textFallback }
+          }
+        }
+
+        if (!response.ok) {
+          throw new Error(payload?.error ?? `Server-Fehler (${response.status})`)
+        }
+
+        if (!payload) {
+          throw new Error("Server hat eine unerwartete Antwort zurückgegeben.")
+        }
+
+        if (payload.error) {
+          throw new Error(payload.error)
+        }
+
+        fullResponse = payload.response ?? payload.content ?? payload.message ?? ""
+        sources = normalizeSourcesList(payload.sources || [])
+
+        if (!fullResponse) {
+          fullResponse = "Ich konnte keine relevanten Informationen finden."
+        }
+
+        const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
+        contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
+        finalizeAssistantInteraction(messageDiv, contentDiv, userMessage, fullResponse, sources)
+        setStatus("")
+        return
+      }
 
       if (!response.ok) {
         throw new Error("Server-Fehler")

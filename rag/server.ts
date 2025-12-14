@@ -11,6 +11,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const app = express()
+const apiRouter = express.Router()
 const PORT = process.env.PORT || 3030
 
 // Middleware
@@ -560,7 +561,7 @@ function buildSourcePayloads(matchedChunks: MatchedSourceChunk[]): SourcePayload
 /**
  * Health Check
  */
-app.get("/health", (req, res) => {
+apiRouter.get("/health", (req, res) => {
   res.json({
     status: "ok",
     vectorStore: vectorStore ? "loaded" : "not loaded",
@@ -571,7 +572,7 @@ app.get("/health", (req, res) => {
 /**
  * Chat Endpoint mit RAG und Streaming
  */
-app.post("/chat-stream", async (req, res) => {
+apiRouter.post("/chat-stream", async (req, res) => {
   try {
     const { message, conversationHistory = [], language = "de", mode, writingSources = [] } = req.body
 
@@ -780,7 +781,7 @@ function canonicalChunkKey(chunk: DocumentChunk & { score: number }) {
 /**
  * Chat Endpoint mit RAG (Non-Streaming für Kompatibilität)
  */
-app.post("/chat", async (req, res) => {
+apiRouter.post("/chat", async (req, res) => {
   try {
     const { message, conversationHistory = [], language = "de" } = req.body
 
@@ -955,7 +956,7 @@ ${context}`
 /**
  * Such-Endpoint (optional, für direkten Zugriff auf Chunks)
  */
-app.post("/search", async (req, res) => {
+apiRouter.post("/search", async (req, res) => {
   try {
     const { query, topK = 10 } = req.body
 
@@ -985,7 +986,7 @@ app.post("/search", async (req, res) => {
 /**
  * Stats Endpoint
  */
-app.get("/stats", (req, res) => {
+apiRouter.get("/stats", (req, res) => {
   if (!vectorStore) {
     return res.status(503).json({ error: "Vector Store nicht geladen" })
   }
@@ -1006,7 +1007,7 @@ app.get("/stats", (req, res) => {
 /**
  * Files Endpoint - Liste aller verfügbaren Dateien für Autocomplete
  */
-app.get("/files", (req, res) => {
+apiRouter.get("/files", (req, res) => {
   if (!vectorStore) {
     return res.status(503).json({ error: "Vector Store nicht geladen" })
   }
@@ -1030,7 +1031,7 @@ app.get("/files", (req, res) => {
 /**
  * Re-index Endpoint - Startet die Indexierung neu
  */
-app.post("/reindex", async (req, res) => {
+apiRouter.post("/reindex", async (req, res) => {
   try {
     console.log("\n🔄 Re-Indexierung gestartet...")
 
@@ -1098,6 +1099,10 @@ async function startServer() {
 
   // Lade Vector Store
   await loadVectorStore()
+
+  // Unterstütze sowohl direkte als auch /rag/ Präfix-Anfragen
+  app.use("/", apiRouter)
+  app.use("/rag", apiRouter)
 
   // Starte Server
   app.listen(PORT, () => {
