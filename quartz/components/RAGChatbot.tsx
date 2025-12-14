@@ -73,6 +73,14 @@ export default ((opts?: Partial<Options>) => {
                 </div>
               </div>
               <div class="rag-chat-header-actions">
+                <button class="rag-chat-expand" id="rag-chat-expand" aria-label="Toggle fullscreen" title="Fullscreen">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <polyline points="9 21 3 21 3 15"></polyline>
+                    <line x1="21" y1="3" x2="14" y2="10"></line>
+                    <line x1="3" y1="21" x2="10" y2="14"></line>
+                  </svg>
+                </button>
                 <button class="rag-chat-lang" id="rag-chat-lang" aria-label="Switch language" title="Sprache wechseln">
                   <span class="rag-lang-text">EN</span>
                 </button>
@@ -185,84 +193,95 @@ export default ((opts?: Partial<Options>) => {
                 </div>
               </div>
               <div class="rag-writing-body">
-                <div class="rag-writing-form">
-                  <div class="rag-writing-template">
-                    <label for="rag-writing-template">Template</label>
-                    <select id="rag-writing-template">
-                      <option value="summary" selected>Summary für mich</option>
-                      <option value="assistant">Schreib Assistance</option>
-                      <option value="blog">Blog Post Format</option>
-                    </select>
-                  </div>
-
-                  <div class="rag-writing-grid">
-                    <label>
-                      Deliverable
-                      <input type="text" id="rag-writing-deliverable" placeholder="z.B. 500-Wort Blogpost" />
-                    </label>
-                    <label>
-                      Audience & Tone
-                      <input type="text" id="rag-writing-audience" placeholder="z.B. PMs, präzise & motivierend" />
-                    </label>
-                  </div>
-
-                  <label>
-                    Purpose / Success Metric
-                    <input type="text" id="rag-writing-purpose" placeholder="z.B. Versteht Produktvorteile in <2 Min" />
-                  </label>
-
-                  <label>
-                    Key questions to answer
-                    <textarea id="rag-writing-questions" placeholder="- Was ist das Problem?\n- Wie lösen wir es?\n- Was ist der CTA?"></textarea>
-                  </label>
-
-                  <label>
-                    Constraints (POV, Länge, No-Gos)
-                    <textarea id="rag-writing-constraints" placeholder="z.B. Max 600 Wörter, kein Jargon, CTA zu /sites/demo/"></textarea>
-                  </label>
-
-                  <div class="rag-writing-sources-block">
-                    <div class="rag-writing-sources-header">
-                      <div>
-                        <span>Sources</span>
-                        <p>Wähle Dateien, die der Assistant nutzen darf</p>
-                      </div>
-                      <input type="text" id="rag-writing-source-filter" placeholder="Dateien suchen..." />
-                    </div>
-                    <div class="rag-writing-source-list" id="rag-writing-source-list">
-                      <div class="rag-writing-source-empty">Lade Dateien…</div>
-                    </div>
-                  </div>
-
-                  <label>
-                    Additional notes / Anchors
-                    <textarea id="rag-writing-notes" placeholder="[[docs/brief.md#L42]] Wichtiges Zitat oder Kontext"></textarea>
-                  </label>
-
-                  <label>
-                    Gaps / Need from Claude
-                    <textarea id="rag-writing-gaps" placeholder="1. Brauchen wir Kundenzitat?\n2. Zahlen für Abschnitt 2?"></textarea>
-                  </label>
-
-                  <button class="rag-writing-generate" id="rag-writing-generate">
-                    🧠 Outline anfordern
+                <div class="rag-writing-form-container" id="rag-writing-form-container">
+                  <button class="rag-writing-toggle" id="rag-writing-toggle" aria-label="Brief ein- oder ausblenden">
+                    <span>Brief</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
                   </button>
-                </div>
+                  <div class="rag-writing-form" id="rag-writing-form">
+                    <div class="rag-writing-template">
+                      <label for="rag-writing-template">Template</label>
+                      <select id="rag-writing-template">
+                        <option value="summary" selected>Summary für mich</option>
+                        <option value="assistant">Schreib Assistance</option>
+                        <option value="blog">Blog Post Format</option>
+                      </select>
+                    </div>
 
-                <div class="rag-writing-output" id="rag-writing-output">
-                  <div class="rag-writing-placeholder">
-                    <p>Fülle den Session Brief aus und starte mit „Outline anfordern“.</p>
+                    <div class="rag-writing-toolbar">
+                      <button type="button" class="rag-writing-link-btn" id="rag-writing-link-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                        Link
+                      </button>
+                    </div>
+
+                    <div class="rag-writing-grid">
+                      <label>
+                        Deliverable
+                        <input type="text" id="rag-writing-deliverable" placeholder="z.B. 500-Wort Blogpost" />
+                      </label>
+                      <label>
+                        Audience & Tone
+                        <input type="text" id="rag-writing-audience" placeholder="z.B. PMs, präzise & motivierend" />
+                      </label>
+                    </div>
+
+                    <label>
+                      Purpose / Success Metric
+                      <input type="text" id="rag-writing-purpose" placeholder="z.B. Versteht Produktvorteile in <2 Min" />
+                    </label>
+
+                    <label>
+                      Key questions to answer
+                      <textarea id="rag-writing-questions" placeholder="- Was ist das Problem?\n- Wie lösen wir es?\n- Was ist der CTA?"></textarea>
+                    </label>
+
+                    <label>
+                      Constraints (POV, Länge, No-Gos)
+                      <textarea id="rag-writing-constraints" placeholder="z.B. Max 600 Wörter, kein Jargon, CTA zu /sites/demo/"></textarea>
+                    </label>
+
+                    <div class="rag-writing-sources-block">
+                      <div class="rag-writing-sources-header">
+                        <div>
+                          <span>Sources</span>
+                          <p>Wähle Dateien, die der Assistant nutzen darf</p>
+                        </div>
+                        <input type="text" id="rag-writing-source-filter" placeholder="Dateien suchen..." />
+                      </div>
+                      <div class="rag-writing-source-list" id="rag-writing-source-list">
+                        <div class="rag-writing-source-empty">Lade Dateien…</div>
+                      </div>
+                    </div>
+
+                    <button class="rag-writing-generate" id="rag-writing-generate">
+                      🧠 Outline anfordern
+                    </button>
                   </div>
+                  <div class="rag-writing-autocomplete" id="rag-writing-autocomplete"></div>
                 </div>
 
-                <div class="rag-writing-followup hidden" id="rag-writing-followup">
-                  <label>
-                    Antwort / zusätzliche Infos
-                    <textarea id="rag-writing-followup-input" placeholder="Beantworte offene Fragen oder gib neues Feedback"></textarea>
-                  </label>
-                  <div class="rag-writing-followup-actions">
-                    <button id="rag-writing-send-followup">Antwort senden</button>
-                    <button id="rag-writing-approve">Outline freigeben & Draft schreiben</button>
+                <div class="rag-writing-main">
+                  <div class="rag-writing-output" id="rag-writing-output">
+                    <div class="rag-writing-placeholder">
+                      <p>Fülle den Session Brief aus und starte mit „Outline anfordern“.</p>
+                    </div>
+                  </div>
+
+                  <div class="rag-writing-followup hidden" id="rag-writing-followup">
+                    <label>
+                      Antwort / zusätzliche Infos
+                      <textarea id="rag-writing-followup-input" placeholder="Beantworte offene Fragen oder gib neues Feedback"></textarea>
+                    </label>
+                    <div class="rag-writing-followup-actions">
+                      <button id="rag-writing-send-followup">Antwort senden</button>
+                      <button id="rag-writing-approve">Outline freigeben & Draft schreiben</button>
+                    </div>
                   </div>
                 </div>
               </div>

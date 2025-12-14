@@ -41,6 +41,8 @@ document.addEventListener("click", (e) => {
 const fab = document.getElementById("rag-chat-fab")
 const overlay = document.getElementById("rag-chat-overlay")
 const closeBtn = document.getElementById("rag-chat-close")
+const expandBtn = document.getElementById("rag-chat-expand")
+let isFullscreen = false
 
 function openChat() {
   overlay?.classList.remove("hidden")
@@ -52,6 +54,10 @@ function closeChat() {
   overlay?.classList.add("hidden")
   fab?.classList.remove("hidden") // Show FAB when chat is closed
   document.body.style.overflow = "" // Restore scroll
+  if (isFullscreen) {
+    toggleFullscreen(false)
+  }
+  hideWritingAutocompleteMenu()
 }
 
 fab?.addEventListener("click", openChat)
@@ -69,6 +75,18 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && !overlay?.classList.contains("hidden")) {
     closeChat()
   }
+})
+
+function toggleFullscreen(force?: boolean) {
+  const shouldEnable = force !== undefined ? force : !isFullscreen
+  isFullscreen = shouldEnable
+  overlay?.classList.toggle("fullscreen", shouldEnable)
+  overlay?.querySelector('.rag-chat-panel')?.classList.toggle("fullscreen", shouldEnable)
+  expandBtn?.classList.toggle("active", shouldEnable)
+}
+
+expandBtn?.addEventListener("click", () => {
+  toggleFullscreen()
 })
 
 // Settings panel toggle
@@ -133,6 +151,8 @@ const writingAssistantBtn = document.getElementById("rag-writing-assistant-btn")
 const writingPanel = document.getElementById("rag-writing-panel")
 const writingClose = document.getElementById("rag-writing-close")
 const writingBack = document.getElementById("rag-writing-back")
+const writingFormContainer = document.getElementById("rag-writing-form-container")
+const writingToggleButton = document.getElementById("rag-writing-toggle")
 
 writingAssistantBtn?.addEventListener("click", () => {
   writingPanel?.classList.toggle("hidden")
@@ -142,17 +162,26 @@ writingAssistantBtn?.addEventListener("click", () => {
   if (!writingPanel?.classList.contains("hidden")) {
     renderWritingSources()
     showWritingFollowup(writingConversationHistory.length > 0)
+  } else {
+    hideWritingAutocompleteMenu()
   }
 })
 
 writingClose?.addEventListener("click", () => {
   writingPanel?.classList.add("hidden")
   showWritingFollowup(false)
+  hideWritingAutocompleteMenu()
 })
 
 writingBack?.addEventListener("click", () => {
   writingPanel?.classList.add("hidden")
   showWritingFollowup(false)
+  hideWritingAutocompleteMenu()
+})
+
+writingToggleButton?.addEventListener("click", () => {
+  writingFormContainer?.classList.toggle("collapsed")
+  hideWritingAutocompleteMenu()
 })
 
 // Language toggle and translations
@@ -818,8 +847,6 @@ const writingAudienceInput = document.getElementById('rag-writing-audience') as 
 const writingPurposeInput = document.getElementById('rag-writing-purpose') as HTMLInputElement | null
 const writingQuestionsInput = document.getElementById('rag-writing-questions') as HTMLTextAreaElement | null
 const writingConstraintsInput = document.getElementById('rag-writing-constraints') as HTMLTextAreaElement | null
-const writingNotesInput = document.getElementById('rag-writing-notes') as HTMLTextAreaElement | null
-const writingGapsInput = document.getElementById('rag-writing-gaps') as HTMLTextAreaElement | null
 const writingGenerateBtn = document.getElementById('rag-writing-generate') as HTMLButtonElement | null
 const writingOutput = document.getElementById('rag-writing-output')
 const writingFollowupSection = document.getElementById('rag-writing-followup')
@@ -828,6 +855,8 @@ const writingFollowupBtn = document.getElementById('rag-writing-send-followup') 
 const writingApproveBtn = document.getElementById('rag-writing-approve') as HTMLButtonElement | null
 const writingSourceList = document.getElementById('rag-writing-source-list')
 const writingSourceFilter = document.getElementById('rag-writing-source-filter') as HTMLInputElement | null
+const writingLinkButton = document.getElementById('rag-writing-link-btn') as HTMLButtonElement | null
+const writingAutocompleteContainer = document.getElementById('rag-writing-autocomplete')
 
 type WritingTemplateKey = "summary" | "assistant" | "blog"
 const writingTemplates: Record<WritingTemplateKey, Partial<Record<string, string>>> = {
@@ -858,6 +887,10 @@ const writingSelectedSources = new Set<string>()
 let writingConversationHistory: Array<{ role: "user" | "assistant"; content: string }> = []
 let writingSessionBrief = ""
 let writingSessionSources: string[] = []
+let writingActiveField: HTMLInputElement | HTMLTextAreaElement | null = null
+let writingAutocompleteVisible = false
+let writingAutocompleteIndex = -1
+let writingWikilinkStart = -1
 
 function applyWritingTemplate(template: WritingTemplateKey) {
   const data = writingTemplates[template] || {}
@@ -914,14 +947,185 @@ function renderWritingSources() {
 
 writingSourceFilter?.addEventListener('input', () => renderWritingSources())
 
+function showWritingAutocompleteMenu(filter: string, target: HTMLInputElement | HTMLTextAreaElement) {
+  if (!writingAutocompleteContainer || !availableFiles.length) return
+  const normalizedFilter = filter.toLowerCase()
+  const filtered = availableFiles.filter(file => file.toLowerCase().includes(normalizedFilter)).slice(0, 12)
+
+  if (!filtered.length) {
+    writingAutocompleteContainer.innerHTML = '<div class="rag-autocomplete-empty">Keine Dateien gefunden</div>'
+  } else {
+    writingAutocompleteContainer.innerHTML = filtered
+      .map(
+        (file, idx) => `
+          <div class="rag-autocomplete-item" data-file="${file}">
+            <span class="rag-autocomplete-file">${file}</span>
+            <span class="rag-autocomplete-meta">↩︎</span>
+          </div>
+        `,
+      )
+      .join("")
+
+    writingAutocompleteContainer.querySelectorAll(".rag-autocomplete-item").forEach(item => {
+      item.addEventListener("click", () => {
+        const fileName = item.getAttribute("data-file")
+        if (fileName) {
+          insertWritingWikilink(fileName)
+        }
+      })
+    })
+  }
+
+  const rect = target.getBoundingClientRect()
+  const width = Math.min(Math.max(rect.width, 220), 360)
+  let left = rect.left
+  if (left + width > window.innerWidth - 16) {
+    left = window.innerWidth - width - 16
+  }
+  writingAutocompleteContainer.style.top = `${rect.bottom + 6}px`
+  writingAutocompleteContainer.style.left = `${left}px`
+  writingAutocompleteContainer.style.width = `${width}px`
+
+  writingAutocompleteContainer.classList.add("visible")
+  writingAutocompleteVisible = true
+  writingAutocompleteIndex = -1
+}
+
+function hideWritingAutocompleteMenu() {
+  if (!writingAutocompleteContainer) return
+  writingAutocompleteContainer.classList.remove("visible")
+  writingAutocompleteVisible = false
+  writingAutocompleteIndex = -1
+  writingWikilinkStart = -1
+}
+
+function insertWritingWikilink(fileName: string) {
+  const target = writingActiveField
+  if (!target) return
+  const value = target.value
+  const selectionStart = target.selectionStart ?? value.length
+  const selectionEnd = target.selectionEnd ?? selectionStart
+  const start = writingWikilinkStart >= 0 ? writingWikilinkStart : selectionStart
+  const beforeLink = value.substring(0, start)
+  const afterCursor = value.substring(selectionEnd)
+  target.value = `${beforeLink}[[${fileName}]]${afterCursor}`
+  const newCursor = beforeLink.length + fileName.length + 4
+  target.setSelectionRange(newCursor, newCursor)
+  target.dispatchEvent(new Event("input"))
+  hideWritingAutocompleteMenu()
+}
+
+function handleWritingFieldInput(field: HTMLInputElement | HTMLTextAreaElement) {
+  writingActiveField = field
+  const text = field.value
+  const cursorPos = field.selectionStart ?? 0
+  const beforeCursor = text.substring(0, cursorPos)
+  const match = beforeCursor.match(/\[\[([^\]]*)$/)
+
+  if (match) {
+    writingWikilinkStart = cursorPos - match[0].length
+    showWritingAutocompleteMenu(match[1], field)
+  } else {
+    hideWritingAutocompleteMenu()
+  }
+}
+
+function handleWritingAutocompleteKeydown(e: KeyboardEvent) {
+  if (!writingAutocompleteVisible || !writingAutocompleteContainer) return
+
+  const items = writingAutocompleteContainer.querySelectorAll(".rag-autocomplete-item")
+  if (e.key === "ArrowDown") {
+    e.preventDefault()
+    writingAutocompleteIndex = Math.min(writingAutocompleteIndex + 1, items.length - 1)
+  } else if (e.key === "ArrowUp") {
+    e.preventDefault()
+    writingAutocompleteIndex = Math.max(writingAutocompleteIndex - 1, 0)
+  } else if (e.key === "Enter" && writingAutocompleteIndex >= 0) {
+    e.preventDefault()
+    const selected = items[writingAutocompleteIndex]
+    const fileName = selected?.getAttribute("data-file")
+    if (fileName) {
+      insertWritingWikilink(fileName)
+    }
+    return
+  } else if (e.key === "Escape") {
+    e.preventDefault()
+    hideWritingAutocompleteMenu()
+    return
+  } else {
+    return
+  }
+
+  items.forEach((item, idx) => {
+    if (idx === writingAutocompleteIndex) {
+      item.classList.add("selected")
+      item.scrollIntoView({ block: "nearest" })
+    } else {
+      item.classList.remove("selected")
+    }
+  })
+}
+
+function attachWritingAutocomplete(field: HTMLInputElement | HTMLTextAreaElement | null) {
+  if (!field) return
+  field.addEventListener("focus", () => {
+    writingActiveField = field
+  })
+  field.addEventListener("input", () => handleWritingFieldInput(field))
+  field.addEventListener("keydown", (e) => handleWritingAutocompleteKeydown(e))
+}
+
+document.addEventListener("click", (event) => {
+  if (!writingAutocompleteContainer || !writingAutocompleteVisible) return
+  const target = event.target as Node
+  if (
+    writingAutocompleteContainer.contains(target) ||
+    (target instanceof Element && target.closest(".rag-writing-form")) ||
+    (target instanceof Element && target.closest(".rag-writing-followup"))
+  ) {
+    return
+  }
+  hideWritingAutocompleteMenu()
+})
+
+window.addEventListener("resize", () => hideWritingAutocompleteMenu())
+
+const writingAutocompleteTargets = [
+  writingDeliverableInput,
+  writingAudienceInput,
+  writingPurposeInput,
+  writingQuestionsInput,
+  writingConstraintsInput,
+  writingFollowupInput,
+]
+
+writingAutocompleteTargets.forEach(field => attachWritingAutocomplete(field))
+
+writingLinkButton?.addEventListener("click", () => {
+  let target =
+    writingActiveField ||
+    writingQuestionsInput ||
+    writingConstraintsInput ||
+    writingFollowupInput ||
+    writingPurposeInput
+  if (!target) return
+  const cursor = target.selectionStart ?? target.value.length
+  const value = target.value
+  target.value = `${value.substring(0, cursor)}[[${value.substring(cursor)}`
+  const newPos = cursor + 2
+  target.setSelectionRange(newPos, newPos)
+  target.focus()
+  writingActiveField = target
+  writingWikilinkStart = cursor
+  showWritingAutocompleteMenu("", target)
+})
+
 type WritingBrief = {
   deliverable: string
   audience: string
   purpose: string
   keyQuestions: string[]
   constraints: string
-  notes: string
-  gaps: string[]
   sources: string[]
 }
 
@@ -934,11 +1138,6 @@ function collectWritingBrief(): WritingBrief | null {
     .map(line => line.trim())
     .filter(Boolean)
   const constraints = writingConstraintsInput?.value.trim() || "Keine zusätzlichen Constraints"
-  const notes = writingNotesInput?.value.trim() || ""
-  const gaps = (writingGapsInput?.value || "")
-    .split("\n")
-    .map(line => line.trim())
-    .filter(Boolean)
   const sources = Array.from(writingSelectedSources)
 
   if (!deliverable) {
@@ -956,8 +1155,8 @@ function collectWritingBrief(): WritingBrief | null {
     writingQuestionsInput?.focus()
     return null
   }
-  if (!sources.length && !notes) {
-    alert("Wähle mindestens eine Quelle oder füge zusätzliche Notizen hinzu.")
+  if (!sources.length) {
+    alert("Wähle mindestens eine Quelle.")
     writingSourceFilter?.focus()
     return null
   }
@@ -968,8 +1167,6 @@ function collectWritingBrief(): WritingBrief | null {
     purpose,
     keyQuestions,
     constraints,
-    notes,
-    gaps,
     sources,
   }
 }
@@ -979,9 +1176,6 @@ function buildSessionBriefText(brief: WritingBrief): string {
   const sourcesText = brief.sources.length
     ? brief.sources.map(src => `[x] ${src}`).join("\n")
     : "[ ] (keine ausgewählten Dateien)"
-  const gapsText = brief.gaps.length
-    ? brief.gaps.map((gap, idx) => `${idx + 1}. ${gap}`).join("\n")
-    : "1. -"
 
   return `Session Brief
 - Deliverable: ${brief.deliverable}
@@ -992,10 +1186,7 @@ ${questionsText}
 - Constraints (length, POV, must/avoid):
 ${brief.constraints}
 - Sources:
-${sourcesText}
-${brief.notes ? `Anchors / Notes:\n${brief.notes}\n` : ""}
-- Gaps / Need from Claude:
-${gapsText}`.trim()
+${sourcesText}`.trim()
 }
 
 type WritingTrigger = "outline" | "followup" | "approve"
@@ -1511,6 +1702,7 @@ function convertMarkdownTables(content: string): string {
         const rows = tableLines.slice(2).map(parseRow)
 
         const tableHtml = [
+          '<div class="rag-md-table-wrapper">',
           '<table class="rag-md-table">',
           '<thead><tr>',
           ...headers.map(head => `<th>${head || '&nbsp;'}</th>`),
@@ -1527,6 +1719,7 @@ function convertMarkdownTables(content: string): string {
             }),
           '</tbody>',
           '</table>',
+          '</div>',
         ].join('')
 
         result.push(tableHtml)
