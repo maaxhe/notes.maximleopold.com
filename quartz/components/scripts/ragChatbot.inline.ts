@@ -1229,8 +1229,49 @@ document.addEventListener("click", (e) => {
 // Lade Dateien beim Start
 loadFiles()
 
+function normalizeSourcesList(sources: any[] = []) {
+  const seen = new Map<string, any>()
+  for (const source of sources ?? []) {
+    const key = (source?.source || source?.title || JSON.stringify(source)).toLowerCase()
+    const existing = seen.get(key)
+    if (!existing || (source?.score ?? 0) > (existing?.score ?? 0)) {
+      seen.set(key, source)
+    }
+  }
+  return Array.from(seen.values())
+}
+
+const CITATION_REGEX = /(?<!\[)\[([^\]]+)\](?!\])/g
+
+function enrichSourcesWithCitations(content: string, sources: any[] = []) {
+  CITATION_REGEX.lastIndex = 0
+  const normalized = normalizeSourcesList(sources)
+  const existingTitles = new Set(
+    normalized.map(src => (src?.title || "").trim().toLowerCase()),
+  )
+
+  let match
+  while ((match = CITATION_REGEX.exec(content)) !== null) {
+    const citation = match[1]?.trim()
+    if (!citation) continue
+    const normalizedCitation = citation.toLowerCase()
+    if (!existingTitles.has(normalizedCitation)) {
+      normalized.push({
+        title: citation,
+        category: "Zitiert im Text",
+        score: 0,
+        source: "",
+      })
+      existingTitles.add(normalizedCitation)
+    }
+  }
+
+  return normalized
+}
+
 // Hilfsfunktion: Formatiere Markdown
 function formatMarkdown(content: string, sources: any[] = []): string {
+  const normalizedSources = normalizeSourcesList(sources)
   // Formatiere Wikilinks [[File]] zu schönen Links
   let formatted = content.replace(/\[\[([^\]]+)\]\]/g, (_match, linkText) => {
     const slug = linkText.trim().replace(/\s+/g, '-')
@@ -1239,10 +1280,10 @@ function formatMarkdown(content: string, sources: any[] = []): string {
 
   // Formatiere Quellen-Zitate [Source Name] zu klickbaren Links
   // Wichtig: NUR Single-Bracket-Zitate, NICHT [[Wikilinks]]
-  if (sources.length > 0) {
+  if (normalizedSources.length > 0) {
     // Erstelle Mapping von Titel zu Source
     const sourceMap = new Map()
-    sources.forEach(source => {
+    normalizedSources.forEach(source => {
       const title = source.title || source.source?.split('/').pop()?.replace(/\.md$/, '') || 'Unknown'
       sourceMap.set(title, source)
     })
@@ -1282,7 +1323,10 @@ function formatMarkdown(content: string, sources: any[] = []): string {
 
 // Hilfsfunktion: Füge Quellen zur Nachricht hinzu
 function addSourcesToMessage(messageDiv: HTMLElement, sources: any[]) {
-  // Keine Duplikat-Filterung mehr nötig - Server macht das schon!
+  const normalizedSources = normalizeSourcesList(sources)
+  if (!normalizedSources.length) {
+    return
+  }
   const sourcesDiv = document.createElement("div")
   sourcesDiv.className = "rag-message-sources"
 
@@ -1291,9 +1335,9 @@ function addSourcesToMessage(messageDiv: HTMLElement, sources: any[]) {
   sourcesTitle.textContent = t('sourcesTitle')
   sourcesDiv.appendChild(sourcesTitle)
 
-  console.log(`📚 Zeige ${sources.length} Quellen`)
+  console.log(`📚 Zeige ${normalizedSources.length} Quellen`)
 
-  sources.forEach((source, idx) => {
+  normalizedSources.forEach((source, idx) => {
     const sourceItem = document.createElement("div")
     sourceItem.className = "rag-source-item"
 
@@ -1384,19 +1428,19 @@ function finalizeAssistantInteraction(
   assistantText: string,
   sources: any[] = [],
 ) {
-  if (sources && sources.length > 0) {
-    addSourcesToMessage(messageDiv, sources)
-  }
+  const preparedSources = enrichSourcesWithCitations(assistantText, sources)
+  addSourcesToMessage(messageDiv, preparedSources)
 
   addCopyButton(contentDiv, assistantText)
 
+  const storedSources = normalizeSourcesList(preparedSources)
   conversationHistory.push(
     { role: "user", content: userMessage },
-    { role: "assistant", content: assistantText, sources },
+    { role: "assistant", content: assistantText, sources: storedSources },
   )
 
-  if (sources && sources.length > 0) {
-    sources.forEach(source => {
+  if (storedSources.length > 0) {
+    storedSources.forEach(source => {
       const key = source.source || source.title
       if (key && !allCitedSources.has(key)) {
         allCitedSources.set(key, source)
@@ -1708,13 +1752,13 @@ async function sendMessage() {
 
               if (parsed.type === 'text') {
                 fullResponse += parsed.content
-                // Formatiere und zeige Text live (ohne Quellen-Links, die kommen später)
-                contentDiv.innerHTML = formatMarkdown(fullResponse, sources)
+                const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
+                contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
                 messagesContainer!.scrollTop = messagesContainer!.scrollHeight
               } else if (parsed.type === 'sources') {
-                sources = parsed.sources
-                // Re-formatiere Text mit Quellen-Links jetzt, da wir die Quellen haben
-                contentDiv.innerHTML = formatMarkdown(fullResponse, sources)
+                sources = normalizeSourcesList(parsed.sources || [])
+                const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
+                contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
               } else if (parsed.type === 'error') {
                 throw new Error(parsed.error)
               }
@@ -1779,7 +1823,7 @@ async function fallbackToChatEndpoint(enrichedMessage: string, userMessage: stri
 
     const data = await response.json()
     const assistantText = data.response || "Der Server hat keine Antwort zurückgegeben."
-    const sources = data.sources || []
+    const sources = normalizeSourcesList(data.sources || [])
 
     const rendered = renderAssistantResponse(assistantText, sources)
     if (!rendered) {

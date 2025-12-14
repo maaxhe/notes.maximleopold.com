@@ -510,9 +510,9 @@ ${context}`
 
     // Filtere: Nur tatsächlich zitierte Quellen
     const referencedChunks = filterReferencedSources(fullText, finalChunks)
+    const uniqueReferenced = dedupeChunksBySource(referencedChunks)
 
-    // Extrahiere Quellen (nur die zitierten!)
-    const sources = referencedChunks.map(chunk => ({
+    const sources = uniqueReferenced.map(chunk => ({
       title: chunk.metadata.title,
       category: chunk.metadata.category,
       type: chunk.metadata.type,
@@ -534,6 +534,18 @@ ${context}`
     res.end()
   }
 })
+
+function dedupeChunksBySource(chunks: Array<DocumentChunk & { score: number }>) {
+  const seen = new Map<string, DocumentChunk & { score: number }>()
+  for (const chunk of chunks) {
+    const key = chunk.metadata.source || chunk.metadata.title || chunk.id
+    const existing = seen.get(key)
+    if (!existing || (chunk.score ?? 0) > (existing.score ?? 0)) {
+      seen.set(key, chunk)
+    }
+  }
+  return Array.from(seen.values())
+}
 
 /**
  * Chat Endpoint mit RAG (Non-Streaming für Kompatibilität)
@@ -673,7 +685,8 @@ ${context}`
     const referencedChunks = filterReferencedSources(assistantMessage, finalChunks)
 
     // Extrahiere verwendete Quellen (nur die zitierten!)
-    const sources = referencedChunks.map(chunk => ({
+    const uniqueReferenced = dedupeChunksBySource(referencedChunks)
+    const sources = uniqueReferenced.map(chunk => ({
       title: chunk.metadata.title,
       category: chunk.metadata.category,
       type: chunk.metadata.type,
