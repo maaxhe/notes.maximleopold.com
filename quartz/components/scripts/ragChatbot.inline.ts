@@ -79,6 +79,32 @@ settingsBtn?.addEventListener("click", () => {
   settingsPanel?.classList.toggle("hidden")
 })
 
+// Language toggle
+let currentLanguage = localStorage.getItem("rag-language") || "de"
+const langBtn = document.getElementById("rag-chat-lang")
+const langText = langBtn?.querySelector(".rag-lang-text")
+
+// Update button text based on current language
+function updateLanguageButton() {
+  if (langText) {
+    langText.textContent = currentLanguage === "de" ? "EN" : "DE"
+  }
+}
+
+updateLanguageButton()
+
+langBtn?.addEventListener("click", () => {
+  // Toggle language
+  currentLanguage = currentLanguage === "de" ? "en" : "de"
+  localStorage.setItem("rag-language", currentLanguage)
+  updateLanguageButton()
+
+  // Show feedback
+  const langName = currentLanguage === "de" ? "Deutsch" : "English"
+  setStatus(`Sprache gewechselt zu ${langName}`, "info")
+  setTimeout(() => setStatus(""), 2000)
+})
+
 // Clear chat button
 const clearBtn = document.getElementById("rag-chat-clear")
 
@@ -500,9 +526,19 @@ function addMessage(
       const sourceCategory = source.category || ""
       const relevance = Math.round(source.score * 100)
 
-      // Erstelle URL-freundlichen Slug aus dem Titel
-      const slug = sourceTitle.trim().replace(/\s+/g, '-')
-      const sourceUrl = `/${slug}`
+      // Erstelle URL aus dem source-Pfad
+      let sourceUrl = "/"
+      if (source.source) {
+        // Entferne 'content/' am Anfang und '.md' am Ende
+        const path = source.source.replace(/^content\//, '').replace(/\.md$/, '')
+        // Konvertiere zu URL-freundlichem Format (Leerzeichen zu Bindestrichen)
+        const slug = path.split('/').map(part => part.trim().replace(/\s+/g, '-')).join('/')
+        sourceUrl = `/${slug}`
+      } else {
+        // Fallback: verwende Titel
+        const slug = sourceTitle.trim().replace(/\s+/g, '-')
+        sourceUrl = `/${slug}`
+      }
 
       sourceItem.innerHTML = `
             <span class="rag-source-number">[${idx + 1}]</span>
@@ -602,6 +638,7 @@ async function sendMessage() {
       body: JSON.stringify({
         message: enrichedMessage,
         conversationHistory,
+        language: currentLanguage, // Füge Sprache hinzu
       }),
     })
 

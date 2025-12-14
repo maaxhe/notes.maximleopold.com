@@ -54,6 +54,9 @@ export default ((opts?: Partial<Options>) => {
                 </div>
               </div>
               <div class="rag-chat-header-actions">
+                <button class="rag-chat-lang" id="rag-chat-lang" aria-label="Switch language" title="Sprache wechseln">
+                  <span class="rag-lang-text">EN</span>
+                </button>
                 <button class="rag-chat-clear" id="rag-chat-clear" aria-label="Clear chat" title="Chat löschen">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="3 6 5 6 21 6"></polyline>

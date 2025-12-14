@@ -223,7 +223,7 @@ app.get("/health", (req, res) => {
  */
 app.post("/chat", async (req, res) => {
   try {
-    const { message, conversationHistory = [] } = req.body
+    const { message, conversationHistory = [], language = "de" } = req.body
 
     if (!message) {
       return res.status(400).json({ error: "Message ist erforderlich" })
@@ -283,7 +283,8 @@ HAUPTPUNKTE ANGEFORDERT:
 - Keine Details, keine Erklärungen`
     }
 
-    const systemPrompt = `Du bist Mika, ein hilfreicher wissenschaftlicher Assistent, der Fragen zur Bachelorarbeit über auditorische Streams im Gehirn beantwortet.
+    const systemPrompt = language === "de"
+      ? `Du bist Mika, ein hilfreicher wissenschaftlicher Assistent, der Fragen zur Bachelorarbeit über auditorische Streams im Gehirn beantwortet.
 
 WICHTIGE REGELN:
 1. Beantworte Fragen ausschließlich basierend auf den bereitgestellten Quellen
@@ -296,6 +297,20 @@ WICHTIGE REGELN:
 ${specificInstructions}
 
 KONTEXT AUS DEN DOKUMENTEN:
+${context}`
+      : `You are Mika, a helpful scientific assistant answering questions about the bachelor thesis on auditory streams in the brain.
+
+IMPORTANT RULES:
+1. Answer questions exclusively based on the provided sources
+2. Be EXTREMELY CONCISE - no lengthy explanations
+3. Always cite sources (e.g. "[Source 1]" or "[Source 2, 3]")
+4. If information is not in the sources, state this clearly
+5. Use scientific but accessible language
+6. For contradictory information, briefly mention both perspectives
+7. Answer in English
+${specificInstructions}
+
+CONTEXT FROM DOCUMENTS:
 ${context}`
 
     // Bereite Konversationshistorie vor
@@ -328,6 +343,7 @@ ${context}`
       type: chunk.metadata.type,
       score: chunk.score,
       excerpt: chunk.content.substring(0, 200) + "...",
+      source: chunk.metadata.source, // Füge den tatsächlichen Dateipfad hinzu
     }))
 
     console.log(`✅ Antwort generiert (${assistantMessage.length} Zeichen)`)
