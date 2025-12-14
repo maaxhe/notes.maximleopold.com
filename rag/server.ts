@@ -321,16 +321,14 @@ ${context}`
     const assistantMessage =
       response.content[0].type === "text" ? response.content[0].text : ""
 
-    // Extrahiere verwendete Quellen
-    const sources = relevantChunks
-      .filter(chunk => chunk.score > 0.5) // Nur wirklich relevante
-      .map(chunk => ({
-        title: chunk.metadata.title,
-        category: chunk.metadata.category,
-        type: chunk.metadata.type,
-        score: chunk.score,
-        excerpt: chunk.content.substring(0, 200) + "...",
-      }))
+    // Extrahiere verwendete Quellen (alle Chunks, die an Claude gesendet wurden)
+    const sources = relevantChunks.map(chunk => ({
+      title: chunk.metadata.title,
+      category: chunk.metadata.category,
+      type: chunk.metadata.type,
+      score: chunk.score,
+      excerpt: chunk.content.substring(0, 200) + "...",
+    }))
 
     console.log(`✅ Antwort generiert (${assistantMessage.length} Zeichen)`)
 

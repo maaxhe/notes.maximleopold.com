@@ -500,9 +500,13 @@ function addMessage(
       const sourceCategory = source.category || ""
       const relevance = Math.round(source.score * 100)
 
+      // Erstelle URL-freundlichen Slug aus dem Titel
+      const slug = sourceTitle.trim().replace(/\s+/g, '-')
+      const sourceUrl = `/${slug}`
+
       sourceItem.innerHTML = `
             <span class="rag-source-number">[${idx + 1}]</span>
-            <span class="rag-source-title">${sourceTitle}</span>
+            <a href="${sourceUrl}" class="rag-source-title" target="_blank" rel="noopener noreferrer">${sourceTitle}</a>
             <span class="rag-source-meta">${sourceCategory} • ${relevance}% relevant</span>
           `
       sourcesDiv.appendChild(sourceItem)

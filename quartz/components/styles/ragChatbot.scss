@@ -499,7 +499,15 @@
       .rag-source-title {
         font-weight: 500;
         flex-grow: 1;
-        color: var(--dark);
+        color: var(--secondary);
+        text-decoration: none;
+        transition: all 0.2s ease;
+        cursor: pointer;
+
+        &:hover {
+          color: var(--tertiary);
+          text-decoration: underline;
+        }
       }
 
       .rag-source-meta {
