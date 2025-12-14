@@ -1,17 +1,36 @@
+const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+const DEFAULT_REMOTE_API = "https://server.maximleopold.com/rag"
 // Auto-detect API URL based on environment
-const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-  ? "http://localhost:3030"
-  : "https://server.maximleopold.com/rag"
+const API_URL = isLocalhost ? "http://localhost:3030" : DEFAULT_REMOTE_API
+
+function normalizeBase(url: string | null | undefined) {
+  if (!url) return null
+  return url.replace(/\/+$/, "")
+}
 
 const apiBaseCandidates = (() => {
-  const normalized = API_URL.replace(/\/+$/, "")
-  const candidates = [normalized]
-  if (normalized.endsWith("/rag")) {
-    candidates.push(normalized.replace(/\/rag$/, ""))
-  } else {
-    candidates.push(`${normalized}/rag`)
+  const candidates = new Set<string>()
+  const initial = normalizeBase(API_URL)
+  if (initial) {
+    candidates.add(initial)
+    if (initial.endsWith("/rag")) {
+      candidates.add(initial.replace(/\/rag$/, ""))
+    } else {
+      candidates.add(`${initial}/rag`)
+    }
   }
-  return Array.from(new Set(candidates))
+
+  if (!isLocalhost) {
+    const sameOrigin = normalizeBase(`${window.location.origin}/rag`)
+    const sameOriginRoot = normalizeBase(window.location.origin)
+    if (sameOrigin) candidates.add(sameOrigin)
+    if (sameOriginRoot) candidates.add(sameOriginRoot)
+
+    const remoteRoot = normalizeBase(DEFAULT_REMOTE_API.replace(/\/rag$/, ""))
+    if (remoteRoot) candidates.add(remoteRoot)
+  }
+
+  return Array.from(candidates)
 })()
 
 let activeApiBase = apiBaseCandidates[0]
