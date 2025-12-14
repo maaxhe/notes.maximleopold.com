@@ -1208,10 +1208,11 @@
   .rag-message-sources {
     margin-top: 0.75rem;
     padding: 0.75rem;
-    background: var(--light);
+    background: color-mix(in srgb, var(--light) 85%, transparent);
     border-radius: 8px;
-    border: 1px solid var(--gray);
+    border: 1px solid color-mix(in srgb, var(--gray) 60%, transparent);
     font-size: 0.85rem;
+    transition: background 0.3s ease, border 0.3s ease, color 0.3s ease;
 
     .rag-sources-title {
       font-weight: 600;
@@ -1221,43 +1222,32 @@
 
     .rag-source-item {
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.4rem 0;
+      flex-direction: column;
+      gap: 0.15rem;
+      padding: 0.5rem 0;
       border-bottom: 1px solid var(--lightgray);
 
       &:last-child {
         border-bottom: none;
       }
 
-      .rag-source-number {
-        background: var(--secondary);
-        color: var(--light);
-        padding: 0.1rem 0.4rem;
-        border-radius: 4px;
-        font-weight: 600;
-        font-size: 0.75rem;
-        flex-shrink: 0;
-      }
-
       .rag-source-title {
-        font-weight: 500;
-        flex-grow: 1;
-        color: var(--secondary);
-        text-decoration: none;
-        transition: all 0.2s ease;
-        cursor: pointer;
-
-        &:hover {
-          color: var(--tertiary);
-          text-decoration: underline;
+        font-weight: 600;
+        a {
+          color: var(--secondary);
+          text-decoration: none;
+          transition: color 0.2s ease;
+          &:hover {
+            color: var(--tertiary);
+            text-decoration: underline;
+          }
         }
       }
 
       .rag-source-meta {
+        font-size: 0.78rem;
         color: var(--gray);
-        font-size: 0.8rem;
-        flex-shrink: 0;
+        font-style: italic;
       }
     }
   }

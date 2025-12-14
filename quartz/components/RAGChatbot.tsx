@@ -12,6 +12,25 @@ interface Message {
     type: string
     score: number
     excerpt: string
+    source?: string
+    url?: string
+    id?: string
+    citation?: {
+      label: string
+      shortLabel: string
+      authors: string
+      year: string
+      title: string
+      venue: string
+    }
+    bibliography?: {
+      authors: string
+      year: string
+      title: string
+      venue: string
+      url?: string
+    }
+    chunkIds?: string[]
   }>
 }
 

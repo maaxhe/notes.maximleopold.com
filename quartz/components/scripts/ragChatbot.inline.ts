@@ -432,6 +432,110 @@ interface ChatSession {
 let currentSessionId: string | null = null
 let allCitedSources: Map<string, any> = new Map() // Global citation tracking
 
+type ParsedSourceMeta = {
+  authors: string
+  year: string
+  title: string
+  venue: string
+  label: string
+  shortLabel: string
+  url: string
+}
+
+const INTERNAL_SOURCE_HOSTS = ["notes.maximleopold.com", "maximleopold.com", "localhost", "127.0.0.1"]
+const sourceMetaCache = new WeakMap<object, ParsedSourceMeta | null>()
+
+function normalizeCitationKeyForClient(value?: string) {
+  return (value || "")
+    .toLowerCase()
+    .replace(/[\[\]\(\)\.,]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+}
+
+function buildUrlFromSourcePath(path?: string, fallbackTitle?: string) {
+  if (!path && !fallbackTitle) return "/"
+  if (path?.startsWith("http")) {
+    return path
+  }
+  const base = (path || fallbackTitle || "")
+    .replace(/^content\//i, "")
+    .replace(/\.md$/i, "")
+  const slug = base
+    .split("/")
+    .map(segment =>
+      segment
+        .trim()
+        .replace(/\s+/g, "-")
+        .replace(/&/g, "-and-")
+        .replace(/%/g, "-percent")
+        .replace(/\?/g, "")
+        .replace(/#/g, "")
+    )
+    .join("/")
+  return slug.startsWith("/") ? slug : `/${slug}`
+}
+
+function formatSourceUrlForDisplay(url: string) {
+  if (!url) return ""
+  try {
+    const parsed = new URL(url, window.location.origin)
+    if (parsed.origin === window.location.origin) {
+      return parsed.pathname
+    }
+    return parsed.hostname.replace(/^www\./, "")
+  } catch {
+    return url
+  }
+}
+
+function parseSourceMeta(source: any): ParsedSourceMeta | null {
+  if (!source || typeof source !== "object") return null
+  if (sourceMetaCache.has(source)) {
+    return sourceMetaCache.get(source) || null
+  }
+
+  const citation = source.citation || source.bibliography || {}
+  const rawTitle =
+    citation.label ||
+    source.title ||
+    source.source?.split("/").pop()?.replace(/\.md$/, "") ||
+    "Unbekannte Quelle"
+  const venue =
+    citation.venue ||
+    source.bibliography?.venue ||
+    source.category?.replace(/\.md$/i, "") ||
+    "Internal Notes"
+  const authors = citation.authors || rawTitle
+  const year = citation.year || ""
+  const title = citation.title || rawTitle
+  const url = source.url || buildUrlFromSourcePath(source.source, rawTitle)
+
+  if (url.startsWith("http")) {
+    const lower = url.toLowerCase()
+    if (INTERNAL_SOURCE_HOSTS.some(host => lower.includes(host))) {
+      sourceMetaCache.set(source, null)
+      return null
+    }
+  }
+
+  const label = citation.label || rawTitle
+  const shortLabel = citation.shortLabel || (year ? `${authors.split(/[,&]/)[0].trim()}, ${year}` : title)
+
+  const meta: ParsedSourceMeta = {
+    authors,
+    year,
+    title,
+    venue,
+    label,
+    shortLabel,
+    url,
+  }
+
+  sourceMetaCache.set(source, meta)
+  return meta
+}
+
 // Lade Chat-Historie aus localStorage
 function loadChatHistory(): ChatSession[] {
   try {
@@ -612,7 +716,7 @@ historySearch?.addEventListener('input', (e) => {
 function renderCitationManager() {
   if (!citationStats || !citationList) return
 
-  const sources = Array.from(allCitedSources.values())
+  const sources = Array.from(allCitedSources.values()).filter(source => parseSourceMeta(source))
 
   citationStats.innerHTML = `
     <div class="rag-citation-stat">
@@ -628,11 +732,13 @@ function renderCitationManager() {
   }
 
   sources.forEach((source, idx) => {
+    const meta = parseSourceMeta(source)
+    if (!meta) return
     const item = document.createElement('div')
     item.className = 'rag-citation-item'
     item.innerHTML = `
       <span class="rag-citation-number">[${idx + 1}]</span>
-      <span class="rag-citation-title">${source.title || 'Unknown'}</span>
+      <span class="rag-citation-title">${meta.authors}${meta.year ? ` (${meta.year})` : ""} – ${meta.title}</span>
     `
     citationList.appendChild(item)
   })
@@ -655,31 +761,44 @@ document.getElementById('rag-export-list')?.addEventListener('click', () => {
 })
 
 function generateBibTeX(sources: any[]): string {
-  return sources.map((source, idx) => {
-    const title = source.title || 'Unknown'
-    const year = title.match(/\((\d{4})\)/) ? title.match(/\((\d{4})\)/)[1] : '2024'
-    const authors = title.split(/\d{4}/)[0].trim().replace(/\(.*\)/, '').trim()
-
-    return `@article{source${idx + 1},
-  title={${title}},
-  author={${authors}},
-  year={${year}},
-  note={Source: ${source.source || 'Unknown'}}
+  return sources
+    .map((source, idx) => {
+      const meta = parseSourceMeta(source)
+      if (!meta) return null
+      const url = source.url || source.source || meta.url
+      return `@article{source${idx + 1},
+  title={${meta.title}},
+  author={${meta.authors}},
+  year={${meta.year || "n.d."}},
+  note={Source: ${url || "unknown"}}
 }`
-  }).join('\n\n')
+    })
+    .filter(Boolean)
+    .join('\n\n')
 }
 
 function generateAPA(sources: any[]): string {
-  return sources.map(source => {
-    const title = source.title || 'Unknown'
-    return `${title}. Retrieved from ${source.source || 'Unknown'}`
-  }).join('\n\n')
+  return sources
+    .map(source => {
+      const meta = parseSourceMeta(source)
+      if (!meta) return null
+      const url = source.url || source.source || meta.url
+      return `${meta.authors}${meta.year ? ` (${meta.year})` : ""}. ${meta.title}. ${meta.venue}. Retrieved from ${url || "unknown"}`
+    })
+    .filter(Boolean)
+    .join('\n\n')
 }
 
 function generateSimpleList(sources: any[]): string {
-  return sources.map((source, idx) => {
-    return `[${idx + 1}] ${source.title || 'Unknown'}\n    ${source.source || 'Unknown'}`
-  }).join('\n\n')
+  return sources
+    .map((source, idx) => {
+      const meta = parseSourceMeta(source)
+      if (!meta) return null
+      const url = source.url || source.source || meta.url
+      return `[${idx + 1}] ${meta.authors}${meta.year ? ` (${meta.year})` : ""} – ${meta.title}\n    ${url || ""}`
+    })
+    .filter(Boolean)
+    .join('\n\n')
 }
 
 function downloadFile(filename: string, content: string) {
@@ -1230,6 +1349,10 @@ document.addEventListener("click", (e) => {
 loadFiles()
 
 function canonicalSourceKey(source: any) {
+  if (source?.id) {
+    return String(source.id)
+  }
+
   const pathKey = source?.source
     ? source.source
         .replace(/^content\//, "")
@@ -1252,8 +1375,40 @@ function normalizeSourcesList(sources: any[] = []) {
     const key = canonicalSourceKey(source)
     if (!key) continue
     const existing = seen.get(key)
-    if (!existing || (source?.score ?? 0) > (existing?.score ?? 0)) {
-      seen.set(key, source)
+    if (!existing) {
+      const cloned = { ...source }
+      if (source?.chunkIds) {
+        cloned.chunkIds = Array.from(new Set(source.chunkIds))
+      }
+      seen.set(key, cloned)
+    } else {
+      const merged = { ...existing }
+      const chunkIds = [
+        ...(existing.chunkIds ?? []),
+        ...(source?.chunkIds ?? []),
+      ]
+      if (chunkIds.length) {
+        merged.chunkIds = Array.from(new Set(chunkIds))
+      }
+      if ((source?.score ?? 0) > (existing?.score ?? 0)) {
+        Object.assign(merged, source)
+        if (chunkIds.length) {
+          merged.chunkIds = Array.from(new Set(chunkIds))
+        }
+      }
+      if (source?.citation && !existing?.citation) {
+        merged.citation = source.citation
+      }
+      if (source?.bibliography && !existing?.bibliography) {
+        merged.bibliography = source.bibliography
+      }
+      if (!merged.url && source?.url) {
+        merged.url = source.url
+      }
+      if (!merged.source && source?.source) {
+        merged.source = source.source
+      }
+      seen.set(key, merged)
     }
   }
   return Array.from(seen.values())
@@ -1269,6 +1424,10 @@ function enrichSourcesWithCitations(content: string, sources: any[] = []) {
 // Hilfsfunktion: Formatiere Markdown
 function formatMarkdown(content: string, sources: any[] = []): string {
   const normalizedSources = normalizeSourcesList(sources)
+  const sourceEntries = normalizedSources
+    .map(source => ({ source, meta: parseSourceMeta(source) }))
+    .filter(entry => entry.meta) as Array<{ source: any; meta: ParsedSourceMeta }>
+
   // Formatiere Wikilinks [[File]] zu schönen Links
   let formatted = content.replace(/\[\[([^\]]+)\]\]/g, (_match, linkText) => {
     const slug = linkText.trim().replace(/\s+/g, '-')
@@ -1277,33 +1436,32 @@ function formatMarkdown(content: string, sources: any[] = []): string {
 
   // Formatiere Quellen-Zitate [Source Name] zu klickbaren Links
   // Wichtig: NUR Single-Bracket-Zitate, NICHT [[Wikilinks]]
-  if (normalizedSources.length > 0) {
-    // Erstelle Mapping von Titel zu Source
-    const sourceMap = new Map()
-    normalizedSources.forEach(source => {
-      const title = source.title || source.source?.split('/').pop()?.replace(/\.md$/, '') || 'Unknown'
-      sourceMap.set(title, source)
+  if (sourceEntries.length > 0) {
+    const citationIndex = new Map<string, ParsedSourceMeta>()
+    sourceEntries.forEach(({ meta, source }) => {
+      const candidates = [
+        normalizeCitationKeyForClient(source.title),
+        normalizeCitationKeyForClient(meta.label),
+        normalizeCitationKeyForClient(meta.shortLabel),
+        normalizeCitationKeyForClient(meta.title),
+      ]
+      candidates.forEach(key => {
+        if (key) {
+          citationIndex.set(key, meta)
+        }
+      })
     })
 
-    // Ersetze [Source Name] mit klickbaren Citations (aber NICHT [[Wikilinks]])
     formatted = formatted.replace(/(?<!\[)\[([^\]]+)\](?!\])/g, (match, citationText) => {
-      const source = sourceMap.get(citationText.trim())
-      if (source && source.source) {
-        // Generiere URL mit Quartz-Slug-Logik
-        const path = source.source.replace(/^content\//, '').replace(/\.md$/, '')
-        const slug = path.split('/').map(segment =>
-          segment
-            .replace(/\s/g, '-')
-            .replace(/&/g, '-and-')
-            .replace(/%/g, '-percent')
-            .replace(/\?/g, '')
-            .replace(/#/g, '')
-        ).join('/')
-        const url = `/${slug}`
-
-        return `<a href="${url}" class="rag-source-cite" target="_blank" rel="noopener noreferrer" title="${source.title}">[${citationText}]</a>`
+      const key = normalizeCitationKeyForClient(citationText)
+      const meta = citationIndex.get(key)
+      if (!meta) {
+        return match
       }
-      return match // Nicht-Source Zitate unverändert lassen
+      const label = meta.year ? `${meta.authors}, ${meta.year}` : meta.title
+      const citation = `(${label})`
+      const href = meta.url || "#"
+      return `<a href="${href}" class="rag-source-cite" target="_blank" rel="noopener noreferrer">${citation}</a>`
     })
   }
 
@@ -1321,9 +1479,13 @@ function formatMarkdown(content: string, sources: any[] = []): string {
 // Hilfsfunktion: Füge Quellen zur Nachricht hinzu
 function addSourcesToMessage(messageDiv: HTMLElement, sources: any[]) {
   const normalizedSources = normalizeSourcesList(sources)
+    .map(source => ({ source, meta: parseSourceMeta(source) }))
+    .filter(entry => entry.meta) as Array<{ source: any; meta: ParsedSourceMeta }>
+
   if (!normalizedSources.length) {
     return
   }
+
   const sourcesDiv = document.createElement("div")
   sourcesDiv.className = "rag-message-sources"
 
@@ -1334,32 +1496,21 @@ function addSourcesToMessage(messageDiv: HTMLElement, sources: any[]) {
 
   console.log(`📚 Zeige ${normalizedSources.length} Quellen`)
 
-  normalizedSources.forEach((source, idx) => {
+  normalizedSources.forEach(({ source, meta }) => {
     const sourceItem = document.createElement("div")
     sourceItem.className = "rag-source-item"
 
-    const sourceTitle = source.title || "Unbekannt"
-    const sourceCategory = source.category || ""
-    const relevance = Math.round(source.score * 100)
-
-    let sourceUrl = "/"
-    if (source.source) {
-      const path = source.source.replace(/^content\//, '').replace(/\.md$/, '')
-      const slug = path.split('/').map(segment =>
-        segment
-          .replace(/\s/g, '-')
-          .replace(/&/g, '-and-')
-          .replace(/%/g, '-percent')
-          .replace(/\?/g, '')
-          .replace(/#/g, '')
-      ).join('/')
-      sourceUrl = `/${slug}`
-    }
+    const url = meta.url || "/"
+    const venueText = meta.venue ? `<div class="rag-source-meta">${meta.venue}</div>` : ""
+    const label = meta.year ? `${meta.authors} (${meta.year})` : meta.authors
 
     sourceItem.innerHTML = `
-      <span class="rag-source-number">[${idx + 1}]</span>
-      <a href="${sourceUrl}" class="rag-source-title" target="_blank" rel="noopener noreferrer">${sourceTitle}</a>
-      <span class="rag-source-meta">${sourceCategory} • ${relevance}% relevant</span>
+      <div class="rag-source-title">
+        <a href="${url}" target="_blank" rel="noopener noreferrer">
+          ${label}${meta.title ? ` – ${meta.title}` : ""}
+        </a>
+      </div>
+      ${venueText}
     `
     sourcesDiv.appendChild(sourceItem)
   })
@@ -1438,9 +1589,11 @@ function finalizeAssistantInteraction(
 
   if (storedSources.length > 0) {
     storedSources.forEach(source => {
-      const key = source.source || source.title
+      const meta = parseSourceMeta(source)
+      if (!meta) return
+      const key = source.id || source.source || source.title
       if (key && !allCitedSources.has(key)) {
-        allCitedSources.set(key, source)
+        allCitedSources.set(key, { ...source })
       }
     })
     console.log(`📖 Citation Manager: ${allCitedSources.size} Quellen gesammelt`)
@@ -1539,76 +1692,7 @@ function addMessage(
 
   // Füge Quellen hinzu, falls vorhanden
   if (sources && sources.length > 0) {
-    const sourcesDiv = document.createElement("div")
-    sourcesDiv.className = "rag-message-sources"
-
-    const sourcesTitle = document.createElement("div")
-    sourcesTitle.className = "rag-sources-title"
-    sourcesTitle.textContent = t('sourcesTitle')
-    sourcesDiv.appendChild(sourcesTitle)
-
-    // Filtere Duplikate: Zeige jede Datei nur einmal (mit höchstem Score)
-    const uniqueSources = sources.reduce((acc: any[], source: any) => {
-      // Finde existierende Quelle mit demselben Pfad
-      const existingIndex = acc.findIndex(s => s.source === source.source)
-
-      if (existingIndex === -1) {
-        // Neue Quelle hinzufügen
-        acc.push(source)
-      } else {
-        // Verwende den höheren Score
-        if (source.score > acc[existingIndex].score) {
-          acc[existingIndex] = source
-        }
-      }
-      return acc
-    }, [])
-
-    console.log(`📚 Zeige ${uniqueSources.length} eindeutige Quellen (von ${sources.length} Chunks)`)
-
-    uniqueSources.forEach((source, idx) => {
-      const sourceItem = document.createElement("div")
-      sourceItem.className = "rag-source-item"
-
-      const sourceTitle = source.title || "Unbekannt"
-      const sourceCategory = source.category || ""
-      const relevance = Math.round(source.score * 100)
-
-      // Erstelle URL aus dem source-Pfad mit Quartz-Slug-Logik
-      let sourceUrl = "/"
-      if (source.source) {
-        // Entferne 'content/' am Anfang und '.md' am Ende
-        const path = source.source.replace(/^content\//, '').replace(/\.md$/, '')
-        // Verwende Quartz-Slug-Logik: sluggify jedes Segment
-        const slug = path.split('/').map(segment =>
-          segment
-            .replace(/\s/g, '-')       // Leerzeichen zu Bindestrichen
-            .replace(/&/g, '-and-')    // & zu -and-
-            .replace(/%/g, '-percent') // % zu -percent
-            .replace(/\?/g, '')        // ? entfernen
-            .replace(/#/g, '')         // # entfernen
-        ).join('/')
-        sourceUrl = `/${slug}`
-      } else {
-        // Fallback: verwende Titel mit gleicher Logik
-        const slug = sourceTitle
-          .replace(/\s/g, '-')
-          .replace(/&/g, '-and-')
-          .replace(/%/g, '-percent')
-          .replace(/\?/g, '')
-          .replace(/#/g, '')
-        sourceUrl = `/${slug}`
-      }
-
-      sourceItem.innerHTML = `
-            <span class="rag-source-number">[${idx + 1}]</span>
-            <a href="${sourceUrl}" class="rag-source-title" target="_blank" rel="noopener noreferrer">${sourceTitle}</a>
-            <span class="rag-source-meta">${sourceCategory} • ${relevance}% relevant</span>
-          `
-      sourcesDiv.appendChild(sourceItem)
-    })
-
-    messageDiv.appendChild(sourcesDiv)
+    addSourcesToMessage(messageDiv, sources)
   }
 
   if (messagesContainer) {

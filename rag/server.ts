@@ -210,6 +210,196 @@ ${chunk.content}
     .join("\n---\n\n")
 }
 
+const INTERNAL_SOURCE_PATTERNS = [
+  "notes.maximleopold.com",
+  "maximleopold.com",
+  "server.maximleopold.com",
+  "localhost",
+  "127.0.0.1",
+]
+
+const CITATION_REGEX = /(?<!\[)\[([^\]\[]+)\](?!\])/g
+
+interface ChunkSourceMetadata {
+  rawTitle: string
+  authors: string
+  year: string
+  title: string
+  venue: string
+  citationLabel: string
+  shortLabel: string
+  sourceId: string
+  path?: string
+  url?: string | null
+}
+
+interface MatchedSourceChunk {
+  chunk: DocumentChunk & { score: number }
+  meta: ChunkSourceMetadata
+}
+
+interface SourcePayload {
+  id: string
+  title: string
+  category?: string
+  type?: string
+  score?: number
+  excerpt: string
+  source?: string
+  url?: string | null
+  citation: {
+    label: string
+    shortLabel: string
+    authors: string
+    year: string
+    title: string
+    venue: string
+  }
+  bibliography: {
+    authors: string
+    year: string
+    title: string
+    venue: string
+    url?: string | null
+  }
+  chunkIds: string[]
+}
+
+function containsInvalidCitation(text: string): boolean {
+  if (!text) return false
+  return /\bquelle\b/i.test(text) || /\bsource\s+\d+/i.test(text)
+}
+
+function normalizeCitationKey(value?: string): string {
+  return (value || "")
+    .toLowerCase()
+    .replace(/[\[\]\(\)\.,]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+}
+
+function extractCitationMentions(text: string): Map<string, string> {
+  const matches = new Map<string, string>()
+  if (!text) return matches
+  CITATION_REGEX.lastIndex = 0
+  let match
+  while ((match = CITATION_REGEX.exec(text)) !== null) {
+    const raw = match[1].trim()
+    const key = normalizeCitationKey(raw)
+    if (key) {
+      matches.set(key, raw)
+    }
+  }
+  return matches
+}
+
+function buildPublicUrlFromSource(rawSource?: string | null) {
+  if (!rawSource) return null
+  if (rawSource.startsWith("http")) {
+    return rawSource
+  }
+  const normalized = rawSource.replace(/^content\//i, "").replace(/\.md$/i, "")
+  const slug = normalized
+    .split("/")
+    .map(segment =>
+      segment
+        .trim()
+        .replace(/\s+/g, "-")
+        .replace(/&/g, "-and-")
+        .replace(/%/g, "-percent")
+        .replace(/\?/g, "")
+        .replace(/#/g, "")
+    )
+    .join("/")
+  return `/${slug}`
+}
+
+function parseSourceMetadata(rawTitle: string, fallbackCategory?: string) {
+  const trimmed = rawTitle?.trim() || "Unbenannte Quelle"
+  const fallbackVenue = fallbackCategory?.replace(/\.md$/i, "") || "Internal Notes"
+
+  const pattern = /^(?<authors>.+?)\s*\((?<year>\d{4})\)\s*(?:[-–:]\s*(?<rest>.+))?$/
+  const match = trimmed.match(pattern)
+
+  let authors = trimmed
+  let year = ""
+  let rest = ""
+  if (match?.groups) {
+    authors = match.groups.authors.trim()
+    year = match.groups.year
+    rest = match.groups.rest?.trim() || ""
+  }
+
+  let title = trimmed
+  let venue = fallbackVenue
+
+  if (rest) {
+    const restParts = rest.split(" - ").map(part => part.trim()).filter(Boolean)
+    if (restParts.length > 1) {
+      title = restParts.shift() || trimmed
+      venue = restParts.join(" - ")
+    } else {
+      title = rest
+    }
+  }
+
+  if (!title) {
+    title = trimmed
+  }
+
+  if (!authors) {
+    authors = title
+  }
+
+  const citationLabel = `${authors}${year ? ` (${year})` : ""}`
+  const shortLabel = year ? `${authors.split(/[,&]/)[0].trim()}, ${year}` : title
+
+  return {
+    rawTitle: trimmed,
+    authors,
+    year,
+    title,
+    venue,
+    citationLabel,
+    shortLabel,
+  }
+}
+
+function buildChunkSourceMetadata(chunk: DocumentChunk & { score: number }): ChunkSourceMetadata | null {
+  const rawSource = chunk.metadata.source
+  if (rawSource && INTERNAL_SOURCE_PATTERNS.some(pattern => rawSource.toLowerCase().includes(pattern))) {
+    return null
+  }
+
+  const rawTitle =
+    chunk.metadata.title ||
+    rawSource?.split("/").pop()?.replace(/\.md$/i, "") ||
+    "Unbekannte Quelle"
+
+  const parsed = parseSourceMetadata(rawTitle, chunk.metadata.category)
+  const sourceId = canonicalChunkKey(chunk)
+  if (!sourceId) {
+    return null
+  }
+  const url = buildPublicUrlFromSource(rawSource)
+
+  return {
+    ...parsed,
+    sourceId,
+    path: rawSource,
+    url,
+  }
+}
+
+function buildCandidateCitationKeys(meta: ChunkSourceMetadata) {
+  const candidates = new Set<string>()
+  candidates.add(normalizeCitationKey(meta.rawTitle))
+  candidates.add(normalizeCitationKey(meta.citationLabel))
+  candidates.add(normalizeCitationKey(meta.shortLabel))
+  candidates.add(normalizeCitationKey(meta.title))
+  return Array.from(candidates).filter(Boolean)
+}
+
 function collectChunksForSources(titles: string[], maxPerSource = 3): Array<DocumentChunk & { score: number }> {
   if (!vectorStore || !titles.length) {
     return []
@@ -279,62 +469,90 @@ ${context}`
 function filterReferencedSources(
   responseText: string,
   allChunks: Array<DocumentChunk & { score: number }>
-): Array<DocumentChunk & { score: number }> {
-  // Extrahiere alle Zitate wie [FEF], [Bedini & Baldauf (2021)], etc.
-  const citationPattern = /\[([^\]]+)\]/g
-  const citations = new Set<string>()
-  let match
+) {
+  const citationMap = extractCitationMentions(responseText)
+  console.log(`📝 Gefundene Zitate im Text: ${Array.from(citationMap.values()).join(", ")}`)
 
-  while ((match = citationPattern.exec(responseText)) !== null) {
-    citations.add(match[1].trim())
+  if (!citationMap.size) {
+    return {
+      matches: [] as MatchedSourceChunk[],
+      citationCount: 0,
+      unmatchedCitations: [] as string[],
+    }
   }
 
-  console.log(`📝 Gefundene Zitate im Text: ${Array.from(citations).join(", ")}`)
+  const matchedChunks: MatchedSourceChunk[] = []
+  const matchedKeys = new Set<string>()
 
-  // Filtere Chunks: Behalte nur die, die auch zitiert wurden
-  // Verwende FUZZY MATCHING für bessere Trefferquote
-  const referencedChunks = allChunks.filter(chunk => {
-    const sourceTitle = chunk.metadata.title || chunk.metadata.source.split("/").pop()?.replace(/\.md$/, '') || 'Unknown'
+  allChunks.forEach(chunk => {
+    const meta = buildChunkSourceMetadata(chunk)
+    if (!meta) return
+    const candidates = buildCandidateCitationKeys(meta)
+    const hit = candidates.find(key => citationMap.has(key))
+    if (hit) {
+      matchedChunks.push({ chunk, meta })
+      matchedKeys.add(hit)
+    }
+  })
 
-    // Exakter Match
-    if (citations.has(sourceTitle)) return true
+  const unmatchedCitations = Array.from(citationMap.entries())
+    .filter(([key]) => !matchedKeys.has(key))
+    .map(([, raw]) => raw)
 
-    // Fuzzy Match: Token-basierter Vergleich
-    for (const citation of citations) {
-      // Extrahiere wichtige Tokens: Namen, Jahre, Schlüsselwörter
-      const citationTokens = citation
-        .toLowerCase()
-        .replace(/[&\-\(\)\[\]]/g, ' ')
-        .split(/\s+/)
-        .filter(t => t.length > 2) // Ignoriere kurze Wörter
+  console.log(
+    `✂️  Reduziert von ${allChunks.length} auf ${matchedChunks.length} tatsächlich zitierte Quellen`
+  )
 
-      const titleTokens = sourceTitle
-        .toLowerCase()
-        .replace(/[&\-\(\)\[\]]/g, ' ')
-        .split(/\s+/)
-        .filter(t => t.length > 2)
+  return {
+    matches: matchedChunks,
+    citationCount: citationMap.size,
+    unmatchedCitations,
+  }
+}
 
-      // Zähle übereinstimmende Tokens
-      const matches = citationTokens.filter(ct => titleTokens.some(tt => tt.includes(ct) || ct.includes(tt)))
+function buildSourcePayloads(matchedChunks: MatchedSourceChunk[]): SourcePayload[] {
+  const sourceMap = new Map<string, SourcePayload>()
 
-      // Wenn >50% der Citation-Tokens im Titel vorkommen, ist es ein Match
-      if (matches.length > 0 && matches.length / citationTokens.length >= 0.5) {
-        return true
+  matchedChunks.forEach(({ chunk, meta }) => {
+    const existing = sourceMap.get(meta.sourceId)
+    const excerpt = chunk.content.substring(0, 200) + "..."
+    if (!existing) {
+      sourceMap.set(meta.sourceId, {
+        id: meta.sourceId,
+        title: meta.rawTitle,
+        category: chunk.metadata.category,
+        type: chunk.metadata.type,
+        score: chunk.score,
+        excerpt,
+        source: chunk.metadata.source,
+        url: meta.url,
+        citation: {
+          label: meta.citationLabel,
+          shortLabel: meta.shortLabel,
+          authors: meta.authors,
+          year: meta.year,
+          title: meta.title,
+          venue: meta.venue,
+        },
+        bibliography: {
+          authors: meta.authors,
+          year: meta.year,
+          title: meta.title,
+          venue: meta.venue,
+          url: meta.url,
+        },
+        chunkIds: [chunk.id],
+      })
+    } else {
+      existing.chunkIds = Array.from(new Set([...(existing.chunkIds || []), chunk.id]))
+      if ((chunk.score ?? 0) > (existing.score ?? 0)) {
+        existing.score = chunk.score
+        existing.excerpt = excerpt
       }
     }
-
-    return false
   })
 
-  console.log(`✂️  Reduziert von ${allChunks.length} auf ${referencedChunks.length} tatsächlich zitierte Quellen`)
-
-  // Debug: Zeige gefilterte Quellen
-  referencedChunks.forEach((c, i) => {
-    const title = c.metadata.title || c.metadata.source.split("/").pop()?.replace(/\.md$/, '') || 'Unknown'
-    console.log(`   ✓ [${i+1}] ${title}`)
-  })
-
-  return referencedChunks
+  return Array.from(sourceMap.values())
 }
 
 // API Endpoints
@@ -512,23 +730,30 @@ ${context}`
 
     console.log(`✅ Stream abgeschlossen (${fullText.length} Zeichen)`)
 
-    // Filtere: Nur tatsächlich zitierte Quellen
-    const referencedChunks = filterReferencedSources(fullText, finalChunks)
-    const uniqueReferenced = dedupeChunksBySource(referencedChunks)
+    if (containsInvalidCitation(fullText)) {
+      throw new Error("Ungültige Zitierweise erkannt. Bitte erneut versuchen, ohne generische 'Quelle'-Referenzen.")
+    }
 
-    const sources = uniqueReferenced.map(chunk => ({
-      title: chunk.metadata.title,
-      category: chunk.metadata.category,
-      type: chunk.metadata.type,
-      score: chunk.score,
-      excerpt: chunk.content.substring(0, 200) + "...",
-      source: chunk.metadata.source,
-    }))
+    // Filtere: Nur tatsächlich zitierte Quellen
+    const { matches, citationCount, unmatchedCitations } = filterReferencedSources(fullText, finalChunks)
+    if (unmatchedCitations.length > 0) {
+      throw new Error(`Zitate ohne Quelle gefunden: ${unmatchedCitations.join(", ")}`)
+    }
+
+    const sources = buildSourcePayloads(matches)
+    if (citationCount > 0 && sources.length === 0) {
+      throw new Error("Keine gültigen Quellenmetadaten für die verwendeten Zitate gefunden.")
+    }
+
+    const provenance = {
+      retrievedChunkIds: finalChunks.map(chunk => chunk.id),
+      usedChunkIds: sources.flatMap(source => source.chunkIds),
+    }
 
     console.log(`📚 Sende ${sources.length} Quellen an Frontend`)
 
     // Sende Quellen am Ende
-    res.write(`data: ${JSON.stringify({ type: 'sources', sources })}\n\n`)
+    res.write(`data: ${JSON.stringify({ type: 'sources', sources, provenance })}\n\n`)
     res.write('data: [DONE]\n\n')
     res.end()
 
@@ -550,19 +775,6 @@ function canonicalChunkKey(chunk: DocumentChunk & { score: number }) {
     ?.toLowerCase()
     ?.replace(/\s+/g, " ")
   return sourcePath || titleKey || chunk.id
-}
-
-function dedupeChunksBySource(chunks: Array<DocumentChunk & { score: number }>) {
-  const seen = new Map<string, DocumentChunk & { score: number }>()
-  for (const chunk of chunks) {
-    const key = canonicalChunkKey(chunk)
-    if (!key) continue
-    const existing = seen.get(key)
-    if (!existing || (chunk.score ?? 0) > (existing.score ?? 0)) {
-      seen.set(key, chunk)
-    }
-  }
-  return Array.from(seen.values())
 }
 
 /**
@@ -700,18 +912,24 @@ ${context}`
     console.log(`✅ Antwort generiert (${assistantMessage.length} Zeichen)`)
 
     // Filtere: Nur tatsächlich zitierte Quellen
-    const referencedChunks = filterReferencedSources(assistantMessage, finalChunks)
+    if (containsInvalidCitation(assistantMessage)) {
+      throw new Error("Ungültige Zitierweise erkannt. Bitte erneut versuchen, ohne generische 'Quelle'-Referenzen.")
+    }
 
-    // Extrahiere verwendete Quellen (nur die zitierten!)
-    const uniqueReferenced = dedupeChunksBySource(referencedChunks)
-    const sources = uniqueReferenced.map(chunk => ({
-      title: chunk.metadata.title,
-      category: chunk.metadata.category,
-      type: chunk.metadata.type,
-      score: chunk.score,
-      excerpt: chunk.content.substring(0, 200) + "...",
-      source: chunk.metadata.source,
-    }))
+    const { matches, citationCount, unmatchedCitations } = filterReferencedSources(assistantMessage, finalChunks)
+    if (unmatchedCitations.length > 0) {
+      throw new Error(`Zitate ohne Quelle gefunden: ${unmatchedCitations.join(", ")}`)
+    }
+
+    const sources = buildSourcePayloads(matches)
+    if (citationCount > 0 && sources.length === 0) {
+      throw new Error("Keine gültigen Quellenmetadaten für die verwendeten Zitate gefunden.")
+    }
+
+    const provenance = {
+      retrievedChunkIds: finalChunks.map(chunk => chunk.id),
+      usedChunkIds: sources.flatMap(source => source.chunkIds),
+    }
 
     console.log(`📚 Sende ${sources.length} Quellen an Frontend`)
 
@@ -719,6 +937,7 @@ ${context}`
     res.json({
       response: assistantMessage,
       sources,
+      provenance,
       debug: {
         topScores: relevantChunks.slice(0, 3).map(c => c.score),
         chunksUsed: relevantChunks.length,
