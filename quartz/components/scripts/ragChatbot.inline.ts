@@ -1814,6 +1814,8 @@ async function sendMessage() {
         throw new Error("Stream nicht verfügbar")
       }
 
+      let currentEvent: string | null = null
+
       while (true) {
         const { done, value } = await reader.read()
         if (done) break
@@ -1822,30 +1824,64 @@ async function sendMessage() {
         const lines = chunk.split('\n')
 
         for (const line of lines) {
-          if (line.startsWith('data: ')) {
-            const data = line.slice(6)
-            if (data === '[DONE]') {
-              break
+          if (!line.trim()) {
+            currentEvent = null
+            continue
+          }
+
+          if (line.startsWith('event:')) {
+            currentEvent = line.slice(6).trim()
+            continue
+          }
+
+          if (!line.startsWith('data: ')) {
+            continue
+          }
+
+          const data = line.slice(6)
+          if (data === '[DONE]') {
+            break
+          }
+
+          try {
+            const parsed = JSON.parse(data)
+
+            if (currentEvent === 'token') {
+              const token = parsed.token ?? parsed.content ?? ''
+              if (!token) continue
+              fullResponse += token
+              const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
+              contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
+              messagesContainer!.scrollTop = messagesContainer!.scrollHeight
+              continue
             }
 
-            try {
-              const parsed = JSON.parse(data)
-
-              if (parsed.type === 'text') {
-                fullResponse += parsed.content
-                const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
-                contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
-                messagesContainer!.scrollTop = messagesContainer!.scrollHeight
-              } else if (parsed.type === 'sources') {
+            if (currentEvent === 'done') {
+              if (parsed.sources) {
                 sources = normalizeSourcesList(parsed.sources || [])
                 const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
                 contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
-              } else if (parsed.type === 'error') {
+              }
+              if (parsed.error) {
                 throw new Error(parsed.error)
               }
-            } catch (e) {
-              // Ignoriere Parse-Fehler für unvollständige Chunks
+              continue
             }
+
+            if (parsed.type === 'text') {
+              fullResponse += parsed.content
+              const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
+              contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
+              messagesContainer!.scrollTop = messagesContainer!.scrollHeight
+            } else if (parsed.type === 'sources') {
+              sources = normalizeSourcesList(parsed.sources || [])
+              const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
+              contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
+            } else if (parsed.type === 'error') {
+              throw new Error(parsed.error)
+            }
+          } catch (e) {
+            // Ignoriere Parse-Fehler für unvollständige Chunks
           }
         }
       }
