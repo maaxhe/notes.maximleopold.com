@@ -1229,10 +1229,28 @@ document.addEventListener("click", (e) => {
 // Lade Dateien beim Start
 loadFiles()
 
+function canonicalSourceKey(source: any) {
+  const pathKey = source?.source
+    ? source.source
+        .replace(/^content\//, "")
+        .replace(/\.md$/i, "")
+        .toLowerCase()
+        .replace(/\s+/g, " ")
+    : ""
+  const titleKey = source?.title
+    ? String(source.title)
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, " ")
+    : ""
+  return pathKey || titleKey || JSON.stringify(source ?? {}).toLowerCase()
+}
+
 function normalizeSourcesList(sources: any[] = []) {
   const seen = new Map<string, any>()
   for (const source of sources ?? []) {
-    const key = (source?.source || source?.title || JSON.stringify(source)).toLowerCase()
+    const key = canonicalSourceKey(source)
+    if (!key) continue
     const existing = seen.get(key)
     if (!existing || (source?.score ?? 0) > (existing?.score ?? 0)) {
       seen.set(key, source)

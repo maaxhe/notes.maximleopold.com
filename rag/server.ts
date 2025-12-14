@@ -535,10 +535,24 @@ ${context}`
   }
 })
 
+function canonicalChunkKey(chunk: DocumentChunk & { score: number }) {
+  const sourcePath = chunk.metadata.source
+    ?.replace(/^content\//, "")
+    ?.replace(/\.md$/i, "")
+    ?.toLowerCase()
+    ?.replace(/\s+/g, " ")
+  const titleKey = chunk.metadata.title
+    ?.trim()
+    ?.toLowerCase()
+    ?.replace(/\s+/g, " ")
+  return sourcePath || titleKey || chunk.id
+}
+
 function dedupeChunksBySource(chunks: Array<DocumentChunk & { score: number }>) {
   const seen = new Map<string, DocumentChunk & { score: number }>()
   for (const chunk of chunks) {
-    const key = chunk.metadata.source || chunk.metadata.title || chunk.id
+    const key = canonicalChunkKey(chunk)
+    if (!key) continue
     const existing = seen.get(key)
     if (!existing || (chunk.score ?? 0) > (existing.score ?? 0)) {
       seen.set(key, chunk)
