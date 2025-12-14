@@ -418,11 +418,24 @@ function addMessage(
   contentDiv.className = "rag-message-content"
 
   // Formatiere Wikilinks [[File]] zu schönen Links
-  const formattedContent = content.replace(/\[\[([^\]]+)\]\]/g, (match, linkText) => {
+  let formattedContent = content.replace(/\[\[([^\]]+)\]\]/g, (_match, linkText) => {
     // Erstelle URL-freundlichen Slug (Leerzeichen zu Bindestrichen, etc.)
     const slug = linkText.trim().replace(/\s+/g, '-')
     return `<a href="/${slug}" class="rag-wikilink" data-link="${linkText}">${linkText}</a>`
   })
+
+  // Formatiere Markdown
+  // Headlines (## Text)
+  formattedContent = formattedContent.replace(/^##\s+(.+)$/gm, '<h2>$1</h2>')
+
+  // Bold (**Text**)
+  formattedContent = formattedContent.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+
+  // Italic (_Text_)
+  formattedContent = formattedContent.replace(/(?<!\w)_(.+?)_(?!\w)/g, '<em>$1</em>')
+
+  // Newlines zu <br> (damit Zeilenumbrüche sichtbar werden)
+  formattedContent = formattedContent.replace(/\n/g, '<br>')
 
   contentDiv.innerHTML = formattedContent
   messageDiv.appendChild(contentDiv)
@@ -517,7 +530,7 @@ function setStatus(message: string, type: string = "info") {
 
 function setLoading(isLoading: boolean) {
   if (!sendButton || !inputField) return
-  sendButton.disabled = isLoading
+  ;(sendButton as HTMLButtonElement).disabled = isLoading
   inputField.disabled = isLoading
 
   if (isLoading) {
