@@ -1263,28 +1263,7 @@ const CITATION_REGEX = /(?<!\[)\[([^\]]+)\](?!\])/g
 
 function enrichSourcesWithCitations(content: string, sources: any[] = []) {
   CITATION_REGEX.lastIndex = 0
-  const normalized = normalizeSourcesList(sources)
-  const existingTitles = new Set(
-    normalized.map(src => (src?.title || "").trim().toLowerCase()),
-  )
-
-  let match
-  while ((match = CITATION_REGEX.exec(content)) !== null) {
-    const citation = match[1]?.trim()
-    if (!citation) continue
-    const normalizedCitation = citation.toLowerCase()
-    if (!existingTitles.has(normalizedCitation)) {
-      normalized.push({
-        title: citation,
-        category: "Zitiert im Text",
-        score: 0,
-        source: "",
-      })
-      existingTitles.add(normalizedCitation)
-    }
-  }
-
-  return normalized
+  return normalizeSourcesList(sources)
 }
 
 // Hilfsfunktion: Formatiere Markdown

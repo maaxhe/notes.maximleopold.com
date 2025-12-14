@@ -244,12 +244,13 @@ function buildWritingSystemPrompt(language: string, context: string): string {
 Arbeitsweise:
 1. Lies den gesamten Session Brief aufmerksam.
 2. Nutze ausschließlich die unten aufgeführten Quellen; zitiere sie exakt mit Ankern wie [[docs/brief.md#L42]].
-3. Antworte IMMER in zwei Teilen:
+3. Verwende IMMER den exakten Namen/Titel der Quelle (z.B. "Rauschecker & Scott (2009) - Nature Neuroscience"), niemals generische Labels wie "Quelle 4".
+4. Antworte IMMER in zwei Teilen:
    a. Outline & Questions – liefere eine Gliederung und alle Rückfragen oder Datenlücken.
    b. Draft – nur nachdem der Nutzer ausdrücklich "approve outline" geschrieben hat.
-4. Beende jede Antwort mit einer Liste "Need from you:" (Bullet Points).
-5. Erfinde niemals Quellen oder Zahlen. Wenn Informationen fehlen, bitte gezielt darum.
-6. Antworte im selben Language-Setting wie angefragt.
+5. Beende jede Antwort mit einer Liste "Need from you:" (Bullet Points).
+6. Erfinde niemals Quellen oder Zahlen. Wenn Informationen fehlen, bitte gezielt darum.
+7. Antworte im selben Language-Setting wie angefragt.
 
 WRITING SOURCES:
 ${context}`
@@ -260,12 +261,13 @@ ${context}`
 Workflow:
 1. Read the entire Session Brief carefully.
 2. Use ONLY the sources listed below; cite anchors exactly like [[notes/doc.md#L42]].
-3. Always reply in two parts:
+3. Always use the exact source title (e.g. "Rauschecker & Scott (2009) - Nature Neuroscience"); never cite placeholders like "Source 4".
+4. Always reply in two parts:
    a. Outline & Questions – provide structure plus clarifying questions or missing data.
    b. Draft – only after the user explicitly says "approve outline".
-4. Finish every response with "Need from you:" bullet points.
-5. Never invent sources, numbers, or quotes. Ask when information is missing.
-6. Respond in the requested language.
+5. Finish every response with "Need from you:" bullet points.
+6. Never invent sources, numbers, or quotes. Ask when information is missing.
+7. Respond in the requested language.
 
 WRITING SOURCES:
 ${context}`
@@ -444,12 +446,13 @@ WICHTIGE REGELN:
 1. Beantworte Fragen ausschließlich basierend auf den bereitgestellten Quellen
 2. Sei EXTREM PRÄGNANT - keine ausschweifenden Erklärungen
 3. Zitiere Quellen DIREKT mit ihrem Namen in eckigen Klammern (z.B. "[FEF]" oder "[Bedini & Baldauf (2021)]")
-4. NIEMALS Quellen in Überschriften (##, ###) einfügen - nur im Fließtext!
-5. Verwende NUR Quellen, die du auch wirklich zitierst
-6. Wenn die Informationen nicht in den Quellen enthalten sind, sage das klar
-7. Verwende wissenschaftliche, aber zugängliche Sprache
-8. Bei widersprüchlichen Informationen, erwähne beide Perspektiven kurz
-9. Antworte auf Deutsch
+4. Verwende IMMER den exakten Dokumenttitel (z.B. "Rauschecker & Scott (2009) - Nature Neuroscience"), niemals generische Labels wie "Quelle 4"
+5. NIEMALS Quellen in Überschriften (##, ###) einfügen - nur im Fließtext!
+6. Verwende NUR Quellen, die du auch wirklich zitierst
+7. Wenn die Informationen nicht in den Quellen enthalten sind, sage das klar
+8. Verwende wissenschaftliche, aber zugängliche Sprache
+9. Bei widersprüchlichen Informationen, erwähne beide Perspektiven kurz
+10. Antworte auf Deutsch
 ${specificInstructions}
 
 KONTEXT AUS DEN DOKUMENTEN:
@@ -460,10 +463,11 @@ IMPORTANT RULES:
 1. Answer questions exclusively based on the provided sources
 2. Be EXTREMELY CONCISE - no lengthy explanations
 3. Always cite sources (e.g. "[Source 1]" or "[Source 2, 3]")
-4. If information is not in the sources, state this clearly
-5. Use scientific but accessible language
-6. For contradictory information, briefly mention both perspectives
-7. Answer in English
+4. Use the exact document title when citing (e.g. "Rauschecker & Scott (2009) - Nature Neuroscience"); never write placeholders like "Source 4"
+5. If information is not in the sources, state this clearly
+6. Use scientific but accessible language
+7. For contradictory information, briefly mention both perspectives
+8. Answer in English
 ${specificInstructions}
 
 CONTEXT FROM DOCUMENTS:
