@@ -2817,9 +2817,10 @@ async function sendMessage() {
 
           try {
             const parsed = JSON.parse(data)
+            const eventType = (parsed.event ?? parsed.type ?? currentEvent ?? "").toLowerCase()
 
-            if (currentEvent === 'token') {
-              const token = parsed.token ?? parsed.content ?? ''
+            if (eventType === 'token' || parsed.token || parsed.content) {
+              const token = parsed.token ?? parsed.content ?? parsed.message ?? ''
               if (!token) continue
               fullResponse += token
               const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
@@ -2828,7 +2829,7 @@ async function sendMessage() {
               continue
             }
 
-            if (currentEvent === 'done') {
+            if (eventType === 'done' || parsed.done) {
               if (parsed.sources) {
                 sources = normalizeSourcesList(parsed.sources || [])
                 const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
@@ -2840,17 +2841,22 @@ async function sendMessage() {
               continue
             }
 
-            if (parsed.type === 'text') {
-              fullResponse += parsed.content
-              const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
-              contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
-              messagesContainer!.scrollTop = messagesContainer!.scrollHeight
-            } else if (parsed.type === 'sources') {
+            if (eventType === 'sources' || parsed.sources) {
               sources = normalizeSourcesList(parsed.sources || [])
               const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
               contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
-            } else if (parsed.type === 'error') {
-              throw new Error(parsed.error)
+              continue
+            }
+
+            if (parsed.error || eventType === 'error') {
+              throw new Error(parsed.error ?? 'Unbekannter Fehler')
+            }
+
+            if (parsed.content || parsed.message) {
+              fullResponse += parsed.content ?? parsed.message ?? ''
+              const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
+              contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
+              messagesContainer!.scrollTop = messagesContainer!.scrollHeight
             }
           } catch (e) {
             // Ignoriere Parse-Fehler für unvollständige Chunks
