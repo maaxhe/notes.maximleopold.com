@@ -17,13 +17,13 @@
 /* When left sidebar is hidden */
 .sidebar.left.sidebar-hidden ~ * #quartz-body,
 body:has(.sidebar.left.sidebar-hidden) .page > #quartz-body {
-  grid-template-columns: 0 auto 220px !important;
+  grid-template-columns: 0 auto 280px !important;
 }
 
 /* When right sidebar is hidden */
 .sidebar.right.sidebar-hidden ~ * #quartz-body,
 body:has(.sidebar.right.sidebar-hidden) .page > #quartz-body {
-  grid-template-columns: 220px auto 0 !important;
+  grid-template-columns: 280px auto 0 !important;
 }
 
 /* When both sidebars are hidden */
@@ -155,7 +155,7 @@ body:has(.sidebar.left.sidebar-hidden):has(.sidebar.right.sidebar-hidden) .page 
   }
 
   &.right-toggle {
-    right: 0.75rem;
+    right: 5rem;
   }
 
   /* Hide on mobile */

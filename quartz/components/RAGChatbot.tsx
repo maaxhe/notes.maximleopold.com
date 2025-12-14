@@ -105,12 +105,101 @@ export default ((opts?: Partial<Options>) => {
                     <circle cx="12" cy="12" r="3"></circle>
                   </svg>
                 </button>
+                <button class="rag-chat-features" id="rag-chat-features" aria-label="Features" title="Features">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                  </svg>
+                </button>
                 <button class="rag-chat-close" id="rag-chat-close" aria-label="Close">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                   </svg>
                 </button>
+              </div>
+            </div>
+
+            {/* Features Panel */}
+            <div class="rag-features-panel hidden" id="rag-features-panel">
+              <div class="rag-features-header">
+                <h4>✨ Features</h4>
+              </div>
+              <div class="rag-features-content">
+                <button class="rag-citation-manager-btn" id="rag-citation-manager-btn" title="Verwalte alle zitierten Quellen">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                  </svg>
+                  <span>📚 Citation Manager</span>
+                </button>
+                <p class="rag-features-hint">Exportiere alle zitierten Quellen als BibTeX, APA oder Zotero.</p>
+
+                <button class="rag-compare-tool-btn" id="rag-compare-tool-btn" title="Vergleiche zwei Gehirnregionen">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="16 3 21 3 21 8"></polyline>
+                    <line x1="4" y1="20" x2="21" y2="3"></line>
+                    <polyline points="21 16 21 21 16 21"></polyline>
+                    <line x1="15" y1="15" x2="21" y2="21"></line>
+                    <line x1="4" y1="4" x2="9" y2="9"></line>
+                  </svg>
+                  <span>🔄 Compare Tool</span>
+                </button>
+                <p class="rag-features-hint">Vergleiche zwei Gehirnregionen Seite an Seite.</p>
+
+                <button class="rag-gap-analysis-btn" id="rag-gap-analysis-btn" title="Finde Lücken in deiner Recherche">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                    <path d="M11 8v6"></path>
+                    <path d="M8 11h6"></path>
+                  </svg>
+                  <span>🔍 Gap Analysis</span>
+                </button>
+                <p class="rag-features-hint">Analysiere deine Notizen und finde Forschungslücken.</p>
+
+                <button class="rag-timeline-btn" id="rag-timeline-btn" title="Zeige chronologische Entwicklung der Forschung">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="2" x2="12" y2="22"></line>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                  </svg>
+                  <span>📅 Timeline View</span>
+                </button>
+                <p class="rag-features-hint">Chronologische Übersicht deiner Quellen.</p>
+
+                <button class="rag-concept-map-btn" id="rag-concept-map-btn" title="Generiere Concept Map">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <line x1="21.17" y1="8" x2="12" y2="8"></line>
+                    <line x1="3.95" y1="6.06" x2="8.54" y2="14"></line>
+                    <line x1="10.88" y1="21.94" x2="15.46" y2="14"></line>
+                  </svg>
+                  <span>🗺️ Concept Map</span>
+                </button>
+                <p class="rag-features-hint">Visualisiere Connections zwischen Regionen.</p>
+
+                <button class="rag-batch-export-btn" id="rag-batch-export-btn" title="Exportiere mehrere Notizen">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                  <span>📦 Batch Export</span>
+                </button>
+                <p class="rag-features-hint">Exportiere mehrere Notizen als Markdown.</p>
+
+                <button class="rag-fact-checker-btn" id="rag-fact-checker-btn" title="Finde Widersprüche in Notizen">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                  </svg>
+                  <span>⚠️ Fact Checker</span>
+                </button>
+                <p class="rag-features-hint">Finde Widersprüche in deinen Notizen.</p>
               </div>
             </div>
 
@@ -129,15 +218,6 @@ export default ((opts?: Partial<Options>) => {
                   <span>Vault neu indizieren</span>
                 </button>
                 <p class="rag-settings-hint">Führt die Re-Indexierung aller Dokumente durch. Dies kann einige Minuten dauern.</p>
-
-                <button class="rag-citation-manager-btn" id="rag-citation-manager-btn" title="Verwalte alle zitierten Quellen">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                  </svg>
-                  <span>Citation Manager</span>
-                </button>
-                <p class="rag-settings-hint">Exportiere alle zitierten Quellen als BibTeX, APA oder Zotero.</p>
               </div>
             </div>
 
@@ -180,22 +260,166 @@ export default ((opts?: Partial<Options>) => {
               </div>
             </div>
 
-            {/* Writing Assistant Panel */}
-            <div class="rag-writing-panel hidden" id="rag-writing-panel">
-              <div class="rag-writing-header">
-                <div>
-                  <h4>✍️ Writing Assistant</h4>
-                  <p>Session Brief → Outline → Draft</p>
-                </div>
-                <div class="rag-writing-header-actions">
-                  <button class="rag-writing-back" id="rag-writing-back" aria-label="Zurück">← Zurück</button>
-                  <button class="rag-writing-close" id="rag-writing-close" aria-label="Close">×</button>
+            {/* Timeline View Panel */}
+            <div class="rag-timeline-panel hidden" id="rag-timeline-panel">
+              <div class="rag-timeline-header">
+                <h4>📅 Timeline View</h4>
+                <div class="rag-timeline-header-actions">
+                  <button class="rag-timeline-home" id="rag-timeline-home" aria-label="Zurück zum Vault">↩ Vault</button>
+                  <button class="rag-timeline-close" id="rag-timeline-close" aria-label="Close">×</button>
                 </div>
               </div>
+              <div class="rag-timeline-form">
+                <label for="rag-timeline-topic">Thema / Suchbegriff (optional)</label>
+                <input type="text" id="rag-timeline-topic" placeholder="z.B. dorsal stream, FEF, attention" />
+                <button class="rag-timeline-generate-btn" id="rag-timeline-generate-btn">
+                  📅 Timeline generieren
+                </button>
+              </div>
+              <div class="rag-timeline-output" id="rag-timeline-output">
+                <div class="rag-timeline-placeholder">
+                  Generiere eine chronologische Übersicht deiner Quellen
+                </div>
+              </div>
+            </div>
+
+            {/* Concept Map Panel */}
+            <div class="rag-concept-map-panel hidden" id="rag-concept-map-panel">
+              <div class="rag-concept-map-header">
+                <h4>🗺️ Concept Map Generator</h4>
+                <div class="rag-concept-map-header-actions">
+                  <button class="rag-concept-map-home" id="rag-concept-map-home" aria-label="Zurück zum Vault">↩ Vault</button>
+                  <button class="rag-concept-map-close" id="rag-concept-map-close" aria-label="Close">×</button>
+                </div>
+              </div>
+              <div class="rag-concept-map-form">
+                <label for="rag-concept-map-center">Zentrale Region / Konzept</label>
+                <input type="text" id="rag-concept-map-center" placeholder="z.B. FEF, Auditory Dorsal Stream" />
+                <button class="rag-concept-map-generate-btn" id="rag-concept-map-generate-btn">
+                  🗺️ Map generieren
+                </button>
+              </div>
+              <div class="rag-concept-map-output" id="rag-concept-map-output">
+                <div class="rag-concept-map-placeholder">
+                  Visualisiere Connections und Beziehungen
+                </div>
+              </div>
+            </div>
+
+            {/* Batch Export Panel */}
+            <div class="rag-batch-export-panel hidden" id="rag-batch-export-panel">
+              <div class="rag-batch-export-header">
+                <h4>📦 Batch Export</h4>
+                <div class="rag-batch-export-header-actions">
+                  <button class="rag-batch-export-home" id="rag-batch-export-home" aria-label="Zurück zum Vault">↩ Vault</button>
+                  <button class="rag-batch-export-close" id="rag-batch-export-close" aria-label="Close">×</button>
+                </div>
+              </div>
+              <div class="rag-batch-export-form">
+                <div class="rag-batch-export-controls">
+                  <button class="rag-batch-select-all" id="rag-batch-select-all">Alle auswählen</button>
+                  <button class="rag-batch-deselect-all" id="rag-batch-deselect-all">Alle abwählen</button>
+                  <input type="text" id="rag-batch-search" placeholder="Suchen..." />
+                </div>
+                <div class="rag-batch-export-list" id="rag-batch-export-list">
+                  {/* Dynamisch gefüllt */}
+                </div>
+                <button class="rag-batch-export-btn" id="rag-batch-export-download-btn">
+                  📥 Ausgewählte exportieren
+                </button>
+              </div>
+            </div>
+
+            {/* Fact Checker Panel */}
+            <div class="rag-fact-checker-panel hidden" id="rag-fact-checker-panel">
+              <div class="rag-fact-checker-header">
+                <h4>⚠️ Fact Checker</h4>
+                <div class="rag-fact-checker-header-actions">
+                  <button class="rag-fact-checker-home" id="rag-fact-checker-home" aria-label="Zurück zum Vault">↩ Vault</button>
+                  <button class="rag-fact-checker-close" id="rag-fact-checker-close" aria-label="Close">×</button>
+                </div>
+              </div>
+              <div class="rag-fact-checker-form">
+                <p class="rag-fact-checker-description">
+                  Analysiere deine Notizen auf Widersprüche und Inkonsistenzen.
+                </p>
+                <button class="rag-fact-checker-analyze-btn" id="rag-fact-checker-analyze-btn">
+                  ⚠️ Widersprüche finden
+                </button>
+              </div>
+              <div class="rag-fact-checker-output" id="rag-fact-checker-output">
+                <div class="rag-fact-checker-placeholder">
+                  Klicke auf "Widersprüche finden" um deine Notizen zu analysieren
+                </div>
+              </div>
+            </div>
+
+            {/* Gap Analysis Panel */}
+            <div class="rag-gap-panel hidden" id="rag-gap-panel">
+              <div class="rag-gap-header">
+                <h4>🔍 Gap Analysis</h4>
+                <div class="rag-gap-header-actions">
+                  <button class="rag-gap-home" id="rag-gap-home" aria-label="Zurück zum Vault">↩ Vault</button>
+                  <button class="rag-gap-close" id="rag-gap-close" aria-label="Close">×</button>
+                </div>
+              </div>
+              <div class="rag-gap-form">
+                <p class="rag-gap-description">
+                  Analysiere deine Bachelorarbeit-Notizen und identifiziere Forschungslücken.
+                </p>
+                <button class="rag-gap-analyze-btn" id="rag-gap-analyze-btn">
+                  🔍 Analyse starten
+                </button>
+              </div>
+              <div class="rag-gap-output" id="rag-gap-output">
+                <div class="rag-gap-placeholder">
+                  Klicke auf "Analyse starten" um Lücken in deiner Recherche zu finden
+                </div>
+              </div>
+            </div>
+
+            {/* Compare Tool Panel */}
+            <div class="rag-compare-panel hidden" id="rag-compare-panel">
+              <div class="rag-compare-header">
+                <h4>🔄 Compare Tool</h4>
+                <button class="rag-compare-close" id="rag-compare-close" aria-label="Close">×</button>
+              </div>
+              <div class="rag-compare-form">
+                <label for="rag-compare-region-a">Region A</label>
+                <input type="text" id="rag-compare-region-a" placeholder="z.B. FEF" list="rag-compare-regions-a" />
+                <datalist id="rag-compare-regions-a"></datalist>
+
+                <label for="rag-compare-region-b">Region B</label>
+                <input type="text" id="rag-compare-region-b" placeholder="z.B. IFJ" list="rag-compare-regions-b" />
+                <datalist id="rag-compare-regions-b"></datalist>
+
+                <button class="rag-compare-btn" id="rag-compare-btn">
+                  🔍 Vergleichen
+                </button>
+              </div>
+              <div class="rag-compare-output" id="rag-compare-output">
+                <div class="rag-compare-placeholder">
+                  Wähle zwei Regionen aus und klicke auf "Vergleichen"
+                </div>
+              </div>
+            </div>
+
+            {/* Writing Assistant Panel */}
+            <div class="rag-writing-panel hidden" id="rag-writing-panel">
+                <div class="rag-writing-header">
+                  <div>
+                    <h4>✍️ Writing Assistant</h4>
+                    <p>Session Brief → Outline → Draft</p>
+                  </div>
+                  <div class="rag-writing-header-actions">
+                    <button class="rag-writing-home" id="rag-writing-home" aria-label="Zurück zum Research Vault">↩ Vault</button>
+                    <button class="rag-writing-back" id="rag-writing-back" aria-label="Zurück">← Zurück</button>
+                    <button class="rag-writing-close" id="rag-writing-close" aria-label="Close">×</button>
+                  </div>
+                </div>
               <div class="rag-writing-body">
                 <div class="rag-writing-form-container" id="rag-writing-form-container">
                   <button class="rag-writing-toggle" id="rag-writing-toggle" aria-label="Brief ein- oder ausblenden">
-                    <span>Brief</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <polyline points="9 18 15 12 9 6"></polyline>
                     </svg>
@@ -203,20 +427,21 @@ export default ((opts?: Partial<Options>) => {
                   <div class="rag-writing-form" id="rag-writing-form">
                     <div class="rag-writing-template">
                       <label for="rag-writing-template">Template</label>
-                      <select id="rag-writing-template">
-                        <option value="summary" selected>Summary für mich</option>
-                        <option value="assistant">Schreib Assistance</option>
-                        <option value="blog">Blog Post Format</option>
-                      </select>
-                    </div>
+                    <select id="rag-writing-template">
+                      <option value="custom" selected>Leer</option>
+                      <option value="summary">Summary für mich</option>
+                      <option value="assistant">Schreib Assistance</option>
+                      <option value="blog">Blog Post Format</option>
+                    </select>
+                  </div>
 
                     <div class="rag-writing-toolbar">
-                      <button type="button" class="rag-writing-link-btn" id="rag-writing-link-btn">
+                      <button type="button" class="rag-writing-link-btn" id="rag-writing-link-btn" title="Füge [[wikilink]] zu deinen Notizen ein">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                           <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
                           <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
                         </svg>
-                        Link
+                        [[Link]] einfügen
                       </button>
                     </div>
 

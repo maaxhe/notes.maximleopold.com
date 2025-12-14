@@ -89,6 +89,19 @@ expandBtn?.addEventListener("click", () => {
   toggleFullscreen()
 })
 
+// Features panel toggle
+const featuresBtn = document.getElementById("rag-chat-features")
+const featuresPanel = document.getElementById("rag-features-panel")
+
+featuresBtn?.addEventListener("click", () => {
+  featuresPanel?.classList.toggle("hidden")
+  // Hide other panels
+  settingsPanel?.classList.add("hidden")
+  historyPanel?.classList.add("hidden")
+  citationPanel?.classList.add("hidden")
+  writingPanel?.classList.add("hidden")
+})
+
 // Settings panel toggle
 const settingsBtn = document.getElementById("rag-chat-settings")
 const settingsPanel = document.getElementById("rag-settings-panel")
@@ -96,6 +109,7 @@ const settingsPanel = document.getElementById("rag-settings-panel")
 settingsBtn?.addEventListener("click", () => {
   settingsPanel?.classList.toggle("hidden")
   // Hide other panels
+  featuresPanel?.classList.add("hidden")
   historyPanel?.classList.add("hidden")
   citationPanel?.classList.add("hidden")
   writingPanel?.classList.add("hidden")
@@ -111,6 +125,7 @@ const historyClose = document.getElementById("rag-history-close")
 historyBtn?.addEventListener("click", () => {
   historyPanel?.classList.toggle("hidden")
   // Hide other panels
+  featuresPanel?.classList.add("hidden")
   settingsPanel?.classList.add("hidden")
   citationPanel?.classList.add("hidden")
   writingPanel?.classList.add("hidden")
@@ -133,6 +148,7 @@ const citationList = document.getElementById("rag-citation-list")
 
 citationManagerBtn?.addEventListener("click", () => {
   citationPanel?.classList.toggle("hidden")
+  featuresPanel?.classList.add("hidden")
   settingsPanel?.classList.add("hidden")
   historyPanel?.classList.add("hidden")
   writingPanel?.classList.add("hidden")
@@ -146,21 +162,615 @@ citationClose?.addEventListener("click", () => {
   citationPanel?.classList.add("hidden")
 })
 
+// Timeline View panel
+const timelineBtn = document.getElementById("rag-timeline-btn")
+const timelinePanel = document.getElementById("rag-timeline-panel")
+const timelineClose = document.getElementById("rag-timeline-close")
+const timelineHome = document.getElementById("rag-timeline-home")
+const timelineTopicInput = document.getElementById("rag-timeline-topic") as HTMLInputElement | null
+const timelineGenerateBtn = document.getElementById("rag-timeline-generate-btn")
+const timelineOutput = document.getElementById("rag-timeline-output")
+
+timelineBtn?.addEventListener("click", () => {
+  timelinePanel?.classList.toggle("hidden")
+  featuresPanel?.classList.add("hidden")
+  settingsPanel?.classList.add("hidden")
+  historyPanel?.classList.add("hidden")
+  citationPanel?.classList.add("hidden")
+  writingPanel?.classList.add("hidden")
+  comparePanel?.classList.add("hidden")
+  conceptMapPanel?.classList.add("hidden")
+  batchExportPanel?.classList.add("hidden")
+  factCheckerPanel?.classList.add("hidden")
+  gapPanel?.classList.add("hidden")
+})
+
+timelineClose?.addEventListener("click", () => {
+  timelinePanel?.classList.add("hidden")
+})
+
+timelineHome?.addEventListener("click", () => {
+  window.location.href = "/"
+})
+
+timelineGenerateBtn?.addEventListener("click", async () => {
+  const topic = timelineTopicInput?.value.trim() || "alle Quellen"
+
+  if (timelineOutput) {
+    timelineOutput.innerHTML = '<div class="rag-timeline-loading">📅 Erstelle Timeline...</div>'
+  }
+
+  try {
+    const prompt = `Erstelle eine chronologische Timeline meiner Bachelorarbeit-Quellen zum Thema: "${topic}"
+
+Gruppiere die Papers nach Dekaden und zeige die wichtigsten Entwicklungen:
+
+## 📚 Timeline der Forschung
+
+### 1990er
+- [Jahr] Autor et al. - Kurze Beschreibung des wichtigsten Beitrags
+
+### 2000er
+- [Jahr] Autor et al. - Kurze Beschreibung
+...
+
+### 2020+
+- [Jahr] Autor et al. - Kurze Beschreibung
+
+## 🔍 Wichtige Meilensteine
+[Fasse 3-5 Schlüsselentwicklungen zusammen]
+
+Zeige echte Papers aus meinen Notizen, sortiert nach Publikationsjahr.`
+
+    const response = await fetch(`${API_URL}/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: prompt,
+        conversationHistory: [],
+        language: currentLanguage
+      })
+    })
+
+    if (!response.ok) throw new Error('Fehler bei Timeline')
+
+    const data = await response.json()
+    const result = data.response || 'Keine Antwort vom Server'
+
+    if (timelineOutput) {
+      timelineOutput.innerHTML = `
+        <div class="rag-timeline-result">
+          ${formatMarkdown(result)}
+        </div>
+        <button class="rag-copy-timeline" onclick="navigator.clipboard.writeText(\`${result.replace(/`/g, '\\`')}\`)">
+          📋 Kopieren
+        </button>
+      `
+    }
+  } catch (error) {
+    console.error('Timeline Fehler:', error)
+    if (timelineOutput) {
+      timelineOutput.innerHTML = '<div class="rag-timeline-error">❌ Fehler beim Erstellen der Timeline</div>'
+    }
+  }
+})
+
+// Concept Map panel
+const conceptMapBtn = document.getElementById("rag-concept-map-btn")
+const conceptMapPanel = document.getElementById("rag-concept-map-panel")
+const conceptMapClose = document.getElementById("rag-concept-map-close")
+const conceptMapHome = document.getElementById("rag-concept-map-home")
+const conceptMapCenterInput = document.getElementById("rag-concept-map-center") as HTMLInputElement | null
+const conceptMapGenerateBtn = document.getElementById("rag-concept-map-generate-btn")
+const conceptMapOutput = document.getElementById("rag-concept-map-output")
+
+conceptMapBtn?.addEventListener("click", () => {
+  conceptMapPanel?.classList.toggle("hidden")
+  featuresPanel?.classList.add("hidden")
+  settingsPanel?.classList.add("hidden")
+  historyPanel?.classList.add("hidden")
+  citationPanel?.classList.add("hidden")
+  writingPanel?.classList.add("hidden")
+  comparePanel?.classList.add("hidden")
+  timelinePanel?.classList.add("hidden")
+  batchExportPanel?.classList.add("hidden")
+  factCheckerPanel?.classList.add("hidden")
+  gapPanel?.classList.add("hidden")
+})
+
+conceptMapClose?.addEventListener("click", () => {
+  conceptMapPanel?.classList.add("hidden")
+})
+
+conceptMapHome?.addEventListener("click", () => {
+  window.location.href = "/"
+})
+
+conceptMapGenerateBtn?.addEventListener("click", async () => {
+  const center = conceptMapCenterInput?.value.trim()
+
+  if (!center) {
+    alert("Bitte gib eine Region oder ein Konzept ein")
+    return
+  }
+
+  if (conceptMapOutput) {
+    conceptMapOutput.innerHTML = '<div class="rag-concept-map-loading">🗺️ Erstelle Concept Map...</div>'
+  }
+
+  try {
+    const prompt = `Erstelle eine visuelle Concept Map für: "${center}"
+
+Zeige die wichtigsten Connections und Beziehungen:
+
+## 🎯 Zentrum: ${center}
+
+### 🔗 Direktverbundene Regionen
+[Liste die direkt verbundenen Gehirnregionen]
+
+### ⚡ Hauptfunktionen
+[Schlüsselfunktionen von ${center}]
+
+### 📊 Connectivity Pattern
+[Beschreibe das Connectivity-Muster]
+
+### 🔬 Wichtige Studien
+[Top 3-5 Papers die diese Connections untersuchen]
+
+### 🗺️ ASCII Diagram
+\`\`\`
+    [Region A]
+         |
+         ↓
+    [${center}] ←→ [Region B]
+         |
+         ↓
+    [Region C]
+\`\`\`
+
+Nutze Informationen aus meinen Notizen über ${center}.`
+
+    const response = await fetch(`${API_URL}/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: prompt,
+        conversationHistory: [],
+        language: currentLanguage
+      })
+    })
+
+    if (!response.ok) throw new Error('Fehler bei Concept Map')
+
+    const data = await response.json()
+    const result = data.response || 'Keine Antwort vom Server'
+
+    if (conceptMapOutput) {
+      conceptMapOutput.innerHTML = `
+        <div class="rag-concept-map-result">
+          ${formatMarkdown(result)}
+        </div>
+        <button class="rag-copy-concept-map" onclick="navigator.clipboard.writeText(\`${result.replace(/`/g, '\\`')}\`)">
+          📋 Kopieren
+        </button>
+      `
+    }
+  } catch (error) {
+    console.error('Concept Map Fehler:', error)
+    if (conceptMapOutput) {
+      conceptMapOutput.innerHTML = '<div class="rag-concept-map-error">❌ Fehler beim Erstellen der Concept Map</div>'
+    }
+  }
+})
+
+// Batch Export panel
+const batchExportBtn = document.getElementById("rag-batch-export-btn")
+const batchExportPanel = document.getElementById("rag-batch-export-panel")
+const batchExportClose = document.getElementById("rag-batch-export-close")
+const batchExportHome = document.getElementById("rag-batch-export-home")
+const batchExportList = document.getElementById("rag-batch-export-list")
+const batchSelectAllBtn = document.getElementById("rag-batch-select-all")
+const batchDeselectAllBtn = document.getElementById("rag-batch-deselect-all")
+const batchSearchInput = document.getElementById("rag-batch-search") as HTMLInputElement | null
+const batchExportDownloadBtn = document.getElementById("rag-batch-export-download-btn")
+
+const selectedFiles = new Set<string>()
+
+batchExportBtn?.addEventListener("click", () => {
+  batchExportPanel?.classList.toggle("hidden")
+  featuresPanel?.classList.add("hidden")
+  settingsPanel?.classList.add("hidden")
+  historyPanel?.classList.add("hidden")
+  citationPanel?.classList.add("hidden")
+  writingPanel?.classList.add("hidden")
+  comparePanel?.classList.add("hidden")
+  timelinePanel?.classList.add("hidden")
+  conceptMapPanel?.classList.add("hidden")
+  factCheckerPanel?.classList.add("hidden")
+  gapPanel?.classList.add("hidden")
+
+  if (!batchExportPanel?.classList.contains("hidden")) {
+    renderBatchExportList()
+  }
+})
+
+batchExportClose?.addEventListener("click", () => {
+  batchExportPanel?.classList.add("hidden")
+})
+
+batchExportHome?.addEventListener("click", () => {
+  window.location.href = "/"
+})
+
+function renderBatchExportList(filter = '') {
+  if (!batchExportList) return
+
+  const filtered = availableFiles.filter(file =>
+    file.toLowerCase().includes(filter.toLowerCase())
+  )
+
+  batchExportList.innerHTML = filtered.map(file => `
+    <label class="rag-batch-export-item">
+      <input type="checkbox" value="${file}" ${selectedFiles.has(file) ? 'checked' : ''}>
+      <span>${file}</span>
+    </label>
+  `).join('')
+
+  batchExportList.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', (e) => {
+      const target = e.target as HTMLInputElement
+      if (target.checked) {
+        selectedFiles.add(target.value)
+      } else {
+        selectedFiles.delete(target.value)
+      }
+    })
+  })
+}
+
+batchSelectAllBtn?.addEventListener("click", () => {
+  availableFiles.forEach(file => selectedFiles.add(file))
+  renderBatchExportList(batchSearchInput?.value || '')
+})
+
+batchDeselectAllBtn?.addEventListener("click", () => {
+  selectedFiles.clear()
+  renderBatchExportList(batchSearchInput?.value || '')
+})
+
+batchSearchInput?.addEventListener("input", () => {
+  renderBatchExportList(batchSearchInput.value)
+})
+
+batchExportDownloadBtn?.addEventListener("click", () => {
+  if (selectedFiles.size === 0) {
+    alert("Bitte wähle mindestens eine Datei aus")
+    return
+  }
+
+  const content = Array.from(selectedFiles).map(file => {
+    return `# ${file}\n\n[Inhalt der Datei ${file}]\n\n---\n\n`
+  }).join('')
+
+  const blob = new Blob([content], { type: 'text/markdown' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `ba-notes-export-${Date.now()}.md`
+  a.click()
+  URL.revokeObjectURL(url)
+
+  alert(`${selectedFiles.size} Dateien exportiert!`)
+})
+
+// Fact Checker panel
+const factCheckerBtn = document.getElementById("rag-fact-checker-btn")
+const factCheckerPanel = document.getElementById("rag-fact-checker-panel")
+const factCheckerClose = document.getElementById("rag-fact-checker-close")
+const factCheckerHome = document.getElementById("rag-fact-checker-home")
+const factCheckerAnalyzeBtn = document.getElementById("rag-fact-checker-analyze-btn")
+const factCheckerOutput = document.getElementById("rag-fact-checker-output")
+
+factCheckerBtn?.addEventListener("click", () => {
+  factCheckerPanel?.classList.toggle("hidden")
+  featuresPanel?.classList.add("hidden")
+  settingsPanel?.classList.add("hidden")
+  historyPanel?.classList.add("hidden")
+  citationPanel?.classList.add("hidden")
+  writingPanel?.classList.add("hidden")
+  comparePanel?.classList.add("hidden")
+  timelinePanel?.classList.add("hidden")
+  conceptMapPanel?.classList.add("hidden")
+  batchExportPanel?.classList.add("hidden")
+  gapPanel?.classList.add("hidden")
+})
+
+factCheckerClose?.addEventListener("click", () => {
+  factCheckerPanel?.classList.add("hidden")
+})
+
+factCheckerHome?.addEventListener("click", () => {
+  window.location.href = "/"
+})
+
+factCheckerAnalyzeBtn?.addEventListener("click", async () => {
+  if (factCheckerOutput) {
+    factCheckerOutput.innerHTML = '<div class="rag-fact-checker-loading">⚠️ Analysiere Notizen auf Widersprüche...</div>'
+  }
+
+  try {
+    const prompt = `Analysiere meine Bachelorarbeit-Notizen auf Widersprüche und Inkonsistenzen.
+
+Suche nach:
+
+## ⚠️ Widersprüchliche Aussagen
+[Finde Aussagen die sich widersprechen, z.B. "FEF ist primär visuell" vs "FEF verarbeitet auditorisch"]
+
+## 🔤 Terminologie-Inkonsistenzen
+[Finde inkonsistente Begriffe, z.B. "auditory cortex" vs "Hörkortex" vs "AC"]
+
+## 📊 Konflikterende Daten
+[Finde widersprüchliche Zahlen oder Fakten]
+
+## 💡 Empfehlungen
+[Konkrete Vorschläge wie die Inkonsistenzen aufgelöst werden können]
+
+Sei spezifisch und zitiere die betroffenen Notizen.`
+
+    const response = await fetch(`${API_URL}/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: prompt,
+        conversationHistory: [],
+        language: currentLanguage
+      })
+    })
+
+    if (!response.ok) throw new Error('Fehler bei Fact Checking')
+
+    const data = await response.json()
+    const result = data.response || 'Keine Antwort vom Server'
+
+    if (factCheckerOutput) {
+      factCheckerOutput.innerHTML = `
+        <div class="rag-fact-checker-result">
+          ${formatMarkdown(result)}
+        </div>
+        <button class="rag-copy-fact-checker" onclick="navigator.clipboard.writeText(\`${result.replace(/`/g, '\\`')}\`)">
+          📋 Kopieren
+        </button>
+      `
+    }
+  } catch (error) {
+    console.error('Fact Checker Fehler:', error)
+    if (factCheckerOutput) {
+      factCheckerOutput.innerHTML = '<div class="rag-fact-checker-error">❌ Fehler beim Fact Checking</div>'
+    }
+  }
+})
+
+// Gap Analysis panel
+const gapAnalysisBtn = document.getElementById("rag-gap-analysis-btn")
+const gapPanel = document.getElementById("rag-gap-panel")
+const gapClose = document.getElementById("rag-gap-close")
+const gapHome = document.getElementById("rag-gap-home")
+const gapAnalyzeBtn = document.getElementById("rag-gap-analyze-btn")
+const gapOutput = document.getElementById("rag-gap-output")
+
+gapAnalysisBtn?.addEventListener("click", () => {
+  gapPanel?.classList.toggle("hidden")
+  featuresPanel?.classList.add("hidden")
+  settingsPanel?.classList.add("hidden")
+  historyPanel?.classList.add("hidden")
+  citationPanel?.classList.add("hidden")
+  writingPanel?.classList.add("hidden")
+  comparePanel?.classList.add("hidden")
+})
+
+gapHome?.addEventListener("click", () => {
+  window.location.href = "/"
+})
+
+gapClose?.addEventListener("click", () => {
+  gapPanel?.classList.add("hidden")
+})
+
+gapAnalyzeBtn?.addEventListener("click", async () => {
+  if (gapOutput) {
+    gapOutput.innerHTML = '<div class="rag-gap-loading">🔍 Analysiere deine Notizen...</div>'
+  }
+
+  try {
+    const prompt = `Analysiere meine Bachelorarbeit-Notizen zum Thema "Auditorische Streams und Gehirnregionen" und identifiziere Forschungslücken.
+
+Erstelle eine strukturierte Gap Analysis mit folgenden Kategorien:
+
+## 🎯 Stark abgedeckte Bereiche
+[Liste die am besten dokumentierten Themen/Regionen auf]
+
+## ⚠️ Schwach abgedeckte Bereiche
+[Welche wichtigen Themen/Regionen fehlen oder sind unterrepräsentiert?]
+
+## 📅 Zeitliche Lücken
+[Gibt es wichtige neuere Studien (2020+) die fehlen? Oder zu alte Quellen?]
+
+## 🔬 Perspektiven-Lücken
+[Welche Aspekte fehlen? (z.B. anatomische Details, funktionale Studien, Connectivity-Daten, klinische Relevanz)]
+
+## 💡 Konkrete Empfehlungen
+[Top 3-5 Papers oder Themen die du noch recherchieren solltest]
+
+Sei spezifisch und zitiere Beispiele aus meinen Notizen.`
+
+    const response = await fetch(`${API_URL}/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: prompt,
+        conversationHistory: [],
+        language: currentLanguage
+      })
+    })
+
+    if (!response.ok) throw new Error('Fehler bei Gap Analysis')
+
+    const data = await response.json()
+    const result = data.response || 'Keine Antwort vom Server'
+
+    if (gapOutput) {
+      gapOutput.innerHTML = `
+        <div class="rag-gap-result">
+          ${formatMarkdown(result)}
+        </div>
+        <button class="rag-copy-gap" onclick="navigator.clipboard.writeText(\`${result.replace(/`/g, '\\`')}\`)">
+          📋 Kopieren
+        </button>
+      `
+    }
+  } catch (error) {
+    console.error('Gap Analysis Fehler:', error)
+    if (gapOutput) {
+      gapOutput.innerHTML = '<div class="rag-gap-error">❌ Fehler bei der Analyse</div>'
+    }
+  }
+})
+
+// Compare Tool panel
+const compareToolBtn = document.getElementById("rag-compare-tool-btn")
+const comparePanel = document.getElementById("rag-compare-panel")
+const compareClose = document.getElementById("rag-compare-close")
+const compareRegionAInput = document.getElementById("rag-compare-region-a") as HTMLInputElement | null
+const compareRegionBInput = document.getElementById("rag-compare-region-b") as HTMLInputElement | null
+const compareBtn = document.getElementById("rag-compare-btn")
+const compareOutput = document.getElementById("rag-compare-output")
+
+compareToolBtn?.addEventListener("click", () => {
+  comparePanel?.classList.toggle("hidden")
+  featuresPanel?.classList.add("hidden")
+  settingsPanel?.classList.add("hidden")
+  historyPanel?.classList.add("hidden")
+  citationPanel?.classList.add("hidden")
+  writingPanel?.classList.add("hidden")
+
+  if (!comparePanel?.classList.contains("hidden")) {
+    populateCompareRegions()
+  }
+})
+
+compareClose?.addEventListener("click", () => {
+  comparePanel?.classList.add("hidden")
+})
+
+function populateCompareRegions() {
+  const dataListA = document.getElementById("rag-compare-regions-a")
+  const dataListB = document.getElementById("rag-compare-regions-b")
+
+  if (!dataListA || !dataListB || !availableFiles.length) return
+
+  // Filter nur Gehirnregionen (Glasser Areas und Other Areas)
+  const regions = availableFiles.filter(file =>
+    file.includes("Glasser areas") ||
+    file.includes("Other areas") ||
+    file.match(/^[A-Z0-9]+$/) // Short names like FEF, IFJ, etc
+  )
+
+  const optionsHTML = regions.map(region => `<option value="${region}">`).join('')
+  dataListA.innerHTML = optionsHTML
+  dataListB.innerHTML = optionsHTML
+}
+
+compareBtn?.addEventListener("click", async () => {
+  const regionA = compareRegionAInput?.value.trim()
+  const regionB = compareRegionBInput?.value.trim()
+
+  if (!regionA || !regionB) {
+    alert("Bitte gib beide Regionen an")
+    return
+  }
+
+  if (regionA === regionB) {
+    alert("Bitte wähle zwei verschiedene Regionen")
+    return
+  }
+
+  if (compareOutput) {
+    compareOutput.innerHTML = '<div class="rag-compare-loading">🔍 Vergleiche ' + regionA + ' mit ' + regionB + '...</div>'
+  }
+
+  try {
+    const prompt = `Vergleiche die folgenden zwei Gehirnregionen systematisch:
+
+**Region A**: ${regionA}
+**Region B**: ${regionB}
+
+Erstelle eine strukturierte Vergleichstabelle mit folgenden Kategorien:
+
+| Kategorie | ${regionA} | ${regionB} |
+|-----------|------------|------------|
+| **Anatomische Lage** | ... | ... |
+| **Hauptfunktionen** | ... | ... |
+| **Connectivity** | ... | ... |
+| **Key Studies** | ... | ... |
+| **Gemeinsamkeiten** | ... | ... |
+| **Unterschiede** | ... | ... |
+
+Zitiere relevante Quellen mit [[source name]].`
+
+    const response = await fetch(`${API_URL}/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: prompt,
+        conversationHistory: [],
+        language: currentLanguage
+      })
+    })
+
+    if (!response.ok) throw new Error('Fehler beim Vergleich')
+
+    const data = await response.json()
+    const result = data.response || 'Keine Antwort vom Server'
+
+    if (compareOutput) {
+      compareOutput.innerHTML = `
+        <div class="rag-compare-result">
+          ${formatMarkdown(result)}
+        </div>
+        <button class="rag-copy-compare" onclick="navigator.clipboard.writeText(\`${result.replace(/`/g, '\\`')}\`)">
+          📋 Kopieren
+        </button>
+      `
+    }
+  } catch (error) {
+    console.error('Compare Tool Fehler:', error)
+    if (compareOutput) {
+      compareOutput.innerHTML = '<div class="rag-compare-error">❌ Fehler beim Vergleich</div>'
+    }
+  }
+})
+
 // Writing Assistant panel
 const writingAssistantBtn = document.getElementById("rag-writing-assistant-btn")
 const writingPanel = document.getElementById("rag-writing-panel")
 const writingClose = document.getElementById("rag-writing-close")
 const writingBack = document.getElementById("rag-writing-back")
+const writingHome = document.getElementById("rag-writing-home")
 const writingFormContainer = document.getElementById("rag-writing-form-container")
 const writingToggleButton = document.getElementById("rag-writing-toggle")
 
 writingAssistantBtn?.addEventListener("click", () => {
   writingPanel?.classList.toggle("hidden")
+  featuresPanel?.classList.add("hidden")
   settingsPanel?.classList.add("hidden")
   historyPanel?.classList.add("hidden")
   citationPanel?.classList.add("hidden")
   if (!writingPanel?.classList.contains("hidden")) {
-    renderWritingSources()
+    if (!filesLoaded && !filesLoading) {
+      loadFiles()
+    } else {
+      renderWritingSources()
+    }
     showWritingFollowup(writingConversationHistory.length > 0)
   } else {
     hideWritingAutocompleteMenu()
@@ -177,6 +787,10 @@ writingBack?.addEventListener("click", () => {
   writingPanel?.classList.add("hidden")
   showWritingFollowup(false)
   hideWritingAutocompleteMenu()
+})
+
+writingHome?.addEventListener("click", () => {
+  window.location.href = "/"
 })
 
 writingToggleButton?.addEventListener("click", () => {
@@ -430,14 +1044,19 @@ reindexBtn?.addEventListener("click", async () => {
 // Quick action buttons
 const quickBtns = document.querySelectorAll(".rag-quick-btn")
 quickBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click", async () => {
+    console.log("🔘 Quick action button clicked")
     const prompt =
       btn.getAttribute("data-prompt")?.replace("{currentFile}", currentPageTitle) || ""
     const inputField = document.getElementById("rag-input") as HTMLTextAreaElement | null
+    console.log("📝 Prompt:", prompt)
+    console.log("📝 Input field:", inputField)
     if (inputField && prompt) {
       inputField.value = prompt
       inputField.focus()
-      // Auto-send
+      console.log("📤 Sending message automatically...")
+      // Auto-send with slight delay to ensure input is set
+      await new Promise(resolve => setTimeout(resolve, 100))
       sendMessage()
     }
   })
@@ -859,7 +1478,9 @@ const writingLinkButton = document.getElementById('rag-writing-link-btn') as HTM
 const writingAutocompleteContainer = document.getElementById('rag-writing-autocomplete')
 
 type WritingTemplateKey = "summary" | "assistant" | "blog"
+type WritingTemplateKey = "custom" | "summary" | "assistant" | "blog"
 const writingTemplates: Record<WritingTemplateKey, Partial<Record<string, string>>> = {
+  custom: {},
   summary: {
     deliverable: "Executive Summary (max. 300 Wörter)",
     audience: "Nur für mich – direkt & deutsch, Fokus auf Kernaussagen",
@@ -894,6 +1515,16 @@ let writingWikilinkStart = -1
 
 function applyWritingTemplate(template: WritingTemplateKey) {
   const data = writingTemplates[template] || {}
+  if (template === "custom") {
+    if (writingDeliverableInput) writingDeliverableInput.value = ""
+    if (writingAudienceInput) writingAudienceInput.value = ""
+    if (writingPurposeInput) writingPurposeInput.value = ""
+    if (writingQuestionsInput) writingQuestionsInput.value = ""
+    if (writingConstraintsInput) writingConstraintsInput.value = ""
+    writingSelectedSources.clear()
+    renderWritingSources()
+    return
+  }
   if (data.deliverable && writingDeliverableInput) writingDeliverableInput.value = data.deliverable
   if (data.audience && writingAudienceInput) writingAudienceInput.value = data.audience
   if (data.purpose && writingPurposeInput) writingPurposeInput.value = data.purpose
@@ -916,6 +1547,14 @@ function renderWritingSources() {
   const filter = writingSourceFilter?.value.trim().toLowerCase() ?? ""
   writingSourceList.innerHTML = ""
 
+  if (!availableFiles.length) {
+    const empty = document.createElement("div")
+    empty.className = "rag-writing-source-empty"
+    empty.textContent = filesLoading ? "Dateien werden geladen…" : "Noch keine Dateien verfügbar."
+    writingSourceList.appendChild(empty)
+    return
+  }
+
   const filtered = availableFiles
     .filter(file => file.toLowerCase().includes(filter))
     .slice(0, 200)
@@ -923,7 +1562,7 @@ function renderWritingSources() {
   if (!filtered.length) {
     const empty = document.createElement("div")
     empty.className = "rag-writing-source-empty"
-    empty.textContent = filter ? "Keine Treffer." : "Keine Dateien verfügbar."
+    empty.textContent = "Keine Treffer."
     writingSourceList.appendChild(empty)
     return
   }
@@ -1111,7 +1750,9 @@ writingLinkButton?.addEventListener("click", () => {
   if (!target) return
   const cursor = target.selectionStart ?? target.value.length
   const value = target.value
-  target.value = `${value.substring(0, cursor)}[[${value.substring(cursor)}`
+  const before = value.substring(0, cursor)
+  const after = value.substring(cursor)
+  target.value = `${before}[[${after}`
   const newPos = cursor + 2
   target.setSelectionRange(newPos, newPos)
   target.focus()
@@ -1130,6 +1771,7 @@ type WritingBrief = {
 }
 
 function collectWritingBrief(): WritingBrief | null {
+  console.log("🔍 Collecting writing brief...")
   const deliverable = writingDeliverableInput?.value.trim()
   const audience = writingAudienceInput?.value.trim() || "nicht definiert"
   const purpose = writingPurposeInput?.value.trim()
@@ -1140,27 +1782,34 @@ function collectWritingBrief(): WritingBrief | null {
   const constraints = writingConstraintsInput?.value.trim() || "Keine zusätzlichen Constraints"
   const sources = Array.from(writingSelectedSources)
 
+  console.log("📊 Brief data:", { deliverable, audience, purpose, keyQuestions, sources: sources.length })
+
   if (!deliverable) {
+    console.log("❌ Missing deliverable")
     alert("Bitte beschreibe das Deliverable.")
     writingDeliverableInput?.focus()
     return null
   }
   if (!purpose) {
+    console.log("❌ Missing purpose")
     alert("Bitte erläutere das Ziel / den Erfolg.")
     writingPurposeInput?.focus()
     return null
   }
   if (!keyQuestions.length) {
+    console.log("❌ Missing key questions")
     alert("Füge mindestens eine Key Question hinzu.")
     writingQuestionsInput?.focus()
     return null
   }
   if (!sources.length) {
+    console.log("❌ Missing sources")
     alert("Wähle mindestens eine Quelle.")
     writingSourceFilter?.focus()
     return null
   }
 
+  console.log("✅ Brief validated successfully")
   return {
     deliverable,
     audience,
@@ -1344,12 +1993,18 @@ async function writingFallbackToChat(message: string) {
 }
 
 writingGenerateBtn?.addEventListener("click", async () => {
+  console.log("📝 Outline anfordern button clicked")
   const brief = collectWritingBrief()
-  if (!brief) return
+  console.log("📝 Brief collected:", brief)
+  if (!brief) {
+    console.log("❌ Brief validation failed - returning early")
+    return
+  }
   writingSessionBrief = buildSessionBriefText(brief)
   writingSessionSources = brief.sources
   writingConversationHistory = []
   writingFollowupInput && (writingFollowupInput.value = "")
+  console.log("📝 Sending writing request...")
   await runWritingRequest(writingSessionBrief, { resetHistory: true, trigger: "outline" })
 })
 
@@ -1378,20 +2033,31 @@ const statusDiv = document.getElementById("rag-status")
 // Autocomplete für Wikilinks
 const autocompleteContainer = document.getElementById("rag-autocomplete")
 let availableFiles: string[] = []
+let filesLoaded = false
+let filesLoading = false
 let autocompleteVisible = false
 let selectedIndex = -1
 let wikilinkStart = -1
 
 // Lade verfügbare Dateien
-async function loadFiles() {
+async function loadFiles(force = false) {
+  if (filesLoading && !force) return
+  filesLoading = true
+  writingSourceFilter?.setAttribute("disabled", "true")
   try {
     const response = await fetch(`${API_URL}/files`)
     const data = await response.json()
     availableFiles = data.files || []
+    filesLoaded = true
     console.log(`📁 ${availableFiles.length} Dateien geladen für Autocomplete`)
     renderWritingSources()
   } catch (error) {
+    filesLoaded = false
     console.error("Fehler beim Laden der Dateien:", error)
+    renderWritingSources()
+  } finally {
+    filesLoading = false
+    writingSourceFilter?.removeAttribute("disabled")
   }
 }
 
@@ -1612,6 +2278,42 @@ function enrichSourcesWithCitations(content: string, sources: any[] = []) {
   return normalizeSourcesList(sources)
 }
 
+// Evidence Strength Indicator
+type EvidenceStrength = "strong" | "moderate" | "weak"
+
+function calculateEvidenceStrength(source: any): { strength: EvidenceStrength; icon: string; label: string } {
+  const meta = parseSourceMeta(source)
+  if (!meta) return { strength: "weak", icon: "🔴", label: "Weak evidence" }
+
+  const title = meta.title.toLowerCase()
+  const score = source.score || 0
+
+  // Strong evidence: Meta-analyses, systematic reviews, multiple high-quality studies
+  if (
+    title.includes("meta-analysis") ||
+    title.includes("meta analysis") ||
+    title.includes("systematic review") ||
+    title.includes("review") && score > 0.65
+  ) {
+    return { strength: "strong", icon: "🟢", label: "Strong evidence (Meta-analysis/Review)" }
+  }
+
+  // Moderate evidence: Well-cited single studies, high similarity score
+  if (score > 0.60) {
+    return { strength: "moderate", icon: "🟡", label: "Moderate evidence (Robust study)" }
+  }
+
+  // Weak evidence: Low similarity, single studies
+  return { strength: "weak", icon: "🔴", label: "Weak/Limited evidence" }
+}
+
+function enrichSourcesWithEvidence(sources: any[]): any[] {
+  return sources.map(source => ({
+    ...source,
+    evidence: calculateEvidenceStrength(source)
+  }))
+}
+
 // Hilfsfunktion: Formatiere Markdown
 function formatMarkdown(content: string, sources: any[] = []): string {
   const normalizedSources = normalizeSourcesList(sources)
@@ -1763,8 +2465,12 @@ function addSourcesToMessage(messageDiv: HTMLElement, sources: any[]) {
     const venueText = meta.venue ? `<div class="rag-source-meta">${meta.venue}</div>` : ""
     const label = meta.year ? `${meta.authors} (${meta.year})` : meta.authors
 
+    // Calculate evidence strength
+    const evidence = calculateEvidenceStrength(source)
+
     sourceItem.innerHTML = `
       <div class="rag-source-title">
+        <span class="rag-evidence-indicator" title="${evidence.label}">${evidence.icon}</span>
         <a href="${url}" target="_blank" rel="noopener noreferrer">
           ${label}${meta.title ? ` – ${meta.title}` : ""}
         </a>
