@@ -405,7 +405,8 @@ batchExportHome?.addEventListener("click", () => {
 function renderBatchExportList(filter = '') {
   if (!batchExportList) return
 
-  const filtered = availableFiles.filter(file =>
+  const files = Array.isArray(availableFiles) ? availableFiles : []
+  const filtered = files.filter(file =>
     file.toLowerCase().includes(filter.toLowerCase())
   )
 
@@ -429,7 +430,8 @@ function renderBatchExportList(filter = '') {
 }
 
 batchSelectAllBtn?.addEventListener("click", () => {
-  availableFiles.forEach(file => selectedFiles.add(file))
+  const files = Array.isArray(availableFiles) ? availableFiles : []
+  files.forEach(file => selectedFiles.add(file))
   renderBatchExportList(batchSearchInput?.value || '')
 })
 
@@ -666,10 +668,11 @@ function populateCompareRegions() {
   const dataListA = document.getElementById("rag-compare-regions-a")
   const dataListB = document.getElementById("rag-compare-regions-b")
 
-  if (!dataListA || !dataListB || !availableFiles.length) return
+  const files = Array.isArray(availableFiles) ? availableFiles : []
+  if (!dataListA || !dataListB || files.length === 0) return
 
   // Filter nur Gehirnregionen (Glasser Areas und Other Areas)
-  const regions = availableFiles.filter(file =>
+  const regions = files.filter(file =>
     file.includes("Glasser areas") ||
     file.includes("Other areas") ||
     file.match(/^[A-Z0-9]+$/) // Short names like FEF, IFJ, etc
@@ -1547,7 +1550,8 @@ function renderWritingSources() {
   const filter = writingSourceFilter?.value.trim().toLowerCase() ?? ""
   writingSourceList.innerHTML = ""
 
-  if (!availableFiles.length) {
+  const files = Array.isArray(availableFiles) ? availableFiles : []
+  if (!files.length) {
     const empty = document.createElement("div")
     empty.className = "rag-writing-source-empty"
     empty.textContent = filesLoading ? "Dateien werden geladen…" : "Noch keine Dateien verfügbar."
@@ -1555,7 +1559,7 @@ function renderWritingSources() {
     return
   }
 
-  const filtered = availableFiles
+  const filtered = files
     .filter(file => file.toLowerCase().includes(filter))
     .slice(0, 200)
 
@@ -1587,9 +1591,11 @@ function renderWritingSources() {
 writingSourceFilter?.addEventListener('input', () => renderWritingSources())
 
 function showWritingAutocompleteMenu(filter: string, target: HTMLInputElement | HTMLTextAreaElement) {
-  if (!writingAutocompleteContainer || !availableFiles.length) return
+  if (!writingAutocompleteContainer) return
+  const files = Array.isArray(availableFiles) ? availableFiles : []
+  if (!files.length) return
   const normalizedFilter = filter.toLowerCase()
-  const filtered = availableFiles.filter(file => file.toLowerCase().includes(normalizedFilter)).slice(0, 12)
+  const filtered = files.filter(file => file.toLowerCase().includes(normalizedFilter)).slice(0, 12)
 
   if (!filtered.length) {
     writingAutocompleteContainer.innerHTML = '<div class="rag-autocomplete-empty">Keine Dateien gefunden</div>'
@@ -2047,7 +2053,7 @@ async function loadFiles(force = false) {
   try {
     const response = await fetch(`${API_URL}/files`)
     const data = await response.json()
-    availableFiles = data.files || []
+    availableFiles = Array.isArray(data.files) ? data.files : []
     filesLoaded = true
     console.log(`📁 ${availableFiles.length} Dateien geladen für Autocomplete`)
     renderWritingSources()
@@ -2065,7 +2071,8 @@ async function loadFiles(force = false) {
 function showAutocomplete(filter: string) {
   if (!autocompleteContainer || !inputField) return
 
-  const filtered = availableFiles.filter((file) =>
+  const files = Array.isArray(availableFiles) ? availableFiles : []
+  const filtered = files.filter((file) =>
     file.toLowerCase().includes(filter.toLowerCase()),
   )
 
