@@ -347,6 +347,9 @@ ${context}`
     }))
 
     console.log(`✅ Antwort generiert (${assistantMessage.length} Zeichen)`)
+    console.log(`📚 Sende ${sources.length} Quellen an Frontend:`)
+    sources.forEach((s, i) => console.log(`   [${i+1}] ${s.title} (${s.source})`))
+
 
     res.json({
       response: assistantMessage,

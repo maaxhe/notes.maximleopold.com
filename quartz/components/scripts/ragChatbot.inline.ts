@@ -529,8 +529,10 @@ function addMessage(
   })
 
   // Formatiere Markdown
-  // Headlines (## Text)
-  formattedContent = formattedContent.replace(/^##\s+(.+)$/gm, '<h2>$1</h2>')
+  // Headlines - wichtig: größere Überschriften zuerst!
+  formattedContent = formattedContent.replace(/^###\s+(.+)$/gm, '<h3>$1</h3>')  // ### → h3
+  formattedContent = formattedContent.replace(/^##\s+(.+)$/gm, '<h2>$1</h2>')   // ## → h2
+  formattedContent = formattedContent.replace(/^#\s+(.+)$/gm, '<h1>$1</h1>')    // # → h1
 
   // Bold (**Text**)
   formattedContent = formattedContent.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
@@ -738,6 +740,10 @@ async function sendMessage() {
     }
 
     const data = await response.json()
+
+    // Debug: Log sources
+    console.log("📚 Sources from server:", data.sources)
+    console.log("📚 Number of sources:", data.sources?.length || 0)
 
     // Zeige Assistenten-Antwort
     addMessage("assistant", data.response, data.sources)
