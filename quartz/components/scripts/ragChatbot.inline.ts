@@ -138,10 +138,15 @@ writingAssistantBtn?.addEventListener("click", () => {
   settingsPanel?.classList.add("hidden")
   historyPanel?.classList.add("hidden")
   citationPanel?.classList.add("hidden")
+  if (!writingPanel?.classList.contains("hidden")) {
+    renderWritingSources()
+    showWritingFollowup(writingConversationHistory.length > 0)
+  }
 })
 
 writingClose?.addEventListener("click", () => {
   writingPanel?.classList.add("hidden")
+  showWritingFollowup(false)
 })
 
 // Language toggle and translations
@@ -403,7 +408,7 @@ quickBtns.forEach((btn) => {
   })
 })
 
-let conversationHistory: Array<{ role: string; content: string }> = []
+let conversationHistory: Array<{ role: string; content: string; sources?: any[] }> = []
 
 // ===== CHAT HISTORY MANAGEMENT =====
 interface ChatSession {
@@ -682,112 +687,320 @@ function downloadFile(filename: string, content: string) {
 }
 
 // Writing Assistant
-const writingTopicInput = document.getElementById('rag-writing-topic') as HTMLInputElement | null
-const writingSectionSelect = document.getElementById('rag-writing-section') as HTMLSelectElement | null
-const writingLengthSelect = document.getElementById('rag-writing-length') as HTMLSelectElement | null
-const writingGenerateBtn = document.getElementById('rag-writing-generate')
+const writingTemplateSelect = document.getElementById('rag-writing-template') as HTMLSelectElement | null
+const writingDeliverableInput = document.getElementById('rag-writing-deliverable') as HTMLInputElement | null
+const writingAudienceInput = document.getElementById('rag-writing-audience') as HTMLInputElement | null
+const writingPurposeInput = document.getElementById('rag-writing-purpose') as HTMLInputElement | null
+const writingQuestionsInput = document.getElementById('rag-writing-questions') as HTMLTextAreaElement | null
+const writingConstraintsInput = document.getElementById('rag-writing-constraints') as HTMLTextAreaElement | null
+const writingNotesInput = document.getElementById('rag-writing-notes') as HTMLTextAreaElement | null
+const writingGapsInput = document.getElementById('rag-writing-gaps') as HTMLTextAreaElement | null
+const writingGenerateBtn = document.getElementById('rag-writing-generate') as HTMLButtonElement | null
 const writingOutput = document.getElementById('rag-writing-output')
+const writingFollowupSection = document.getElementById('rag-writing-followup')
+const writingFollowupInput = document.getElementById('rag-writing-followup-input') as HTMLTextAreaElement | null
+const writingFollowupBtn = document.getElementById('rag-writing-send-followup') as HTMLButtonElement | null
+const writingApproveBtn = document.getElementById('rag-writing-approve') as HTMLButtonElement | null
+const writingSourceList = document.getElementById('rag-writing-source-list')
+const writingSourceFilter = document.getElementById('rag-writing-source-filter') as HTMLInputElement | null
 
-writingGenerateBtn?.addEventListener('click', async () => {
-  const topic = writingTopicInput?.value.trim()
-  const section = writingSectionSelect?.value
-  const length = writingLengthSelect?.value
+type WritingTemplateKey = "custom" | "launch" | "press" | "memo"
+const writingTemplates: Record<WritingTemplateKey, Partial<Record<string, string>>> = {
+  custom: {},
+  launch: {
+    deliverable: "Launch Blogpost (500 Worte)",
+    audience: "Produktmanager:innen, Tech-Blog Leser:innen – energiegeladen & präzise",
+    purpose: "Verstehen Nutzen des Quartz Upload Service in <2 Minuten & klicken CTA",
+    questions: "- Welches Problem lösen wir?\n- Wie funktioniert der Upload→Build Flow?\n- Welcher CTA?",
+    constraints: "Max 600 Wörter, kein Marketing-Sprech, CTA zu /sites/demo/",
+  },
+  press: {
+    deliverable: "Pressemitteilung (350 Worte)",
+    audience: "Tech-Journalist:innen, nüchterner Ton",
+    purpose: "Warum ist Quartz Upload Service berichtenswert + Zitat & Verfügbarkeit",
+    questions: "- Welcher Marktbedarf?\n- Was ist neu?\n- Statement vom Gründer?",
+    constraints: "Strikte Presse-Struktur (Lead, Details, Boilerplate).",
+  },
+  memo: {
+    deliverable: "Team Memo (1 Seite)",
+    audience: "GT-1 Team, direkt & offen",
+    purpose: "Mitarbeitende wissen, was sich ändert & welche Risiken bleiben",
+    questions: "- Kontext & Problem\n- Entscheid & Begründung\n- Nächste Schritte / Owner",
+    constraints: "Max 3 Abschnitte, klare Verantwortlichkeiten, keine Buzzwords.",
+  },
+}
 
-  if (!topic) {
-    alert('Bitte gib ein Thema ein')
+const writingSelectedSources = new Set<string>()
+let writingConversationHistory: Array<{ role: "user" | "assistant"; content: string }> = []
+let writingSessionBrief = ""
+let writingSessionSources: string[] = []
+
+function applyWritingTemplate(template: WritingTemplateKey) {
+  const data = writingTemplates[template] || {}
+  if (data.deliverable && writingDeliverableInput) writingDeliverableInput.value = data.deliverable
+  if (data.audience && writingAudienceInput) writingAudienceInput.value = data.audience
+  if (data.purpose && writingPurposeInput) writingPurposeInput.value = data.purpose
+  if (data.questions && writingQuestionsInput) writingQuestionsInput.value = data.questions
+  if (data.constraints && writingConstraintsInput) writingConstraintsInput.value = data.constraints
+}
+
+writingTemplateSelect?.addEventListener('change', () => {
+  const value = (writingTemplateSelect.value as WritingTemplateKey) || "custom"
+  applyWritingTemplate(value)
+})
+
+function renderWritingSources() {
+  if (!writingSourceList) return
+  const filter = writingSourceFilter?.value.trim().toLowerCase() ?? ""
+  writingSourceList.innerHTML = ""
+
+  const filtered = availableFiles
+    .filter(file => file.toLowerCase().includes(filter))
+    .slice(0, 200)
+
+  if (!filtered.length) {
+    const empty = document.createElement("div")
+    empty.className = "rag-writing-source-empty"
+    empty.textContent = filter ? "Keine Treffer." : "Keine Dateien verfügbar."
+    writingSourceList.appendChild(empty)
     return
   }
 
-  const lengthMap = {
-    short: '2-3 Sätze',
-    medium: '5-7 Sätze',
-    long: '10+ Sätze, strukturiert mit Unterabschnitten'
+  filtered.forEach(file => {
+    const item = document.createElement("button")
+    item.type = "button"
+    item.className = `rag-writing-source ${writingSelectedSources.has(file) ? "selected" : ""}`
+    item.textContent = file
+    item.addEventListener("click", () => {
+      if (writingSelectedSources.has(file)) {
+        writingSelectedSources.delete(file)
+      } else {
+        writingSelectedSources.add(file)
+      }
+      renderWritingSources()
+    })
+    writingSourceList.appendChild(item)
+  })
+}
+
+writingSourceFilter?.addEventListener('input', () => renderWritingSources())
+
+type WritingBrief = {
+  deliverable: string
+  audience: string
+  purpose: string
+  keyQuestions: string[]
+  constraints: string
+  notes: string
+  gaps: string[]
+  sources: string[]
+}
+
+function collectWritingBrief(): WritingBrief | null {
+  const deliverable = writingDeliverableInput?.value.trim()
+  const audience = writingAudienceInput?.value.trim() || "nicht definiert"
+  const purpose = writingPurposeInput?.value.trim()
+  const keyQuestions = (writingQuestionsInput?.value || "")
+    .split("\n")
+    .map(line => line.trim())
+    .filter(Boolean)
+  const constraints = writingConstraintsInput?.value.trim() || "Keine zusätzlichen Constraints"
+  const notes = writingNotesInput?.value.trim() || ""
+  const gaps = (writingGapsInput?.value || "")
+    .split("\n")
+    .map(line => line.trim())
+    .filter(Boolean)
+  const sources = Array.from(writingSelectedSources)
+
+  if (!deliverable) {
+    alert("Bitte beschreibe das Deliverable.")
+    writingDeliverableInput?.focus()
+    return null
+  }
+  if (!purpose) {
+    alert("Bitte erläutere das Ziel / den Erfolg.")
+    writingPurposeInput?.focus()
+    return null
+  }
+  if (!keyQuestions.length) {
+    alert("Füge mindestens eine Key Question hinzu.")
+    writingQuestionsInput?.focus()
+    return null
+  }
+  if (!sources.length && !notes) {
+    alert("Wähle mindestens eine Quelle oder füge zusätzliche Notizen hinzu.")
+    writingSourceFilter?.focus()
+    return null
   }
 
-  const sectionMap = {
-    introduction: 'Introduction',
-    methods: 'Methods',
-    results: 'Results',
-    discussion: 'Discussion'
+  return {
+    deliverable,
+    audience,
+    purpose,
+    keyQuestions,
+    constraints,
+    notes,
+    gaps,
+    sources,
+  }
+}
+
+function buildSessionBriefText(brief: WritingBrief): string {
+  const questionsText = brief.keyQuestions.map(q => `- ${q}`).join("\n")
+  const sourcesText = brief.sources.length
+    ? brief.sources.map(src => `[x] ${src}`).join("\n")
+    : "[ ] (keine ausgewählten Dateien)"
+  const gapsText = brief.gaps.length
+    ? brief.gaps.map((gap, idx) => `${idx + 1}. ${gap}`).join("\n")
+    : "1. -"
+
+  return `Session Brief
+- Deliverable: ${brief.deliverable}
+- Audience & tone: ${brief.audience}
+- Purpose/success metric: ${brief.purpose}
+- Key questions to answer:
+${questionsText}
+- Constraints (length, POV, must/avoid):
+${brief.constraints}
+- Sources:
+${sourcesText}
+${brief.notes ? `Anchors / Notes:\n${brief.notes}\n` : ""}
+- Gaps / Need from Claude:
+${gapsText}`.trim()
+}
+
+type WritingTrigger = "outline" | "followup" | "approve"
+
+function setWritingButtonsState(isLoading: boolean, trigger: WritingTrigger = "outline") {
+  if (writingGenerateBtn) {
+    writingGenerateBtn.disabled = isLoading
+    writingGenerateBtn.textContent = isLoading && trigger === "outline" ? "⏳ Outline wird erstellt..." : "🧠 Outline anfordern"
+  }
+  if (writingFollowupBtn) {
+    writingFollowupBtn.disabled = isLoading
+    writingFollowupBtn.textContent = isLoading && trigger === "followup" ? "Sende..." : "Antwort senden"
+  }
+  if (writingApproveBtn) {
+    writingApproveBtn.disabled = isLoading
+    writingApproveBtn.textContent = isLoading && trigger === "approve" ? "Generiere Draft..." : "Outline freigeben & Draft schreiben"
+  }
+}
+
+function showWritingFollowup(show: boolean) {
+  if (!writingFollowupSection) return
+  writingFollowupSection.classList.toggle("hidden", !show)
+}
+
+async function runWritingRequest(message: string, options: { resetHistory?: boolean; trigger?: WritingTrigger } = {}) {
+  const { resetHistory = false, trigger = "outline" } = options
+  if (!writingSessionSources.length) {
+    alert("Bitte wähle zuerst Quellen aus.")
+    return
   }
 
-  const prompt = `Schreibe einen wissenschaftlichen Absatz für die ${sectionMap[section as keyof typeof sectionMap]}-Sektion meiner Bachelorarbeit über "${topic}".
+  if (resetHistory) {
+    writingConversationHistory = []
+  }
 
-Anforderungen:
-- Länge: ${lengthMap[length as keyof typeof lengthMap]}
-- Wissenschaftlicher Schreibstil
-- Zitiere relevante Quellen mit [Source Name] Format
-- Verwende Fachterminologie
-- Strukturiert und präzise
-
-Generiere NUR den wissenschaftlichen Text, keine Erklärungen davor oder danach.`
-
-  writingGenerateBtn.disabled = true
-  writingGenerateBtn.textContent = '⏳ Generiere...'
-
+  setWritingButtonsState(true, trigger)
   if (writingOutput) {
-    writingOutput.innerHTML = '<div class="rag-writing-loading">Generiere wissenschaftlichen Text...</div>'
+    writingOutput.innerHTML = '<div class="rag-writing-loading">Mika arbeitet an deiner Antwort...</div>'
   }
 
   try {
     const response = await fetch(`${API_URL}/chat-stream`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        message: prompt,
-        conversationHistory: [],
+        mode: "writing_assistant",
+        message,
+        conversationHistory: writingConversationHistory,
         language: currentLanguage,
+        writingSources: writingSessionSources,
       }),
     })
 
-    if (!response.ok) throw new Error('Fehler beim Generieren')
+    if (!response.ok) throw new Error("Fehler beim Schreiben")
 
     const reader = response.body?.getReader()
     const decoder = new TextDecoder()
-    let fullText = ''
+    let fullText = ""
 
-    while (true) {
-      const { done, value } = await reader!.read()
+    while (reader) {
+      const { done, value } = await reader.read()
       if (done) break
 
       const chunk = decoder.decode(value)
-      const lines = chunk.split('\n')
+      const lines = chunk.split("\n")
 
       for (const line of lines) {
-        if (line.startsWith('data: ')) {
-          const data = line.slice(6)
-          if (data === '[DONE]') break
+        if (!line.startsWith("data: ")) continue
+        const data = line.slice(6)
+        if (data === "[DONE]") break
 
-          try {
-            const parsed = JSON.parse(data)
-            if (parsed.type === 'text') {
-              fullText += parsed.content
-              if (writingOutput) {
-                writingOutput.innerHTML = `
-                  <div class="rag-writing-result">
-                    ${formatMarkdown(fullText)}
-                  </div>
-                  <button class="rag-copy-writing" onclick="navigator.clipboard.writeText(\`${fullText.replace(/`/g, '\\`')}\`)">
-                    📋 Kopieren
-                  </button>
-                `
-              }
+        try {
+          const parsed = JSON.parse(data)
+          if (parsed.type === "text") {
+            fullText += parsed.content
+            if (writingOutput) {
+              writingOutput.innerHTML = `
+                <div class="rag-writing-result">
+                  ${formatMarkdown(fullText)}
+                </div>
+                <button class="rag-copy-writing" onclick="navigator.clipboard.writeText(\`${fullText.replace(/`/g, '\\`')}\`)">
+                  📋 Kopieren
+                </button>
+              `
             }
-          } catch (e) {
-            // Ignore parse errors
           }
+        } catch {
+          // ignore chunk parse errors
         }
       }
     }
+
+    writingConversationHistory = [
+      ...writingConversationHistory,
+      { role: "user", content: message },
+      { role: "assistant", content: fullText },
+    ]
+
+    showWritingFollowup(true)
   } catch (error) {
-    console.error('Writing Assistant Fehler:', error)
+    console.error("Writing Assistant Fehler:", error)
     if (writingOutput) {
       writingOutput.innerHTML = '<div class="rag-writing-error">❌ Fehler beim Generieren</div>'
     }
   } finally {
-    writingGenerateBtn.disabled = false
-    writingGenerateBtn.textContent = 'Generieren'
+    setWritingButtonsState(false, trigger)
   }
+}
+
+writingGenerateBtn?.addEventListener("click", async () => {
+  const brief = collectWritingBrief()
+  if (!brief) return
+  writingSessionBrief = buildSessionBriefText(brief)
+  writingSessionSources = brief.sources
+  writingConversationHistory = []
+  writingFollowupInput && (writingFollowupInput.value = "")
+  await runWritingRequest(writingSessionBrief, { resetHistory: true, trigger: "outline" })
+})
+
+writingFollowupBtn?.addEventListener("click", async () => {
+  const reply = writingFollowupInput?.value.trim()
+  if (!reply) {
+    alert("Bitte gib eine Antwort ein.")
+    return
+  }
+  await runWritingRequest(reply, { trigger: "followup" })
+  if (writingFollowupInput) writingFollowupInput.value = ""
+})
+
+writingApproveBtn?.addEventListener("click", async () => {
+  const extra = writingFollowupInput?.value.trim()
+  const message = extra ? `${extra}\n\napprove outline` : "approve outline"
+  await runWritingRequest(message, { trigger: "approve" })
+  if (writingFollowupInput) writingFollowupInput.value = ""
 })
 
 const messagesContainer = document.getElementById("rag-messages")
@@ -809,6 +1022,7 @@ async function loadFiles() {
     const data = await response.json()
     availableFiles = data.files || []
     console.log(`📁 ${availableFiles.length} Dateien geladen für Autocomplete`)
+    renderWritingSources()
   } catch (error) {
     console.error("Fehler beim Laden der Dateien:", error)
   }
@@ -1091,6 +1305,54 @@ function addCopyButton(contentDiv: HTMLElement, content: string) {
   })
 
   contentDiv.appendChild(copyBtn)
+}
+
+function renderAssistantResponse(text: string, sources: any[] = []) {
+  if (!messagesContainer) return null
+  const messageDiv = document.createElement("div")
+  messageDiv.className = "rag-message assistant"
+  const contentDiv = document.createElement("div")
+  contentDiv.className = "rag-message-content"
+  contentDiv.innerHTML = formatMarkdown(text, sources)
+  messageDiv.appendChild(contentDiv)
+  messagesContainer.appendChild(messageDiv)
+  messagesContainer.scrollTop = messagesContainer.scrollHeight
+  return { messageDiv, contentDiv }
+}
+
+function finalizeAssistantInteraction(
+  messageDiv: HTMLElement,
+  contentDiv: HTMLElement,
+  userMessage: string,
+  assistantText: string,
+  sources: any[] = [],
+) {
+  if (sources && sources.length > 0) {
+    addSourcesToMessage(messageDiv, sources)
+  }
+
+  addCopyButton(contentDiv, assistantText)
+
+  conversationHistory.push(
+    { role: "user", content: userMessage },
+    { role: "assistant", content: assistantText, sources },
+  )
+
+  if (sources && sources.length > 0) {
+    sources.forEach(source => {
+      const key = source.source || source.title
+      if (key && !allCitedSources.has(key)) {
+        allCitedSources.set(key, source)
+      }
+    })
+    console.log(`📖 Citation Manager: ${allCitedSources.size} Quellen gesammelt`)
+  }
+
+  if (!currentSessionId) {
+    const newSession = createNewSession(userMessage)
+    currentSessionId = newSession.id
+  }
+  saveCurrentSession()
 }
 
 function addMessage(
@@ -1406,45 +1668,20 @@ async function sendMessage() {
         }
       }
 
-      // Füge Quellen hinzu
-      if (sources && sources.length > 0) {
-        addSourcesToMessage(messageDiv, sources)
-      }
-
-      // Füge Copy-Button hinzu
-      addCopyButton(contentDiv, fullResponse)
-
       console.log("📚 Sources from server:", sources)
       console.log("📚 Number of sources:", sources?.length || 0)
 
-      // Update Konversationshistorie
-      conversationHistory.push(
-        { role: "user", content: userMessage },
-        { role: "assistant", content: fullResponse, sources },
-      )
-
-      // Track cited sources für Citation Manager
-      if (sources && sources.length > 0) {
-        sources.forEach(source => {
-          const key = source.source || source.title
-          if (key && !allCitedSources.has(key)) {
-            allCitedSources.set(key, source)
-          }
-        })
-        console.log(`📖 Citation Manager: ${allCitedSources.size} Quellen gesammelt`)
-      }
-
-      // Auto-Save Session
-      if (!currentSessionId) {
-        const newSession = createNewSession(userMessage)
-        currentSessionId = newSession.id
-      }
-      saveCurrentSession()
+      finalizeAssistantInteraction(messageDiv, contentDiv, userMessage, fullResponse, sources || [])
     } catch (streamError) {
       console.error("Streaming-Fehler:", streamError)
       // Fallback: Entferne leere Nachricht und zeige Fehler
       if (messageDiv.parentNode) {
         messageDiv.parentNode.removeChild(messageDiv)
+      }
+
+      const fallbackSuccess = await fallbackToChatEndpoint(enrichedMessage, userMessage)
+      if (fallbackSuccess) {
+        return
       }
       throw streamError
     }
@@ -1461,6 +1698,45 @@ async function sendMessage() {
     setTimeout(() => setStatus(""), 3000)
   } finally {
     setLoading(false)
+  }
+}
+
+async function fallbackToChatEndpoint(enrichedMessage: string, userMessage: string) {
+  try {
+    setStatus("Streaming nicht verfügbar – nutze Backup-Endpunkt", "warning")
+    const response = await fetch(`${API_URL}/chat`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: enrichedMessage,
+        conversationHistory,
+        language: currentLanguage,
+      }),
+    })
+
+    if (!response.ok) {
+      throw new Error("Backup-Endpunkt nicht erreichbar")
+    }
+
+    const data = await response.json()
+    const assistantText = data.response || "Der Server hat keine Antwort zurückgegeben."
+    const sources = data.sources || []
+
+    const rendered = renderAssistantResponse(assistantText, sources)
+    if (!rendered) {
+      return false
+    }
+
+    finalizeAssistantInteraction(rendered.messageDiv, rendered.contentDiv, userMessage, assistantText, sources)
+    setStatus("")
+    return true
+  } catch (fallbackError) {
+    console.error("Fallback-Fehler:", fallbackError)
+    setStatus("Fehler bei der Verbindung zum Server", "error")
+    setTimeout(() => setStatus(""), 3000)
+    return false
   }
 }
 

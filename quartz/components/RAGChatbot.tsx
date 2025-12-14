@@ -156,34 +156,94 @@ export default ((opts?: Partial<Options>) => {
             {/* Writing Assistant Panel */}
             <div class="rag-writing-panel hidden" id="rag-writing-panel">
               <div class="rag-writing-header">
-                <h4>✍️ Writing Assistant</h4>
+                <div>
+                  <h4>✍️ Writing Assistant</h4>
+                  <p>Session Brief → Outline → Draft</p>
+                </div>
                 <button class="rag-writing-close" id="rag-writing-close" aria-label="Close">×</button>
               </div>
-              <div class="rag-writing-form">
-                <label>Thema:</label>
-                <input type="text" id="rag-writing-topic" placeholder="z.B. Dorsaler auditorischer Stream" />
+              <div class="rag-writing-body">
+                <div class="rag-writing-form">
+                  <div class="rag-writing-template">
+                    <label for="rag-writing-template">Template</label>
+                    <select id="rag-writing-template">
+                      <option value="custom" selected>Eigenes Briefing</option>
+                      <option value="launch">Launch Blog Post</option>
+                      <option value="press">Pressemitteilung</option>
+                      <option value="memo">Team Memo</option>
+                    </select>
+                  </div>
 
-                <label>Sektion:</label>
-                <select id="rag-writing-section">
-                  <option value="introduction">Introduction</option>
-                  <option value="methods">Methods</option>
-                  <option value="results">Results</option>
-                  <option value="discussion">Discussion</option>
-                </select>
+                  <div class="rag-writing-grid">
+                    <label>
+                      Deliverable
+                      <input type="text" id="rag-writing-deliverable" placeholder="z.B. 500-Wort Blogpost" />
+                    </label>
+                    <label>
+                      Audience & Tone
+                      <input type="text" id="rag-writing-audience" placeholder="z.B. PMs, präzise & motivierend" />
+                    </label>
+                  </div>
 
-                <label>Länge:</label>
-                <select id="rag-writing-length">
-                  <option value="short">Kurzer Absatz (2-3 Sätze)</option>
-                  <option value="medium">Absatz (5-7 Sätze)</option>
-                  <option value="long">Ausführlich (10+ Sätze)</option>
-                </select>
+                  <label>
+                    Purpose / Success Metric
+                    <input type="text" id="rag-writing-purpose" placeholder="z.B. Versteht Produktvorteile in <2 Min" />
+                  </label>
 
-                <button class="rag-writing-generate" id="rag-writing-generate">
-                  Generieren
-                </button>
-              </div>
-              <div class="rag-writing-output" id="rag-writing-output">
-                {/* Generierter Text */}
+                  <label>
+                    Key questions to answer
+                    <textarea id="rag-writing-questions" placeholder="- Was ist das Problem?\n- Wie lösen wir es?\n- Was ist der CTA?"></textarea>
+                  </label>
+
+                  <label>
+                    Constraints (POV, Länge, No-Gos)
+                    <textarea id="rag-writing-constraints" placeholder="z.B. Max 600 Wörter, kein Jargon, CTA zu /sites/demo/"></textarea>
+                  </label>
+
+                  <div class="rag-writing-sources-block">
+                    <div class="rag-writing-sources-header">
+                      <div>
+                        <span>Sources</span>
+                        <p>Wähle Dateien, die der Assistant nutzen darf</p>
+                      </div>
+                      <input type="text" id="rag-writing-source-filter" placeholder="Dateien suchen..." />
+                    </div>
+                    <div class="rag-writing-source-list" id="rag-writing-source-list">
+                      <div class="rag-writing-source-empty">Lade Dateien…</div>
+                    </div>
+                  </div>
+
+                  <label>
+                    Additional notes / Anchors
+                    <textarea id="rag-writing-notes" placeholder="[[docs/brief.md#L42]] Wichtiges Zitat oder Kontext"></textarea>
+                  </label>
+
+                  <label>
+                    Gaps / Need from Claude
+                    <textarea id="rag-writing-gaps" placeholder="1. Brauchen wir Kundenzitat?\n2. Zahlen für Abschnitt 2?"></textarea>
+                  </label>
+
+                  <button class="rag-writing-generate" id="rag-writing-generate">
+                    🧠 Outline anfordern
+                  </button>
+                </div>
+
+                <div class="rag-writing-output" id="rag-writing-output">
+                  <div class="rag-writing-placeholder">
+                    <p>Fülle den Session Brief aus und starte mit „Outline anfordern“.</p>
+                  </div>
+                </div>
+
+                <div class="rag-writing-followup hidden" id="rag-writing-followup">
+                  <label>
+                    Antwort / zusätzliche Infos
+                    <textarea id="rag-writing-followup-input" placeholder="Beantworte offene Fragen oder gib neues Feedback"></textarea>
+                  </label>
+                  <div class="rag-writing-followup-actions">
+                    <button id="rag-writing-send-followup">Antwort senden</button>
+                    <button id="rag-writing-approve">Outline freigeben & Draft schreiben</button>
+                  </div>
+                </div>
               </div>
             </div>
 

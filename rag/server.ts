@@ -210,6 +210,67 @@ ${chunk.content}
     .join("\n---\n\n")
 }
 
+function collectChunksForSources(titles: string[], maxPerSource = 3): Array<DocumentChunk & { score: number }> {
+  if (!vectorStore || !titles.length) {
+    return []
+  }
+
+  const normalized = titles.map(title => title.toUpperCase())
+  const collected: Array<DocumentChunk & { score: number }> = []
+
+  normalized.forEach((title, titleIndex) => {
+    const matches = vectorStore!.chunks.filter(chunk => {
+      const chunkTitle = chunk.metadata.title?.toUpperCase() || ""
+      if (chunkTitle === title) return true
+      // Fallback: allow partial match
+      return chunkTitle.includes(title)
+    })
+
+    matches.slice(0, maxPerSource).forEach((chunk, idx) => {
+      collected.push({
+        ...chunk,
+        score: 1 - titleIndex * 0.01 - idx * 0.001,
+      })
+    })
+  })
+
+  return collected
+}
+
+function buildWritingSystemPrompt(language: string, context: string): string {
+  if (language === "de") {
+    return `Du bist ein Writing Partner, der jedes Briefing strukturiert verarbeitet.
+
+Arbeitsweise:
+1. Lies den gesamten Session Brief aufmerksam.
+2. Nutze ausschließlich die unten aufgeführten Quellen; zitiere sie exakt mit Ankern wie [[docs/brief.md#L42]].
+3. Antworte IMMER in zwei Teilen:
+   a. Outline & Questions – liefere eine Gliederung und alle Rückfragen oder Datenlücken.
+   b. Draft – nur nachdem der Nutzer ausdrücklich "approve outline" geschrieben hat.
+4. Beende jede Antwort mit einer Liste "Need from you:" (Bullet Points).
+5. Erfinde niemals Quellen oder Zahlen. Wenn Informationen fehlen, bitte gezielt darum.
+6. Antworte im selben Language-Setting wie angefragt.
+
+WRITING SOURCES:
+${context}`
+  }
+
+  return `You are a writing partner who treats each session as a structured brief.
+
+Workflow:
+1. Read the entire Session Brief carefully.
+2. Use ONLY the sources listed below; cite anchors exactly like [[notes/doc.md#L42]].
+3. Always reply in two parts:
+   a. Outline & Questions – provide structure plus clarifying questions or missing data.
+   b. Draft – only after the user explicitly says "approve outline".
+4. Finish every response with "Need from you:" bullet points.
+5. Never invent sources, numbers, or quotes. Ask when information is missing.
+6. Respond in the requested language.
+
+WRITING SOURCES:
+${context}`
+}
+
 /**
  * Extrahiere tatsächlich zitierte Quellen aus Claude's Antwort
  */
@@ -292,7 +353,7 @@ app.get("/health", (req, res) => {
  */
 app.post("/chat-stream", async (req, res) => {
   try {
-    const { message, conversationHistory = [], language = "de" } = req.body
+    const { message, conversationHistory = [], language = "de", mode, writingSources = [] } = req.body
 
     if (!message) {
       return res.status(400).json({ error: "Message ist erforderlich" })
@@ -304,65 +365,80 @@ app.post("/chat-stream", async (req, res) => {
 
     console.log(`\n💬 Query (Stream): "${message}"`)
 
-    // Finde relevante Chunks (erhöht auf 30 für mehr Diversität!)
-    const relevantChunks = await findRelevantChunks(message, 30)
+    const isWritingMode = mode === "writing_assistant"
+    let finalChunks: Array<DocumentChunk & { score: number }>
+    let context = ""
+    let systemPrompt = ""
 
-    if (relevantChunks.length === 0) {
-      return res.json({
-        response: "Ich konnte keine relevanten Informationen finden.",
-        sources: [],
-      })
-    }
+    if (isWritingMode) {
+      finalChunks = collectChunksForSources(writingSources, 3)
 
-    console.log(`📚 ${relevantChunks.length} relevante Chunks gefunden`)
-    console.log(`   Top Scores: ${relevantChunks.slice(0, 3).map(c => `${Math.round(c.score * 100)}%`).join(", ")}`)
-
-    // Filtere Duplikate: Nur beste Chunk pro Datei (WICHTIG: VOR dem Senden an Claude!)
-    const uniqueChunks = relevantChunks.reduce((acc: typeof relevantChunks, chunk) => {
-      const existingIndex = acc.findIndex(c => c.metadata.source === chunk.metadata.source)
-      if (existingIndex === -1) {
-        acc.push(chunk)
-      } else if (chunk.score > acc[existingIndex].score) {
-        acc[existingIndex] = chunk
+      if (finalChunks.length === 0) {
+        return res.status(400).json({ error: "Keine passenden Quellen für den Writing Assistant gefunden." })
       }
-      return acc
-    }, [])
 
-    // Limitiere auf maximal 8 eindeutige Quellen (erhöht von 5 für mehr Kontext!)
-    const finalChunks = uniqueChunks.slice(0, 8)
+      context = formatContext(finalChunks)
+      systemPrompt = buildWritingSystemPrompt(language, context)
+    } else {
+      // Finde relevante Chunks (erhöht auf 30 für mehr Diversität!)
+      const relevantChunks = await findRelevantChunks(message, 30)
 
-    console.log(`📚 Verwende ${finalChunks.length} eindeutige Quellen (von ${relevantChunks.length} Chunks)`)
-    finalChunks.forEach((c, i) => console.log(`   [${i+1}] ${c.metadata.title} (${Math.round(c.score * 100)}%)`))
+      if (relevantChunks.length === 0) {
+        return res.json({
+          response: "Ich konnte keine relevanten Informationen finden.",
+          sources: [],
+        })
+      }
 
-    // Formatiere Kontext
-    const context = formatContext(finalChunks)
+      console.log(`📚 ${relevantChunks.length} relevante Chunks gefunden`)
+      console.log(`   Top Scores: ${relevantChunks.slice(0, 3).map(c => `${Math.round(c.score * 100)}%`).join(", ")}`)
 
-    // Erkenne Anfrage-Typ
-    const isSummaryRequest = message.toLowerCase().includes("zusammenfassen") ||
-                            message.toLowerCase().includes("fasse") ||
-                            message.toLowerCase().includes("zusammenfassung")
-    const isMainPointsRequest = message.toLowerCase().includes("hauptpunkte") ||
-                               message.toLowerCase().includes("key points")
+      // Filtere Duplikate: Nur beste Chunk pro Datei (WICHTIG: VOR dem Senden an Claude!)
+      const uniqueChunks = relevantChunks.reduce((acc: typeof relevantChunks, chunk) => {
+        const existingIndex = acc.findIndex(c => c.metadata.source === chunk.metadata.source)
+        if (existingIndex === -1) {
+          acc.push(chunk)
+        } else if (chunk.score > acc[existingIndex].score) {
+          acc[existingIndex] = chunk
+        }
+        return acc
+      }, [])
 
-    let specificInstructions = ""
-    if (isSummaryRequest) {
-      specificInstructions = `
+      // Limitiere auf maximal 8 eindeutige Quellen (erhöht von 5 für mehr Kontext!)
+      finalChunks = uniqueChunks.slice(0, 8)
+
+      console.log(`📚 Verwende ${finalChunks.length} eindeutige Quellen (von ${relevantChunks.length} Chunks)`)
+      finalChunks.forEach((c, i) => console.log(`   [${i+1}] ${c.metadata.title} (${Math.round(c.score * 100)}%)`))
+
+      // Formatiere Kontext
+      context = formatContext(finalChunks)
+
+      // Erkenne Anfrage-Typ
+      const isSummaryRequest = message.toLowerCase().includes("zusammenfassen") ||
+                              message.toLowerCase().includes("fasse") ||
+                              message.toLowerCase().includes("zusammenfassung")
+      const isMainPointsRequest = message.toLowerCase().includes("hauptpunkte") ||
+                                 message.toLowerCase().includes("key points")
+
+      let specificInstructions = ""
+      if (isSummaryRequest) {
+        specificInstructions = `
 ZUSAMMENFASSUNG ANGEFORDERT:
 - Gib eine echte ZUSAMMENFASSUNG in 2-3 Sätzen
 - Konzentriere dich auf die KERNAUSSAGE, nicht auf Details
 - Verwende EIGENE WORTE, keine Ausschnitte aus den Quellen
 - Formuliere ÜBERGREIFEND und ABSTRAHIEREND`
-    } else if (isMainPointsRequest) {
-      specificInstructions = `
+      } else if (isMainPointsRequest) {
+        specificInstructions = `
 HAUPTPUNKTE ANGEFORDERT:
 - Gib EXAKT 3 kurze Bullet Points aus (verwende • als Symbol)
 - Jeder Punkt: MAXIMAL 1 Zeile
 - Nur die WICHTIGSTEN Kernaussagen
 - Keine Details, keine Erklärungen`
-    }
+      }
 
-    const systemPrompt = language === "de"
-      ? `Du bist Mika, ein hilfreicher wissenschaftlicher Assistent, der Fragen zur Bachelorarbeit über auditorische Streams im Gehirn beantwortet.
+      systemPrompt = language === "de"
+        ? `Du bist Mika, ein hilfreicher wissenschaftlicher Assistent, der Fragen zur Bachelorarbeit über auditorische Streams im Gehirn beantwortet.
 
 WICHTIGE REGELN:
 1. Beantworte Fragen ausschließlich basierend auf den bereitgestellten Quellen
@@ -378,7 +454,7 @@ ${specificInstructions}
 
 KONTEXT AUS DEN DOKUMENTEN:
 ${context}`
-      : `You are Mika, a helpful scientific assistant answering questions about the bachelor thesis on auditory streams in the brain.
+        : `You are Mika, a helpful scientific assistant answering questions about the bachelor thesis on auditory streams in the brain.
 
 IMPORTANT RULES:
 1. Answer questions exclusively based on the provided sources
@@ -392,6 +468,7 @@ ${specificInstructions}
 
 CONTEXT FROM DOCUMENTS:
 ${context}`
+    }
 
     // Bereite Konversationshistorie vor
     const messages: Anthropic.MessageParam[] = [
