@@ -77,6 +77,71 @@ const settingsPanel = document.getElementById("rag-settings-panel")
 
 settingsBtn?.addEventListener("click", () => {
   settingsPanel?.classList.toggle("hidden")
+  // Hide other panels
+  historyPanel?.classList.add("hidden")
+  citationPanel?.classList.add("hidden")
+  writingPanel?.classList.add("hidden")
+})
+
+// History panel toggle
+const historyBtn = document.getElementById("rag-chat-history")
+const historyPanel = document.getElementById("rag-history-panel")
+const historyList = document.getElementById("rag-history-list")
+const historySearch = document.getElementById("rag-history-search") as HTMLInputElement | null
+const historyClose = document.getElementById("rag-history-close")
+
+historyBtn?.addEventListener("click", () => {
+  historyPanel?.classList.toggle("hidden")
+  // Hide other panels
+  settingsPanel?.classList.add("hidden")
+  citationPanel?.classList.add("hidden")
+  writingPanel?.classList.add("hidden")
+
+  if (!historyPanel?.classList.contains("hidden")) {
+    renderHistoryList()
+  }
+})
+
+historyClose?.addEventListener("click", () => {
+  historyPanel?.classList.add("hidden")
+})
+
+// Citation Manager panel
+const citationManagerBtn = document.getElementById("rag-citation-manager-btn")
+const citationPanel = document.getElementById("rag-citation-panel")
+const citationClose = document.getElementById("rag-citation-close")
+const citationStats = document.getElementById("rag-citation-stats")
+const citationList = document.getElementById("rag-citation-list")
+
+citationManagerBtn?.addEventListener("click", () => {
+  citationPanel?.classList.toggle("hidden")
+  settingsPanel?.classList.add("hidden")
+  historyPanel?.classList.add("hidden")
+  writingPanel?.classList.add("hidden")
+
+  if (!citationPanel?.classList.contains("hidden")) {
+    renderCitationManager()
+  }
+})
+
+citationClose?.addEventListener("click", () => {
+  citationPanel?.classList.add("hidden")
+})
+
+// Writing Assistant panel
+const writingAssistantBtn = document.getElementById("rag-writing-assistant-btn")
+const writingPanel = document.getElementById("rag-writing-panel")
+const writingClose = document.getElementById("rag-writing-close")
+
+writingAssistantBtn?.addEventListener("click", () => {
+  writingPanel?.classList.toggle("hidden")
+  settingsPanel?.classList.add("hidden")
+  historyPanel?.classList.add("hidden")
+  citationPanel?.classList.add("hidden")
+})
+
+writingClose?.addEventListener("click", () => {
+  writingPanel?.classList.add("hidden")
 })
 
 // Language toggle and translations
@@ -90,14 +155,16 @@ const translations = {
     welcomeMessage: "Hallo! Ich bin Mika, dein Bachelorarbeit-Assistent. Nutze die Buttons oben für schnelle Aktionen oder stelle mir eine Frage!",
     placeholder: "Frage zu deiner Bachelorarbeit... (tippe [[ für Dateiauswahl)",
     quickActions: {
-      summary: "📄 Diese Seite zusammenfassen",
-      explain: "💡 Hauptpunkte erklären",
-      sources: "📚 Quellen finden"
+      summary: "📄 Zusammenfassen",
+      connectivity: "🔗 Connectivity anzeigen",
+      compare: "🔄 Mit anderen vergleichen",
+      literature: "📖 Literatur durchsuchen"
     },
     quickPrompts: {
       summary: "Fasse {currentFile} zusammen",
-      explain: "Erkläre die Hauptpunkte aus {currentFile}",
-      sources: "Welche Quellen werden in {currentFile} referenziert?"
+      connectivity: "Zeige alle Verbindungen und Connectivity von {currentFile}",
+      compare: "Vergleiche {currentFile} mit verwandten Regionen. Zeige Unterschiede und Gemeinsamkeiten",
+      literature: "Welche Paper und Studien diskutieren {currentFile}? Liste alle Quellen mit wichtigen Findings"
     },
     status: {
       searching: "Suche relevante Informationen...",
@@ -114,14 +181,16 @@ const translations = {
     welcomeMessage: "Hello! I'm Mika, your bachelor thesis assistant. Use the buttons above for quick actions or ask me a question!",
     placeholder: "Question about your bachelor thesis... (type [[ for file selection)",
     quickActions: {
-      summary: "📄 Summarize this page",
-      explain: "💡 Explain main points",
-      sources: "📚 Find sources"
+      summary: "📄 Summarize",
+      connectivity: "🔗 Show connectivity",
+      compare: "🔄 Compare with others",
+      literature: "📖 Search literature"
     },
     quickPrompts: {
       summary: "Summarize {currentFile}",
-      explain: "Explain the main points from {currentFile}",
-      sources: "Which sources are referenced in {currentFile}?"
+      connectivity: "Show all connections and connectivity of {currentFile}",
+      compare: "Compare {currentFile} with related regions. Show differences and similarities",
+      literature: "Which papers and studies discuss {currentFile}? List all sources with key findings"
     },
     status: {
       searching: "Searching for relevant information...",
@@ -156,7 +225,7 @@ function updateUILanguage() {
   // Update quick action buttons
   const quickBtns = document.querySelectorAll('.rag-quick-btn')
   quickBtns.forEach((btn, idx) => {
-    const types = ['summary', 'explain', 'sources']
+    const types = ['summary', 'connectivity', 'compare', 'literature']
     const type = types[idx]
     if (type) {
       btn.textContent = t(`quickActions.${type}`)
@@ -336,6 +405,391 @@ quickBtns.forEach((btn) => {
 
 let conversationHistory: Array<{ role: string; content: string }> = []
 
+// ===== CHAT HISTORY MANAGEMENT =====
+interface ChatSession {
+  id: string
+  timestamp: number
+  title: string
+  messages: Array<{
+    role: string
+    content: string
+    sources?: any[]
+  }>
+  citedSources: Set<string> // Für Citation Manager
+}
+
+let currentSessionId: string | null = null
+let allCitedSources: Map<string, any> = new Map() // Global citation tracking
+
+// Lade Chat-Historie aus localStorage
+function loadChatHistory(): ChatSession[] {
+  try {
+    const stored = localStorage.getItem('rag-chat-history')
+    if (stored) {
+      const sessions = JSON.parse(stored)
+      // Convert citedSources back to Set
+      return sessions.map((s: any) => ({
+        ...s,
+        citedSources: new Set(s.citedSources || [])
+      }))
+    }
+  } catch (e) {
+    console.error('Fehler beim Laden der Chat-Historie:', e)
+  }
+  return []
+}
+
+// Speichere Chat-Historie
+function saveChatHistory(sessions: ChatSession[]) {
+  try {
+    // Convert Sets to Arrays for JSON
+    const serializable = sessions.map(s => ({
+      ...s,
+      citedSources: Array.from(s.citedSources)
+    }))
+    localStorage.setItem('rag-chat-history', JSON.stringify(serializable))
+  } catch (e) {
+    console.error('Fehler beim Speichern der Chat-Historie:', e)
+  }
+}
+
+// Erstelle neue Chat-Session
+function createNewSession(firstMessage: string): ChatSession {
+  const id = `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+  const title = firstMessage.substring(0, 50) + (firstMessage.length > 50 ? '...' : '')
+
+  return {
+    id,
+    timestamp: Date.now(),
+    title,
+    messages: [],
+    citedSources: new Set()
+  }
+}
+
+// Speichere aktuelle Session
+function saveCurrentSession() {
+  if (!currentSessionId || conversationHistory.length === 0) return
+
+  const sessions = loadChatHistory()
+  const sessionIndex = sessions.findIndex(s => s.id === currentSessionId)
+
+  const currentSession: ChatSession = {
+    id: currentSessionId,
+    timestamp: Date.now(),
+    title: sessions[sessionIndex]?.title || conversationHistory[0]?.content.substring(0, 50) || 'Neue Konversation',
+    messages: conversationHistory.map((msg: any) => ({
+      role: msg.role,
+      content: msg.content,
+      sources: msg.sources || []
+    })),
+    citedSources: new Set(allCitedSources.keys())
+  }
+
+  if (sessionIndex >= 0) {
+    sessions[sessionIndex] = currentSession
+  } else {
+    sessions.unshift(currentSession) // Neueste zuerst
+  }
+
+  // Behalte max 50 Sessions
+  if (sessions.length > 50) {
+    sessions.splice(50)
+  }
+
+  saveChatHistory(sessions)
+}
+
+// Lade Session
+function loadSession(sessionId: string) {
+  const sessions = loadChatHistory()
+  const session = sessions.find(s => s.id === sessionId)
+
+  if (!session) return
+
+  currentSessionId = sessionId
+  conversationHistory = session.messages
+
+  // Leere Chat und zeige geladene Nachrichten
+  if (messagesContainer) {
+    messagesContainer.innerHTML = ''
+
+    session.messages.forEach(msg => {
+      addMessage(msg.role as 'user' | 'assistant', msg.content, msg.sources)
+    })
+  }
+
+  console.log(`📂 Session geladen: ${session.title}`)
+}
+
+// Rendere History List
+function renderHistoryList(searchTerm = '') {
+  const sessions = loadChatHistory()
+
+  if (!historyList) return
+
+  historyList.innerHTML = ''
+
+  const filtered = searchTerm
+    ? sessions.filter(s => s.title.toLowerCase().includes(searchTerm.toLowerCase()))
+    : sessions
+
+  if (filtered.length === 0) {
+    historyList.innerHTML = '<div class="rag-history-empty">Keine Chats gefunden</div>'
+    return
+  }
+
+  filtered.forEach(session => {
+    const item = document.createElement('div')
+    item.className = 'rag-history-item'
+    if (session.id === currentSessionId) {
+      item.classList.add('active')
+    }
+
+    const date = new Date(session.timestamp)
+    const dateStr = date.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })
+    const timeStr = date.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })
+
+    item.innerHTML = `
+      <div class="rag-history-item-content">
+        <div class="rag-history-item-title">${session.title}</div>
+        <div class="rag-history-item-meta">${dateStr} ${timeStr} • ${session.messages.length} Nachrichten</div>
+      </div>
+      <button class="rag-history-delete" data-session-id="${session.id}" title="Löschen">🗑️</button>
+    `
+
+    item.querySelector('.rag-history-item-content')?.addEventListener('click', () => {
+      loadSession(session.id)
+      historyPanel?.classList.add('hidden')
+    })
+
+    item.querySelector('.rag-history-delete')?.addEventListener('click', (e) => {
+      e.stopPropagation()
+      if (confirm('Chat wirklich löschen?')) {
+        deleteSession(session.id)
+        renderHistoryList(searchTerm)
+      }
+    })
+
+    historyList.appendChild(item)
+  })
+}
+
+// Lösche Session
+function deleteSession(sessionId: string) {
+  const sessions = loadChatHistory()
+  const filtered = sessions.filter(s => s.id !== sessionId)
+  saveChatHistory(filtered)
+
+  if (currentSessionId === sessionId) {
+    currentSessionId = null
+    conversationHistory = []
+    if (messagesContainer) {
+      messagesContainer.innerHTML = ''
+      addMessage('assistant', translations[currentLanguage].welcomeMessage)
+    }
+  }
+}
+
+// History Search
+historySearch?.addEventListener('input', (e) => {
+  const target = e.target as HTMLInputElement
+  renderHistoryList(target.value)
+})
+
+// Rendere Citation Manager
+function renderCitationManager() {
+  if (!citationStats || !citationList) return
+
+  const sources = Array.from(allCitedSources.values())
+
+  citationStats.innerHTML = `
+    <div class="rag-citation-stat">
+      <strong>${sources.length}</strong> Quellen gesammelt
+    </div>
+  `
+
+  citationList.innerHTML = ''
+
+  if (sources.length === 0) {
+    citationList.innerHTML = '<div class="rag-citation-empty">Noch keine Quellen zitiert</div>'
+    return
+  }
+
+  sources.forEach((source, idx) => {
+    const item = document.createElement('div')
+    item.className = 'rag-citation-item'
+    item.innerHTML = `
+      <span class="rag-citation-number">[${idx + 1}]</span>
+      <span class="rag-citation-title">${source.title || 'Unknown'}</span>
+    `
+    citationList.appendChild(item)
+  })
+}
+
+// Export Citations
+document.getElementById('rag-export-bibtex')?.addEventListener('click', () => {
+  const bibtex = generateBibTeX(Array.from(allCitedSources.values()))
+  downloadFile('citations.bib', bibtex)
+})
+
+document.getElementById('rag-export-apa')?.addEventListener('click', () => {
+  const apa = generateAPA(Array.from(allCitedSources.values()))
+  downloadFile('citations.txt', apa)
+})
+
+document.getElementById('rag-export-list')?.addEventListener('click', () => {
+  const list = generateSimpleList(Array.from(allCitedSources.values()))
+  downloadFile('citations.txt', list)
+})
+
+function generateBibTeX(sources: any[]): string {
+  return sources.map((source, idx) => {
+    const title = source.title || 'Unknown'
+    const year = title.match(/\((\d{4})\)/) ? title.match(/\((\d{4})\)/)[1] : '2024'
+    const authors = title.split(/\d{4}/)[0].trim().replace(/\(.*\)/, '').trim()
+
+    return `@article{source${idx + 1},
+  title={${title}},
+  author={${authors}},
+  year={${year}},
+  note={Source: ${source.source || 'Unknown'}}
+}`
+  }).join('\n\n')
+}
+
+function generateAPA(sources: any[]): string {
+  return sources.map(source => {
+    const title = source.title || 'Unknown'
+    return `${title}. Retrieved from ${source.source || 'Unknown'}`
+  }).join('\n\n')
+}
+
+function generateSimpleList(sources: any[]): string {
+  return sources.map((source, idx) => {
+    return `[${idx + 1}] ${source.title || 'Unknown'}\n    ${source.source || 'Unknown'}`
+  }).join('\n\n')
+}
+
+function downloadFile(filename: string, content: string) {
+  const blob = new Blob([content], { type: 'text/plain' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = filename
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
+// Writing Assistant
+const writingTopicInput = document.getElementById('rag-writing-topic') as HTMLInputElement | null
+const writingSectionSelect = document.getElementById('rag-writing-section') as HTMLSelectElement | null
+const writingLengthSelect = document.getElementById('rag-writing-length') as HTMLSelectElement | null
+const writingGenerateBtn = document.getElementById('rag-writing-generate')
+const writingOutput = document.getElementById('rag-writing-output')
+
+writingGenerateBtn?.addEventListener('click', async () => {
+  const topic = writingTopicInput?.value.trim()
+  const section = writingSectionSelect?.value
+  const length = writingLengthSelect?.value
+
+  if (!topic) {
+    alert('Bitte gib ein Thema ein')
+    return
+  }
+
+  const lengthMap = {
+    short: '2-3 Sätze',
+    medium: '5-7 Sätze',
+    long: '10+ Sätze, strukturiert mit Unterabschnitten'
+  }
+
+  const sectionMap = {
+    introduction: 'Introduction',
+    methods: 'Methods',
+    results: 'Results',
+    discussion: 'Discussion'
+  }
+
+  const prompt = `Schreibe einen wissenschaftlichen Absatz für die ${sectionMap[section as keyof typeof sectionMap]}-Sektion meiner Bachelorarbeit über "${topic}".
+
+Anforderungen:
+- Länge: ${lengthMap[length as keyof typeof lengthMap]}
+- Wissenschaftlicher Schreibstil
+- Zitiere relevante Quellen mit [Source Name] Format
+- Verwende Fachterminologie
+- Strukturiert und präzise
+
+Generiere NUR den wissenschaftlichen Text, keine Erklärungen davor oder danach.`
+
+  writingGenerateBtn.disabled = true
+  writingGenerateBtn.textContent = '⏳ Generiere...'
+
+  if (writingOutput) {
+    writingOutput.innerHTML = '<div class="rag-writing-loading">Generiere wissenschaftlichen Text...</div>'
+  }
+
+  try {
+    const response = await fetch(`${API_URL}/chat-stream`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: prompt,
+        conversationHistory: [],
+        language: currentLanguage,
+      }),
+    })
+
+    if (!response.ok) throw new Error('Fehler beim Generieren')
+
+    const reader = response.body?.getReader()
+    const decoder = new TextDecoder()
+    let fullText = ''
+
+    while (true) {
+      const { done, value } = await reader!.read()
+      if (done) break
+
+      const chunk = decoder.decode(value)
+      const lines = chunk.split('\n')
+
+      for (const line of lines) {
+        if (line.startsWith('data: ')) {
+          const data = line.slice(6)
+          if (data === '[DONE]') break
+
+          try {
+            const parsed = JSON.parse(data)
+            if (parsed.type === 'text') {
+              fullText += parsed.content
+              if (writingOutput) {
+                writingOutput.innerHTML = `
+                  <div class="rag-writing-result">
+                    ${formatMarkdown(fullText)}
+                  </div>
+                  <button class="rag-copy-writing" onclick="navigator.clipboard.writeText(\`${fullText.replace(/`/g, '\\`')}\`)">
+                    📋 Kopieren
+                  </button>
+                `
+              }
+            }
+          } catch (e) {
+            // Ignore parse errors
+          }
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Writing Assistant Fehler:', error)
+    if (writingOutput) {
+      writingOutput.innerHTML = '<div class="rag-writing-error">❌ Fehler beim Generieren</div>'
+    }
+  } finally {
+    writingGenerateBtn.disabled = false
+    writingGenerateBtn.textContent = 'Generieren'
+  }
+})
+
 const messagesContainer = document.getElementById("rag-messages")
 const inputField = document.getElementById("rag-input") as HTMLTextAreaElement | null
 const sendButton = document.getElementById("rag-send")
@@ -504,6 +958,141 @@ document.addEventListener("click", (e) => {
 // Lade Dateien beim Start
 loadFiles()
 
+// Hilfsfunktion: Formatiere Markdown
+function formatMarkdown(content: string, sources: any[] = []): string {
+  // Formatiere Wikilinks [[File]] zu schönen Links
+  let formatted = content.replace(/\[\[([^\]]+)\]\]/g, (_match, linkText) => {
+    const slug = linkText.trim().replace(/\s+/g, '-')
+    return `<a href="/${slug}" class="rag-wikilink" data-link="${linkText}">${linkText}</a>`
+  })
+
+  // Formatiere Quellen-Zitate [Source Name] zu klickbaren Links
+  // Wichtig: NUR Single-Bracket-Zitate, NICHT [[Wikilinks]]
+  if (sources.length > 0) {
+    // Erstelle Mapping von Titel zu Source
+    const sourceMap = new Map()
+    sources.forEach(source => {
+      const title = source.title || source.source?.split('/').pop()?.replace(/\.md$/, '') || 'Unknown'
+      sourceMap.set(title, source)
+    })
+
+    // Ersetze [Source Name] mit klickbaren Citations (aber NICHT [[Wikilinks]])
+    formatted = formatted.replace(/(?<!\[)\[([^\]]+)\](?!\])/g, (match, citationText) => {
+      const source = sourceMap.get(citationText.trim())
+      if (source && source.source) {
+        // Generiere URL mit Quartz-Slug-Logik
+        const path = source.source.replace(/^content\//, '').replace(/\.md$/, '')
+        const slug = path.split('/').map(segment =>
+          segment
+            .replace(/\s/g, '-')
+            .replace(/&/g, '-and-')
+            .replace(/%/g, '-percent')
+            .replace(/\?/g, '')
+            .replace(/#/g, '')
+        ).join('/')
+        const url = `/${slug}`
+
+        return `<a href="${url}" class="rag-source-cite" target="_blank" rel="noopener noreferrer" title="${source.title}">[${citationText}]</a>`
+      }
+      return match // Nicht-Source Zitate unverändert lassen
+    })
+  }
+
+  // Formatiere Markdown-Überschriften und Text
+  formatted = formatted.replace(/^###\s+(.+)$/gm, '<h3>$1</h3>')
+  formatted = formatted.replace(/^##\s+(.+)$/gm, '<h2>$1</h2>')
+  formatted = formatted.replace(/^#\s+(.+)$/gm, '<h1>$1</h1>')
+  formatted = formatted.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+  formatted = formatted.replace(/(?<!\w)_(.+?)_(?!\w)/g, '<em>$1</em>')
+  formatted = formatted.replace(/\n/g, '<br>')
+
+  return formatted
+}
+
+// Hilfsfunktion: Füge Quellen zur Nachricht hinzu
+function addSourcesToMessage(messageDiv: HTMLElement, sources: any[]) {
+  // Keine Duplikat-Filterung mehr nötig - Server macht das schon!
+  const sourcesDiv = document.createElement("div")
+  sourcesDiv.className = "rag-message-sources"
+
+  const sourcesTitle = document.createElement("div")
+  sourcesTitle.className = "rag-sources-title"
+  sourcesTitle.textContent = t('sourcesTitle')
+  sourcesDiv.appendChild(sourcesTitle)
+
+  console.log(`📚 Zeige ${sources.length} Quellen`)
+
+  sources.forEach((source, idx) => {
+    const sourceItem = document.createElement("div")
+    sourceItem.className = "rag-source-item"
+
+    const sourceTitle = source.title || "Unbekannt"
+    const sourceCategory = source.category || ""
+    const relevance = Math.round(source.score * 100)
+
+    let sourceUrl = "/"
+    if (source.source) {
+      const path = source.source.replace(/^content\//, '').replace(/\.md$/, '')
+      const slug = path.split('/').map(segment =>
+        segment
+          .replace(/\s/g, '-')
+          .replace(/&/g, '-and-')
+          .replace(/%/g, '-percent')
+          .replace(/\?/g, '')
+          .replace(/#/g, '')
+      ).join('/')
+      sourceUrl = `/${slug}`
+    }
+
+    sourceItem.innerHTML = `
+      <span class="rag-source-number">[${idx + 1}]</span>
+      <a href="${sourceUrl}" class="rag-source-title" target="_blank" rel="noopener noreferrer">${sourceTitle}</a>
+      <span class="rag-source-meta">${sourceCategory} • ${relevance}% relevant</span>
+    `
+    sourcesDiv.appendChild(sourceItem)
+  })
+
+  messageDiv.appendChild(sourcesDiv)
+}
+
+// Hilfsfunktion: Füge Copy-Button hinzu
+function addCopyButton(contentDiv: HTMLElement, content: string) {
+  const copyBtn = document.createElement("button")
+  copyBtn.className = "rag-copy-btn"
+  copyBtn.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+    </svg>
+  `
+  copyBtn.title = "Kopieren"
+
+  copyBtn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(content)
+      copyBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      `
+      copyBtn.classList.add("copied")
+      setTimeout(() => {
+        copyBtn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        `
+        copyBtn.classList.remove("copied")
+      }, 2000)
+    } catch (err) {
+      console.error("Fehler beim Kopieren:", err)
+    }
+  })
+
+  contentDiv.appendChild(copyBtn)
+}
+
 function addMessage(
   role: string,
   content: string,
@@ -598,7 +1187,26 @@ function addMessage(
     sourcesTitle.textContent = t('sourcesTitle')
     sourcesDiv.appendChild(sourcesTitle)
 
-    sources.forEach((source, idx) => {
+    // Filtere Duplikate: Zeige jede Datei nur einmal (mit höchstem Score)
+    const uniqueSources = sources.reduce((acc: any[], source: any) => {
+      // Finde existierende Quelle mit demselben Pfad
+      const existingIndex = acc.findIndex(s => s.source === source.source)
+
+      if (existingIndex === -1) {
+        // Neue Quelle hinzufügen
+        acc.push(source)
+      } else {
+        // Verwende den höheren Score
+        if (source.score > acc[existingIndex].score) {
+          acc[existingIndex] = source
+        }
+      }
+      return acc
+    }, [])
+
+    console.log(`📚 Zeige ${uniqueSources.length} eindeutige Quellen (von ${sources.length} Chunks)`)
+
+    uniqueSources.forEach((source, idx) => {
       const sourceItem = document.createElement("div")
       sourceItem.className = "rag-source-item"
 
@@ -721,38 +1329,125 @@ async function sendMessage() {
 
     setStatus(t('status.generating'))
 
-    // Sende Chat-Anfrage (mit angereicherter Nachricht)
-    const response = await fetch(`${API_URL}/chat`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        message: enrichedMessage,
-        conversationHistory,
-        language: currentLanguage, // Füge Sprache hinzu
-      }),
-    })
+    // Erstelle leere Assistenten-Nachricht für Streaming
+    const messageDiv = document.createElement("div")
+    messageDiv.className = "rag-message assistant"
 
-    if (!response.ok) {
-      const error = await response.json()
-      throw new Error(error.error || "Unbekannter Fehler")
+    const contentDiv = document.createElement("div")
+    contentDiv.className = "rag-message-content"
+    messageDiv.appendChild(contentDiv)
+
+    if (messagesContainer) {
+      messagesContainer.appendChild(messageDiv)
+      messagesContainer.scrollTop = messagesContainer.scrollHeight
     }
 
-    const data = await response.json()
+    let fullResponse = ""
+    let sources: any[] = []
 
-    // Debug: Log sources
-    console.log("📚 Sources from server:", data.sources)
-    console.log("📚 Number of sources:", data.sources?.length || 0)
+    try {
+      // Sende Streaming-Request
+      const response = await fetch(`${API_URL}/chat-stream`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: enrichedMessage,
+          conversationHistory,
+          language: currentLanguage,
+        }),
+      })
 
-    // Zeige Assistenten-Antwort
-    addMessage("assistant", data.response, data.sources)
+      if (!response.ok) {
+        throw new Error("Server-Fehler")
+      }
 
-    // Update Konversationshistorie
-    conversationHistory.push(
-      { role: "user", content: userMessage },
-      { role: "assistant", content: data.response },
-    )
+      const reader = response.body?.getReader()
+      const decoder = new TextDecoder()
+
+      if (!reader) {
+        throw new Error("Stream nicht verfügbar")
+      }
+
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+
+        const chunk = decoder.decode(value)
+        const lines = chunk.split('\n')
+
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            const data = line.slice(6)
+            if (data === '[DONE]') {
+              break
+            }
+
+            try {
+              const parsed = JSON.parse(data)
+
+              if (parsed.type === 'text') {
+                fullResponse += parsed.content
+                // Formatiere und zeige Text live (ohne Quellen-Links, die kommen später)
+                contentDiv.innerHTML = formatMarkdown(fullResponse, sources)
+                messagesContainer!.scrollTop = messagesContainer!.scrollHeight
+              } else if (parsed.type === 'sources') {
+                sources = parsed.sources
+                // Re-formatiere Text mit Quellen-Links jetzt, da wir die Quellen haben
+                contentDiv.innerHTML = formatMarkdown(fullResponse, sources)
+              } else if (parsed.type === 'error') {
+                throw new Error(parsed.error)
+              }
+            } catch (e) {
+              // Ignoriere Parse-Fehler für unvollständige Chunks
+            }
+          }
+        }
+      }
+
+      // Füge Quellen hinzu
+      if (sources && sources.length > 0) {
+        addSourcesToMessage(messageDiv, sources)
+      }
+
+      // Füge Copy-Button hinzu
+      addCopyButton(contentDiv, fullResponse)
+
+      console.log("📚 Sources from server:", sources)
+      console.log("📚 Number of sources:", sources?.length || 0)
+
+      // Update Konversationshistorie
+      conversationHistory.push(
+        { role: "user", content: userMessage },
+        { role: "assistant", content: fullResponse, sources },
+      )
+
+      // Track cited sources für Citation Manager
+      if (sources && sources.length > 0) {
+        sources.forEach(source => {
+          const key = source.source || source.title
+          if (key && !allCitedSources.has(key)) {
+            allCitedSources.set(key, source)
+          }
+        })
+        console.log(`📖 Citation Manager: ${allCitedSources.size} Quellen gesammelt`)
+      }
+
+      // Auto-Save Session
+      if (!currentSessionId) {
+        const newSession = createNewSession(userMessage)
+        currentSessionId = newSession.id
+      }
+      saveCurrentSession()
+    } catch (streamError) {
+      console.error("Streaming-Fehler:", streamError)
+      // Fallback: Entferne leere Nachricht und zeige Fehler
+      if (messageDiv.parentNode) {
+        messageDiv.parentNode.removeChild(messageDiv)
+      }
+      throw streamError
+    }
 
     setStatus("")
   } catch (error: any) {

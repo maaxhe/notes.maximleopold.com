@@ -57,6 +57,13 @@ export default ((opts?: Partial<Options>) => {
                 <button class="rag-chat-lang" id="rag-chat-lang" aria-label="Switch language" title="Sprache wechseln">
                   <span class="rag-lang-text">EN</span>
                 </button>
+                <button class="rag-chat-history" id="rag-chat-history" aria-label="Chat history" title="Chat-Verlauf">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 3v5h5"></path>
+                    <path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"></path>
+                    <path d="M12 7v5l4 2"></path>
+                  </svg>
+                </button>
                 <button class="rag-chat-clear" id="rag-chat-clear" aria-label="Clear chat" title="Chat löschen">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="3 6 5 6 21 6"></polyline>
@@ -95,19 +102,107 @@ export default ((opts?: Partial<Options>) => {
                   <span>Vault neu indizieren</span>
                 </button>
                 <p class="rag-settings-hint">Führt die Re-Indexierung aller Dokumente durch. Dies kann einige Minuten dauern.</p>
+
+                <button class="rag-citation-manager-btn" id="rag-citation-manager-btn" title="Verwalte alle zitierten Quellen">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                  </svg>
+                  <span>Citation Manager</span>
+                </button>
+                <p class="rag-settings-hint">Exportiere alle zitierten Quellen als BibTeX, APA oder Zotero.</p>
+              </div>
+            </div>
+
+            {/* History Panel */}
+            <div class="rag-history-panel hidden" id="rag-history-panel">
+              <div class="rag-history-header">
+                <h4>📚 Chat-Verlauf</h4>
+                <button class="rag-history-close" id="rag-history-close" aria-label="Close">×</button>
+              </div>
+              <div class="rag-history-search">
+                <input type="text" id="rag-history-search" placeholder="Durchsuchen..." />
+              </div>
+              <div class="rag-history-list" id="rag-history-list">
+                {/* Dynamisch gefüllt via JavaScript */}
+              </div>
+            </div>
+
+            {/* Citation Manager Panel */}
+            <div class="rag-citation-panel hidden" id="rag-citation-panel">
+              <div class="rag-citation-header">
+                <h4>📖 Citation Manager</h4>
+                <button class="rag-citation-close" id="rag-citation-close" aria-label="Close">×</button>
+              </div>
+              <div class="rag-citation-stats" id="rag-citation-stats">
+                {/* Dynamisch gefüllt */}
+              </div>
+              <div class="rag-citation-export">
+                <button class="rag-export-btn" id="rag-export-bibtex">
+                  <span>BibTeX</span>
+                </button>
+                <button class="rag-export-btn" id="rag-export-apa">
+                  <span>APA</span>
+                </button>
+                <button class="rag-export-btn" id="rag-export-list">
+                  <span>Simple List</span>
+                </button>
+              </div>
+              <div class="rag-citation-list" id="rag-citation-list">
+                {/* Liste aller Quellen */}
+              </div>
+            </div>
+
+            {/* Writing Assistant Panel */}
+            <div class="rag-writing-panel hidden" id="rag-writing-panel">
+              <div class="rag-writing-header">
+                <h4>✍️ Writing Assistant</h4>
+                <button class="rag-writing-close" id="rag-writing-close" aria-label="Close">×</button>
+              </div>
+              <div class="rag-writing-form">
+                <label>Thema:</label>
+                <input type="text" id="rag-writing-topic" placeholder="z.B. Dorsaler auditorischer Stream" />
+
+                <label>Sektion:</label>
+                <select id="rag-writing-section">
+                  <option value="introduction">Introduction</option>
+                  <option value="methods">Methods</option>
+                  <option value="results">Results</option>
+                  <option value="discussion">Discussion</option>
+                </select>
+
+                <label>Länge:</label>
+                <select id="rag-writing-length">
+                  <option value="short">Kurzer Absatz (2-3 Sätze)</option>
+                  <option value="medium">Absatz (5-7 Sätze)</option>
+                  <option value="long">Ausführlich (10+ Sätze)</option>
+                </select>
+
+                <button class="rag-writing-generate" id="rag-writing-generate">
+                  Generieren
+                </button>
+              </div>
+              <div class="rag-writing-output" id="rag-writing-output">
+                {/* Generierter Text */}
               </div>
             </div>
 
             {/* Quick Actions */}
             <div class="rag-quick-actions">
               <button class="rag-quick-btn" data-prompt="Fasse {currentFile} zusammen" data-type="summary">
-                📄 Diese Seite zusammenfassen
+                📄 Zusammenfassen
               </button>
-              <button class="rag-quick-btn" data-prompt="Erkläre die Hauptpunkte aus {currentFile}" data-type="explain">
-                💡 Hauptpunkte erklären
+              <button class="rag-quick-btn" data-prompt="Zeige alle Verbindungen und Connectivity von {currentFile}" data-type="connectivity">
+                🔗 Connectivity anzeigen
               </button>
-              <button class="rag-quick-btn" data-prompt="Welche Quellen werden in {currentFile} referenziert?" data-type="sources">
-                📚 Quellen finden
+              <button class="rag-quick-btn" data-prompt="Vergleiche {currentFile} mit verwandten Regionen. Zeige Unterschiede und Gemeinsamkeiten" data-type="compare">
+                🔄 Mit anderen vergleichen
+              </button>
+              <button class="rag-quick-btn" data-prompt="Welche Paper und Studien diskutieren {currentFile}? Liste alle Quellen mit wichtigen Findings" data-type="literature">
+                📖 Literatur durchsuchen
+              </button>
+              <button class="rag-quick-btn rag-writing-assistant-btn" id="rag-writing-assistant-btn" data-type="writing">
+                ✍️ Writing Assistant
               </button>
             </div>
 

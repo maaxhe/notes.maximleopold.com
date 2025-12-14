@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test Sources</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .source {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .source a {
+            color: #2563eb;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .source a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Quellen-Test</h1>
+    <button onclick="testAPI()">API Testen</button>
+    <div id="result"></div>
+
+    <script>
+        async function testAPI() {
+            const result = document.getElementById('result');
+            result.innerHTML = '<p>⏳ Lade Daten...</p>';
+
+            try {
+                const response = await fetch('http://localhost:3030/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: 'Fasse FEF zusammen',
+                        language: 'de'
+                    })
+                });
+
+                const data = await response.json();
+
+                console.log('📚 Received sources:', data.sources);
+
+                if (!data.sources || data.sources.length === 0) {
+                    result.innerHTML = '<p>❌ KEINE QUELLEN EMPFANGEN!</p>';
+                    return;
+                }
+
+                let html = `<h2>✅ ${data.sources.length} Quellen empfangen:</h2>`;
+
+                data.sources.forEach((source, idx) => {
+                    // Generate URL with Quartz slug logic
+                    let url = '/';
+                    if (source.source) {
+                        const path = source.source.replace(/^content\//, '').replace(/\.md$/, '');
+                        const slug = path.split('/').map(segment =>
+                            segment
+                                .replace(/\s/g, '-')
+                                .replace(/&/g, '-and-')
+                                .replace(/%/g, '-percent')
+                                .replace(/\?/g, '')
+                                .replace(/#/g, '')
+                        ).join('/');
+                        url = `/${slug}`;
+                    }
+
+                    html += `
+                        <div class="source">
+                            <strong>[${idx + 1}]</strong>
+                            <a href="${url}" target="_blank">${source.title || 'Unbekannt'}</a>
+                            <br>
+                            <small>Kategorie: ${source.category || 'N/A'} • ${Math.round(source.score * 100)}% relevant</small>
+                            <br>
+                            <small style="color: #666;">Pfad: ${source.source || 'N/A'}</small>
+                            <br>
+                            <small style="color: #666;">URL: <code>${url}</code></small>
+                        </div>
+                    `;
+                });
+
+                result.innerHTML = html;
+
+            } catch (error) {
+                result.innerHTML = `<p>❌ Fehler: ${error.message}</p>`;
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -150,42 +150,45 @@ async function findRelevantChunks(
     }
   }
 
-  // PRIORITÄT 2: Current Page (nur wenn keine Wikilinks vorhanden sind)
-  else if (currentPage) {
-    const pageChunks = chunks.filter(chunk =>
-      chunk.metadata.title?.toUpperCase() === currentPage.toUpperCase() ||
-      chunk.metadata.source.toUpperCase().includes(`/${currentPage.toUpperCase()}.MD`)
-    )
-
-    if (pageChunks.length > 0) {
-      console.log(`📌 CURRENT PAGE: ${pageChunks.length} Chunks von "${currentPage}"`)
-      chunks = pageChunks
-    } else {
-      console.log(`⚠️  Keine Chunks für Current Page "${currentPage}" gefunden`)
-    }
-  }
-
-  // PRIORITÄT 3: Specific File (alter Mechanismus als letzter Fallback)
-  else if (specificFile) {
-    const fileChunks = chunks.filter(chunk =>
-      chunk.metadata.source.toUpperCase().includes(specificFile) ||
-      chunk.metadata.title?.toUpperCase().includes(specificFile)
-    )
-
-    if (fileChunks.length > 0) {
-      console.log(`📌 SPECIFIC FILE: ${fileChunks.length} Chunks für "${specificFile}"`)
-      chunks = fileChunks
-    }
-  }
-
-  // Berechne Ähnlichkeiten
+  // Berechne Ähnlichkeiten für ALLE Chunks
   const scoredChunks = chunks
-    .map(chunk => ({
-      ...chunk,
-      score: cosineSimilarity(queryVector, chunk.embedding!),
-    }))
+    .map(chunk => {
+      let score = cosineSimilarity(queryVector, chunk.embedding!)
+
+      // PRIORITÄT 2: Boost Current Page Chunks (moderate Bevorzugung, nicht Exklusivität!)
+      if (currentPage) {
+        const isCurrentPage =
+          chunk.metadata.title?.toUpperCase() === currentPage.toUpperCase() ||
+          chunk.metadata.source.toUpperCase().includes(`/${currentPage.toUpperCase()}.MD`)
+
+        if (isCurrentPage) {
+          score *= 1.3  // 30% Boost für aktuelle Seite
+        }
+      }
+
+      // PRIORITÄT 3: Boost Specific File (falls erwähnt in Query)
+      else if (specificFile) {
+        const isSpecificFile =
+          chunk.metadata.source.toUpperCase().includes(specificFile) ||
+          chunk.metadata.title?.toUpperCase().includes(specificFile)
+
+        if (isSpecificFile) {
+          score *= 1.2  // 20% Boost für spezifisch erwähnte Dateien
+        }
+      }
+
+      return { ...chunk, score }
+    })
     .sort((a, b) => b.score - a.score)
     .slice(0, topK)
+
+  // Logging für besseres Debugging
+  if (currentPage) {
+    const currentPageCount = scoredChunks.filter(c =>
+      c.metadata.title?.toUpperCase() === currentPage.toUpperCase()
+    ).length
+    console.log(`📌 CONTEXT: Auf Seite "${currentPage}" (${currentPageCount}/${scoredChunks.length} Chunks von aktueller Seite)`)
+  }
 
   return scoredChunks
 }
@@ -196,13 +199,79 @@ async function findRelevantChunks(
 function formatContext(chunks: Array<DocumentChunk & { score: number }>): string {
   return chunks
     .map((chunk, idx) => {
-      const source = chunk.metadata.title || chunk.metadata.source.split("/").pop()
+      const sourceTitle = chunk.metadata.title || chunk.metadata.source.split("/").pop()?.replace(/\.md$/, '') || 'Unknown'
       const category = chunk.metadata.category || "Unknown"
-      return `[Quelle ${idx + 1}: ${source} (${category}, Relevanz: ${(chunk.score * 100).toFixed(1)}%)]
+
+      // Verwende den Titel als Zitier-Key (statt Nummer)
+      return `[${sourceTitle}] (${category}, Relevanz: ${(chunk.score * 100).toFixed(1)}%)
 ${chunk.content}
 `
     })
     .join("\n---\n\n")
+}
+
+/**
+ * Extrahiere tatsächlich zitierte Quellen aus Claude's Antwort
+ */
+function filterReferencedSources(
+  responseText: string,
+  allChunks: Array<DocumentChunk & { score: number }>
+): Array<DocumentChunk & { score: number }> {
+  // Extrahiere alle Zitate wie [FEF], [Bedini & Baldauf (2021)], etc.
+  const citationPattern = /\[([^\]]+)\]/g
+  const citations = new Set<string>()
+  let match
+
+  while ((match = citationPattern.exec(responseText)) !== null) {
+    citations.add(match[1].trim())
+  }
+
+  console.log(`📝 Gefundene Zitate im Text: ${Array.from(citations).join(", ")}`)
+
+  // Filtere Chunks: Behalte nur die, die auch zitiert wurden
+  // Verwende FUZZY MATCHING für bessere Trefferquote
+  const referencedChunks = allChunks.filter(chunk => {
+    const sourceTitle = chunk.metadata.title || chunk.metadata.source.split("/").pop()?.replace(/\.md$/, '') || 'Unknown'
+
+    // Exakter Match
+    if (citations.has(sourceTitle)) return true
+
+    // Fuzzy Match: Token-basierter Vergleich
+    for (const citation of citations) {
+      // Extrahiere wichtige Tokens: Namen, Jahre, Schlüsselwörter
+      const citationTokens = citation
+        .toLowerCase()
+        .replace(/[&\-\(\)\[\]]/g, ' ')
+        .split(/\s+/)
+        .filter(t => t.length > 2) // Ignoriere kurze Wörter
+
+      const titleTokens = sourceTitle
+        .toLowerCase()
+        .replace(/[&\-\(\)\[\]]/g, ' ')
+        .split(/\s+/)
+        .filter(t => t.length > 2)
+
+      // Zähle übereinstimmende Tokens
+      const matches = citationTokens.filter(ct => titleTokens.some(tt => tt.includes(ct) || ct.includes(tt)))
+
+      // Wenn >50% der Citation-Tokens im Titel vorkommen, ist es ein Match
+      if (matches.length > 0 && matches.length / citationTokens.length >= 0.5) {
+        return true
+      }
+    }
+
+    return false
+  })
+
+  console.log(`✂️  Reduziert von ${allChunks.length} auf ${referencedChunks.length} tatsächlich zitierte Quellen`)
+
+  // Debug: Zeige gefilterte Quellen
+  referencedChunks.forEach((c, i) => {
+    const title = c.metadata.title || c.metadata.source.split("/").pop()?.replace(/\.md$/, '') || 'Unknown'
+    console.log(`   ✓ [${i+1}] ${title}`)
+  })
+
+  return referencedChunks
 }
 
 // API Endpoints
@@ -219,7 +288,178 @@ app.get("/health", (req, res) => {
 })
 
 /**
- * Chat Endpoint mit RAG
+ * Chat Endpoint mit RAG und Streaming
+ */
+app.post("/chat-stream", async (req, res) => {
+  try {
+    const { message, conversationHistory = [], language = "de" } = req.body
+
+    if (!message) {
+      return res.status(400).json({ error: "Message ist erforderlich" })
+    }
+
+    if (!vectorStore) {
+      return res.status(503).json({ error: "Vector Store nicht geladen" })
+    }
+
+    console.log(`\n💬 Query (Stream): "${message}"`)
+
+    // Finde relevante Chunks (erhöht auf 30 für mehr Diversität!)
+    const relevantChunks = await findRelevantChunks(message, 30)
+
+    if (relevantChunks.length === 0) {
+      return res.json({
+        response: "Ich konnte keine relevanten Informationen finden.",
+        sources: [],
+      })
+    }
+
+    console.log(`📚 ${relevantChunks.length} relevante Chunks gefunden`)
+    console.log(`   Top Scores: ${relevantChunks.slice(0, 3).map(c => `${Math.round(c.score * 100)}%`).join(", ")}`)
+
+    // Filtere Duplikate: Nur beste Chunk pro Datei (WICHTIG: VOR dem Senden an Claude!)
+    const uniqueChunks = relevantChunks.reduce((acc: typeof relevantChunks, chunk) => {
+      const existingIndex = acc.findIndex(c => c.metadata.source === chunk.metadata.source)
+      if (existingIndex === -1) {
+        acc.push(chunk)
+      } else if (chunk.score > acc[existingIndex].score) {
+        acc[existingIndex] = chunk
+      }
+      return acc
+    }, [])
+
+    // Limitiere auf maximal 8 eindeutige Quellen (erhöht von 5 für mehr Kontext!)
+    const finalChunks = uniqueChunks.slice(0, 8)
+
+    console.log(`📚 Verwende ${finalChunks.length} eindeutige Quellen (von ${relevantChunks.length} Chunks)`)
+    finalChunks.forEach((c, i) => console.log(`   [${i+1}] ${c.metadata.title} (${Math.round(c.score * 100)}%)`))
+
+    // Formatiere Kontext
+    const context = formatContext(finalChunks)
+
+    // Erkenne Anfrage-Typ
+    const isSummaryRequest = message.toLowerCase().includes("zusammenfassen") ||
+                            message.toLowerCase().includes("fasse") ||
+                            message.toLowerCase().includes("zusammenfassung")
+    const isMainPointsRequest = message.toLowerCase().includes("hauptpunkte") ||
+                               message.toLowerCase().includes("key points")
+
+    let specificInstructions = ""
+    if (isSummaryRequest) {
+      specificInstructions = `
+ZUSAMMENFASSUNG ANGEFORDERT:
+- Gib eine echte ZUSAMMENFASSUNG in 2-3 Sätzen
+- Konzentriere dich auf die KERNAUSSAGE, nicht auf Details
+- Verwende EIGENE WORTE, keine Ausschnitte aus den Quellen
+- Formuliere ÜBERGREIFEND und ABSTRAHIEREND`
+    } else if (isMainPointsRequest) {
+      specificInstructions = `
+HAUPTPUNKTE ANGEFORDERT:
+- Gib EXAKT 3 kurze Bullet Points aus (verwende • als Symbol)
+- Jeder Punkt: MAXIMAL 1 Zeile
+- Nur die WICHTIGSTEN Kernaussagen
+- Keine Details, keine Erklärungen`
+    }
+
+    const systemPrompt = language === "de"
+      ? `Du bist Mika, ein hilfreicher wissenschaftlicher Assistent, der Fragen zur Bachelorarbeit über auditorische Streams im Gehirn beantwortet.
+
+WICHTIGE REGELN:
+1. Beantworte Fragen ausschließlich basierend auf den bereitgestellten Quellen
+2. Sei EXTREM PRÄGNANT - keine ausschweifenden Erklärungen
+3. Zitiere Quellen DIREKT mit ihrem Namen in eckigen Klammern (z.B. "[FEF]" oder "[Bedini & Baldauf (2021)]")
+4. NIEMALS Quellen in Überschriften (##, ###) einfügen - nur im Fließtext!
+5. Verwende NUR Quellen, die du auch wirklich zitierst
+6. Wenn die Informationen nicht in den Quellen enthalten sind, sage das klar
+7. Verwende wissenschaftliche, aber zugängliche Sprache
+8. Bei widersprüchlichen Informationen, erwähne beide Perspektiven kurz
+9. Antworte auf Deutsch
+${specificInstructions}
+
+KONTEXT AUS DEN DOKUMENTEN:
+${context}`
+      : `You are Mika, a helpful scientific assistant answering questions about the bachelor thesis on auditory streams in the brain.
+
+IMPORTANT RULES:
+1. Answer questions exclusively based on the provided sources
+2. Be EXTREMELY CONCISE - no lengthy explanations
+3. Always cite sources (e.g. "[Source 1]" or "[Source 2, 3]")
+4. If information is not in the sources, state this clearly
+5. Use scientific but accessible language
+6. For contradictory information, briefly mention both perspectives
+7. Answer in English
+${specificInstructions}
+
+CONTEXT FROM DOCUMENTS:
+${context}`
+
+    // Bereite Konversationshistorie vor
+    const messages: Anthropic.MessageParam[] = [
+      ...conversationHistory.map((msg: any) => ({
+        role: msg.role,
+        content: msg.content,
+      })),
+      {
+        role: "user",
+        content: message,
+      },
+    ]
+
+    // Setup SSE
+    res.setHeader('Content-Type', 'text/event-stream')
+    res.setHeader('Cache-Control', 'no-cache')
+    res.setHeader('Connection', 'keep-alive')
+
+    // Stream Response
+    const stream = await anthropic.messages.stream({
+      model: "claude-sonnet-4-5-20250929",
+      max_tokens: 2048,
+      system: systemPrompt,
+      messages,
+    })
+
+    let fullText = ""
+
+    for await (const chunk of stream) {
+      if (chunk.type === 'content_block_delta' && chunk.delta.type === 'text_delta') {
+        const text = chunk.delta.text
+        fullText += text
+        // Sende Text-Chunk an Client
+        res.write(`data: ${JSON.stringify({ type: 'text', content: text })}\n\n`)
+      }
+    }
+
+    console.log(`✅ Stream abgeschlossen (${fullText.length} Zeichen)`)
+
+    // Filtere: Nur tatsächlich zitierte Quellen
+    const referencedChunks = filterReferencedSources(fullText, finalChunks)
+
+    // Extrahiere Quellen (nur die zitierten!)
+    const sources = referencedChunks.map(chunk => ({
+      title: chunk.metadata.title,
+      category: chunk.metadata.category,
+      type: chunk.metadata.type,
+      score: chunk.score,
+      excerpt: chunk.content.substring(0, 200) + "...",
+      source: chunk.metadata.source,
+    }))
+
+    console.log(`📚 Sende ${sources.length} Quellen an Frontend`)
+
+    // Sende Quellen am Ende
+    res.write(`data: ${JSON.stringify({ type: 'sources', sources })}\n\n`)
+    res.write('data: [DONE]\n\n')
+    res.end()
+
+  } catch (error: any) {
+    console.error("❌ Fehler:", error)
+    res.write(`data: ${JSON.stringify({ type: 'error', error: error.message })}\n\n`)
+    res.end()
+  }
+})
+
+/**
+ * Chat Endpoint mit RAG (Non-Streaming für Kompatibilität)
  */
 app.post("/chat", async (req, res) => {
   try {
@@ -235,8 +475,8 @@ app.post("/chat", async (req, res) => {
 
     console.log(`\n💬 Query: "${message}"`)
 
-    // Finde relevante Chunks
-    const relevantChunks = await findRelevantChunks(message, 8) // Top 8 für besseren Kontext
+    // Finde relevante Chunks (erhöht auf 30 für mehr Diversität!)
+    const relevantChunks = await findRelevantChunks(message, 30)
 
     if (relevantChunks.length === 0) {
       return res.json({
@@ -247,15 +487,27 @@ app.post("/chat", async (req, res) => {
     }
 
     console.log(`📚 ${relevantChunks.length} relevante Chunks gefunden`)
-    console.log(
-      `   Top Scores: ${relevantChunks
-        .slice(0, 3)
-        .map(c => (c.score * 100).toFixed(1) + "%")
-        .join(", ")}`
-    )
+    console.log(`   Top Scores: ${relevantChunks.slice(0, 3).map(c => `${Math.round(c.score * 100)}%`).join(", ")}`)
+
+    // Filtere Duplikate: Nur beste Chunk pro Datei
+    const uniqueChunks = relevantChunks.reduce((acc: typeof relevantChunks, chunk) => {
+      const existingIndex = acc.findIndex(c => c.metadata.source === chunk.metadata.source)
+      if (existingIndex === -1) {
+        acc.push(chunk)
+      } else if (chunk.score > acc[existingIndex].score) {
+        acc[existingIndex] = chunk
+      }
+      return acc
+    }, [])
+
+    // Limitiere auf maximal 8 eindeutige Quellen (erhöht von 5 für mehr Kontext!)
+    const finalChunks = uniqueChunks.slice(0, 8)
+
+    console.log(`📚 Verwende ${finalChunks.length} eindeutige Quellen (von ${relevantChunks.length} Chunks)`)
+    finalChunks.forEach((c, i) => console.log(`   [${i+1}] ${c.metadata.title} (${Math.round(c.score * 100)}%)`))
 
     // Formatiere Kontext
-    const context = formatContext(relevantChunks)
+    const context = formatContext(finalChunks)
 
     // Erkenne den Anfrage-Typ
     const isSummaryRequest = message.toLowerCase().includes("zusammenfassen") ||
@@ -289,11 +541,13 @@ HAUPTPUNKTE ANGEFORDERT:
 WICHTIGE REGELN:
 1. Beantworte Fragen ausschließlich basierend auf den bereitgestellten Quellen
 2. Sei EXTREM PRÄGNANT - keine ausschweifenden Erklärungen
-3. Zitiere immer die Quellen (z.B. "[Quelle 1]" oder "[Quelle 2, 3]")
-4. Wenn die Informationen nicht in den Quellen enthalten sind, sage das klar
-5. Verwende wissenschaftliche, aber zugängliche Sprache
-6. Bei widersprüchlichen Informationen, erwähne beide Perspektiven kurz
-7. Antworte auf Deutsch
+3. Zitiere Quellen DIREKT mit ihrem Namen in eckigen Klammern (z.B. "[FEF]" oder "[Bedini & Baldauf (2021)]")
+4. NIEMALS Quellen in Überschriften (##, ###) einfügen - nur im Fließtext!
+5. Verwende NUR Quellen, die du auch wirklich zitierst
+6. Wenn die Informationen nicht in den Quellen enthalten sind, sage das klar
+7. Verwende wissenschaftliche, aber zugängliche Sprache
+8. Bei widersprüchlichen Informationen, erwähne beide Perspektiven kurz
+9. Antworte auf Deutsch
 ${specificInstructions}
 
 KONTEXT AUS DEN DOKUMENTEN:
@@ -336,19 +590,22 @@ ${context}`
     const assistantMessage =
       response.content[0].type === "text" ? response.content[0].text : ""
 
-    // Extrahiere verwendete Quellen (alle Chunks, die an Claude gesendet wurden)
-    const sources = relevantChunks.map(chunk => ({
+    console.log(`✅ Antwort generiert (${assistantMessage.length} Zeichen)`)
+
+    // Filtere: Nur tatsächlich zitierte Quellen
+    const referencedChunks = filterReferencedSources(assistantMessage, finalChunks)
+
+    // Extrahiere verwendete Quellen (nur die zitierten!)
+    const sources = referencedChunks.map(chunk => ({
       title: chunk.metadata.title,
       category: chunk.metadata.category,
       type: chunk.metadata.type,
       score: chunk.score,
       excerpt: chunk.content.substring(0, 200) + "...",
-      source: chunk.metadata.source, // Füge den tatsächlichen Dateipfad hinzu
+      source: chunk.metadata.source,
     }))
 
-    console.log(`✅ Antwort generiert (${assistantMessage.length} Zeichen)`)
-    console.log(`📚 Sende ${sources.length} Quellen an Frontend:`)
-    sources.forEach((s, i) => console.log(`   [${i+1}] ${s.title} (${s.source})`))
+    console.log(`📚 Sende ${sources.length} Quellen an Frontend`)
 
 
     res.json({
