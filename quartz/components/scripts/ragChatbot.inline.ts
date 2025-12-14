@@ -526,17 +526,29 @@ function addMessage(
       const sourceCategory = source.category || ""
       const relevance = Math.round(source.score * 100)
 
-      // Erstelle URL aus dem source-Pfad
+      // Erstelle URL aus dem source-Pfad mit Quartz-Slug-Logik
       let sourceUrl = "/"
       if (source.source) {
         // Entferne 'content/' am Anfang und '.md' am Ende
         const path = source.source.replace(/^content\//, '').replace(/\.md$/, '')
-        // Konvertiere zu URL-freundlichem Format (Leerzeichen zu Bindestrichen)
-        const slug = path.split('/').map(part => part.trim().replace(/\s+/g, '-')).join('/')
+        // Verwende Quartz-Slug-Logik: sluggify jedes Segment
+        const slug = path.split('/').map(segment =>
+          segment
+            .replace(/\s/g, '-')       // Leerzeichen zu Bindestrichen
+            .replace(/&/g, '-and-')    // & zu -and-
+            .replace(/%/g, '-percent') // % zu -percent
+            .replace(/\?/g, '')        // ? entfernen
+            .replace(/#/g, '')         // # entfernen
+        ).join('/')
         sourceUrl = `/${slug}`
       } else {
-        // Fallback: verwende Titel
-        const slug = sourceTitle.trim().replace(/\s+/g, '-')
+        // Fallback: verwende Titel mit gleicher Logik
+        const slug = sourceTitle
+          .replace(/\s/g, '-')
+          .replace(/&/g, '-and-')
+          .replace(/%/g, '-percent')
+          .replace(/\?/g, '')
+          .replace(/#/g, '')
         sourceUrl = `/${slug}`
       }
 

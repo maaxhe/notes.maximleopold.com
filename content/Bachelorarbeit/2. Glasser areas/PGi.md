@@ -1,6 +1,6 @@
 ---
-  title: "PGi"
-  created: "2025-11-20"
+title: "PGi"
+created: "2025-11-20"
 modified: 2025-12-14
 ---
 # PGi
