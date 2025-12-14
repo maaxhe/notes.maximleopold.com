@@ -2955,7 +2955,7 @@ async function sendMessage() {
 
       const processEventBlock = (rawEvent: string) => {
         let currentEvent: string | null = null
-        const lines = rawEvent.split('\n')
+        const lines = rawEvent.split(/\r?\n/)
 
         for (const rawLine of lines) {
           const line = rawLine.trimEnd()
@@ -2987,16 +2987,20 @@ async function sendMessage() {
         }
       }
 
+      const boundaryRegex = /\r?\n\r?\n/
       while (!streamClosed) {
         const { done, value } = await reader.read()
         if (done) break
 
         buffer += decoder.decode(value, { stream: true })
 
-        let boundaryIndex = buffer.indexOf('\n\n')
+        let boundaryIndex = buffer.search(boundaryRegex)
         while (boundaryIndex !== -1) {
+          const match = buffer.match(boundaryRegex)
+          if (!match) break
+          const boundaryLength = match[0].length
           const rawEvent = buffer.slice(0, boundaryIndex)
-          buffer = buffer.slice(boundaryIndex + 2)
+          buffer = buffer.slice(boundaryIndex + boundaryLength)
 
           if (rawEvent.trim()) {
             processEventBlock(rawEvent)
@@ -3006,7 +3010,7 @@ async function sendMessage() {
             break
           }
 
-          boundaryIndex = buffer.indexOf('\n\n')
+          boundaryIndex = buffer.search(boundaryRegex)
         }
       }
 
