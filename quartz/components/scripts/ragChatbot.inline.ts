@@ -132,6 +132,7 @@ citationClose?.addEventListener("click", () => {
 const writingAssistantBtn = document.getElementById("rag-writing-assistant-btn")
 const writingPanel = document.getElementById("rag-writing-panel")
 const writingClose = document.getElementById("rag-writing-close")
+const writingBack = document.getElementById("rag-writing-back")
 
 writingAssistantBtn?.addEventListener("click", () => {
   writingPanel?.classList.toggle("hidden")
@@ -145,6 +146,11 @@ writingAssistantBtn?.addEventListener("click", () => {
 })
 
 writingClose?.addEventListener("click", () => {
+  writingPanel?.classList.add("hidden")
+  showWritingFollowup(false)
+})
+
+writingBack?.addEventListener("click", () => {
   writingPanel?.classList.add("hidden")
   showWritingFollowup(false)
 })
@@ -704,29 +710,28 @@ const writingApproveBtn = document.getElementById('rag-writing-approve') as HTML
 const writingSourceList = document.getElementById('rag-writing-source-list')
 const writingSourceFilter = document.getElementById('rag-writing-source-filter') as HTMLInputElement | null
 
-type WritingTemplateKey = "custom" | "launch" | "press" | "memo"
+type WritingTemplateKey = "summary" | "assistant" | "blog"
 const writingTemplates: Record<WritingTemplateKey, Partial<Record<string, string>>> = {
-  custom: {},
-  launch: {
-    deliverable: "Launch Blogpost (500 Worte)",
-    audience: "Produktmanager:innen, Tech-Blog Leser:innen – energiegeladen & präzise",
-    purpose: "Verstehen Nutzen des Quartz Upload Service in <2 Minuten & klicken CTA",
-    questions: "- Welches Problem lösen wir?\n- Wie funktioniert der Upload→Build Flow?\n- Welcher CTA?",
-    constraints: "Max 600 Wörter, kein Marketing-Sprech, CTA zu /sites/demo/",
+  summary: {
+    deliverable: "Executive Summary (max. 300 Wörter)",
+    audience: "Nur für mich – direkt & deutsch, Fokus auf Kernaussagen",
+    purpose: "Nach 2 Minuten verstehe ich Status, Risiken und To-Dos",
+    questions: "- Was ist aktuell passiert?\n- Welche Insights sind wichtig?\n- Welche offenen Punkte habe ich?",
+    constraints: "Bullet-lastig, maximal 3 Abschnitte, klare Prioritäten.",
   },
-  press: {
-    deliverable: "Pressemitteilung (350 Worte)",
-    audience: "Tech-Journalist:innen, nüchterner Ton",
-    purpose: "Warum ist Quartz Upload Service berichtenswert + Zitat & Verfügbarkeit",
-    questions: "- Welcher Marktbedarf?\n- Was ist neu?\n- Statement vom Gründer?",
-    constraints: "Strikte Presse-Struktur (Lead, Details, Boilerplate).",
+  assistant: {
+    deliverable: "Schreibassistenz für BA-Abschnitt",
+    audience: "Betreuer:innen, wissenschaftlicher Ton",
+    purpose: "Sauber strukturierter Absatz inkl. Zitaten/Anchors",
+    questions: "- Welcher Kontext?\n- Welche Argumente müssen rein?\n- Welche Erkenntnisse/Quellen erwähnen?",
+    constraints: "Strenger akademischer Stil, zitiere mit [[anchor]], keine Floskeln.",
   },
-  memo: {
-    deliverable: "Team Memo (1 Seite)",
-    audience: "GT-1 Team, direkt & offen",
-    purpose: "Mitarbeitende wissen, was sich ändert & welche Risiken bleiben",
-    questions: "- Kontext & Problem\n- Entscheid & Begründung\n- Nächste Schritte / Owner",
-    constraints: "Max 3 Abschnitte, klare Verantwortlichkeiten, keine Buzzwords.",
+  blog: {
+    deliverable: "Blogpost (600–800 Wörter)",
+    audience: "Tech-Interessierte Leser:innen, locker aber präzise",
+    purpose: "Verstehen Problem → Lösung → Impact, klicken CTA",
+    questions: "- Welches Problem lösen wir?\n- Wie funktioniert die Lösung?\n- Was ist der Call-to-Action?",
+    constraints: "Hook + 3 Abschnitte + CTA, aktive Sprache, keine Buzzwords.",
   },
 }
 
@@ -745,9 +750,14 @@ function applyWritingTemplate(template: WritingTemplateKey) {
 }
 
 writingTemplateSelect?.addEventListener('change', () => {
-  const value = (writingTemplateSelect.value as WritingTemplateKey) || "custom"
+  const value = (writingTemplateSelect.value as WritingTemplateKey) || "summary"
   applyWritingTemplate(value)
 })
+
+if (writingTemplateSelect) {
+  const initialTemplate = (writingTemplateSelect.value as WritingTemplateKey) || "summary"
+  applyWritingTemplate(initialTemplate)
+}
 
 function renderWritingSources() {
   if (!writingSourceList) return
@@ -968,11 +978,58 @@ async function runWritingRequest(message: string, options: { resetHistory?: bool
     showWritingFollowup(true)
   } catch (error) {
     console.error("Writing Assistant Fehler:", error)
-    if (writingOutput) {
+    const fallbackOk = await writingFallbackToChat(message)
+    if (!fallbackOk && writingOutput) {
       writingOutput.innerHTML = '<div class="rag-writing-error">❌ Fehler beim Generieren</div>'
     }
   } finally {
     setWritingButtonsState(false, trigger)
+  }
+}
+
+async function writingFallbackToChat(message: string) {
+  if (!writingOutput) return false
+  try {
+    writingOutput.innerHTML = '<div class="rag-writing-loading">Streaming nicht verfügbar – nutze Backup-Endpunkt…</div>'
+    const response = await fetch(`${API_URL}/chat`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        mode: "writing_assistant",
+        message,
+        conversationHistory: writingConversationHistory,
+        language: currentLanguage,
+        writingSources: writingSessionSources,
+      }),
+    })
+
+    if (!response.ok) {
+      throw new Error("Backup-Endpunkt nicht erreichbar")
+    }
+
+    const data = await response.json()
+    const assistantText = data.response || "Keine Antwort vom Server."
+
+    writingOutput.innerHTML = `
+      <div class="rag-writing-result">
+        ${formatMarkdown(assistantText)}
+      </div>
+      <button class="rag-copy-writing" onclick="navigator.clipboard.writeText(\`${assistantText.replace(/`/g, '\\`')}\`)">
+        📋 Kopieren
+      </button>
+    `
+
+    writingConversationHistory = [
+      ...writingConversationHistory,
+      { role: "user", content: message },
+      { role: "assistant", content: assistantText },
+    ]
+
+    showWritingFollowup(true)
+    return true
+  } catch (err) {
+    console.error("Writing Fallback Fehler:", err)
+    return false
   }
 }
 

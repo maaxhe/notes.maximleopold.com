@@ -160,17 +160,19 @@ export default ((opts?: Partial<Options>) => {
                   <h4>✍️ Writing Assistant</h4>
                   <p>Session Brief → Outline → Draft</p>
                 </div>
-                <button class="rag-writing-close" id="rag-writing-close" aria-label="Close">×</button>
+                <div class="rag-writing-header-actions">
+                  <button class="rag-writing-back" id="rag-writing-back" aria-label="Zurück">← Zurück</button>
+                  <button class="rag-writing-close" id="rag-writing-close" aria-label="Close">×</button>
+                </div>
               </div>
               <div class="rag-writing-body">
                 <div class="rag-writing-form">
                   <div class="rag-writing-template">
                     <label for="rag-writing-template">Template</label>
                     <select id="rag-writing-template">
-                      <option value="custom" selected>Eigenes Briefing</option>
-                      <option value="launch">Launch Blog Post</option>
-                      <option value="press">Pressemitteilung</option>
-                      <option value="memo">Team Memo</option>
+                      <option value="summary" selected>Summary für mich</option>
+                      <option value="assistant">Schreib Assistance</option>
+                      <option value="blog">Blog Post Format</option>
                     </select>
                   </div>
 
