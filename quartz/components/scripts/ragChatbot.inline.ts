@@ -2885,6 +2885,46 @@ async function sendMessage() {
     let fullResponse = ""
     let sources: any[] = []
 
+    const applyParsedChunk = (parsed: any, eventHint: string | null) => {
+      const eventType = (parsed.event ?? parsed.type ?? eventHint ?? "").toLowerCase()
+
+      if (eventType === 'sources' || parsed.sources) {
+        sources = normalizeSourcesList(parsed.sources || [])
+        const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
+        contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
+        if (messagesContainer) {
+          messagesContainer.scrollTop = messagesContainer.scrollHeight
+        }
+        return
+      }
+
+      if (eventType === 'done' || parsed.done) {
+        if (parsed.sources) {
+          sources = normalizeSourcesList(parsed.sources || [])
+          const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
+          contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
+        }
+        if (parsed.error) {
+          throw new Error(parsed.error)
+        }
+        return
+      }
+
+      if (parsed.error || eventType === 'error') {
+        throw new Error(parsed.error ?? 'Unbekannter Fehler')
+      }
+
+      const textDelta = extractTextFromPayload(parsed, eventType)
+      if (textDelta) {
+        fullResponse += textDelta
+        const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
+        contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
+        if (messagesContainer) {
+          messagesContainer.scrollTop = messagesContainer.scrollHeight
+        }
+      }
+    }
+
     try {
       // Sende Streaming-Request
       const response = await fetch(`${API_URL}/chat-stream`, {
@@ -2910,18 +2950,16 @@ async function sendMessage() {
         throw new Error("Stream nicht verfügbar")
       }
 
-      let currentEvent: string | null = null
+      let buffer = ""
+      let streamClosed = false
 
-      while (true) {
-        const { done, value } = await reader.read()
-        if (done) break
+      const processEventBlock = (rawEvent: string) => {
+        let currentEvent: string | null = null
+        const lines = rawEvent.split('\n')
 
-        const chunk = decoder.decode(value)
-        const lines = chunk.split('\n')
-
-        for (const line of lines) {
-          if (!line.trim()) {
-            currentEvent = null
+        for (const rawLine of lines) {
+          const line = rawLine.trimEnd()
+          if (!line) {
             continue
           }
 
@@ -2930,58 +2968,50 @@ async function sendMessage() {
             continue
           }
 
-          if (!line.startsWith('data: ')) {
+          if (!line.startsWith('data:')) {
             continue
           }
 
-          const data = line.slice(6)
-          if (data === '[DONE]') {
-            break
+          const payload = line.slice(5).trimStart()
+          if (payload === '[DONE]') {
+            streamClosed = true
+            return
           }
 
           try {
-            const parsed = JSON.parse(data)
-            const eventType = (parsed.event ?? parsed.type ?? currentEvent ?? "").toLowerCase()
-
-            if (eventType === 'sources' || parsed.sources) {
-              sources = normalizeSourcesList(parsed.sources || [])
-              const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
-              contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
-              if (messagesContainer) {
-                messagesContainer.scrollTop = messagesContainer.scrollHeight
-              }
-              continue
-            }
-
-            if (eventType === 'done' || parsed.done) {
-              if (parsed.sources) {
-                sources = normalizeSourcesList(parsed.sources || [])
-                const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
-                contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
-              }
-              if (parsed.error) {
-                throw new Error(parsed.error)
-              }
-              continue
-            }
-
-            if (parsed.error || eventType === 'error') {
-              throw new Error(parsed.error ?? 'Unbekannter Fehler')
-            }
-
-            const textDelta = extractTextFromPayload(parsed, eventType)
-            if (textDelta) {
-              fullResponse += textDelta
-              const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
-              contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
-              if (messagesContainer) {
-                messagesContainer.scrollTop = messagesContainer.scrollHeight
-              }
-            }
+            const parsed = JSON.parse(payload)
+            applyParsedChunk(parsed, currentEvent)
           } catch (e) {
-            // Ignoriere Parse-Fehler für unvollständige Chunks
+            // Ungültiger Chunk - ignoriere und warte auf nächste vollständige Nachricht
           }
         }
+      }
+
+      while (!streamClosed) {
+        const { done, value } = await reader.read()
+        if (done) break
+
+        buffer += decoder.decode(value, { stream: true })
+
+        let boundaryIndex = buffer.indexOf('\n\n')
+        while (boundaryIndex !== -1) {
+          const rawEvent = buffer.slice(0, boundaryIndex)
+          buffer = buffer.slice(boundaryIndex + 2)
+
+          if (rawEvent.trim()) {
+            processEventBlock(rawEvent)
+          }
+
+          if (streamClosed) {
+            break
+          }
+
+          boundaryIndex = buffer.indexOf('\n\n')
+        }
+      }
+
+      if (!streamClosed && buffer.trim()) {
+        processEventBlock(buffer)
       }
 
       console.log("📚 Sources from server:", sources)
