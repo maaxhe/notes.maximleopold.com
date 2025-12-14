@@ -1,6 +1,6 @@
 ---
-title: "STSda"
-created: "2025-11-17"
+  title: "STSda"
+  created: "2025-11-17"
 modified: 2025-12-14
 ---
 # STSda

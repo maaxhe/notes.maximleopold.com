@@ -79,29 +79,110 @@ settingsBtn?.addEventListener("click", () => {
   settingsPanel?.classList.toggle("hidden")
 })
 
-// Language toggle
+// Language toggle and translations
 let currentLanguage = localStorage.getItem("rag-language") || "de"
 const langBtn = document.getElementById("rag-chat-lang")
 const langText = langBtn?.querySelector(".rag-lang-text")
 
-// Update button text based on current language
-function updateLanguageButton() {
+// Translations object
+const translations = {
+  de: {
+    welcomeMessage: "Hallo! Ich bin Mika, dein Bachelorarbeit-Assistent. Nutze die Buttons oben für schnelle Aktionen oder stelle mir eine Frage!",
+    placeholder: "Frage zu deiner Bachelorarbeit... (tippe [[ für Dateiauswahl)",
+    quickActions: {
+      summary: "📄 Diese Seite zusammenfassen",
+      explain: "💡 Hauptpunkte erklären",
+      sources: "📚 Quellen finden"
+    },
+    quickPrompts: {
+      summary: "Fasse {currentFile} zusammen",
+      explain: "Erkläre die Hauptpunkte aus {currentFile}",
+      sources: "Welche Quellen werden in {currentFile} referenziert?"
+    },
+    status: {
+      searching: "Suche relevante Informationen...",
+      generating: "Generiere Antwort...",
+      cleared: "Chat wurde gelöscht",
+      langChanged: "Sprache gewechselt zu Deutsch"
+    },
+    confirmClear: "Möchtest du wirklich den gesamten Chat löschen?",
+    sendButton: "Senden",
+    thinking: "Denke nach...",
+    sourcesTitle: "📚 Quellen:"
+  },
+  en: {
+    welcomeMessage: "Hello! I'm Mika, your bachelor thesis assistant. Use the buttons above for quick actions or ask me a question!",
+    placeholder: "Question about your bachelor thesis... (type [[ for file selection)",
+    quickActions: {
+      summary: "📄 Summarize this page",
+      explain: "💡 Explain main points",
+      sources: "📚 Find sources"
+    },
+    quickPrompts: {
+      summary: "Summarize {currentFile}",
+      explain: "Explain the main points from {currentFile}",
+      sources: "Which sources are referenced in {currentFile}?"
+    },
+    status: {
+      searching: "Searching for relevant information...",
+      generating: "Generating answer...",
+      cleared: "Chat cleared",
+      langChanged: "Language switched to English"
+    },
+    confirmClear: "Do you really want to clear the entire chat?",
+    sendButton: "Send",
+    thinking: "Thinking...",
+    sourcesTitle: "📚 Sources:"
+  }
+}
+
+// Get current translations
+function t(key: string): string {
+  const keys = key.split('.')
+  let value: any = translations[currentLanguage as keyof typeof translations]
+  for (const k of keys) {
+    value = value[k]
+  }
+  return value
+}
+
+// Update all UI texts based on current language
+function updateUILanguage() {
+  // Update placeholder
+  if (inputField) {
+    inputField.placeholder = t('placeholder')
+  }
+
+  // Update quick action buttons
+  const quickBtns = document.querySelectorAll('.rag-quick-btn')
+  quickBtns.forEach((btn, idx) => {
+    const types = ['summary', 'explain', 'sources']
+    const type = types[idx]
+    if (type) {
+      btn.textContent = t(`quickActions.${type}`)
+      btn.setAttribute('data-prompt', t(`quickPrompts.${type}`))
+    }
+  })
+
+  // Update language button
   if (langText) {
     langText.textContent = currentLanguage === "de" ? "EN" : "DE"
   }
 }
 
-updateLanguageButton()
+// Initialize UI language
+updateUILanguage()
 
 langBtn?.addEventListener("click", () => {
   // Toggle language
   currentLanguage = currentLanguage === "de" ? "en" : "de"
   localStorage.setItem("rag-language", currentLanguage)
-  updateLanguageButton()
+
+  // Update all UI texts
+  updateUILanguage()
 
   // Show feedback
-  const langName = currentLanguage === "de" ? "Deutsch" : "English"
-  setStatus(`Sprache gewechselt zu ${langName}`, "info")
+  setStatus(t('status.langChanged'), "info")
   setTimeout(() => setStatus(""), 2000)
 })
 
@@ -110,7 +191,7 @@ const clearBtn = document.getElementById("rag-chat-clear")
 
 clearBtn?.addEventListener("click", () => {
   // Bestätigungsdialog
-  if (!confirm("Möchtest du wirklich den gesamten Chat löschen?")) {
+  if (!confirm(t('confirmClear'))) {
     return
   }
 
@@ -123,13 +204,10 @@ clearBtn?.addEventListener("click", () => {
   }
 
   // Füge Willkommensnachricht wieder hinzu
-  addMessage(
-    "assistant",
-    "Hallo! Ich bin Mika, dein Bachelorarbeit-Assistent. Nutze die Buttons oben für schnelle Aktionen oder stelle mir eine Frage!",
-  )
+  addMessage("assistant", t('welcomeMessage'))
 
   // Visuelles Feedback
-  setStatus("Chat wurde gelöscht", "info")
+  setStatus(t('status.cleared'), "info")
   setTimeout(() => setStatus(""), 2000)
 })
 
@@ -515,7 +593,7 @@ function addMessage(
 
     const sourcesTitle = document.createElement("div")
     sourcesTitle.className = "rag-sources-title"
-    sourcesTitle.textContent = "📚 Quellen:"
+    sourcesTitle.textContent = t('sourcesTitle')
     sourcesDiv.appendChild(sourcesTitle)
 
     sources.forEach((source, idx) => {
@@ -586,14 +664,14 @@ function setLoading(isLoading: boolean) {
   inputField.disabled = isLoading
 
   if (isLoading) {
-    sendButton.innerHTML = '<span class="rag-loading-spinner"></span> Denke nach...'
+    sendButton.innerHTML = `<span class="rag-loading-spinner"></span> ${t('thinking')}`
   } else {
     sendButton.innerHTML = `
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="22" y1="2" x2="11" y2="13"></line>
             <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
           </svg>
-          Senden
+          ${t('sendButton')}
         `
   }
 }
@@ -630,7 +708,7 @@ async function sendMessage() {
   addMessage("user", userMessage)
   inputField.value = ""
   setLoading(true)
-  setStatus("Suche relevante Informationen...")
+  setStatus(t('status.searching'))
 
   try {
     // Überprüfe Server-Status
@@ -639,7 +717,7 @@ async function sendMessage() {
       throw new Error("Server ist nicht erreichbar")
     }
 
-    setStatus("Generiere Antwort...")
+    setStatus(t('status.generating'))
 
     // Sende Chat-Anfrage (mit angereicherter Nachricht)
     const response = await fetch(`${API_URL}/chat`, {
