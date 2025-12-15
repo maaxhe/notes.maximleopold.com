@@ -1,7 +1,7 @@
 const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
 const REMOTE_FALLBACK_API = "https://server.maximleopold.com/rag"
-// Auto-detect API URL based on environment (prefer same origin in production)
-const API_URL = isLocalhost ? "http://localhost:3030" : `${window.location.origin}/rag`
+// Auto-detect API URL based on environment
+const API_URL = isLocalhost ? "http://localhost:3030" : REMOTE_FALLBACK_API
 
 function normalizeBase(url: string | null | undefined) {
   if (!url) return null
@@ -1241,9 +1241,11 @@ function parseSourceMeta(source: any): ParsedSourceMeta | null {
   const title = citation.title || rawTitle
   const url = source.url || buildUrlFromSourcePath(source.source, rawTitle)
 
+  // Filter out external sources - only show sources from the vault
   if (url.startsWith("http")) {
     const lower = url.toLowerCase()
-    if (INTERNAL_SOURCE_HOSTS.some(host => lower.includes(host))) {
+    if (!INTERNAL_SOURCE_HOSTS.some(host => lower.includes(host))) {
+      // External URL - not from our vault, filter it out
       sourceMetaCache.set(source, null)
       return null
     }
