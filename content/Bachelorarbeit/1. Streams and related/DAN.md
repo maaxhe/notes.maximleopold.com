@@ -5,7 +5,7 @@ tags:
   - stream/safe
   - stream/where
   - "#region/network"
-modified: 2025-12-15
+modified: 2026-01-06
 ---
 # DAN (Dorsal Attention Network)
 

@@ -3,7 +3,7 @@ title: TGd
 created: 2025-11-17
 tags:
   - "#stream/what"
-modified: 2025-12-15
+modified: 2026-01-06
 ---
 # TGd
 

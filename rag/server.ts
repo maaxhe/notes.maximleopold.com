@@ -474,9 +474,18 @@ function filterReferencedSources(
   const citationMap = extractCitationMentions(responseText)
   console.log(`📝 Gefundene Zitate im Text: ${Array.from(citationMap.values()).join(", ")}`)
 
+  // If no citations found, return ALL chunks as sources (they were used to generate the answer)
   if (!citationMap.size) {
+    console.log(`⚠️ Keine Citations im Text gefunden - gebe ALLE ${allChunks.length} verwendeten Chunks als Quellen zurück`)
+    const allMatches: MatchedSourceChunk[] = allChunks
+      .map(chunk => {
+        const meta = buildChunkSourceMetadata(chunk)
+        return meta ? { chunk, meta } : null
+      })
+      .filter((m): m is MatchedSourceChunk => m !== null)
+
     return {
-      matches: [] as MatchedSourceChunk[],
+      matches: allMatches,
       citationCount: 0,
       unmatchedCitations: [] as string[],
     }
@@ -738,12 +747,12 @@ ${context}`
     // Filtere: Nur tatsächlich zitierte Quellen
     const { matches, citationCount, unmatchedCitations } = filterReferencedSources(fullText, finalChunks)
     if (unmatchedCitations.length > 0) {
-      throw new Error(`Zitate ohne Quelle gefunden: ${unmatchedCitations.join(", ")}`)
+      console.warn(`⚠️ Warnung: Zitate ohne passende Quelle gefunden: ${unmatchedCitations.join(", ")}`)
     }
 
     const sources = buildSourcePayloads(matches)
     if (citationCount > 0 && sources.length === 0) {
-      throw new Error("Keine gültigen Quellenmetadaten für die verwendeten Zitate gefunden.")
+      console.warn("⚠️ Warnung: Keine gültigen Quellenmetadaten für die verwendeten Zitate gefunden.")
     }
 
     const provenance = {
@@ -919,12 +928,12 @@ ${context}`
 
     const { matches, citationCount, unmatchedCitations } = filterReferencedSources(assistantMessage, finalChunks)
     if (unmatchedCitations.length > 0) {
-      throw new Error(`Zitate ohne Quelle gefunden: ${unmatchedCitations.join(", ")}`)
+      console.warn(`⚠️ Warnung: Zitate ohne passende Quelle gefunden: ${unmatchedCitations.join(", ")}`)
     }
 
     const sources = buildSourcePayloads(matches)
     if (citationCount > 0 && sources.length === 0) {
-      throw new Error("Keine gültigen Quellenmetadaten für die verwendeten Zitate gefunden.")
+      console.warn("⚠️ Warnung: Keine gültigen Quellenmetadaten für die verwendeten Zitate gefunden.")
     }
 
     const provenance = {

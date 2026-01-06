@@ -1220,7 +1220,10 @@ function formatSourceUrlForDisplay(url: string) {
 }
 
 function parseSourceMeta(source: any): ParsedSourceMeta | null {
-  if (!source || typeof source !== "object") return null
+  if (!source || typeof source !== "object") {
+    console.log(`🚫 Rejected source: not an object`, source)
+    return null
+  }
   if (sourceMetaCache.has(source)) {
     return sourceMetaCache.get(source) || null
   }
@@ -1241,14 +1244,22 @@ function parseSourceMeta(source: any): ParsedSourceMeta | null {
   const title = citation.title || rawTitle
   const url = source.url || buildUrlFromSourcePath(source.source, rawTitle)
 
+  console.log(`🔍 Processing source: ${rawTitle}, URL: ${url}`)
+
   // Filter out external sources - only show sources from the vault
-  if (url.startsWith("http")) {
+  // Allow: 1) Non-HTTP URLs (relative paths), 2) HTTP URLs from our vault
+  if (url && url.startsWith("http")) {
     const lower = url.toLowerCase()
-    if (!INTERNAL_SOURCE_HOSTS.some(host => lower.includes(host))) {
+    const isInternal = INTERNAL_SOURCE_HOSTS.some(host => lower.includes(host))
+    if (!isInternal) {
       // External URL - not from our vault, filter it out
+      console.log(`🚫 Filtered out external source: ${url}`)
       sourceMetaCache.set(source, null)
       return null
     }
+    console.log(`✅ Accepted HTTP source from vault: ${rawTitle} (${url})`)
+  } else {
+    console.log(`✅ Accepted non-HTTP source: ${rawTitle} (${url})`)
   }
 
   const label = citation.label || rawTitle
@@ -2368,6 +2379,7 @@ function canonicalSourceKey(source: any) {
 }
 
 function normalizeSourcesList(sources: any[] = []) {
+  console.log(`🔍 normalizeSourcesList called with ${sources?.length || 0} sources`, sources)
   const seen = new Map<string, any>()
   for (const source of sources ?? []) {
     const key = canonicalSourceKey(source)
@@ -2462,6 +2474,8 @@ function formatMarkdown(content: string, sources: any[] = []): string {
     .map(source => ({ source, meta: parseSourceMeta(source) }))
     .filter(entry => entry.meta) as Array<{ source: any; meta: ParsedSourceMeta }>
 
+  console.log(`📝 formatMarkdown: ${sourceEntries.length} sources to format`)
+
   // Formatiere Wikilinks [[File]] zu schönen Links
   let formatted = content.replace(/\[\[([^\]]+)\]\]/g, (_match, linkText) => {
     const slug = linkText.trim().replace(/\s+/g, '-')
@@ -2470,10 +2484,12 @@ function formatMarkdown(content: string, sources: any[] = []): string {
 
   formatted = convertMarkdownTables(formatted)
 
-  // Formatiere Quellen-Zitate [Source Name] zu klickbaren Links
-  // Wichtig: NUR Single-Bracket-Zitate, NICHT [[Wikilinks]]
+  // Nummeriertes Citation-System: [1], [2], [3] im Text
   if (sourceEntries.length > 0) {
-    const citationIndex = new Map<string, ParsedSourceMeta>()
+    // Erstelle einen Index: Source Name -> Nummer
+    const citationIndex = new Map<string, { number: number; meta: ParsedSourceMeta }>()
+    let citationNumber = 1
+
     sourceEntries.forEach(({ meta, source }) => {
       const candidates = [
         normalizeCitationKeyForClient(source.title),
@@ -2482,23 +2498,25 @@ function formatMarkdown(content: string, sources: any[] = []): string {
         normalizeCitationKeyForClient(meta.title),
       ]
       candidates.forEach(key => {
-        if (key) {
-          citationIndex.set(key, meta)
+        if (key && !citationIndex.has(key)) {
+          citationIndex.set(key, { number: citationNumber, meta })
+          citationNumber++
         }
       })
     })
 
-    formatted = formatted.replace(/(?<!\[)\[([^\]]+)\](?!\])/g, (match, citationText) => {
+    // Ersetze [Source Name] durch nummerierte, klickbare Citations im Text
+    formatted = formatted.replace(/(?<!\[)\[([^\]]+)\](?!\]|\d)/g, (match, citationText) => {
       const key = normalizeCitationKeyForClient(citationText)
-      const meta = citationIndex.get(key)
-      if (!meta) {
+      const citation = citationIndex.get(key)
+      if (!citation) {
         return match
       }
-      const label = meta.year ? `${meta.authors}, ${meta.year}` : meta.title
-      const citation = `(${label})`
-      const href = meta.url || "#"
-      return `<a href="${href}" class="rag-source-cite" target="_blank" rel="noopener noreferrer">${citation}</a>`
+      const href = citation.meta.url || "#"
+      return `<a href="${href}" class="rag-citation-link" target="_blank" rel="noopener noreferrer" data-citation="${citation.number}">[${citation.number}]</a>`
     })
+
+    // Note: Quellen-Liste wird von addSourcesToMessage() hinzugefügt, nicht hier
   }
 
   // Formatiere Markdown-Überschriften und Text
@@ -2580,11 +2598,15 @@ function convertMarkdownTables(content: string): string {
 
 // Hilfsfunktion: Füge Quellen zur Nachricht hinzu
 function addSourcesToMessage(messageDiv: HTMLElement, sources: any[]) {
+  console.log(`📚 addSourcesToMessage called with ${sources?.length || 0} sources`, sources)
   const normalizedSources = normalizeSourcesList(sources)
     .map(source => ({ source, meta: parseSourceMeta(source) }))
     .filter(entry => entry.meta) as Array<{ source: any; meta: ParsedSourceMeta }>
 
+  console.log(`📚 After normalization and filtering: ${normalizedSources.length} sources`)
+
   if (!normalizedSources.length) {
+    console.log(`⚠️ No sources to display after filtering`)
     return
   }
 
@@ -2606,12 +2628,8 @@ function addSourcesToMessage(messageDiv: HTMLElement, sources: any[]) {
     const venueText = meta.venue ? `<div class="rag-source-meta">${meta.venue}</div>` : ""
     const label = meta.year ? `${meta.authors} (${meta.year})` : meta.authors
 
-    // Calculate evidence strength
-    const evidence = calculateEvidenceStrength(source)
-
     sourceItem.innerHTML = `
       <div class="rag-source-title">
-        <span class="rag-evidence-indicator" title="${evidence.label}">${evidence.icon}</span>
         <a href="${url}" target="_blank" rel="noopener noreferrer">
           ${label}${meta.title ? ` – ${meta.title}` : ""}
         </a>
