@@ -10,8 +10,49 @@
   const STORAGE_TIMESTAMP_KEY = "vault_auth_timestamp";
 
   // ============================================
+  // MAGIC LINK CONFIGURATION (Guest Access)
+  // ============================================
+  const MAGIC_LINK_TOKEN = "recruiter-access-2026-mxlpd";
+  const MAGIC_LINK_EXPIRY = new Date("2026-01-31T23:59:59").getTime();
+  const MAGIC_LINK_PARAM = "access_token";
+
+  // ============================================
   // IMPLEMENTATION
   // ============================================
+
+  // Check if Magic Link token is valid
+  function checkMagicLink() {
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const accessToken = urlParams.get(MAGIC_LINK_PARAM);
+
+      if (!accessToken) {
+        return { valid: false, reason: 'no_token' };
+      }
+
+      // Check if token matches
+      if (accessToken !== MAGIC_LINK_TOKEN) {
+        return { valid: false, reason: 'invalid_token' };
+      }
+
+      // Check if token has expired
+      const now = Date.now();
+      if (now > MAGIC_LINK_EXPIRY) {
+        return { valid: false, reason: 'expired' };
+      }
+
+      return { valid: true };
+    } catch (e) {
+      return { valid: false, reason: 'error' };
+    }
+  }
+
+  // Clean URL by removing the access_token parameter
+  function cleanMagicLinkUrl() {
+    const url = new URL(window.location.href);
+    url.searchParams.delete(MAGIC_LINK_PARAM);
+    window.history.replaceState({}, document.title, url.toString());
+  }
 
   // Check authentication status
   function isTokenValid() {
@@ -246,7 +287,16 @@
       });
     }
 
-    // Check if user is already authenticated
+    // 1. Check for Magic Link access first
+    const magicLinkResult = checkMagicLink();
+    if (magicLinkResult.valid) {
+      // Valid magic link - auto-login and clean URL
+      await saveAuthToken();
+      cleanMagicLinkUrl();
+      return; // User is now authenticated, no overlay needed
+    }
+
+    // 2. Check if user is already authenticated via stored token
     if (!isTokenValid()) {
       // Not authenticated, show password overlay
       showPasswordOverlay();
