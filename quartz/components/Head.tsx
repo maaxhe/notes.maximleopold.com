@@ -45,19 +45,36 @@ export default (() => {
           dangerouslySetInnerHTML={{
             __html: `
 (function() {
+  // Magic Link Configuration (must match vault-auth.js)
+  var MAGIC_LINK_TOKEN = "recruiter-access-2026-mxlpd";
+  var MAGIC_LINK_EXPIRY = new Date("2026-01-31T23:59:59").getTime();
+
   function isTokenValid() {
     try {
-      const token = localStorage.getItem('vault_auth_token');
-      const timestamp = localStorage.getItem('vault_auth_timestamp');
+      var token = localStorage.getItem('vault_auth_token');
+      var timestamp = localStorage.getItem('vault_auth_timestamp');
       if (!token || !timestamp) return false;
-      const daysSince = (Date.now() - parseInt(timestamp, 10)) / (1000 * 60 * 60 * 24);
+      var daysSince = (Date.now() - parseInt(timestamp, 10)) / (1000 * 60 * 60 * 24);
       return daysSince < 30;
     } catch (e) {
       return false;
     }
   }
 
-  if (!isTokenValid()) {
+  function isMagicLinkValid() {
+    try {
+      var urlParams = new URLSearchParams(window.location.search);
+      var accessToken = urlParams.get('access_token');
+      if (!accessToken) return false;
+      if (accessToken !== MAGIC_LINK_TOKEN) return false;
+      if (Date.now() > MAGIC_LINK_EXPIRY) return false;
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  if (!isTokenValid() && !isMagicLinkValid()) {
     document.write('<style id="vault-overlay-style">body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a0a;z-index:999998;}</style>');
   }
 })();
