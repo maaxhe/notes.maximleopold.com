@@ -163,7 +163,7 @@ async function findRelevantChunks(
           chunk.metadata.source.toUpperCase().includes(`/${currentPage.toUpperCase()}.MD`)
 
         if (isCurrentPage) {
-          score *= 1.3  // 30% Boost für aktuelle Seite
+          score *= 2.0  // 100% Boost für aktuelle Seite
         }
       }
 
@@ -741,7 +741,7 @@ ${context}`
     console.log(`✅ Stream abgeschlossen (${fullText.length} Zeichen)`)
 
     if (containsInvalidCitation(fullText)) {
-      throw new Error("Ungültige Zitierweise erkannt. Bitte erneut versuchen, ohne generische 'Quelle'-Referenzen.")
+      console.warn("⚠️ Warnung: Generische Zitierweise erkannt (wird ignoriert)")
     }
 
     // Filtere: Nur tatsächlich zitierte Quellen
@@ -923,7 +923,7 @@ ${context}`
 
     // Filtere: Nur tatsächlich zitierte Quellen
     if (containsInvalidCitation(assistantMessage)) {
-      throw new Error("Ungültige Zitierweise erkannt. Bitte erneut versuchen, ohne generische 'Quelle'-Referenzen.")
+      console.warn("⚠️ Warnung: Generische Zitierweise erkannt (wird ignoriert)")
     }
 
     const { matches, citationCount, unmatchedCitations } = filterReferencedSources(assistantMessage, finalChunks)

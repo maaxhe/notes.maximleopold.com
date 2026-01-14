@@ -6,7 +6,7 @@ tags:
   - stream/safe
   - function/motion
   - stream/dorsal
-modified: 2026-01-06
+modified: 2026-01-14
 ---
 # 7AL
 

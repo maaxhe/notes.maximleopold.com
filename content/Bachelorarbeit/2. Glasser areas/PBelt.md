@@ -5,7 +5,7 @@ tags:
   - region/core
   - function/language
   - stream/safe
-modified: 2026-01-06
+modified: 2026-01-14
 ---
 # PBelt
 

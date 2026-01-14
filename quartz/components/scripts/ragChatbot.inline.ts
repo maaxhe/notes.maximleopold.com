@@ -1,7 +1,6 @@
 const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-const REMOTE_FALLBACK_API = "https://server.maximleopold.com/rag"
-// Auto-detect API URL based on environment
-const API_URL = isLocalhost ? "http://localhost:3030" : REMOTE_FALLBACK_API
+// Use same-origin API path to avoid CORS issues
+const API_URL = isLocalhost ? "http://localhost:3030" : "/api/rag"
 
 function normalizeBase(url: string | null | undefined) {
   if (!url) return null
@@ -13,25 +12,7 @@ const apiBaseCandidates = (() => {
   const initial = normalizeBase(API_URL)
   if (initial) {
     candidates.add(initial)
-    if (initial.endsWith("/rag")) {
-      candidates.add(initial.replace(/\/rag$/, ""))
-    } else {
-      candidates.add(`${initial}/rag`)
-    }
   }
-
-  if (!isLocalhost) {
-    const remoteBase = normalizeBase(REMOTE_FALLBACK_API)
-    if (remoteBase) {
-      candidates.add(remoteBase)
-      if (remoteBase.endsWith("/rag")) {
-        candidates.add(remoteBase.replace(/\/rag$/, ""))
-      } else {
-        candidates.add(`${remoteBase}/rag`)
-      }
-    }
-  }
-
   return Array.from(candidates)
 })()
 

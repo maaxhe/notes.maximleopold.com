@@ -1,5 +1,5 @@
 ---
-modified: 2026-01-06
+modified: 2026-01-14
 ---
 
 ### Meine nächsten Schritte
@@ -8,26 +8,26 @@ modified: 2026-01-06
 - [ ] 
 
 #### Phase 1 
-- [ ] Informationen streamlinen und in die Areale packen
-	- [ ] schauen, wo pST genau sit und welche Areale es abdeckt
-- [ ] Alle auditory areale für beide streams überprüfen. Für jedes Areal
-	- [ ] anatomische Lage (vor Glasser eroieren)
-		- [ ] frühere Begriffe auf Glasser mappen
+- [x] Informationen streamlinen und in die Areale packen
+	- [x] schauen, wo pST genau sit und welche Areale es abdeckt
+- [x] Alle auditory areale für beide streams überprüfen. Für jedes Areal
+	- [x] anatomische Lage (vor Glasser eroieren)
+		- [x] frühere Begriffe auf Glasser mappen
 		- [ ] in MatLab Atlas + MNI Daten übereinanderlegen
-	- [ ] Funktion laut Glasser und anderen identifizieren 
-	- [ ] Zugehörigkeit zu dorsal oder ventral 
-	- [ ] typische PFC target regions ergänzen
-- [ ] Alles in eine Tabelle zusammenführen 
-	- [ ] für jedes Areal 1-2 Studien zitieren, die gut belegt sind
-- [ ] hemispheric differences? -> beachten! [[BA All Sources#^0ead40]]
-	- [ ] left: semantic, right: prosody -> correct??
+	- [x] Funktion laut Glasser und anderen identifizieren 
+	- [x] Zugehörigkeit zu dorsal oder ventral 
+	- [x] typische PFC target regions ergänzen
+- [x] Alles in eine Tabelle zusammenführen 
+	- [x] für jedes Areal 1-2 Studien zitieren, die gut belegt sind
+- [x] hemispheric differences? -> beachten! [[BA All Sources#^0ead40]]
+	- [x] left: semantic, right: prosody -> correct??
 #### Phase 2
-- [ ] Prefrontal Target Regions definieren 
-- [ ] Zuordnen, welcher Stream dorthin projiziert 
-- [ ] Kategorien hinzufügen
-	- [ ] dorsal = spatial/motor 
-	- [ ] ventral = object/semantic/social 
-- [ ] Hypthese erstellen
+- [x] Prefrontal Target Regions definieren 
+- [x] Zuordnen, welcher Stream dorthin projiziert 
+- [x] Kategorien hinzufügen
+	- [x] dorsal = spatial/motor 
+	- [x] ventral = object/semantic/social 
+- [x] Hypthese erstellen
 
 #### Phase 3
 - [ ] Schreiben .... dann sehen wir weiter 

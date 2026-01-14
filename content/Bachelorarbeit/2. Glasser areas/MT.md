@@ -6,7 +6,7 @@ tags:
   - stream/where
   - stream/safe
   - function/visual
-modified: 2026-01-06
+modified: 2026-01-14
 ---
 # MT
 
@@ -58,6 +58,15 @@ Tags: #cognitivescience/neuroscience #science
 ## Source
 [[Action&Cognition Motor System]]
 
+
+vielleicht etwas, das zeigt, dass MT auch nur durch auditory stimuli angeregt werden kann 
+https://www.sciencedirect.com/science/article/pii/S0926641002000617
+
+und hier, dass MT/MST nicht von auditory streams beeinflusst werden: 
+https://www.biorxiv.org/content/10.1101/204529v3.abstract
+
+mein chat dazu: 
+https://www.perplexity.ai/search/summarize-the-current-webpage-fuN_XTUPRluG_3WTDW1pTw#2
 
 Created: 08-06-24 19:04
 

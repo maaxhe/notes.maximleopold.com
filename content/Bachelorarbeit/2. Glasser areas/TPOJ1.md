@@ -5,7 +5,7 @@ tags:
   - function/language
   - function/semantic
   - stream/safe
-modified: 2026-01-06
+modified: 2026-01-14
 ---
 # TPOJ1
 
