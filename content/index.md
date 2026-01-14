@@ -1,6 +1,6 @@
 ---
 title: Research Vault
-modified: 2025-12-12
+modified: "2025-12-12"
 ---
 
 # Research Vault

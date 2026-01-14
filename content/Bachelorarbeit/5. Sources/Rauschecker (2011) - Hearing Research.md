@@ -1,5 +1,5 @@
 ---
-modified: 2026-01-14
+modified: "2026-01-14"
 ---
 
 ## Rauschecker (2011) - Hearing Research
