@@ -38,6 +38,84 @@ more about [[A5]]
 more about [[STSdp]]:
 - Relative to area STSvp on the inferior bank of the STS, area STSdp on the superior banks is has more myelin (Panel B), differs markedly in functional connectivity (Panel D), is more activated in the LANGUAGE MATH (Panel E), TOM-RANDOM (Panel H, especially in the right hemisphere), and MOTOR CUE-AVG (Panel I) contrasts. Relative to its anterior neighbor STSda in the superior bank of the STS, area STSdp has more myelin (Panel B), and differs markedly in its functional activation profile, being more activated in the CUE-AVG contrast (Panel I) and the RELATIONAL MATCH (Panel J), working memory (e.g. Panel L), SOCIAL TOM and other primary contrasts, and less active in the STORY-MATH contrast (Panel G). ^428d69
 
+
+from SUPPL about [[STV]]: 
+#### STV
+- **Distinctive Features:** Both STV and PSL possess unique features beyond typical multi-modal gradients and show prominent asymmetries between hemispheres.
+- **STV (Superior Temporal Visual area):**
+    - Defined using gradients from functional connectivity maps seeded from the **PCV** (Posterior Cingulate Visual area).
+    - Shows strong functional connectivity with the PCV.
+- **PSL (Peri-Sylvian Language area):**
+    - Defined using gradients from functional connectivity maps seeded from the unilateral **Area 55b**.
+    - Contains an anterior-to-posterior topographic organization of connectivity (similar to areas 55b, SFL, and 44)
+- **Border with Area A4:**
+    - Moderately long in the **Left Hemisphere**.
+    - Almost nonexistent in the **Right Hemisphere**.
+- **Relative to Area A4 (Left Hemisphere):**
+    - STV is more connected with PCV than A4 is.
+    - **Deactivated** vs. activated in: TOOL-AVG, LANGUAGE MATH, and STORY contrasts.
+    - **More activated** in: MOTOR CUE-AVG contrast.
+    - **Activated** vs. deactivated in: SOCIAL primary contrasts and TOM-RANDOM contrast.
+- **Relative to TPOJ1 (Inferior Neighbor):**
+    - STV has less myelin.
+    - STV has stronger functional connectivity with PCV.
+    - STV is deactivated vs. activated in LANGUAGE MATH and STORY contrasts.
+    - **Left Hemisphere:** STV is less activated than TPOJ1 in GAMBLING primary contrasts and MOTOR AVG.
+    - **Right Hemisphere:** STV is less activated than TPOJ1 in TOM-RANDOM contrast.
+- **Relative to PGi (Posterior Neighbor):**
+    - Differs strongly in functional connectivity.
+    - Less activated in LANGUAGE STORY and STORY-MATH contrasts.
+    - More activated in SOCIAL RANDOM contrast.
+- **Relative to PFm (Posterior Neighbor):**
+    - Differs strongly in functional connectivity.
+    - More activated in SOCIAL primary contrasts.
+- **Relative to PSL (Superior Neighbor):**
+    - STV has stronger connectivity with **PCV**, whereas PSL has stronger connectivity with **55b**
+    - STV is **deactivated** (vs. PSL activated) in: Working memory primary contrasts, MOTOR AVG (Panel L), LANGUAGE MATH, STORY (LH only), and RELATIONAL primary contrasts.
+
+from SUPPL about PSL: 
+### PSL
+- **Relative to Area A4 (Antero-inferior Neighbor):**
+    - Stronger functional connectivity with **Area 55b**.
+    - Activated vs. deactivated in primary contrasts.
+    - Deactivated vs. activated in TOOL-AVG contrast.
+    - More activated in MOTOR AVG.
+- **Relative to PFm (Supero-posterior Neighbor):**
+    - Stronger functional connectivity with **Area 55b**.
+    - More activated in RELATIONAL primary contrasts (bilateral).
+    - **Left Hemisphere:** More activated in LANGUAGE MATH and STORY contrasts.
+    - **Right Hemisphere:** More activated in MOTOR CUE and TOM-RANDOM contrasts.
+- **Relative to PF (Supero-anterior Neighbor):**
+    - Stronger functional connectivity with **Area 55b**.
+    - **Left Hemisphere:** Less activated in MOTOR CUE; more activated in LANGUAGE MATH and STORY.
+    - **Right Hemisphere:** Less deactivated in LANGUAGE contrasts; more activated in TOM-RANDOM (but not on the Left).
+
+### **4. Lateralization and Topography of PSL**
+
+- **Lateralization:**
+    
+    - PSL is one of the few "strikingly functionally lateralized" areas in the cortex.
+        
+    - **Cortical Thickness:** PSL is much thicker on the **Right** than on the Left.
+        
+    - **Activation:** Left PSL is more activated in RELATIONAL-MATCH contrasts than Right PSL.
+        
+    - **Geography:** Located near the supero-posterior tip of the Sylvian fissure, extending onto the Superior Temporal Gyrus (especially on the Right).
+        
+- **Topographic Organization (Language Network):**
+    
+    - PSL, 55b, SFL, and 44 show a topographic organization of connectivity along the anterior-posterior axis.
+        
+    - This pattern is part of a left-lateralized language Resting State Network (RSN).
+        
+    - **Left Hemisphere Gradient Mapping:** Progression from Posterior to Anterior in PSL corresponds to:
+        
+        - Anterior to Posterior in **Area 55b**.
+            
+        - Inferior to Superior in **Area 44**.
+            
+        - Anterior to Posterior in **SFL** (more prominent on the Left).
+
 ![[Glasser fMRI auditory cortex.png]]
 
 ![[Glasser et al. - 2016 - A multi-modal parcellation of human cerebral cortex SUPPL.pdf]]
