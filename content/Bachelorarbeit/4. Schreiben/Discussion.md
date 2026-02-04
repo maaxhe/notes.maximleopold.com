@@ -6,7 +6,7 @@ progress: 0
 needsFeedback: false
 tags:
   - ba
-modified: "2026-01-14"
+modified: 2026-02-04
 ---
 ## Discussion 
 _hier kommt alles rein, was ich als content für eine discussion erachte_
