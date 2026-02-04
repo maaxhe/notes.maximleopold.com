@@ -2,7 +2,7 @@
 title: Results
 chapterNumber: 4
 status: draft
-progress: 0
+progress: 10
 needsFeedback: false
 tags:
   - ba
@@ -10,7 +10,6 @@ modified: 2026-02-04
 ---
 ## Results 
 _hier sind meine Results vornehmlich aus der Toolbox_
-
 
 
 So dachte ich, wäre eigentlich die Verteilung. Denn nach connectivity waren PSL und STV eigentlich mehr what/ventral pathway
