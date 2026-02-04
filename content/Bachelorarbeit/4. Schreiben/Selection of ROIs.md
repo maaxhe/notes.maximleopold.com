@@ -8,9 +8,15 @@ tags:
   - ba
 modified: 2026-02-04
 ---
-a## Selection of ROIs 
+## Selection of ROIs 
 
 The selection of ROIs is based on previous research mainly by [[Rolls et al. (2023) - Cerebral Cortex]] about connectivity of auditory areas using the Glasser Altas [[Glasser et al. (2016) - Nature]]. 
+
+### How to select correct ROIs 
+
+Ich denke, ich sollte es so machen, dass ich gesicherte Areale für where/what nehmen und eine erste Analyse durchführen sollte. 
+
+Dann könnte ich ein zweites Mal durchführen mit Arealen, die etwas gewagter in die jeweiligen Kategorien fallen. 
 
 ### ROIs for the What-Stream 
 Since the what-stream mainly focusses on semantics and comprehension, it is the main speech processing pathway - as in the visual stream for object recognition. 
@@ -25,6 +31,13 @@ The research on the auditory where-stream is a bit thin. Mainly I focussed on [[
 
 Previous research shows that all [[STG]] subregions connect to the [[fOP]] via dorsal pathways, which could mean that STG generally belongs to the dorsal stream. 
 BUT 
+
+
+#### FOP
+
+[[fOP]] areas are vage. the only source I found was [[Frühholz (2015) - NeuroImage]] in which it says that [[BA44, 44]] is part of fOP and therefore it could be part of the dorsal pathway. 
+
+
 
 
 

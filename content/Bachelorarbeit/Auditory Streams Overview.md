@@ -81,6 +81,27 @@ This might be due to the evolution of complex semantic understanding and therefo
 ---
 ![[Glasser HCP-MMP1 human brain lateral view.png]]
 
+| **Gruppe**             | **Glasser-Labels (Beispiele)**                                                                   |
+| ---------------------- | ------------------------------------------------------------------------------------------------ |
+| **Seeds**              | `FEF`, `IFJa`, `IFJp`                                                                            |
+| **Ventral (What)**     | `STGa`, `STSda`, `STSdp`, `STSva`, `STSvp`, `TA2`, `TGd`, `TGv`, `TE1a`, `TE1m`, `TE1p`, `TPOJ1` |
+| **Dorsal (Where/How)** | `A4`, `A5`, `7AL`, `7Am`, `7PC`, `MT`, `MST`, `STV`, `PSL`                                       |
+| **Core (Baseline)**    | `A1`, `LBelt`, `MBelt`, `PBelt`, `RI`                                                            |
+|                        |                                                                                                  |
+
+#### erweiterte Tabelle: 
+dorsal: 
+A4, A5, STV, PSL, PFcm, PF, 7PC, 7Am, FOP1, FOP2, FOP3, 43, PFop
+
+ventral: 
+TPOJ1, STGa, STSda, STSdp, STSva, STSvp, TA2, TGd, TGv, TE1a, TE1m, TE1p
+
+#### reduzierte Tabelle
+dorsal: 
+7AL, 7Am, 7PC, 44, MST, MT, PBelt 
+
+ventral: 
+45, 47l, PGi, STGa, STSda, STSdp, STV, TGd, TGv, TPOJ1
 ## Legend
 
 **Certainty Indicators:**
