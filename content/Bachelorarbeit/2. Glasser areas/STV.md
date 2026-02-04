@@ -33,6 +33,12 @@ modified: 2026-02-04
 
 ### Projections
 - part of the language-related semantic system ([[Rolls et al. (2023) - Cerebral Cortex#^49fcb6]])
+- STV ist stark mit der PCV (Posterior Cingulate Visual area) verbunden [[Glasser et al. (2016) - Nature]] SUPP 
+- stärkere functional connectivity to PCV than [[PSL]] 
+
+#### Rather [[FEF]] or [[IFJ]]a connections?
+
+
 
 ### PFC targets
 - Broca's Area [[BA45, 45]] ([[Rolls et al. (2023) - Cerebral Cortex#^49fcb6]])
