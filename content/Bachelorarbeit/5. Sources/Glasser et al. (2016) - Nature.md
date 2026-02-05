@@ -1,5 +1,5 @@
 ---
-modified: 2026-02-04
+modified: 2026-02-05
 ---
 
 Glasser, M. F., Coalson, T. S., Robinson, E. C., Hacker, C. D., Harwell, J., Yacoub, E., Ugurbil, K., Andersson, J., Beckmann, C. F., Jenkinson, M., Smith, S. M., & Van Essen, D. C. (2016). A multi-modal parcellation of human cerebral cortex. _Nature_, _536_(7615), 171–178.
@@ -38,6 +38,8 @@ more about [[A5]]
 more about [[STSdp]]:
 - Relative to area STSvp on the inferior bank of the STS, area STSdp on the superior banks is has more myelin (Panel B), differs markedly in functional connectivity (Panel D), is more activated in the LANGUAGE MATH (Panel E), TOM-RANDOM (Panel H, especially in the right hemisphere), and MOTOR CUE-AVG (Panel I) contrasts. Relative to its anterior neighbor STSda in the superior bank of the STS, area STSdp has more myelin (Panel B), and differs markedly in its functional activation profile, being more activated in the CUE-AVG contrast (Panel I) and the RELATIONAL MATCH (Panel J), working memory (e.g. Panel L), SOCIAL TOM and other primary contrasts, and less active in the STORY-MATH contrast (Panel G). ^428d69
 
+#chatbot content following: 
+careful with using this information
 
 from SUPPL about [[STV]]: 
 #### STV

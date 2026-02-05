@@ -6,7 +6,7 @@ progress: 10
 needsFeedback: false
 tags:
   - ba
-modified: 2026-02-04
+modified: 2026-02-05
 ---
 ## Results 
 _hier sind meine Results vornehmlich aus der Toolbox_
@@ -18,6 +18,8 @@ selbe connectivity für left hemisphere
 
 R_FEF
 R_IFJa
+
+R_STV, R_7AL, R_7Am, R_7PC, R_PBelt, R_A4, R_44, R_45, R_47l, R_PGi, R_STGa, R_PSL, R_STSda, R_STSdp, R_TGd, R_TGv
 
 R_7AL, R_7Am, R_7PC, R_44, R_PBelt, R_A4, R_A5, R_44, R_45, R_47l, R_PGi, R_STGa, R_PSL, R_STSda, R_STSdp, R_STV, R_TGd, R_TGv, R_TPOJ1
 
@@ -42,7 +44,8 @@ anatomic locations of A4 and [[A5]] are in the parabelt cortex and are in the po
 
 ##### A4 
 In [[Glasser et al. (2016) - Nature]] [[A4]] is defined as functionally different from its neighbours: 
-- in contrast to STV, A4 shows a weaker connectivity 
+- in contrast to STV, A4 shows a weaker connectivity to visial area PCV
+- also weaker connectivity to 55b than PSL 
 
 ### see also
 [[Methods]]

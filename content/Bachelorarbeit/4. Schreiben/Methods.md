@@ -6,7 +6,7 @@ progress: 3
 needsFeedback: true
 tags:
   - ba
-modified: 2026-02-04
+modified: 2026-02-05
 ---
 ## Methods
 For the analysis, we use the dataset from the HCPMM1 of resting state fMRI analysis with __ subjects. 
