@@ -1,5 +1,5 @@
 ---
-modified: 2026-02-05
+modified: 2026-02-06
 ---
 
 ## figures for Bachelorarbeit 
@@ -19,7 +19,32 @@ Left Hemisphere:
 
 ![[Screenshot 2026-02-04 at 15.57.26.png]]
 
+tiefer reingehen in left vs right 
+
 ![[circ_full812_L_FEF_IFJa_essential.png]]
+
+44, 45, 47l vielleicht als seed regions? 
+wo ist IFJa unterschiedlich von 44, 45, 47l 
+Unterschied zwischen IFJa und IFJp?
+results in g drive reintun 
+
+
+
+spatial hearing, language contrast, predictive modelling 
+
+
+
+A5 connectivity, left-right hemisphere partial connectivity:
+![[A5 partial connectivity left-right hemisphere.png]]
+
+
+A4 vs A5 full connectivity 
+![[Pasted image 20260205132254.png]]
+
+
+FEF vs 55b full connectivity
+![[FEF vs 55b full812.png]]
+55b DTI paper Bedini
 
 ### see also
 [[Glasser]]

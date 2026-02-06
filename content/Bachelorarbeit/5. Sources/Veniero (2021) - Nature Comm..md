@@ -1,5 +1,5 @@
 ---
-modified: 2026-02-05
+modified: 2026-02-06
 ---
 
 Veniero, D., Gross, J., Morand, S., Duecker, F., Sack, A. T., & Thut, G. (2021). Top-down control of visual cortex by the frontal eye fields through oscillatory realignment. _Nature Communications_, _12_(1), 1757. [https://doi.org/10.1038/s41467-021-21979-7](https://doi.org/10.1038/s41467-021-21979-7)

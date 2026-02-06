@@ -2,11 +2,11 @@
 title: Results
 chapterNumber: 4
 status: draft
-progress: 10
+progress: 15
 needsFeedback: false
 tags:
   - ba
-modified: 2026-02-05
+modified: 2026-02-06
 ---
 ## Results 
 _hier sind meine Results vornehmlich aus der Toolbox_
@@ -21,7 +21,7 @@ R_IFJa
 
 R_STV, R_7AL, R_7Am, R_7PC, R_PBelt, R_A4, R_44, R_45, R_47l, R_PGi, R_STGa, R_PSL, R_STSda, R_STSdp, R_TGd, R_TGv
 
-R_7AL, R_7Am, R_7PC, R_44, R_PBelt, R_A4, R_A5, R_44, R_45, R_47l, R_PGi, R_STGa, R_PSL, R_STSda, R_STSdp, R_STV, R_TGd, R_TGv, R_TPOJ1
+R_7AL, R_7Am, R_7PC, R_PBelt, R_A4, R_A5, R_44, R_45, R_47l, R_PGi, R_STGa, R_PSL, R_STSda, R_STSdp, R_STV, R_TGd, R_TGv, R_TPOJ1
 
 Right hemisphere: 
 ![[circ_full812_R_FEF_IFJa_essential.png]]
@@ -42,10 +42,13 @@ According to [[Dureux (2024)]] PSL is unresponsive to all tested auditive stimul
 anatomic locations of A4 and [[A5]] are in the parabelt cortex and are in the posterior part of the superior temporal gyrus (STG). They form the transition from early auditory cortex to specialized streams. In luterature they are being reffered as to the starting point of the dorsal stream (Quelle benötigt). Nach Rolls ist es unsicher, ob A5 zu Where oder zum What pathway gehört, da A5 sowohl connectivity zu Area 44 und IFJa zeigt, als auch zu [[MT]] und [[MST]], welche klar zum where-pathway des visuellen streams gehören. 
 
 
+![[A5 partial connectivity left-right hemisphere.png]]
+
 ##### A4 
 In [[Glasser et al. (2016) - Nature]] [[A4]] is defined as functionally different from its neighbours: 
 - in contrast to STV, A4 shows a weaker connectivity to visial area PCV
 - also weaker connectivity to 55b than PSL 
+
 
 ### see also
 [[Methods]]
