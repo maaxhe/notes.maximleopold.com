@@ -14,7 +14,7 @@ summary of their model:
 
 history of Wernicke and STG: 
 - This position was challenged by two discoveries in the 1970s and 1980s. The first was that deficits in the ability to perceive speech sounds contributed minimally to the auditory comprehension deficit in Wernicke’s aphasia2–7. The second was that destruction of the left STG does not lead to deficits in the auditory comprehension of speech, but instead causes deficits in speech production8. These findings do not rule out a role for the left STG in speech perception, but  make it clear that additional regions participate in the process.
-	- dieses paper geht echt schön auf die Geschichte des auditory-language-streams ein. könnte ich eventuell auch drüber schreiben in ein paar Sätzen am Anfang -> [[Introduction]]
+	- dieses paper geht echt schön auf die Geschichte des auditory-language-streams ein. könnte ich eventuell auch drüber schreiben in ein paar Sätzen am Anfang -> [[1.0 Introduction]]
 
 dorsal stream:
 - The suggestion that the dorsal stream has an auditory–motor integration function differs from earlier arguments for a dorsal auditory ‘where’ system, but is consistent with recent conceptualisations of the dorsal visual stream (BOX 2) and has gained support in recent years ^0af4d2

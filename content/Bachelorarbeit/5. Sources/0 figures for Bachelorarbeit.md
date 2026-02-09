@@ -1,7 +1,3 @@
----
-modified: 2026-02-09
----
-
 ## figures for Bachelorarbeit 
 
 
@@ -48,7 +44,7 @@ FEF vs 55b full connectivity
 
 
 PSL vs STV full connectivity
-![[Pasted image 20260209113612.png]]
+![[PSL vs STV full connecivity.png]]
 
 ### see also
 [[Glasser]]
