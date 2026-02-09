@@ -1,5 +1,5 @@
 ---
-modified: 2026-02-06
+modified: 2026-02-09
 ---
 
 Rolls, E. T., Deco, G., Huang, C.-C., & Feng, J. (2022). The human language effective connectome. _NeuroImage_, _258_, 119352. [https://doi.org/10.1016/j.neuroimage.2022.119352](https://doi.org/10.1016/j.neuroimage.2022.119352)

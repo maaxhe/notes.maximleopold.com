@@ -1,5 +1,5 @@
 ---
-modified: 2026-02-06
+modified: 2026-02-09
 ---
 
 ## figures for Bachelorarbeit 
@@ -45,6 +45,10 @@ A4 vs A5 full connectivity
 FEF vs 55b full connectivity
 ![[FEF vs 55b full812.png]]
 55b DTI paper Bedini
+
+
+PSL vs STV full connectivity
+![[Pasted image 20260209113612.png]]
 
 ### see also
 [[Glasser]]

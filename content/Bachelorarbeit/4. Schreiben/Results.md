@@ -6,7 +6,7 @@ progress: 15
 needsFeedback: false
 tags:
   - ba
-modified: 2026-02-06
+modified: 2026-02-09
 ---
 ## Results 
 _hier sind meine Results vornehmlich aus der Toolbox_
@@ -36,6 +36,7 @@ According to [[Dureux (2024)]] PSL is unresponsive to all tested auditive stimul
 
 - unresponsive to all tested auditive stimuli according to  [[Dureux (2024)#^51288d]] auch 
 
+in contrast to STV 
 
 #### A4 and A5 
 
