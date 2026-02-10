@@ -1,6 +1,6 @@
 ---
-  title: "LBelt"
-  created: "2025-11-20"
+title: "LBelt"
+created: "2025-11-20"
 modified: 2026-02-10
 ---
 # LBelt

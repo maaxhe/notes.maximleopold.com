@@ -136,6 +136,16 @@
   border: 2px solid var(--gray);
   transition: all 0.2s ease;
 
+  &.chapter-sub {
+    margin-left: 2rem;
+    border-left: 3px solid var(--tertiary);
+    opacity: 0.92;
+
+    .chapter-title-section .chapter-title {
+      font-size: 1rem;
+    }
+  }
+
   &:hover {
     border-color: var(--secondary);
     transform: translateX(4px);

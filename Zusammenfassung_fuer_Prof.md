@@ -40,7 +40,7 @@ Die Einleitung führt von der klassischen Wernicke-Perspektive zur modernen Dual
 
 **Links:**
 - Introduction: https://notes.maximleopold.com/Bachelorarbeit/4.-Schreiben/1.0-Introduction
-- From Wernicke's to Dual Stream: https://notes.maximleopold.com/Bachelorarbeit/4.-Schreiben/1.1.-From-Wernickes-to-Dual-Stream
+- From Wernicke's to Dual Stream: https://notes.maximleopold.com/Bachelorarbeit/4.-Schreiben/1.1.-From-Wernicke's-to-Dual-Stream
 
 ---
 
@@ -157,14 +157,14 @@ Alle verwendeten Quellen mit meinen Annotationen und Exzerpten:
 https://notes.maximleopold.com/Bachelorarbeit/5.-Sources/BA-All-Sources
 
 **Wichtigste Quellen (mit Notizen):**
-- Bedini & Baldauf (2021) -- FEF vs IFJ, Supramodale Hypothese: https://notes.maximleopold.com/Bachelorarbeit/5.-Sources/Bedini-&-Baldauf-(2021)
+- Bedini & Baldauf (2021) -- FEF vs IFJ, Supramodale Hypothese: https://notes.maximleopold.com/Bachelorarbeit/5.-Sources/Bedini--and--Baldauf-(2021)
 - Glasser et al. (2016) -- HCP-MMP1 Parcellation Atlas: https://notes.maximleopold.com/Bachelorarbeit/5.-Sources/Glasser-et-al.-(2016)---Nature
 - Rolls et al. (2023) -- Auditory Cortical Connectivity: https://notes.maximleopold.com/Bachelorarbeit/5.-Sources/Rolls-et-al.-(2023)---Cerebral-Cortex
-- Hickok & Poeppel (2007) -- Dual Stream Model: https://notes.maximleopold.com/Bachelorarbeit/5.-Sources/Hickok-&-Poeppel-2007---Nature
-- Hickok & Poeppel (2004) -- Dorsal/Ventral Streams: https://notes.maximleopold.com/Bachelorarbeit/5.-Sources/Hickok-&-Poeppel-(2004)---Cognition
-- Rauschecker & Scott (2009): https://notes.maximleopold.com/Bachelorarbeit/5.-Sources/Rauschecker-&-Scott-(2009)---Nature-Neuroscience
+- Hickok & Poeppel (2007) -- Dual Stream Model: https://notes.maximleopold.com/Bachelorarbeit/5.-Sources/Hickok--and--Poeppel-2007---Nature
+- Hickok & Poeppel (2004) -- Dorsal/Ventral Streams: https://notes.maximleopold.com/Bachelorarbeit/5.-Sources/Hickok--and--Poeppel-(2004)---Cognition
+- Rauschecker & Scott (2009): https://notes.maximleopold.com/Bachelorarbeit/5.-Sources/Rauschecker--and--Scott-(2009)---Nature-Neuroscience
 - Friederici (2011) -- Language Processing Pathways: https://notes.maximleopold.com/Bachelorarbeit/5.-Sources/Friederici-(2011)---Physiological-Reviews
-- De Vries & Baldauf (2021): https://notes.maximleopold.com/Bachelorarbeit/5.-Sources/De-Vries-&-Baldauf-(2021)---Journal-of-Neuroscience
+- De Vries & Baldauf (2021): https://notes.maximleopold.com/Bachelorarbeit/5.-Sources/De-Vries--and--Baldauf-(2021)---Journal-of-Neuroscience
 - Frühholz (2015) -- Affective Prosody: https://notes.maximleopold.com/Bachelorarbeit/5.-Sources/Frühholz-(2015)---NeuroImage
 - Ahveninen et al. (2006): https://notes.maximleopold.com/Bachelorarbeit/5.-Sources/Ahveninen-et-al.-(2006)---PNAS
 

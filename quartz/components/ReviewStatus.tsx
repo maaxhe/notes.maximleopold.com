@@ -10,15 +10,50 @@ const defaultOptions: ReviewStatusOptions = {
   showProgress: true,
 }
 
+// Parse title to extract major.minor chapter numbers (e.g., "3.0 Methods" → {major: 3, minor: 0})
+const parseChapterVersion = (title: string): { major: number; minor: number } | null => {
+  const match = title.match(/^(\d+)\.(\d+)/)
+  if (match) {
+    return { major: parseInt(match[1]), minor: parseInt(match[2]) }
+  }
+  return null
+}
+
 export default ((opts?: Partial<ReviewStatusOptions>) => {
   const options: ReviewStatusOptions = { ...defaultOptions, ...opts }
 
-  const ReviewStatus: QuartzComponent = ({ fileData, displayClass }: QuartzComponentProps) => {
+  const ReviewStatus: QuartzComponent = ({
+    fileData,
+    allFiles,
+    displayClass,
+  }: QuartzComponentProps) => {
     const frontmatter = fileData.frontmatter
     const status = frontmatter?.status as string | undefined
-    const progress = frontmatter?.progress as number | undefined
+    const ownProgress = frontmatter?.progress as number | undefined
 
-    if (!status && !progress) {
+    // For main chapters (X.0), compute average progress from sub-chapters
+    let progress = ownProgress
+    const title = (frontmatter?.title as string) || ""
+    const version = parseChapterVersion(title)
+
+    if (version && version.minor === 0) {
+      // Find sub-chapters (same major number, minor > 0)
+      const subChapters = allFiles.filter((file) => {
+        const fileTitle = (file.frontmatter?.title as string) || ""
+        const fileVersion = parseChapterVersion(fileTitle)
+        return fileVersion && fileVersion.major === version.major && fileVersion.minor > 0
+      })
+
+      if (subChapters.length > 0) {
+        const total = subChapters.reduce(
+          (acc, f) => acc + ((f.frontmatter?.progress as number) || 0),
+          0,
+        )
+        progress = Math.round(total / subChapters.length)
+      }
+    }
+
+    if (!status && progress === undefined) {
       return null
     }
 
