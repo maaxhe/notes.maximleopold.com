@@ -2,7 +2,7 @@
 title: Auditory Streams Overview
 tags:
   - cognitivescience/neuroscience
-modified: 2026-02-09
+modified: 2026-02-10
 ---
 # Auditory Streams Overview
 

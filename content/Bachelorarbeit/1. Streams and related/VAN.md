@@ -4,7 +4,7 @@ created: 2025-11-19
 tags:
   - stream/what
   - stream/safe
-modified: 2026-02-09
+modified: 2026-02-10
 ---
 # VAN (Ventral Attention Network)
 
