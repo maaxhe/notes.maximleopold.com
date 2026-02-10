@@ -64,6 +64,10 @@
     border-left-color: #1abc9c;
   }
 
+  &.words {
+    border-left-color: #9b59b6;
+  }
+
   .stat-number {
     font-size: 2rem;
     font-weight: bold;
@@ -113,6 +117,119 @@
     font-weight: 600;
     color: var(--darkgray);
     font-size: 1rem;
+  }
+}
+
+// Page estimation section
+.page-estimation {
+  background: var(--lightgray);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid #9b59b6;
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  .page-estimation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+
+    .page-count {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--dark);
+
+      .page-count-label {
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--darkgray);
+      }
+    }
+
+    .page-percentage {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #9b59b6;
+    }
+  }
+
+  .page-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 6px;
+    margin-bottom: 1rem;
+
+    @media all and ($mobile) {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+
+  .page-block {
+    position: relative;
+    aspect-ratio: 0.7;
+    background: var(--light);
+    border: 1.5px solid var(--gray);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: all 0.2s ease;
+
+    &.filled {
+      background: linear-gradient(135deg, #9b59b6, #8e44ad);
+      border-color: #7d3c98;
+
+      .page-block-number {
+        color: rgba(255, 255, 255, 0.85);
+      }
+    }
+
+    &.partial {
+      .page-block-fill {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, rgba(155, 89, 182, 0.6), rgba(142, 68, 173, 0.6));
+        transition: height 0.3s ease;
+      }
+    }
+
+    .page-block-number {
+      position: relative;
+      z-index: 1;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--darkgray);
+      user-select: none;
+    }
+  }
+
+  .page-estimation-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--darkgray);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+
+    @media all and ($mobile) {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+  }
+
+  .page-estimation-footnote {
+    font-size: 0.75rem;
+    color: var(--gray);
+    font-style: italic;
+    text-align: right;
   }
 }
 
@@ -189,6 +306,18 @@
     align-items: center;
     gap: 0.5rem;
     flex-shrink: 0;
+  }
+
+  .word-count-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background-color: rgba(155, 89, 182, 0.15);
+    color: #7d3c98;
+    white-space: nowrap;
   }
 
   .feedback-badge {
@@ -280,8 +409,13 @@
 @media (prefers-color-scheme: dark) {
   .stat-card,
   .overall-progress,
-  .chapter-card {
+  .chapter-card,
+  .page-estimation {
     background: var(--light);
+  }
+
+  .page-estimation .page-block {
+    background: var(--lightgray);
   }
 
   .overall-progress .progress-bar-large,
@@ -310,5 +444,10 @@
       background-color: #051b11;
       color: #d1e7dd;
     }
+  }
+
+  .word-count-badge {
+    background-color: rgba(155, 89, 182, 0.25);
+    color: #d2b4de;
   }
 }

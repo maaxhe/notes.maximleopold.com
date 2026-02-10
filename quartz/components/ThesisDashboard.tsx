@@ -2,6 +2,7 @@ import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } fro
 import style from "./styles/thesisDashboard.scss"
 import { resolveRelative } from "../util/path"
 import { formatDate } from "./Date"
+import readingTime from "reading-time"
 
 interface ThesisDashboardOptions {
   title?: string
@@ -102,6 +103,17 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
       return Math.round(total / group.subs.length)
     }
 
+    // Get word count for a single file
+    const getWordCount = (file: (typeof thesisFiles)[number]): number => {
+      if (!file.text) return 0
+      return readingTime(file.text).words
+    }
+
+    // Calculate cumulative word count for a chapter group (all sub-chapters)
+    const groupWordCount = (group: ChapterGroup): number => {
+      return group.subs.reduce((acc, f) => acc + getWordCount(f), 0)
+    }
+
     // Flatten all files for statistics (preserving original behavior)
     const allThesisFiles = [
       ...sortedGroups.flatMap((g) => [...(g.main ? [g.main] : []), ...g.subs]),
@@ -128,6 +140,23 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
           )
         : 0
 
+    // Exclude main chapter files (X.0) from word count — they contain outlines, not prose
+    const mainSlugs = new Set(sortedGroups.map((g) => g.main?.slug).filter(Boolean))
+    const totalWordCount = allThesisFiles
+      .filter((f) => !mainSlugs.has(f.slug))
+      .reduce((acc, f) => acc + getWordCount(f), 0)
+
+    // Page estimation based on UOS formatting guidelines:
+    // Times New Roman 12pt, 1.5 line spacing, margins 2.5cm/2.5cm/2.5cm/2cm
+    // ~283 words per page (8500 words / 30 pages)
+    const WORDS_PER_PAGE = 283
+    const TARGET_PAGES = 30
+    const TARGET_WORDS = 9200
+    const estimatedPages = totalWordCount / WORDS_PER_PAGE
+    const pageProgress = Math.min((estimatedPages / TARGET_PAGES) * 100, 100)
+    const pagesRemaining = Math.max(0, TARGET_PAGES - estimatedPages)
+    const wordsRemaining = Math.max(0, TARGET_WORDS - totalWordCount)
+
     const statusMap: Record<string, { label: string; icon: string; color: string }> = {
       draft: { label: "Entwurf", icon: "🟡", color: "draft" },
       review: { label: "Review", icon: "🔵", color: "review" },
@@ -141,9 +170,11 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
       file: (typeof thesisFiles)[number],
       isSub: boolean,
       overrideProgress?: number,
+      overrideWordCount?: number,
     ) => {
       const status = file.frontmatter?.status as string | undefined
       const progress = overrideProgress ?? (file.frontmatter?.progress as number | undefined)
+      const wordCount = overrideWordCount ?? getWordCount(file)
       const needsFeedback = file.frontmatter?.needsFeedback as boolean | undefined
       const chapterNumber = file.frontmatter?.chapterNumber as number | undefined
       const currentStatus = status ? statusMap[status.toLowerCase()] : null
@@ -161,6 +192,9 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
               <span class="chapter-title">{file.frontmatter?.title || file.slug}</span>
             </div>
             <div class="chapter-badges">
+              {wordCount > 0 && (
+                <span class="word-count-badge">{wordCount.toLocaleString("de-DE")} Wörter</span>
+              )}
               {needsFeedback && (
                 <span class="feedback-badge" title="Feedback benötigt">
                   ⚠️
@@ -203,6 +237,10 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
             <div class="stat-number">{totalFiles}</div>
             <div class="stat-label">Gesamt Seiten</div>
           </div>
+          <div class="stat-card words">
+            <div class="stat-number">{totalWordCount.toLocaleString("de-DE")}</div>
+            <div class="stat-label">Wörter gesamt</div>
+          </div>
           <div class="stat-card draft">
             <div class="stat-number">{draftFiles}</div>
             <div class="stat-label">Draft</div>
@@ -235,6 +273,46 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
           </div>
         )}
 
+        <div class="page-estimation">
+          <h3>Seitenumfang</h3>
+          <div class="page-estimation-header">
+            <span class="page-count">
+              {estimatedPages.toFixed(1)} <span class="page-count-label">von {TARGET_PAGES} Seiten</span>
+            </span>
+            <span class="page-percentage">{Math.round(pageProgress)}%</span>
+          </div>
+          <div class="page-grid">
+            {Array.from({ length: TARGET_PAGES }, (_, i) => {
+              const pageNum = i + 1
+              const fillLevel = Math.min(1, Math.max(0, estimatedPages - i))
+              const isFull = fillLevel >= 1
+              const isPartial = fillLevel > 0 && fillLevel < 1
+              return (
+                <div
+                  class={`page-block ${isFull ? "filled" : ""} ${isPartial ? "partial" : ""}`}
+                  title={`Seite ${pageNum}`}
+                >
+                  {isPartial && (
+                    <div class="page-block-fill" style={`height: ${fillLevel * 100}%`}></div>
+                  )}
+                  <span class="page-block-number">{pageNum}</span>
+                </div>
+              )
+            })}
+          </div>
+          <div class="page-estimation-details">
+            <span>{totalWordCount.toLocaleString("de-DE")} / {TARGET_WORDS.toLocaleString("de-DE")} Wörter</span>
+            {wordsRemaining > 0 ? (
+              <span>Noch ~{wordsRemaining.toLocaleString("de-DE")} Wörter ({pagesRemaining.toFixed(1)} Seiten)</span>
+            ) : (
+              <span>Ziel erreicht!</span>
+            )}
+          </div>
+          <div class="page-estimation-footnote">
+            Basierend auf UOS-Vorgaben: TNR 12pt, 1,5-zeilig, ~{WORDS_PER_PAGE} Wörter/Seite
+          </div>
+        </div>
+
         <div class="thesis-chapters">
           <h3>Alle Kapitel</h3>
           <div class="chapters-list">
@@ -242,10 +320,11 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
               const hasSubs = group.subs.length > 0
               const hasMain = group.main !== null
               const avgProgress = hasSubs && hasMain ? groupAverageProgress(group) : undefined
+              const cumulativeWords = hasSubs && hasMain ? groupWordCount(group) : undefined
 
               return (
                 <>
-                  {group.main && renderChapterCard(group.main, false, avgProgress)}
+                  {group.main && renderChapterCard(group.main, false, avgProgress, cumulativeWords)}
                   {group.subs.map((sub) => renderChapterCard(sub, hasMain))}
                 </>
               )
