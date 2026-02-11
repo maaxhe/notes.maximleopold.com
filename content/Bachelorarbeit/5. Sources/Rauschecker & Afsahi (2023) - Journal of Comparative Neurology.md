@@ -8,7 +8,7 @@ Rauschecker, J. P., & Afsahi, R. K. (2023). Anatomy of the auditory cortex then 
 
 - [x] Paper durchgelesen?
 
-- the primary auditory cortex (A1) and the rostral area (R), respond well to pure tones (PTs) and are narrowly tuned to frequency, whereas normal responsiveness at later stages of auditory cortical processing (area CM) depends on the integrity of the core
+- the primary auditory cortex (A1) and the rostral area (R), respond well to pure tones (PTs) and are narrowly tuned to frequency, whereas normal responsiveness at later stages of auditory cortical processing (area CM) depends on the integrity of the core ^3295c3
 - anterolateral area (AL) projects to rostral parabelt (RB), and the caudolateral area (CL) projects to caudal parabelt (CB). In addition, a middle lateral area (ML) was found that projected to both RB and CB
 - Injections into area AL led to label in the ventrolateral prefrontal cortex (VLPFC), whereas injections into area CL led to label in the dorsolateral prefrontal cortex (DLPFC)
 
