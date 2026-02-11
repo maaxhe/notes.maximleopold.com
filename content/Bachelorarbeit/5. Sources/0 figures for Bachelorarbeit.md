@@ -1,3 +1,7 @@
+---
+modified: 2026-02-11
+---
+
 ## figures for Bachelorarbeit 
 
 
@@ -46,6 +50,12 @@ FEF vs 55b full connectivity
 PSL vs STV full connectivity
 ![[PSL vs STV full connecivity.png]]
 
+
+
+full812 44 vs 45 
+![[Pasted image 20260210225107.png]]
+
+![[Screenshot 2026-02-10 at 22.53.32.png]]
 ### see also
 [[Glasser]]
 Type:
