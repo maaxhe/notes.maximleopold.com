@@ -1,0 +1,53 @@
+---
+title: Bachelorarbeit Gesamt
+status: draft
+tags:
+  - ba
+  - chapter
+  - cognitivescience
+  - Neuroscience
+created: 2026-02-11
+modified: 2026-02-11
+---
+
+# Bachelorarbeit - Gesamtübersicht
+
+---
+
+![[0.1 Abstract#0.1 Abstract]]
+
+---
+
+![[1.0 Introduction#1.0 Introduction]]
+
+---
+
+![[2.0 Theoretical Background#2.0 Theoretical Background]]
+
+---
+
+![[3.0 Methods#3.0 Methods]]
+
+---
+
+![[4.0 Results#4.0 Results]]
+
+---
+
+![[5.0 Discussion#5.0 Discussion]]
+
+---
+
+![[6.0 References#6.0 References]]
+
+---
+
+![[7.0 Appendix#7.0 Appendix]]
+
+---
+
+![[8.0 Declaration#8.0 Declaration]]
+
+---
+
+![[9.0 Abbreviations#9.0 Abbreviations]]
