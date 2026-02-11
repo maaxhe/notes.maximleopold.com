@@ -75,6 +75,7 @@ const config: QuartzConfig = {
         prettyLinks: true,
       }),
       Plugin.Description(),
+      Plugin.ThesisWordCount(),
       Plugin.Latex({ renderEngine: "katex" }),
     ],
     filters: [Plugin.RemoveDrafts()],

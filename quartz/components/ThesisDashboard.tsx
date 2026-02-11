@@ -2,18 +2,20 @@ import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } fro
 import style from "./styles/thesisDashboard.scss"
 import { resolveRelative } from "../util/path"
 import { formatDate } from "./Date"
-import readingTime from "reading-time"
 
 interface ThesisDashboardOptions {
   title?: string
   folderPath?: string
   showProgress?: boolean
+  /** When true, only show stats + page estimation (no chapter list) */
+  compact?: boolean
 }
 
 const defaultOptions: ThesisDashboardOptions = {
   title: "Bachelorarbeit - Übersicht",
   folderPath: "bachelorarbeit/schreiben",
   showProgress: true,
+  compact: false,
 }
 
 export default ((opts?: Partial<ThesisDashboardOptions>) => {
@@ -103,10 +105,9 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
       return Math.round(total / group.subs.length)
     }
 
-    // Get word count for a single file
+    // Get thesis-specific word count (computed by ThesisWordCount transformer)
     const getWordCount = (file: (typeof thesisFiles)[number]): number => {
-      if (!file.text) return 0
-      return readingTime(file.text).words
+      return (file.thesisWordCount as number) || 0
     }
 
     // Calculate cumulative word count for a chapter group (all sub-chapters)
@@ -229,38 +230,42 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
     }
 
     return (
-      <div class="thesis-dashboard">
-        <h1>{options.title}</h1>
+      <div class={`thesis-dashboard${options.compact ? " thesis-dashboard-compact" : ""}`}>
+        {!options.compact && <h1>{options.title}</h1>}
 
         <div class="dashboard-stats">
-          <div class="stat-card">
-            <div class="stat-number">{totalFiles}</div>
-            <div class="stat-label">Gesamt Seiten</div>
-          </div>
           <div class="stat-card words">
             <div class="stat-number">{totalWordCount.toLocaleString("de-DE")}</div>
             <div class="stat-label">Wörter gesamt</div>
           </div>
-          <div class="stat-card draft">
-            <div class="stat-number">{draftFiles}</div>
-            <div class="stat-label">Draft</div>
-          </div>
-          <div class="stat-card review">
-            <div class="stat-number">{inReviewFiles}</div>
-            <div class="stat-label">In Review</div>
-          </div>
-          <div class="stat-card needs-revision">
-            <div class="stat-number">{needsRevisionFiles}</div>
-            <div class="stat-label">Überarbeitung</div>
-          </div>
-          <div class="stat-card completed">
-            <div class="stat-number">{finalFiles}</div>
-            <div class="stat-label">Final</div>
-          </div>
-          <div class="stat-card approved">
-            <div class="stat-number">{approvedFiles}</div>
-            <div class="stat-label">Genehmigt</div>
-          </div>
+          {!options.compact && (
+            <>
+              <div class="stat-card">
+                <div class="stat-number">{totalFiles}</div>
+                <div class="stat-label">Gesamt Seiten</div>
+              </div>
+              <div class="stat-card draft">
+                <div class="stat-number">{draftFiles}</div>
+                <div class="stat-label">Draft</div>
+              </div>
+              <div class="stat-card review">
+                <div class="stat-number">{inReviewFiles}</div>
+                <div class="stat-label">In Review</div>
+              </div>
+              <div class="stat-card needs-revision">
+                <div class="stat-number">{needsRevisionFiles}</div>
+                <div class="stat-label">Überarbeitung</div>
+              </div>
+              <div class="stat-card completed">
+                <div class="stat-number">{finalFiles}</div>
+                <div class="stat-label">Final</div>
+              </div>
+              <div class="stat-card approved">
+                <div class="stat-number">{approvedFiles}</div>
+                <div class="stat-label">Genehmigt</div>
+              </div>
+            </>
+          )}
         </div>
 
         {options.showProgress && (
@@ -313,25 +318,27 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
           </div>
         </div>
 
-        <div class="thesis-chapters">
-          <h3>Alle Kapitel</h3>
-          <div class="chapters-list">
-            {sortedGroups.map((group) => {
-              const hasSubs = group.subs.length > 0
-              const hasMain = group.main !== null
-              const avgProgress = hasSubs && hasMain ? groupAverageProgress(group) : undefined
-              const cumulativeWords = hasSubs && hasMain ? groupWordCount(group) : undefined
+        {!options.compact && (
+          <div class="thesis-chapters">
+            <h3>Alle Kapitel</h3>
+            <div class="chapters-list">
+              {sortedGroups.map((group) => {
+                const hasSubs = group.subs.length > 0
+                const hasMain = group.main !== null
+                const avgProgress = hasSubs && hasMain ? groupAverageProgress(group) : undefined
+                const cumulativeWords = hasSubs && hasMain ? groupWordCount(group) : undefined
 
-              return (
-                <>
-                  {group.main && renderChapterCard(group.main, false, avgProgress, cumulativeWords)}
-                  {group.subs.map((sub) => renderChapterCard(sub, hasMain))}
-                </>
-              )
-            })}
-            {ungrouped.map((file) => renderChapterCard(file, false))}
+                return (
+                  <>
+                    {group.main && renderChapterCard(group.main, false, avgProgress, cumulativeWords)}
+                    {group.subs.map((sub) => renderChapterCard(sub, hasMain))}
+                  </>
+                )
+              })}
+              {ungrouped.map((file) => renderChapterCard(file, false))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     )
   }

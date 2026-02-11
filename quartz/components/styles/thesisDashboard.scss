@@ -16,6 +16,30 @@
     margin-top: 2rem;
     margin-bottom: 1rem;
   }
+
+  &.thesis-dashboard-compact {
+    padding: 0.5rem 0;
+    margin-bottom: 1rem;
+
+    .dashboard-stats {
+      grid-template-columns: 1fr;
+      max-width: 250px;
+      margin-bottom: 1rem;
+    }
+
+    .page-estimation {
+      margin-bottom: 0;
+    }
+
+    .overall-progress {
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
+  }
 }
 
 .dashboard-stats {
