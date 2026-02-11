@@ -64,6 +64,9 @@ logs/
 coverage/
 .nyc_output/
 
+# Auto-publish
+.last-publish
+
 # Misc
 .replit
 replit.nix
