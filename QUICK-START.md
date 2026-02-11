@@ -2,6 +2,21 @@
 
 ## ✅ Was wurde vorbereitet
 
+
+auf '/Users/maxmacbookpro/Developer/eigene Projekte/second_brain/notes.maximleopold.com' gehen und:
+
+npm run publish:quick
+
+eingeben. Den Status kann ich mir hier anschauen: 
+
+https://github.com/maaxhe/notes.maximleopold.com/actions/workflows/deploy-server.yml
+
+Nützliche Befehle:
+  - Log prüfen: cat /tmp/notes-publish.log                                   
+  - Manuell testen: ./auto-publish.sh                                        
+  - Deaktivieren: launchctl unload                                           
+  ~/Library/LaunchAgents/com.maxim.notes-publish.plist  
+
 1. ✅ Deployment-Script erstellt (`deploy-to-server.sh`)
 2. ✅ Frontend-URL aktualisiert (zeigt auf `server.maximleopold.com`)
 3. ✅ Vollständige Deployment-Anleitung erstellt (`SERVER-DEPLOYMENT.md`)
