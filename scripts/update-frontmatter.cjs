@@ -40,14 +40,16 @@ function updateFrontmatter(filePath) {
 
     // Check if modified field exists
     if (frontmatter.includes('modified:')) {
-      // Update existing modified date
+      // Update existing modified date (preserve leading whitespace)
       frontmatter = frontmatter.replace(
-        /modified:\s*.*/,
-        `modified: ${today}`
+        /^(\s*)modified:\s*.*/m,
+        `$1modified: ${today}`
       );
     } else {
-      // Add modified field
-      frontmatter += `\nmodified: ${today}`;
+      // Add modified field (match indent of existing fields)
+      const indentMatch = frontmatter.match(/^(\s+)\w+:/m);
+      const indent = indentMatch ? indentMatch[1] : '';
+      frontmatter += `\n${indent}modified: ${today}`;
     }
 
     content = content.replace(frontmatterRegex, `---\n${frontmatter}\n---\n`);
