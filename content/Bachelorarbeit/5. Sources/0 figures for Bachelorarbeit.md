@@ -5,6 +5,17 @@ modified: 2026-02-11
 ## figures for Bachelorarbeit 
 
 
+Für BrainRest: 
+
+R_FEF
+R_IFJa
+
+R_STV, R_7AL, R_7Am, R_7PC, R_PBelt, R_A4, R_44, R_45, R_47l, R_PGi, R_STGa, R_PSL, R_STSda, R_STSdp, R_TGd, R_TGv
+
+R_7AL, R_7Am, R_7PC, R_PBelt, R_A4, R_A5, R_44, R_45, R_47l, R_PGi, R_STGa, R_PSL, R_STSda, R_STSdp, R_STV, R_TGd, R_TGv, R_TPOJ1
+
+
+
 rig
 
 Right hemisphere: 
