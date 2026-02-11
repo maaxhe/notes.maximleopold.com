@@ -1,7 +1,7 @@
 ---
-title: "PGi"
-created: "2025-11-20"
-modified: 2026-02-11
+  title: "PGi"
+  created: "2025-11-20"
+  modified: 2026-02-11
 ---
 # PGi
 
