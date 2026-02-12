@@ -83,6 +83,17 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
       }
     }
 
+    // Remove 0.0 (main) and 0.1 (outline) from group 0 — they are meta files, not chapters
+    const group0 = groups.get(0)
+    if (group0) {
+      group0.main = null
+      group0.subs = group0.subs.filter((f) => {
+        const v = parseChapterVersion((f.frontmatter?.title as string) || "")
+        return v ? v.minor >= 2 : true
+      })
+      if (group0.subs.length === 0) groups.delete(0)
+    }
+
     // Sort groups by major number and subs by minor number
     const sortedGroups = [...groups.entries()]
       .sort(([a], [b]) => a - b)
