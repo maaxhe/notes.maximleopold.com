@@ -81,7 +81,7 @@ export default (() => {
             `,
           }}
         />
-        <script src="./static/vault-auth.js"></script>
+        <script src={joinSegments(baseDir, "static/vault-auth.js")}></script>
         {cfg.theme.cdnCaching && cfg.theme.fontOrigin === "googleFonts" && (
           <>
             <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -149,7 +149,7 @@ export default (() => {
         {/* Load Hypothesis with defer to ensure DOM is ready but script loads early */}
         <script defer src="https://hypothes.is/embed.js"></script>
         {/* Dedicated print stylesheet - loaded last to override everything */}
-        <link rel="stylesheet" href="./static/print-override.css" media="print" />
+        <link rel="stylesheet" href={joinSegments(baseDir, "static/print-override.css")} media="print" />
       </head>
     )
   }

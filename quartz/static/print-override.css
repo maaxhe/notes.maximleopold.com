@@ -95,6 +95,17 @@
     flex-direction: column !important;
   }
 
+  /* Kill CSS Grid on quartz-body with maximum specificity */
+  .page > #quartz-body,
+  body .page > #quartz-body,
+  body #quartz-root #quartz-body,
+  body #quartz-root.page > #quartz-body {
+    display: block !important;
+    grid-template-columns: none !important;
+    grid-template-rows: none !important;
+    grid-template-areas: none !important;
+  }
+
   /* Center content takes FULL width with maximum specificity */
   body #quartz-root #quartz-body .center,
   body #quartz-body .center,
