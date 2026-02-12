@@ -34,7 +34,6 @@ Right hemisphere:
 
 
 Left Hemisphere: 
-
 ![[Screenshot 2026-02-04 at 15.57.26.png]]
 
 tiefer reingehen in left vs right 
