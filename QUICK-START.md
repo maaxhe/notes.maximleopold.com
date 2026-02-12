@@ -16,6 +16,7 @@ Nützliche Befehle:
   - Manuell testen: ./auto-publish.sh                                        
   - Deaktivieren: launchctl unload                                           
   ~/Library/LaunchAgents/com.maxim.notes-publish.plist  
+  
 
 1. ✅ Deployment-Script erstellt (`deploy-to-server.sh`)
 2. ✅ Frontend-URL aktualisiert (zeigt auf `server.maximleopold.com`)
