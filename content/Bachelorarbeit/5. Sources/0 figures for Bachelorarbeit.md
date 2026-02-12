@@ -71,12 +71,12 @@ PSL vs STV full connectivity
 
 
 full812 44 vs 45 
-![[Pasted image 20260210225107.png]]
+![[44 45 full connectivity.png]]
 
 ![[Screenshot 2026-02-10 at 22.53.32.png]]
 
 partial coo
-![[Pasted image 20260211225856.png]]
+![[FEF iFJa partial correlation.png]]
 ### see also
 [[Glasser]]
 Type:
