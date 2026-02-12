@@ -35,23 +35,10 @@ export default ((opts?: Partial<ReviewStatusOptions>) => {
     let progress = ownProgress
     const title = (frontmatter?.title as string) || ""
     const version = parseChapterVersion(title)
-    const isGesamt = title === "Bachelorarbeit Gesamt" || title === "0.0 Outline Bachelorarbeit"
-
-    if (isGesamt) {
-      // Calculate overall average progress from ALL thesis chapter files
-      const allChapterFiles = allFiles.filter((file) => {
-        const fileTitle = (file.frontmatter?.title as string) || ""
-        const fileVersion = parseChapterVersion(fileTitle)
-        return fileVersion && fileVersion.minor > 0 && file.frontmatter?.progress !== undefined
-      })
-
-      if (allChapterFiles.length > 0) {
-        const total = allChapterFiles.reduce(
-          (acc, f) => acc + ((f.frontmatter?.progress as number) || 0),
-          0,
-        )
-        progress = Math.round(total / allChapterFiles.length)
-      }
+    // 0.0 and 0.1 are meta files — their progress is shown by the compact ThesisDashboard
+    const isMetaFile = title.startsWith("0.0 ") || title.startsWith("0.1 ")
+    if (isMetaFile) {
+      progress = undefined
     } else if (version && version.minor === 0) {
       // Find sub-chapters (same major number, minor > 0)
       const subChapters = allFiles.filter((file) => {
