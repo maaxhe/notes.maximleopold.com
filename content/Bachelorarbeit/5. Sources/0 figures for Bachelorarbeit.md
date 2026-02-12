@@ -1,11 +1,18 @@
 ---
-modified: 2026-02-11
+modified: 2026-02-12
 ---
 
 ## figures for Bachelorarbeit 
 
 
 Für BrainRest: 
+
+beste set so far: 
+Seeds: R_FEF, R_IFJa: 
+
+L_7AL, L_7Am, L_7PC, L_MT, L_MST, L_PBelt, L_A4, L_STV, L_PSL, L_A5, L_PGi, L_TPOJ1, L_STGa, L_STSda, L_STSdp, L_TGd, L_TGv, L_44, L_45, L_47l
+
+
 
 R_FEF
 R_IFJa
@@ -67,6 +74,9 @@ full812 44 vs 45
 ![[Pasted image 20260210225107.png]]
 
 ![[Screenshot 2026-02-10 at 22.53.32.png]]
+
+partial coo
+![[Pasted image 20260211225856.png]]
 ### see also
 [[Glasser]]
 Type:

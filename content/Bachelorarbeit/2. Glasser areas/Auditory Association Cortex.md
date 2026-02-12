@@ -1,7 +1,7 @@
 ---
 title: "Auditory Association Cortex"
 created: "2025-11-13"
-modified: 2026-02-11
+modified: 2026-02-12
 ---
 # Auditory Association Cortex
 

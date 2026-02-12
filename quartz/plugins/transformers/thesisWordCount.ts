@@ -4,6 +4,7 @@ import { QuartzTransformerPlugin } from "../types"
 /**
  * Computes thesis-specific word counts by extracting only actual prose content
  * from BA chapter files, ignoring outlines, checkboxes, notes, template text, etc.
+ * Also tracks transclusion references so the dashboard can build the inclusion chain.
  */
 export const ThesisWordCount: QuartzTransformerPlugin = () => {
   return {
@@ -12,7 +13,6 @@ export const ThesisWordCount: QuartzTransformerPlugin = () => {
       return [
         () => {
           return (_, file) => {
-            // Parse raw content to check for 'ba' tag
             const raw = Buffer.from(file.value as Uint8Array).toString("utf-8")
             const { data, content } = matter(raw)
 
@@ -24,6 +24,18 @@ export const ThesisWordCount: QuartzTransformerPlugin = () => {
             if (!isBA) return
 
             file.data.thesisWordCount = countThesisWords(content)
+
+            // Extract transclusion references: ![[FileName#Heading]] → "FileName"
+            const transcludes: string[] = []
+            const transclusionPattern = /!\[\[([^\]#|]*)/g
+            let match
+            while ((match = transclusionPattern.exec(content)) !== null) {
+              const ref = match[1].trim()
+              if (ref.length > 0 && !ref.match(/\.(png|jpg|jpeg|gif|svg|webp|pdf)$/i)) {
+                transcludes.push(ref)
+              }
+            }
+            file.data.thesisTranscludes = transcludes
           }
         },
       ]
@@ -40,7 +52,6 @@ function countThesisWords(markdown: string): number {
   if (mainHeadingMatch && mainHeadingMatch.index !== undefined) {
     text = text.slice(mainHeadingMatch.index)
   } else {
-    // No standard chapter heading → no countable thesis content
     return 0
   }
 
@@ -57,26 +68,44 @@ function countThesisWords(markdown: string): number {
   }
 
   // 3. Remove non-content elements
-  text = text.replace(/!\[\[[^\]]*\]\]/g, "") // transclusion embeds ![[...]]
-  text = text.replace(/!\[[^\]]*\]\([^)]*\)/g, "") // image embeds ![](url)
+  text = text.replace(/!\[\[[^\]]*\]\]/g, "") // transclusion embeds
+  text = text.replace(/!\[[^\]]*\]\([^)]*\)/g, "") // image embeds
   text = text.replace(/^[\t ]*-\s*\[[ x]\]\s*.*$/gm, "") // checkbox items
   text = text.replace(/Hier schreiben\.\.\./gi, "") // template placeholder
-  text = text.replace(/\*?Hier Dinge abladen[^*\n]*Schreibfluss nicht stoppt\.\*?/gi, "") // scrapbook placeholder
+  text = text.replace(/\*?Hier Dinge abladen[^*\n]*Schreibfluss nicht stoppt\.\*?/gi, "")
   text = text.replace(/^-{3,}$/gm, "") // horizontal rules
-  text = text.replace(/^\*{3,}$/gm, "") // horizontal rules (asterisks)
-  text = text.replace(/^(Type|Tags|Status|Location|Created|Source):.*$/gm, "") // metadata lines
+  text = text.replace(/^\*{3,}$/gm, "")
+  text = text.replace(/^(Type|Tags|Status|Location|Created|Source):.*$/gm, "") // metadata
   text = text.replace(/^\[\[[^\]]*\]\]\s*$/gm, "") // bare wiki-links on own line
+  text = text.replace(/^##\s+\d+\.\s+Subheading\s*$/gim, "") // template subheadings
+  text = text.replace(/-->\s*.*/gm, "") // inline comments from --> to end of line
+  text = text.replace(/\(Quelle\??\)/gi, "") // source annotations
+  text = text.replace(/\(Quelle benötigt\)/gi, "")
+
+  // 3b. Strip heading lines entirely (structural, not prose)
+  text = text.replace(/^#{1,6}\s+.*$/gm, "")
+
+  // 3c. Strip figure/table captions
+  text = text.replace(/^(Figure|Table|Abbildung|Tabelle)\s+\d+[.:]\s*.*$/gim, "")
+
+  // 3d. Strip table formatting rows (only dashes, colons, pipes, spaces)
+  text = text.replace(/^[\s\-:|]+$/gm, "")
 
   // 4. Clean inline syntax but preserve display text
-  text = text.replace(/\[\[([^|\]]*)\|([^\]]*)\]\]/g, "$1") // [[display|target]] → display
-  text = text.replace(/\[\[([^\]]*)\]\]/g, "$1") // [[target]] → target
-  text = text.replace(/\[([^\]]*)\]\([^)]*\)/g, "$1") // [text](url) → text
-  text = text.replace(/^#{1,6}\s+/gm, "") // heading markers
-  text = text.replace(/\*\*([^*]*)\*\*/g, "$1") // bold
-  text = text.replace(/(?<!\*)\*(?!\*)([^*]+)\*(?!\*)/g, "$1") // italic (*)
-  text = text.replace(/_([^_\s][^_]*)_/g, "$1") // italic (_)
-  text = text.replace(/^>\s*/gm, "") // blockquote markers
-  text = text.replace(/\|/g, " ") // table pipes
+  // Wiki-links with display text: [[target|display]] → display
+  text = text.replace(/\[\[([^|\]]*)\|([^\]]*)\]\]/g, "$2")
+  // Wiki-links with anchors: [[target#anchor]] → target (strip #anchor/#^blockref)
+  text = text.replace(/\[\[([^\]#]*?)(?:#[^\]]*)?\]\]/g, "$1")
+  // Markdown links: [text](url) → text
+  text = text.replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
+  // Bold/italic
+  text = text.replace(/\*\*([^*]*)\*\*/g, "$1")
+  text = text.replace(/(?<!\*)\*(?!\*)([^*]+)\*(?!\*)/g, "$1")
+  text = text.replace(/_([^_\s][^_]*)_/g, "$1")
+  // Blockquote markers
+  text = text.replace(/^>\s*/gm, "")
+  // Table pipes
+  text = text.replace(/\|/g, " ")
 
   // 5. Count words
   return text.split(/\s+/).filter((w) => w.length > 0).length
@@ -85,5 +114,6 @@ function countThesisWords(markdown: string): number {
 declare module "vfile" {
   interface DataMap {
     thesisWordCount: number | undefined
+    thesisTranscludes: string[] | undefined
   }
 }

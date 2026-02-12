@@ -141,10 +141,63 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
           )
         : 0
 
-    // Exclude main chapter files (X.0) from word count — they contain outlines, not prose
+    // Build transclusion chain from "0.0 Bachelorarbeit Gesamt" to find which files
+    // are actually integrated into the thesis structure.
+    // Only count words from files reachable through this chain.
+    const allBAFiles = allFiles.filter((f) => {
+      const tags = (f.frontmatter?.tags ?? []).flatMap((tag) =>
+        typeof tag === "string" ? [tag.toLowerCase()] : [],
+      )
+      return tags.includes("ba")
+    })
+
+    const buildIncludedSlugs = (): Set<string> => {
+      const included = new Set<string>()
+      const titleToFile = new Map<string, (typeof allBAFiles)[number]>()
+
+      for (const f of allBAFiles) {
+        const title = (f.frontmatter?.title as string) || ""
+        if (title) titleToFile.set(title, f)
+      }
+
+      // Find root: "0.0 Bachelorarbeit Gesamt"
+      const root = allBAFiles.find((f) => {
+        const title = (f.frontmatter?.title as string) || ""
+        return title.startsWith("0.0 ")
+      })
+      if (!root) {
+        // Fallback: include all files if root not found
+        for (const f of allBAFiles) included.add(f.slug || "")
+        return included
+      }
+
+      // BFS through transclusion references
+      const queue: (typeof allBAFiles)[number][] = [root]
+      while (queue.length > 0) {
+        const current = queue.shift()!
+        const slug = current.slug || ""
+        if (included.has(slug)) continue
+        included.add(slug)
+
+        const refs = (current.thesisTranscludes as string[]) || []
+        for (const ref of refs) {
+          const target = titleToFile.get(ref)
+          if (target && !included.has(target.slug || "")) {
+            queue.push(target)
+          }
+        }
+      }
+
+      return included
+    }
+
+    const includedSlugs = buildIncludedSlugs()
     const mainSlugs = new Set(sortedGroups.map((g) => g.main?.slug).filter(Boolean))
-    const totalWordCount = allThesisFiles
-      .filter((f) => !mainSlugs.has(f.slug))
+
+    // Total word count: only sub-chapter files in the transclusion chain.
+    // Exclude main chapter shells (X.0) — they are outline/transclusion containers.
+    const totalWordCount = allBAFiles
+      .filter((f) => includedSlugs.has(f.slug || "") && !mainSlugs.has(f.slug))
       .reduce((acc, f) => acc + getWordCount(f), 0)
 
     // Page estimation based on UOS formatting guidelines:
@@ -278,45 +331,47 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
           </div>
         )}
 
-        <div class="page-estimation">
-          <h3>Seitenumfang</h3>
-          <div class="page-estimation-header">
-            <span class="page-count">
-              {estimatedPages.toFixed(1)} <span class="page-count-label">von {TARGET_PAGES} Seiten</span>
-            </span>
-            <span class="page-percentage">{Math.round(pageProgress)}%</span>
+        {!options.compact && (
+          <div class="page-estimation">
+            <h3>Seitenumfang</h3>
+            <div class="page-estimation-header">
+              <span class="page-count">
+                {estimatedPages.toFixed(1)} <span class="page-count-label">von {TARGET_PAGES} Seiten</span>
+              </span>
+              <span class="page-percentage">{Math.round(pageProgress)}%</span>
+            </div>
+            <div class="page-grid">
+              {Array.from({ length: TARGET_PAGES }, (_, i) => {
+                const pageNum = i + 1
+                const fillLevel = Math.min(1, Math.max(0, estimatedPages - i))
+                const isFull = fillLevel >= 1
+                const isPartial = fillLevel > 0 && fillLevel < 1
+                return (
+                  <div
+                    class={`page-block ${isFull ? "filled" : ""} ${isPartial ? "partial" : ""}`}
+                    title={`Seite ${pageNum}`}
+                  >
+                    {isPartial && (
+                      <div class="page-block-fill" style={`height: ${fillLevel * 100}%`}></div>
+                    )}
+                    <span class="page-block-number">{pageNum}</span>
+                  </div>
+                )
+              })}
+            </div>
+            <div class="page-estimation-details">
+              <span>{totalWordCount.toLocaleString("de-DE")} / {TARGET_WORDS.toLocaleString("de-DE")} Wörter</span>
+              {wordsRemaining > 0 ? (
+                <span>Noch ~{wordsRemaining.toLocaleString("de-DE")} Wörter ({pagesRemaining.toFixed(1)} Seiten)</span>
+              ) : (
+                <span>Ziel erreicht!</span>
+              )}
+            </div>
+            <div class="page-estimation-footnote">
+              Basierend auf UOS-Vorgaben: TNR 12pt, 1,5-zeilig, ~{WORDS_PER_PAGE} Wörter/Seite
+            </div>
           </div>
-          <div class="page-grid">
-            {Array.from({ length: TARGET_PAGES }, (_, i) => {
-              const pageNum = i + 1
-              const fillLevel = Math.min(1, Math.max(0, estimatedPages - i))
-              const isFull = fillLevel >= 1
-              const isPartial = fillLevel > 0 && fillLevel < 1
-              return (
-                <div
-                  class={`page-block ${isFull ? "filled" : ""} ${isPartial ? "partial" : ""}`}
-                  title={`Seite ${pageNum}`}
-                >
-                  {isPartial && (
-                    <div class="page-block-fill" style={`height: ${fillLevel * 100}%`}></div>
-                  )}
-                  <span class="page-block-number">{pageNum}</span>
-                </div>
-              )
-            })}
-          </div>
-          <div class="page-estimation-details">
-            <span>{totalWordCount.toLocaleString("de-DE")} / {TARGET_WORDS.toLocaleString("de-DE")} Wörter</span>
-            {wordsRemaining > 0 ? (
-              <span>Noch ~{wordsRemaining.toLocaleString("de-DE")} Wörter ({pagesRemaining.toFixed(1)} Seiten)</span>
-            ) : (
-              <span>Ziel erreicht!</span>
-            )}
-          </div>
-          <div class="page-estimation-footnote">
-            Basierend auf UOS-Vorgaben: TNR 12pt, 1,5-zeilig, ~{WORDS_PER_PAGE} Wörter/Seite
-          </div>
-        </div>
+        )}
 
         {!options.compact && (
           <div class="thesis-chapters">

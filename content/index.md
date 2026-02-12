@@ -1,11 +1,14 @@
 ---
 title: Research Vault
-modified: 2026-02-04
+modified: 2026-02-12
 ---
 
 # Research Vault
 
 Diese Seite ist das zentrale Wissenssystem für meine Bachelorarbeit in Cognitive Science. Hier laufen alle Notizen, Paper-Zusammenfassungen, Hypothesen und Areal-Mappings zusammen.
+
+> [!info] Bachelorarbeit
+> **[[0.0 Bachelorarbeit Gesamt]]** | **[[Dashboard BA|Dashboard]]** | **[[0 figures for Bachelorarbeit|Figures]]**
 
 ## Über diese Seite
 
