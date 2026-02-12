@@ -30,7 +30,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.ArticleTitle(),
     Component.ContentMeta(),
     Component.ConditionalRender({
-      component: Component.ThesisDashboard({ compact: true, showProgress: true }),
+      component: Component.ThesisDashboard({ compact: true, showProgress: false }),
       condition: (page) => {
         const title = (page.fileData.frontmatter?.title as string) || ""
         return title.startsWith("0.0 ") || title.startsWith("0.1 ")
