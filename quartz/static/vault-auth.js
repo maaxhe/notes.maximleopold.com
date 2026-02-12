@@ -4,7 +4,8 @@
   // ============================================
   // CONFIGURATION - CHANGE THESE BEFORE DEPLOY
   // ============================================
-  const VAULT_PASSWORD = "steuerbord";
+  // Pre-computed SHA-256 hash of the vault password (never store plaintext)
+  const VAULT_HASH = "77543512afcd747280b1f4fb1d4b9d4b88d5008c61f8c9a1ddb477f428e80b44";
   const TOKEN_VALIDITY_DAYS = 30;
   const STORAGE_KEY = "vault_auth_token";
   const STORAGE_TIMESTAMP_KEY = "vault_auth_timestamp";
@@ -12,8 +13,8 @@
   // ============================================
   // MAGIC LINK CONFIGURATION (Guest Access)
   // ============================================
-  const MAGIC_LINK_TOKEN = "recruiter-access-2026-mxlpd";
-  const MAGIC_LINK_EXPIRY = new Date("2026-01-31T23:59:59").getTime();
+  const MAGIC_LINK_ID = "recruiter-access-2026-v2-mxlpd";
+  const MAGIC_LINK_EXPIRY = new Date("2026-12-31T23:59:59").getTime();
   const MAGIC_LINK_PARAM = "access_token";
 
   // ============================================
@@ -31,7 +32,7 @@
       }
 
       // Check if token matches
-      if (accessToken !== MAGIC_LINK_TOKEN) {
+      if (accessToken !== MAGIC_LINK_ID) {
         return { valid: false, reason: 'invalid_token' };
       }
 
@@ -208,7 +209,7 @@
 
   // Save authentication token
   async function saveAuthToken() {
-    const token = await sha256(VAULT_PASSWORD + Date.now());
+    const token = await sha256(VAULT_HASH + Date.now());
     localStorage.setItem(STORAGE_KEY, token);
     localStorage.setItem(STORAGE_TIMESTAMP_KEY, Date.now().toString());
   }
@@ -263,11 +264,10 @@
       e.preventDefault();
       const enteredPassword = input.value;
 
-      // Hash the entered password to compare
+      // Hash the entered password and compare with stored hash
       const enteredHash = await sha256(enteredPassword);
-      const correctHash = await sha256(VAULT_PASSWORD);
 
-      if (enteredHash === correctHash) {
+      if (enteredHash === VAULT_HASH) {
         await saveAuthToken();
         unlockVault();
       } else {

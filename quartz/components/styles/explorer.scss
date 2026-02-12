@@ -243,8 +243,8 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
 
     .explorer-content {
       box-sizing: border-box;
-      z-index: 100;
-      position: absolute;
+      z-index: 99999;
+      position: fixed;
       top: 0;
       left: 0;
       margin-top: 0;
@@ -255,7 +255,8 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
       transition:
         transform 200ms ease,
         visibility 200ms ease;
-      overflow: hidden;
+      overflow-y: auto;
+      overflow-x: hidden;
       padding: 4rem 0 2rem 0;
       height: 100dvh;
       max-height: 100dvh;
@@ -265,7 +266,8 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
     .mobile-explorer {
       margin: 0;
       padding: 5px;
-      z-index: 101;
+      position: relative;
+      z-index: 100000;
 
       .lucide-menu {
         stroke: var(--darkgray);

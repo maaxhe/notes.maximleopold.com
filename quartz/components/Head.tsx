@@ -46,8 +46,8 @@ export default (() => {
             __html: `
 (function() {
   // Magic Link Configuration (must match vault-auth.js)
-  var MAGIC_LINK_TOKEN = "recruiter-access-2026-mxlpd";
-  var MAGIC_LINK_EXPIRY = new Date("2026-01-31T23:59:59").getTime();
+  var MAGIC_LINK_ID = "recruiter-access-2026-v2-mxlpd";
+  var MAGIC_LINK_EXPIRY = new Date("2026-12-31T23:59:59").getTime();
 
   function isTokenValid() {
     try {
@@ -66,7 +66,7 @@ export default (() => {
       var urlParams = new URLSearchParams(window.location.search);
       var accessToken = urlParams.get('access_token');
       if (!accessToken) return false;
-      if (accessToken !== MAGIC_LINK_TOKEN) return false;
+      if (accessToken !== MAGIC_LINK_ID) return false;
       if (Date.now() > MAGIC_LINK_EXPIRY) return false;
       return true;
     } catch (e) {

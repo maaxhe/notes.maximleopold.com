@@ -10,7 +10,7 @@ node scripts/update-frontmatter.cjs
 # Check for secrets in staged files
 echo "🔐 Checking for potential secrets..."
 if git diff --cached --name-only | grep -E '\.(md|ts|js|json)$' > /dev/null; then
-  if git diff --cached | grep -iE '(password|secret|token|api[_-]?key|private[_-]?key).*[:=].*["\047][^"\047]{8,}["\047]' > /dev/null; then
+  if git diff --cached | grep '^+' | grep -iE '(password|secret|token|api[_-]?key|private[_-]?key).*[:=].*["\047][^"\047]{8,}["\047]' > /dev/null; then
     echo "❌ WARNING: Potential secrets detected in staged files!"
     echo "Please review your changes and remove any sensitive information."
     echo "If this is a false positive, you can skip this check with --no-verify"
