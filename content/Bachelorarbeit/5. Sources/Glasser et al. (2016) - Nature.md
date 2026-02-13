@@ -1,5 +1,5 @@
 ---
-modified: 2026-02-12
+modified: 2026-02-13
 ---
 
 Glasser, M. F., Coalson, T. S., Robinson, E. C., Hacker, C. D., Harwell, J., Yacoub, E., Ugurbil, K., Andersson, J., Beckmann, C. F., Jenkinson, M., Smith, S. M., & Van Essen, D. C. (2016). A multi-modal parcellation of human cerebral cortex. _Nature_, _536_(7615), 171–178.
