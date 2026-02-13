@@ -271,12 +271,21 @@ async function setupSearch(searchElement: Element, currentSlug: FullSlug, data: 
 
   const formatForDisplay = (term: string, id: number) => {
     const slug = idDataMap[id]
+    // Count occurrences of search term in content (case-insensitive)
+    let matchCount = 0
+    if (term.trim() !== "") {
+      const contentText = data[slug].content ?? ""
+      const regex = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi")
+      const matches = contentText.match(regex)
+      matchCount = matches ? matches.length : 0
+    }
     return {
       id,
       slug,
       title: searchType === "tags" ? data[slug].title : highlight(term, data[slug].title ?? ""),
       content: highlight(term, data[slug].content ?? "", true),
       tags: highlightTags(term.substring(1), data[slug].tags),
+      matchCount,
     }
   }
 
@@ -300,14 +309,18 @@ async function setupSearch(searchElement: Element, currentSlug: FullSlug, data: 
     return new URL(resolveRelative(currentSlug, slug), location.toString())
   }
 
-  const resultToHTML = ({ slug, title, content, tags }: Item) => {
+  const resultToHTML = ({ slug, title, content, tags, matchCount }: Item) => {
     const htmlTags = tags.length > 0 ? `<ul class="tags">${tags.join("")}</ul>` : ``
+    const matchBadge =
+      matchCount && matchCount > 0
+        ? `<span class="match-count">${matchCount} Treffer</span>`
+        : ""
     const itemTile = document.createElement("a")
     itemTile.classList.add("result-card")
     itemTile.id = slug
     itemTile.href = resolveUrl(slug).toString()
     itemTile.innerHTML = `
-      <h3 class="card-title">${title}</h3>
+      <h3 class="card-title">${title}${matchBadge}</h3>
       ${htmlTags}
       <p class="card-description">${content}</p>
     `
@@ -388,13 +401,65 @@ async function setupSearch(searchElement: Element, currentSlug: FullSlug, data: 
     previewInner = document.createElement("div")
     previewInner.classList.add("preview-inner")
     previewInner.append(...innerDiv)
-    preview.replaceChildren(previewInner)
 
-    // scroll to longest
-    const highlights = [...preview.getElementsByClassName("highlight")].sort(
-      (a, b) => b.innerHTML.length - a.innerHTML.length,
-    )
-    highlights[0]?.scrollIntoView({ block: "start" })
+    // Collect all highlights for navigation
+    const highlights = [...previewInner.getElementsByClassName("highlight")] as HTMLElement[]
+    const totalMatches = highlights.length
+
+    // Build navigation bar
+    const nav = document.createElement("div")
+    nav.classList.add("match-nav")
+    if (totalMatches > 0) {
+      let currentMatchIndex = 0
+      const counter = document.createElement("span")
+      counter.classList.add("match-nav-counter")
+      counter.textContent = `1 / ${totalMatches}`
+
+      const prevBtn = document.createElement("button")
+      prevBtn.classList.add("match-nav-btn")
+      prevBtn.textContent = "\u2039"
+      prevBtn.setAttribute("aria-label", "Previous match")
+
+      const nextBtn = document.createElement("button")
+      nextBtn.classList.add("match-nav-btn")
+      nextBtn.textContent = "\u203A"
+      nextBtn.setAttribute("aria-label", "Next match")
+
+      const scrollToMatch = (index: number) => {
+        highlights.forEach((h) => h.classList.remove("active-highlight"))
+        highlights[index].classList.add("active-highlight")
+        highlights[index].scrollIntoView({ block: "center", behavior: "smooth" })
+        counter.textContent = `${index + 1} / ${totalMatches}`
+      }
+
+      prevBtn.addEventListener("click", (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        currentMatchIndex = (currentMatchIndex - 1 + totalMatches) % totalMatches
+        scrollToMatch(currentMatchIndex)
+      })
+
+      nextBtn.addEventListener("click", (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        currentMatchIndex = (currentMatchIndex + 1) % totalMatches
+        scrollToMatch(currentMatchIndex)
+      })
+
+      nav.append(prevBtn, counter, nextBtn)
+
+      // Mark first highlight as active
+      highlights[0].classList.add("active-highlight")
+    } else {
+      nav.innerHTML = `<span class="match-nav-counter">Keine Treffer im Inhalt</span>`
+    }
+
+    preview.replaceChildren(nav, previewInner)
+
+    // Scroll to first highlight
+    if (highlights.length > 0) {
+      highlights[0].scrollIntoView({ block: "start" })
+    }
   }
 
   async function onType(e: HTMLElementEventMap["input"]) {
