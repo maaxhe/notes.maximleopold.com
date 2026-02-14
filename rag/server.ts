@@ -212,6 +212,7 @@ ${chunk.content}
 }
 
 const INTERNAL_SOURCE_PATTERNS = [
+  "notes.coxilab.de",
   "notes.maximleopold.com",
   "maximleopold.com",
   "server.maximleopold.com",

@@ -46,7 +46,7 @@ export default ((opts?: Partial<AnnotationsBadgeOptions>) => {
             __html: `
               (function() {
                 const HYPOTHESIS_API = 'https://api.hypothes.is/api';
-                const SITE_URL = '${cfg.baseUrl || "notes.maximleopold.com"}';
+                const SITE_URL = '${cfg.baseUrl || "notes.coxilab.de"}';
                 const STORAGE_KEY = 'hypothesis_last_seen';
                 const CHECK_INTERVAL = 60000; // Check every minute
 

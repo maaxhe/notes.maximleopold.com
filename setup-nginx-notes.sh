@@ -1,12 +1,15 @@
 #!/bin/bash
-# Setup nginx für notes.maximleopold.com auf dem Server
+# Setup nginx für notes.coxilab.de (Haupt-Domain) auf dem Server
+# notes.maximleopold.com wird auf notes.coxilab.de weitergeleitet
+#
 # Führe dieses Script EINMAL auf dem Server aus:
 #   scp -i ~/ssh_keys setup-nginx-notes.sh max@91.99.236.172:/home/max/
 #   ssh -i ~/ssh_keys max@91.99.236.172 "chmod +x setup-nginx-notes.sh && ./setup-nginx-notes.sh"
 
 set -e
 
-DOMAIN="notes.maximleopold.com"
+DOMAIN="notes.coxilab.de"
+DOMAIN_OLD="notes.maximleopold.com"
 WEB_ROOT="/var/www/notes.maximleopold.com"
 EMAIL="max@maximleopold.com"
 
@@ -23,11 +26,12 @@ sudo chown -R max:max "$WEB_ROOT"
 
 # 2. Erstelle nginx Config
 echo -e "${YELLOW}[2/4]${NC} Creating nginx config..."
-sudo tee /etc/nginx/sites-available/notes.maximleopold.com > /dev/null << 'EOF'
+sudo tee /etc/nginx/sites-available/notes > /dev/null << 'EOF'
+# Haupt-Domain: notes.coxilab.de
 server {
     listen 80;
     listen [::]:80;
-    server_name notes.maximleopold.com;
+    server_name notes.coxilab.de;
 
     root /var/www/notes.maximleopold.com;
     index index.html;
@@ -52,11 +56,22 @@ server {
     # Error pages
     error_page 404 /404.html;
 }
+
+# Redirect: notes.maximleopold.com -> notes.coxilab.de
+server {
+    listen 80;
+    listen [::]:80;
+    server_name notes.maximleopold.com;
+
+    return 301 https://notes.coxilab.de$request_uri;
+}
 EOF
 
 # 3. Aktiviere Site
 echo -e "${YELLOW}[3/4]${NC} Enabling site..."
-sudo ln -sf /etc/nginx/sites-available/notes.maximleopold.com /etc/nginx/sites-enabled/
+sudo ln -sf /etc/nginx/sites-available/notes /etc/nginx/sites-enabled/notes
+# Entferne alte Config falls vorhanden
+sudo rm -f /etc/nginx/sites-enabled/notes.maximleopold.com
 sudo nginx -t
 sudo systemctl reload nginx
 
@@ -68,9 +83,10 @@ if ! command -v certbot &> /dev/null; then
 fi
 
 echo -e "${YELLOW}Running certbot...${NC}"
-sudo certbot --nginx -d "$DOMAIN" --non-interactive --agree-tos --email "$EMAIL" || {
-    echo -e "${YELLOW}SSL setup failed. Run manually: sudo certbot --nginx -d $DOMAIN${NC}"
+sudo certbot --nginx -d "$DOMAIN" -d "$DOMAIN_OLD" --non-interactive --agree-tos --email "$EMAIL" || {
+    echo -e "${YELLOW}SSL setup failed. Run manually: sudo certbot --nginx -d $DOMAIN -d $DOMAIN_OLD${NC}"
 }
 
 echo -e "${GREEN}✅ nginx setup complete!${NC}"
-echo "Site will be available at https://$DOMAIN after first deployment"
+echo "Site available at https://$DOMAIN"
+echo "Redirect: https://$DOMAIN_OLD -> https://$DOMAIN"

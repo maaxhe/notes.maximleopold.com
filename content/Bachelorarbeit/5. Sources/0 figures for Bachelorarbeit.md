@@ -1,5 +1,5 @@
 ---
-modified: 2026-02-13
+modified: 2026-02-14
 ---
 
 ## figures for Bachelorarbeit 
@@ -21,6 +21,19 @@ R_STV, R_7AL, R_7Am, R_7PC, R_PBelt, R_A4, R_44, R_45, R_47l, R_PGi, R_STGa, R_P
 
 R_7AL, R_7Am, R_7PC, R_PBelt, R_A4, R_A5, R_44, R_45, R_47l, R_PGi, R_STGa, R_PSL, R_STSda, R_STSdp, R_STV, R_TGd, R_TGv, R_TPOJ1
 
+
+
+Seeds: L_PSL, L_STV:
+L_FEF, L_7AL, L_7Am, L_7PC, L_MT, L_MST, L_PBelt, L_A4, L_A5, L_PF, L_PFop, L_PFm, L_PFcm, L_PGi, L_TPOJ1, L_STGa, L_STSda, L_STSdp, L_TGd, L_TGv, L_44, L_45, L_47l, L_IFJa
+
+
+stv vs psl full correltaion
+![[Pasted image 20260213123320.png]]
+
+
+
+stv vs psl partial correltaion
+![[psl stv partial rcorrelation.png]]
 
 
 rig

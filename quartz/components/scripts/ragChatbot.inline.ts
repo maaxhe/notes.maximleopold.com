@@ -1153,7 +1153,7 @@ type ParsedSourceMeta = {
   url: string
 }
 
-const INTERNAL_SOURCE_HOSTS = ["notes.maximleopold.com", "maximleopold.com", "localhost", "127.0.0.1"]
+const INTERNAL_SOURCE_HOSTS = ["notes.coxilab.de", "notes.maximleopold.com", "maximleopold.com", "localhost", "127.0.0.1"]
 const sourceMetaCache = new WeakMap<object, ParsedSourceMeta | null>()
 
 function normalizeCitationKeyForClient(value?: string) {

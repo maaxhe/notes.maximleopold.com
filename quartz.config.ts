@@ -16,7 +16,7 @@ const config: QuartzConfig = {
       provider: "plausible",
     },
     locale: "de-DE",
-    baseUrl: "notes.maximleopold.com",
+    baseUrl: "notes.coxilab.de",
     ignorePatterns: ["private", "templates", ".obsidian", "**/Private/**", "**/*.excalidraw"],
     defaultDateType: "modified",
     theme: {
