@@ -4,7 +4,7 @@ permalink: Bachelorarbeit/Sources/BA-All-Sources
 aliases:
   - BA All Sources
   - BA-All-Sources
-modified: 2026-02-14
+modified: 2026-02-15
 ---
 
 ## Paper Zitate & Kommentare 
