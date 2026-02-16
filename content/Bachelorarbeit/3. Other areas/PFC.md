@@ -1,7 +1,7 @@
 ---
   title: "Prefrontal cortex"
   created: "2025-11-20"
-  modified: 2026-02-15
+  modified: 2026-02-16
 ---
 # PFC (Prefrontal Cortex)
 

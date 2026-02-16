@@ -1,5 +1,5 @@
 ---
-modified: 2026-02-15
+modified: 2026-02-16
 ---
 
 ### Meine nächsten Schritte
@@ -30,21 +30,27 @@ modified: 2026-02-15
 - [x] Hypthese erstellen
 
 #### Phase 3
-- [ ] Schreiben .... dann sehen wir weiter 
+- Wörter: 
+	- [ ] "control", "drives", "directs" wörter aus dem text hauen und durch "couples with", "shows functional connectivity", "is associated with", "suggests a top-down influence" ersetzen
+	- [ ] alpha/beta rhythm etfernen, sondern durch fMRI nur strukturelle und funktionelle architektur 
+- [ ] Paper einbauen
+	- [ ] Romanski 1999 in Intro einbauen 
+	- [ ] Salmi 2009/2025 einbauen, FEF auditory connectivity schauen 
+	- [ ] Tavor 2026 bei methoden zitieren, resting state task activity predictions
 
 ### Research 
 - [ ] Areale in Dorsal/ventral einteilen
 	- [x] wo ist der Herschl Gyrus? alles dahinter soll where pathway sein -> Herschl == A1
 		- Herschl Gyrus == A1
-	- [ ] schauen wo die einzelnen areale im Glasser Atlas sind -> [[BA All Sources#^dfae6d]]
+	- [x] schauen wo die einzelnen areale im Glasser Atlas sind -> [[BA All Sources#^dfae6d]]
 	- [ ] welche Areale sind auf dem Poeppel paper lateral view zu sehen?
 - [ ] Mehr Quellen finden 
-- [ ] wie wichtig sind functions? ist der auditory cortex involved in decisions?-> ist diese frage überhaupt relevant?
+- [x] wie wichtig sind functions? ist der auditory cortex involved in decisions?-> ist diese frage überhaupt relevant? JOA geht so
 - [ ] check AL ML in monkeys, womit lässt sich das im Menschen vergleichen?
-- [ ] Talairch for Brainstorm -> Wie soll ich das umrechnen?
-- [ ] müssen wir beachten, dass auditory spatial processing eher right lateralized ist? 
+- [x] Talairch for Brainstorm -> Wie soll ich das umrechnen?
+- [x] müssen wir beachten, dass auditory spatial processing eher right lateralized ist? JAA
 - [x] Glasser Atlas nach Auditory Cortex absuchen
-- [ ] Ahveninen Suppl. anschauen 
+- [x] Ahveninen Suppl. anschauen 
 - [ ] lieber functional vs dorsal/ventral anschauen 
 	- [ ] space vs semantic? 
 	- [ ] Was heißt eigentlich "Language" in dem stream kontext? 
