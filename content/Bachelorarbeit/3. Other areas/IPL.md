@@ -7,7 +7,7 @@ tags:
   - "#region/classical"
   - function/language
   - function/workingmemory
-modified: 2026-02-16
+modified: 2026-02-17
 ---
 # IPL (Inferior Parietal  Lobule)
 

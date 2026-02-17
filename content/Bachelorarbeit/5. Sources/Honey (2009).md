@@ -1,5 +1,5 @@
 ---
-modified: 2026-02-16
+modified: 2026-02-17
 ---
 
 Honey, C. J., Sporns, O., Cammoun, L., Gigandet, X., Thiran, J. P., Meuli, R., & Hagmann, P. (2009). Predicting human resting-state functional connectivity from structural connectivity. _Proceedings of the National Academy of Sciences_, _106_(6), 2035–2040. [https://doi.org/10.1073/pnas.0811168106](https://doi.org/10.1073/pnas.0811168106)

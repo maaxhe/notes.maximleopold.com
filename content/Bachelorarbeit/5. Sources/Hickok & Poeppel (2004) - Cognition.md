@@ -1,5 +1,5 @@
 ---
-modified: 2026-02-16
+modified: 2026-02-17
 ---
 
 Hickok, G., & Poeppel, D. (2004). Dorsal and ventral streams: A framework for understanding aspects of the functional anatomy of language. _Cognition_, _92_(1–2), 67–99. [https://doi.org/10.1016/j.cognition.2003.10.011](https://doi.org/10.1016/j.cognition.2003.10.011)
