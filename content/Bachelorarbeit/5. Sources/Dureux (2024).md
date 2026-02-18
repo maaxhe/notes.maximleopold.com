@@ -20,6 +20,9 @@ A prominent cluster, depicted in light blue, encompassed regions that significan
 nice to know: 
 - human auditory regions including A4, A5, LBelt, PBelt, STSdp, and the inferior  frontal area IFJa responded to non-vocal sounds much later, typically between 70-90%, with some  superior temporal gyrus areas (A1, TA2, 52, MBelt) and posterior temporal areas (TPOJ1, STSvp)  only responding at 90-100%.
 
+
+![[Dureux 2024.pdf]]
+
 ## see also
 Tags: #cognitivescience/neuroscience #science 
 *Superlink:* [[050 🧠Neuroscience]] 
