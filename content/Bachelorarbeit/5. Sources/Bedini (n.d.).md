@@ -1,5 +1,5 @@
 ---
-modified: 2026-02-17
+modified: 2026-02-18
 ---
 
 Bedini, M., Olivetti, E., Avesani, P., & Baldauf, D. (n.d.). _Surface-based probabilistic tractography uncovers segregated white matter pathways underlying spatial and non-spatial control_.
