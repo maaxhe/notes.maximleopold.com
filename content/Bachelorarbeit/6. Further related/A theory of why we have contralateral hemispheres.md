@@ -1,5 +1,5 @@
 ---
-modified: 2026-02-18
+modified: 2026-02-19
 ---
 
 ## A theory of why we have contralateral hemispheres
