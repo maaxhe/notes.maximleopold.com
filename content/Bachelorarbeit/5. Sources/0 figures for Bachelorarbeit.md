@@ -13,6 +13,10 @@ Seeds: R_FEF, R_IFJa:
 L_7AL, L_7Am, L_7PC, L_MT, L_MST, L_PBelt, L_A4, L_STV, L_PSL, L_A5, L_PGi, L_TPOJ1, L_STGa, L_STSda, L_STSdp, L_TGd, L_TGv, L_44, L_45, L_47l
 
 
+oder mit den PF und FOP arwas: 
+R_FOP1, R_FOP2, R_FOP3, R_7AL, R_7Am, R_7PC, R_PF, R_PFop, R_PFcm, R_MT, R_MST, R_PBelt, R_A4, R_STV, R_PSL, R_A5, R_PGi, R_TPOJ1, R_STGa, R_STSda, R_STSdp, R_TGd, R_TGv, R_44, R_45, R_47l
+
+
 
 R_FEF
 R_IFJa
