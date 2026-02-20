@@ -5,7 +5,7 @@ tags:
   - stream/pfc
   - "#function/spatialprocessing"
   - "#region/glasser"
-modified: 2026-02-19
+modified: 2026-02-20
 ---
 # FEF Frontal Eye Field
 
