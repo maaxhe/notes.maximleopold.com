@@ -179,6 +179,7 @@
   img {
     max-width: 100%;
     page-break-inside: avoid;
+    content-visibility: visible !important;
   }
 
   /* Tables */
