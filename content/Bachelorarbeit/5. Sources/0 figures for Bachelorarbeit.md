@@ -2,7 +2,7 @@
 modified: 2026-02-21
 ---
 
-## figures for Bachelorarbeit 
+# figures for Bachelorarbeit 
 
 
 Für BrainRest: 
@@ -77,29 +77,29 @@ A4 vs A5 full connectivity
 ![[Pasted image 20260205132254.png]]
 
 
-FEF vs 55b full connectivity
+### FEF vs 55b full connectivity
 ![[FEF vs 55b full812.png]]
 55b DTI paper Bedini
 
 
-PSL vs STV full connectivity
+### PSL vs STV full connectivity
 ![[PSL vs STV full connecivity.png]]
 
 
 
-full812 44 vs 45 
+### full812 44 vs 45 
 ![[44 45 full connectivity.png]]
 
 ![[Screenshot 2026-02-10 at 22.53.32.png]]
 
-partial coo
+### partial coo
 ![[FEF iFJa partial correlation.png]]
 
 
 vielleicht hier die wichtigsten Plots: 
 
 
-FEF vs IFJa part correlation:
+### FEF vs IFJa part correlation:
 
 ![[FEF vs IFJa part corr 812 all regions.png]]
 Significant 13 area(s) for L_FEF in BOLD:
@@ -197,7 +197,7 @@ Significant 16 area(s) for R_IFJa in BOLD:
 
 
 
-FEF vs IFJa full correlation all regions: 
+### FEF vs IFJa full correlation all regions: 
 ![[FEF vs IFJa full correlation all regions.png]]
 Significant 16 area(s) for R_FEF in BOLD:
 
