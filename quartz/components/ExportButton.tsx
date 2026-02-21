@@ -7,7 +7,7 @@ export default (() => {
       <div class="export-button-container">
         <button
           class="export-button"
-          onclick="window.print()"
+          onclick="(function(){document.querySelectorAll('img').forEach(function(img){img.style.contentVisibility='visible';if(!img.complete||img.naturalWidth===0){var s=img.src;img.src='';img.src=s;}});setTimeout(window.print.bind(window),200);})()"
           aria-label="Als PDF exportieren"
           title="Seite als PDF exportieren (Drucken → PDF speichern)"
         >
