@@ -1,4 +1,9 @@
 /* Print styles for better PDF export */
+@page {
+  margin: 1.5cm 2cm;
+  size: A4;
+}
+
 @media print {
   /* Hide ALL navigation, UI elements, sidebars, and embedded content */
   .darkmode,
@@ -62,6 +67,8 @@
     line-height: 1.5;
     margin: 0 !important;
     padding: 0 !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
   }
 
   /* Force single column layout - only center content */
@@ -97,8 +104,9 @@
     max-width: 100% !important;
     width: 100% !important;
     margin: 0 !important;
-    padding: 1cm !important;
+    padding: 0 !important;
     float: none !important;
+    box-sizing: border-box !important;
   }
 
   /* Ensure article content is displayed */

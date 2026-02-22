@@ -69,6 +69,12 @@
     left: -99999px !important;
   }
 
+  /* Define page margins */
+  @page {
+    margin: 1.5cm 2cm;
+    size: A4;
+  }
+
   /* Force full page width */
   html,
   body {
@@ -77,7 +83,8 @@
     margin: 0 !important;
     padding: 0 !important;
     background: white !important;
-    overflow-x: visible !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
   }
 
   /* Force quartz containers to full width */
@@ -115,10 +122,11 @@
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 !important;
-    padding: 1.5cm 2cm !important;
+    padding: 0 !important;
     float: none !important;
     display: block !important;
     flex: none !important;
+    box-sizing: border-box !important;
   }
 
   /* Article full width */
