@@ -6,7 +6,6 @@ export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
   afterBody: [
-    Component.ImageLightbox(),
     Component.HypothesisSPA(),
     Component.SidebarToggle(),
     Component.RAGChatbot({ collapsed: true }),
