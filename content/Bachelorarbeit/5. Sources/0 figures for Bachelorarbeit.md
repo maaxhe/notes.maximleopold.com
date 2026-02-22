@@ -55,7 +55,455 @@ control node: 1
 - L_IFJp
 
 
+## Partial Correlation
 
+![[FEF vs IFJa part corr brain surface.png]]
+#######################################################################################################  22-Feb-2026 19:59:45
+
+![[FEF vs IFJa part corr.png]]
+
+### Data FEF vs IFJa part correlation
+
+^7d880b
+
+Significant 13 area(s) for R_FEF in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    R_FEF          R_SCEF     BOLD            0.0000       24.3700        0.06         0.06           0.03
+    R_FEF          R_55b      BOLD            0.0000       23.6000        0.09         0.08           0.04
+    R_FEF          R_43       BOLD            0.0000       19.3300        0.02         0.02           0.02
+    R_FEF          R_FOP1     BOLD            0.0000       15.3600        0.01         0.01           0.02
+    R_FEF          R_FOP3     BOLD            0.0000       6.3300        0.00         0.00           0.02
+    R_FEF          R_7Am      BOLD            0.0000       7.5200        0.00         0.00           0.02
+    R_FEF          R_PF       BOLD            0.0000       18.1500        0.03         0.02           0.03
+    R_FEF          R_PFop     BOLD            0.0000       10.1800        0.01         0.01           0.02
+    R_FEF          R_PFcm     BOLD            0.0000       10.8800        0.01         0.01           0.02
+    R_FEF          R_MST      BOLD            0.0000       10.4100        0.01         0.01           0.02
+    R_FEF          R_PSL      BOLD            0.0000       12.6400        0.03         0.03           0.03
+    R_FEF          R_TE1a     BOLD            0.0000       8.1500        0.00         0.00           0.02
+    R_FEF          R_TGd      BOLD            0.0000       4.2700        0.00         0.00           0.02
+
+
+
+#######################################################################################################  22-Feb-2026 19:59:45
+
+Significant 20 area(s) for R_IFJa in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    R_IFJa         R_FOP2     BOLD            0.0000       7.0400        0.00         -0.00           0.02
+    R_IFJa         R_OP4      BOLD            0.0000       6.8300        0.00         0.00           0.02
+    R_IFJa         R_7AL      BOLD            0.0001       3.8800        -0.00         -0.00           0.02
+    R_IFJa         R_PBelt    BOLD            0.0023       3.0500        0.01         0.01           0.02
+    R_IFJa         R_A4       BOLD            0.0000       6.5200        0.01         0.01           0.02
+    R_IFJa         R_A5       BOLD            0.0000       14.4300        0.01         0.01           0.02
+    R_IFJa         R_STV      BOLD            0.0000       4.4900        0.03         0.03           0.03
+    R_IFJa         R_PGi      BOLD            0.0000       5.5600        0.00         0.00           0.02
+    R_IFJa         R_TPOJ1    BOLD            0.0000       16.8900        0.03         0.03           0.03
+    R_IFJa         R_STGa     BOLD            0.0000       6.7900        0.00         0.00           0.02
+    R_IFJa         R_STSda    BOLD            0.0000       16.2700        0.02         0.02           0.02
+    R_IFJa         R_STSdp    BOLD            0.0000       17.9800        0.02         0.01           0.02
+    R_IFJa         R_STSvp    BOLD            0.0388       2.0700        0.00         -0.00           0.02
+    R_IFJa         R_TGv      BOLD            0.0284       2.1900        0.00         -0.00           0.02
+    R_IFJa         R_AVI      BOLD            0.0000       4.4600        0.01         0.01           0.02
+    R_IFJa         R_47l      BOLD            0.0000       6.2300        0.01         0.00           0.03
+    R_IFJa         R_45       BOLD            0.0000       19.3300        0.03         0.02           0.03
+    R_IFJa         R_44       BOLD            0.0000       22.5500        0.04         0.04           0.03
+    R_IFJa         R_IFSp     BOLD            0.0000       24.5300        0.12         0.12           0.04
+    R_IFJa         R_IFJp     BOLD            0.0000       24.0500        0.08         0.08           0.03
+
+
+Out of 37 tests, 34 are significant using a false discovery rate of 0.050000.
+FDR/FCR procedure used is guaranteed valid for independent or positively dependent tests.
+
+#######################################################################################################  22-Feb-2026 20:00:46
+
+Significant 16 area(s) for L_FEF in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    L_FEF          L_SCEF     BOLD            0.0000       22.4600        0.04         0.04           0.02
+    L_FEF          L_55b      BOLD            0.0000       21.6800        0.08         0.08           0.04
+    L_FEF          L_43       BOLD            0.0000       15.9700        0.02         0.01           0.02
+    L_FEF          L_FOP1     BOLD            0.0000       12.7500        0.01         0.01           0.02
+    L_FEF          L_FOP3     BOLD            0.0006       3.4300        0.00         0.00           0.02
+    L_FEF          L_7Am      BOLD            0.0000       8.3700        0.00         0.00           0.02
+    L_FEF          L_7PC      BOLD            0.0000       5.8200        0.00         0.00           0.02
+    L_FEF          L_PF       BOLD            0.0000       8.6100        0.02         0.02           0.03
+    L_FEF          L_PFop     BOLD            0.0000       11.1200        0.01         0.01           0.02
+    L_FEF          L_PFcm     BOLD            0.0000       13.9700        0.02         0.02           0.02
+    L_FEF          L_MT       BOLD            0.0000       4.9400        0.00         -0.00           0.02
+    L_FEF          L_MST      BOLD            0.0000       11.1000        0.01         0.01           0.02
+    L_FEF          L_PBelt    BOLD            0.0036       2.9200        0.00         0.00           0.02
+    L_FEF          L_TA2      BOLD            0.0001       3.8100        0.00         0.00           0.02
+    L_FEF          L_TE1a     BOLD            0.0000       9.8600        0.00         0.00           0.02
+    L_FEF          L_TGd      BOLD            0.0002       3.7700        -0.00         -0.00           0.02
+
+
+
+#######################################################################################################  22-Feb-2026 20:00:46
+
+Significant 18 area(s) for L_IFJa in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    L_IFJa         L_FOP2     BOLD            0.0000       6.2100        -0.00         -0.00           0.02
+    L_IFJa         L_OP4      BOLD            0.0000       6.7000        0.00         0.00           0.02
+    L_IFJa         L_A4       BOLD            0.0001       3.9600        0.01         0.01           0.02
+    L_IFJa         L_A5       BOLD            0.0000       12.9700        0.01         0.01           0.02
+    L_IFJa         L_PSL      BOLD            0.0000       5.3100        0.01         0.01           0.03
+    L_IFJa         L_STV      BOLD            0.0345       2.1100        0.03         0.03           0.03
+    L_IFJa         L_PGi      BOLD            0.0005       3.4600        0.00         0.00           0.02
+    L_IFJa         L_TPOJ1    BOLD            0.0000       9.0200        0.02         0.02           0.03
+    L_IFJa         L_STGa     BOLD            0.0000       7.0900        0.00         0.00           0.02
+    L_IFJa         L_STSda    BOLD            0.0000       10.3000        0.01         0.01           0.02
+    L_IFJa         L_STSdp    BOLD            0.0000       16.6300        0.02         0.01           0.03
+    L_IFJa         L_STSva    BOLD            0.0100       2.5800        0.00         0.00           0.02
+    L_IFJa         L_AVI      BOLD            0.0000       6.5200        0.01         0.01           0.02
+    L_IFJa         L_47l      BOLD            0.0000       10.6800        0.01         0.01           0.03
+    L_IFJa         L_45       BOLD            0.0000       20.4200        0.03         0.02           0.03
+    L_IFJa         L_44       BOLD            0.0000       23.5300        0.04         0.04           0.03
+    L_IFJa         L_IFSp     BOLD            0.0000       24.5300        0.14         0.13           0.04
+    L_IFJa         L_IFJp     BOLD            0.0000       24.3800        0.09         0.09           0.03
+
+
+
+## Full Correlation
+
+![[FEF vs IFJa full corr brain.png]]
+
+![[FEF vs IFJa full corr.png]]
+
+### Data FEF vs IFJa full corr
+
+^f184fc
+
+#######################################################################################################  22-Feb-2026 20:11:34
+
+Significant 18 area(s) for L_FEF in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    L_FEF          L_SCEF     BOLD            0.0000       24.4800        0.40         0.40           0.10
+    L_FEF          L_43       BOLD            0.0000       24.2400        0.33         0.33           0.10
+    L_FEF          L_FOP1     BOLD            0.0000       24.2900        0.26         0.26           0.09
+    L_FEF          L_FOP2     BOLD            0.0000       20.0200        0.20         0.19           0.10
+    L_FEF          L_FOP3     BOLD            0.0000       24.3100        0.21         0.21           0.08
+    L_FEF          L_OP4      BOLD            0.0000       20.7500        0.32         0.32           0.11
+    L_FEF          L_7AL      BOLD            0.0000       24.3500        0.31         0.31           0.11
+    L_FEF          L_7Am      BOLD            0.0000       24.4000        0.35         0.36           0.11
+    L_FEF          L_7PC      BOLD            0.0000       24.1800        0.31         0.31           0.11
+    L_FEF          L_PF       BOLD            0.0000       22.2300        0.39         0.40           0.11
+    L_FEF          L_PFop     BOLD            0.0000       23.8100        0.36         0.37           0.11
+    L_FEF          L_PFcm     BOLD            0.0000       24.0700        0.34         0.35           0.11
+    L_FEF          L_MT       BOLD            0.0000       21.3600        0.28         0.28           0.12
+    L_FEF          L_MST      BOLD            0.0000       23.6900        0.33         0.34           0.11
+    L_FEF          L_PBelt    BOLD            0.0000       16.9300        0.29         0.28           0.12
+    L_FEF          L_A4       BOLD            0.0000       9.9300        0.29         0.29           0.11
+    L_FEF          L_STV      BOLD            0.0000       8.0300        0.33         0.34           0.12
+    L_FEF          L_TA2      BOLD            0.0000       16.2800        0.21         0.20           0.10
+
+
+
+#######################################################################################################  22-Feb-2026 20:11:34
+
+Significant 18 area(s) for L_IFJa in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    L_IFJa         L_55b      BOLD            0.0000       7.6500        0.32         0.32           0.11
+    L_IFJa         L_A5       BOLD            0.0000       10.1700        0.26         0.26           0.13
+    L_IFJa         L_PSL      BOLD            0.0000       4.4900        0.29         0.29           0.12
+    L_IFJa         L_PGi      BOLD            0.0000       22.6400        0.22         0.22           0.14
+    L_IFJa         L_STGa     BOLD            0.0000       12.4600        0.17         0.16           0.11
+    L_IFJa         L_STSda    BOLD            0.0000       16.0600        0.24         0.22           0.13
+    L_IFJa         L_STSdp    BOLD            0.0000       19.4200        0.29         0.30           0.13
+    L_IFJa         L_STSva    BOLD            0.0000       21.8600        0.18         0.17           0.13
+    L_IFJa         L_STSvp    BOLD            0.0000       23.0200        0.25         0.24           0.14
+    L_IFJa         L_TE1a     BOLD            0.0000       21.8700        0.09         0.08           0.13
+    L_IFJa         L_TGd      BOLD            0.0000       19.1900        0.16         0.15           0.12
+    L_IFJa         L_TGv      BOLD            0.0000       11.4400        0.11         0.10           0.08
+    L_IFJa         L_AVI      BOLD            0.0000       4.2700        0.21         0.21           0.10
+    L_IFJa         L_47l      BOLD            0.0000       23.3200        0.24         0.23           0.13
+    L_IFJa         L_45       BOLD            0.0000       23.5900        0.31         0.30           0.12
+    L_IFJa         L_44       BOLD            0.0000       22.9700        0.30         0.31           0.11
+    L_IFJa         L_IFSp     BOLD            0.0000       24.3900        0.44         0.44           0.09
+    L_IFJa         L_IFJp     BOLD            0.0000       20.3000        0.37         0.37           0.10
+
+
+Out of 37 tests, 35 are significant using a false discovery rate of 0.050000.
+FDR/FCR procedure used is guaranteed valid for independent or positively dependent tests.
+
+#######################################################################################################  22-Feb-2026 20:11:44
+
+Significant 21 area(s) for R_FEF in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    R_FEF          R_SCEF     BOLD            0.0000       24.5400        0.44         0.45           0.09
+    R_FEF          R_55b      BOLD            0.0000       16.3400        0.36         0.36           0.11
+    R_FEF          R_43       BOLD            0.0000       24.4100        0.35         0.36           0.09
+    R_FEF          R_FOP1     BOLD            0.0000       24.4700        0.29         0.29           0.09
+    R_FEF          R_FOP2     BOLD            0.0000       20.3400        0.19         0.18           0.09
+    R_FEF          R_FOP3     BOLD            0.0000       24.4700        0.23         0.22           0.08
+    R_FEF          R_OP4      BOLD            0.0000       21.1300        0.31         0.32           0.11
+    R_FEF          R_7AL      BOLD            0.0000       23.6600        0.28         0.29           0.11
+    R_FEF          R_7Am      BOLD            0.0000       24.4400        0.38         0.38           0.10
+    R_FEF          R_7PC      BOLD            0.0000       23.5300        0.30         0.30           0.11
+    R_FEF          R_PF       BOLD            0.0000       24.1400        0.44         0.44           0.10
+    R_FEF          R_PFop     BOLD            0.0000       24.1600        0.38         0.39           0.10
+    R_FEF          R_PFcm     BOLD            0.0000       23.9100        0.35         0.36           0.11
+    R_FEF          R_MT       BOLD            0.0000       19.6300        0.27         0.28           0.12
+    R_FEF          R_MST      BOLD            0.0000       23.0500        0.34         0.35           0.10
+    R_FEF          R_PBelt    BOLD            0.0000       13.2900        0.27         0.27           0.11
+    R_FEF          R_A4       BOLD            0.0000       8.9000        0.29         0.29           0.11
+    R_FEF          R_PSL      BOLD            0.0000       22.7300        0.44         0.44           0.09
+    R_FEF          R_STV      BOLD            0.0000       10.4800        0.37         0.37           0.11
+    R_FEF          R_TA2      BOLD            0.0000       16.3400        0.21         0.21           0.09
+    R_FEF          R_AVI      BOLD            0.0000       4.0700        0.23         0.22           0.10
+
+
+
+#######################################################################################################  22-Feb-2026 20:11:44
+
+Significant 14 area(s) for R_IFJa in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    R_IFJa         R_A5       BOLD            0.0000       5.3700        0.24         0.24           0.13
+    R_IFJa         R_PGi      BOLD            0.0000       21.7600        0.16         0.15           0.14
+    R_IFJa         R_STGa     BOLD            0.0000       7.8300        0.14         0.13           0.10
+    R_IFJa         R_STSda    BOLD            0.0000       16.5700        0.23         0.22           0.13
+    R_IFJa         R_STSdp    BOLD            0.0000       8.5300        0.27         0.26           0.13
+    R_IFJa         R_STSva    BOLD            0.0000       21.8400        0.13         0.12           0.12
+    R_IFJa         R_STSvp    BOLD            0.0000       21.4900        0.19         0.19           0.13
+    R_IFJa         R_TE1a     BOLD            0.0000       21.5800        0.04         0.03           0.13
+    R_IFJa         R_TGd      BOLD            0.0000       17.8200        0.12         0.12           0.12
+    R_IFJa         R_47l      BOLD            0.0000       22.9400        0.18         0.17           0.12
+    R_IFJa         R_45       BOLD            0.0000       16.6300        0.26         0.26           0.12
+    R_IFJa         R_44       BOLD            0.0000       12.4100        0.28         0.28           0.11
+    R_IFJa         R_IFSp     BOLD            0.0000       21.0000        0.41         0.42           0.10
+    R_IFJa         R_IFJp     BOLD            0.0000       9.7500        0.32         0.32           0.10
+
+
+### Data FEF vs 55b part corr
+
+^d120fa
+
+#######################################################################################################  22-Feb-2026 20:31:14
+
+Significant 19 area(s) for L_FEF in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    L_FEF          L_43       BOLD            0.0000       8.0200        0.02         0.01           0.02
+    L_FEF          L_FOP1     BOLD            0.0000       11.9000        0.01         0.01           0.02
+    L_FEF          L_FOP2     BOLD            0.0008       3.3500        -0.01         -0.01           0.02
+    L_FEF          L_FOP3     BOLD            0.0000       6.5800        0.00         0.00           0.02
+    L_FEF          L_7Am      BOLD            0.0000       4.6500        0.00         0.00           0.02
+    L_FEF          L_7PC      BOLD            0.0000       4.1900        0.00         0.00           0.02
+    L_FEF          L_PF       BOLD            0.0000       9.7300        0.02         0.02           0.03
+    L_FEF          L_PFop     BOLD            0.0000       10.2000        0.01         0.01           0.02
+    L_FEF          L_PFcm     BOLD            0.0000       16.9400        0.02         0.02           0.02
+    L_FEF          L_MST      BOLD            0.0000       9.6300        0.01         0.01           0.02
+    L_FEF          L_PBelt    BOLD            0.0000       5.1400        0.00         0.00           0.02
+    L_FEF          L_A4       BOLD            0.0000       6.3100        0.01         0.01           0.02
+    L_FEF          L_STV      BOLD            0.0000       13.9700        0.02         0.02           0.02
+    L_FEF          L_STSda    BOLD            0.0379       2.0800        0.00         0.00           0.02
+    L_FEF          L_TA2      BOLD            0.0000       11.7400        0.00         0.00           0.02
+    L_FEF          L_TE1a     BOLD            0.0000       10.5000        0.00         0.00           0.02
+    L_FEF          L_TGd      BOLD            0.0000       4.5500        -0.00         -0.00           0.02
+    L_FEF          L_AVI      BOLD            0.0000       5.2000        0.00         0.00           0.02
+    L_FEF          L_IFJp     BOLD            0.0000       9.9600        0.01         0.01           0.03
+
+
+
+#######################################################################################################  22-Feb-2026 20:31:14
+
+Significant 14 area(s) for L_55b in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    L_55b          L_SCEF     BOLD            0.0234       2.2700        0.04         0.04           0.03
+    L_55b          L_OP4      BOLD            0.0000       9.0700        0.01         0.01           0.03
+    L_55b          L_A5       BOLD            0.0000       13.2700        0.02         0.01           0.03
+    L_55b          L_PSL      BOLD            0.0000       23.2400        0.13         0.12           0.08
+    L_55b          L_PGi      BOLD            0.0000       9.1700        0.01         0.01           0.03
+    L_55b          L_TPOJ1    BOLD            0.0000       10.0800        0.03         0.03           0.04
+    L_55b          L_STGa     BOLD            0.0000       6.7700        0.01         0.00           0.02
+    L_55b          L_STSdp    BOLD            0.0000       23.5800        0.07         0.07           0.05
+    L_55b          L_STSvp    BOLD            0.0010       3.3000        0.01         0.00           0.02
+    L_55b          L_TGv      BOLD            0.0000       9.4900        0.01         0.01           0.02
+    L_55b          L_47l      BOLD            0.0000       9.4100        0.01         0.01           0.03
+    L_55b          L_45       BOLD            0.0000       23.6000        0.06         0.06           0.04
+    L_55b          L_44       BOLD            0.0000       23.3300        0.07         0.07           0.05
+    L_55b          L_IFJa     BOLD            0.0005       3.4800        0.03         0.03           0.03
+
+
+Out of 37 tests, 31 are significant using a false discovery rate of 0.050000.
+FDR/FCR procedure used is guaranteed valid for independent or positively dependent tests.
+
+#######################################################################################################  22-Feb-2026 20:31:33
+
+Significant 17 area(s) for R_FEF in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    R_FEF          R_SCEF     BOLD            0.0000       16.1100        0.06         0.06           0.03
+    R_FEF          R_43       BOLD            0.0000       6.0400        0.02         0.02           0.02
+    R_FEF          R_FOP2     BOLD            0.0282       2.1900        -0.01         -0.01           0.02
+    R_FEF          R_FOP3     BOLD            0.0000       6.2000        0.00         0.00           0.02
+    R_FEF          R_7Am      BOLD            0.0000       6.4400        0.00         0.00           0.02
+    R_FEF          R_PF       BOLD            0.0000       17.8400        0.03         0.02           0.03
+    R_FEF          R_PFop     BOLD            0.0000       15.1800        0.01         0.01           0.02
+    R_FEF          R_PFcm     BOLD            0.0000       14.9300        0.01         0.01           0.02
+    R_FEF          R_MST      BOLD            0.0000       12.0400        0.01         0.01           0.02
+    R_FEF          R_PBelt    BOLD            0.0270       2.2100        0.00         0.00           0.02
+    R_FEF          R_STV      BOLD            0.0000       8.3900        0.02         0.02           0.02
+    R_FEF          R_TA2      BOLD            0.0000       5.6300        0.00         0.00           0.02
+    R_FEF          R_TE1a     BOLD            0.0000       7.1500        0.00         0.00           0.02
+    R_FEF          R_TGd      BOLD            0.0185       2.3500        0.00         0.00           0.02
+    R_FEF          R_AVI      BOLD            0.0000       8.4000        0.00         0.00           0.02
+    R_FEF          R_IFSp     BOLD            0.0000       6.9900        0.02         0.02           0.02
+    R_FEF          R_IFJp     BOLD            0.0000       15.3200        0.02         0.02           0.03
+
+
+
+#######################################################################################################  22-Feb-2026 20:31:33
+
+Significant 14 area(s) for R_55b in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    R_55b          R_OP4      BOLD            0.0000       5.1000        -0.00         0.00           0.02
+    R_55b          R_7PC      BOLD            0.0084       2.6400        -0.00         -0.00           0.02
+    R_55b          R_A4       BOLD            0.0000       7.5100        0.01         0.01           0.03
+    R_55b          R_A5       BOLD            0.0000       19.4200        0.02         0.02           0.03
+    R_55b          R_PSL      BOLD            0.0000       17.5300        0.08         0.08           0.05
+    R_55b          R_PGi      BOLD            0.0000       7.5300        0.00         0.00           0.02
+    R_55b          R_TPOJ1    BOLD            0.0000       20.4400        0.05         0.04           0.03
+    R_55b          R_STGa     BOLD            0.0000       9.9800        0.01         0.01           0.02
+    R_55b          R_STSda    BOLD            0.0000       4.4300        0.00         0.00           0.02
+    R_55b          R_STSdp    BOLD            0.0000       23.2300        0.04         0.04           0.03
+    R_55b          R_TGv      BOLD            0.0000       11.7700        0.01         0.01           0.02
+    R_55b          R_45       BOLD            0.0000       23.7900        0.07         0.07           0.04
+    R_55b          R_44       BOLD            0.0000       18.4500        0.03         0.03           0.03
+    R_55b          R_IFJa     BOLD            0.0002       3.7500        0.03         0.03           0.03
+### Data IFJa vs IFJp part corr
+
+#######################################################################################################  22-Feb-2026 20:19:38
+
+Significant 25 area(s) for R_IFJa in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    R_IFJa         R_55b      BOLD            0.0000       18.8900        0.03         0.03           0.03
+    R_IFJa         R_OP4      BOLD            0.0031       2.9600        0.00         0.00           0.02
+    R_IFJa         R_7AL      BOLD            0.0235       2.2600        -0.00         -0.00           0.02
+    R_IFJa         R_7PC      BOLD            0.0000       6.5500        -0.00         -0.00           0.02
+    R_IFJa         R_PF       BOLD            0.0000       4.7100        -0.00         -0.00           0.02
+    R_IFJa         R_PFop     BOLD            0.0351       2.1100        -0.00         0.00           0.02
+    R_IFJa         R_PBelt    BOLD            0.0000       6.5500        0.01         0.01           0.02
+    R_IFJa         R_A4       BOLD            0.0000       10.2400        0.01         0.01           0.02
+    R_IFJa         R_A5       BOLD            0.0000       7.9500        0.01         0.01           0.02
+    R_IFJa         R_PSL      BOLD            0.0000       14.7600        0.01         0.01           0.02
+    R_IFJa         R_STV      BOLD            0.0000       16.4200        0.03         0.03           0.03
+    R_IFJa         R_PGi      BOLD            0.0001       3.8000        0.00         0.00           0.02
+    R_IFJa         R_TPOJ1    BOLD            0.0000       19.1000        0.03         0.03           0.03
+    R_IFJa         R_STGa     BOLD            0.0176       2.3700        0.00         0.00           0.02
+    R_IFJa         R_STSda    BOLD            0.0000       14.6300        0.02         0.02           0.02
+    R_IFJa         R_STSdp    BOLD            0.0000       14.8100        0.02         0.01           0.02
+    R_IFJa         R_STSva    BOLD            0.0051       2.8000        0.00         0.00           0.02
+    R_IFJa         R_STSvp    BOLD            0.0000       8.1200        0.00         -0.00           0.02
+    R_IFJa         R_TA2      BOLD            0.0000       4.6400        0.00         0.00           0.02
+    R_IFJa         R_TGv      BOLD            0.0402       2.0500        0.00         -0.00           0.02
+    R_IFJa         R_47l      BOLD            0.0000       7.6500        0.01         0.00           0.03
+    R_IFJa         R_45       BOLD            0.0000       18.6000        0.03         0.02           0.03
+    R_IFJa         R_44       BOLD            0.0000       21.7900        0.04         0.04           0.03
+    R_IFJa         R_IFSp     BOLD            0.0000       24.1200        0.12         0.12           0.04
+    R_IFJa         R_FEF      BOLD            0.0168       2.3900        0.02         0.02           0.03
+
+
+
+#######################################################################################################  22-Feb-2026 20:19:38
+
+Significant 1 area(s) for R_IFJp in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    R_IFJp         R_TE1a     BOLD            0.0025       3.0200        -0.00         -0.00           0.02
+
+
+Out of 37 tests, 29 are significant using a false discovery rate of 0.050000.
+FDR/FCR procedure used is guaranteed valid for independent or positively dependent tests.
+
+#######################################################################################################  22-Feb-2026 20:19:52
+
+Significant 26 area(s) for L_IFJa in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    L_IFJa         L_55b      BOLD            0.0000       16.9300        0.03         0.03           0.03
+    L_IFJa         L_43       BOLD            0.0010       3.2900        -0.00         -0.00           0.02
+    L_IFJa         L_FOP1     BOLD            0.0039       2.8800        -0.00         -0.00           0.02
+    L_IFJa         L_OP4      BOLD            0.0004       3.5300        0.00         0.00           0.02
+    L_IFJa         L_7AL      BOLD            0.0044       2.8500        -0.00         -0.00           0.02
+    L_IFJa         L_7PC      BOLD            0.0000       9.5800        -0.00         -0.00           0.02
+    L_IFJa         L_PF       BOLD            0.0000       4.5800        0.01         0.01           0.02
+    L_IFJa         L_PFop     BOLD            0.0048       2.8200        0.00         0.00           0.02
+    L_IFJa         L_PFcm     BOLD            0.0000       4.2600        0.00         0.00           0.02
+    L_IFJa         L_A4       BOLD            0.0000       9.4900        0.01         0.01           0.02
+    L_IFJa         L_A5       BOLD            0.0000       10.9800        0.01         0.01           0.02
+    L_IFJa         L_PSL      BOLD            0.0000       10.3000        0.01         0.01           0.03
+    L_IFJa         L_STV      BOLD            0.0000       18.3900        0.03         0.03           0.03
+    L_IFJa         L_PGi      BOLD            0.0000       8.6300        0.00         0.00           0.02
+    L_IFJa         L_TPOJ1    BOLD            0.0000       16.5700        0.02         0.02           0.03
+    L_IFJa         L_STGa     BOLD            0.0000       5.8100        0.00         0.00           0.02
+    L_IFJa         L_STSda    BOLD            0.0000       10.1700        0.01         0.01           0.02
+    L_IFJa         L_STSdp    BOLD            0.0000       13.4600        0.02         0.01           0.03
+    L_IFJa         L_STSva    BOLD            0.0000       4.3600        0.00         0.00           0.02
+    L_IFJa         L_STSvp    BOLD            0.0000       8.3100        0.00         0.00           0.02
+    L_IFJa         L_TA2      BOLD            0.0011       3.2500        0.00         -0.00           0.02
+    L_IFJa         L_47l      BOLD            0.0000       11.2600        0.01         0.01           0.03
+    L_IFJa         L_45       BOLD            0.0000       20.2600        0.03         0.02           0.03
+    L_IFJa         L_44       BOLD            0.0000       21.6400        0.04         0.04           0.03
+    L_IFJa         L_IFSp     BOLD            0.0000       24.5200        0.14         0.13           0.04
+    L_IFJa         L_FEF      BOLD            0.0000       5.6600        0.02         0.02           0.02
+
+
+
+#######################################################################################################  22-Feb-2026 20:19:52
+
+Significant 3 area(s) for L_IFJp in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    L_IFJp         L_FOP2     BOLD            0.0055       2.7700        0.00         0.00           0.02
+    L_IFJp         L_MT       BOLD            0.0089       2.6200        -0.00         -0.00           0.02
+    L_IFJp         L_TE1a     BOLD            0.0000       4.8500        -0.00         -0.00           0.02
+
+
+Out of 38 tests, 34 are significant using a false discovery rate of 0.050000.
+FDR/FCR procedure used is guaranteed valid for independent or positively dependent tests.
+
+# Müll
 
 
 
@@ -124,407 +572,6 @@ A4 vs A5 full connectivity
 
 ### PSL vs STV full connectivity
 ![[PSL vs STV full connecivity.png]]
-
-
-
-### full812 44 vs 45 
-![[44 45 full connectivity.png]]
-
-![[Screenshot 2026-02-10 at 22.53.32.png]]
-
-### partial coo
-![[FEF iFJa partial correlation.png]]
-
-
-vielleicht hier die wichtigsten Plots: 
-
-
-### FEF vs IFJa part correlation:
-
-![[FEF vs IFJa part corr 812 all regions.png]]
-Significant 13 area(s) for L_FEF in BOLD:
-
- 
-    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
-    -----------------------------------------------------------------------------------------------------
-    L_FEF          L_FOP1     BOLD            0.0000       12.7200        0.01         0.01           0.02
-    L_FEF          L_FOP3     BOLD            0.0006       3.4200        0.00         0.00           0.02
-    L_FEF          L_7Am      BOLD            0.0000       8.3600        0.00         0.00           0.02
-    L_FEF          L_7PC      BOLD            0.0000       5.7900        0.00         0.00           0.02
-    L_FEF          L_PF       BOLD            0.0000       8.6000        0.02         0.02           0.03
-    L_FEF          L_PFop     BOLD            0.0000       11.0900        0.01         0.01           0.02
-    L_FEF          L_PFcm     BOLD            0.0000       13.9300        0.02         0.02           0.02
-    L_FEF          L_MT       BOLD            0.0000       4.9200        0.00         -0.00           0.02
-    L_FEF          L_MST      BOLD            0.0000       11.0700        0.01         0.01           0.02
-    L_FEF          L_PBelt    BOLD            0.0037       2.9000        0.00         0.00           0.02
-    L_FEF          L_TE1a     BOLD            0.0000       9.8400        0.00         0.00           0.02
-    L_FEF          L_TGd      BOLD            0.0002       3.7500        -0.00         -0.00           0.02
-    L_FEF          L_TA2      BOLD            0.0001       3.7900        0.00         0.00           0.02
-
-
-
-#######################################################################################################  21-Feb-2026 13:31:37
-
-Significant 14 area(s) for L_IFJa in BOLD:
-
- 
-    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
-    -----------------------------------------------------------------------------------------------------
-    L_IFJa         L_FOP2     BOLD            0.0000       6.1900        -0.00         -0.00           0.02
-    L_IFJa         L_A4       BOLD            0.0001       3.9400        0.01         0.01           0.02
-    L_IFJa         L_STV      BOLD            0.0353       2.1100        0.03         0.03           0.03
-    L_IFJa         L_PSL      BOLD            0.0000       5.2800        0.01         0.01           0.03
-    L_IFJa         L_A5       BOLD            0.0000       12.9400        0.01         0.01           0.02
-    L_IFJa         L_PGi      BOLD            0.0006       3.4500        0.00         0.00           0.02
-    L_IFJa         L_TPOJ1    BOLD            0.0000       9.0000        0.02         0.02           0.03
-    L_IFJa         L_STGa     BOLD            0.0000       7.0800        0.00         0.00           0.02
-    L_IFJa         L_STSda    BOLD            0.0000       10.2800        0.01         0.01           0.02
-    L_IFJa         L_STSdp    BOLD            0.0000       16.5900        0.02         0.01           0.03
-    L_IFJa         L_STSva    BOLD            0.0102       2.5700        0.00         0.00           0.02
-    L_IFJa         L_44       BOLD            0.0000       23.4900        0.04         0.04           0.03
-    L_IFJa         L_45       BOLD            0.0000       20.3800        0.03         0.02           0.03
-    L_IFJa         L_47l      BOLD            0.0000       10.6600        0.01         0.01           0.03
-
-
-Out of 30 tests, 26 are significant using a false discovery rate of 0.050000.
-FDR/FCR procedure used is guaranteed valid for independent or positively dependent tests.
-
-#######################################################################################################  21-Feb-2026 13:31:58
-
-Significant 10 area(s) for R_FEF in BOLD:
-
- 
-    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
-    -----------------------------------------------------------------------------------------------------
-    R_FEF          R_FOP1     BOLD            0.0000       15.3400        0.01         0.01           0.02
-    R_FEF          R_FOP3     BOLD            0.0000       6.3200        0.00         0.00           0.02
-    R_FEF          R_7Am      BOLD            0.0000       7.5000        0.00         0.00           0.02
-    R_FEF          R_PF       BOLD            0.0000       18.1100        0.03         0.02           0.03
-    R_FEF          R_PFop     BOLD            0.0000       10.1600        0.01         0.01           0.02
-    R_FEF          R_PFcm     BOLD            0.0000       10.8700        0.01         0.01           0.02
-    R_FEF          R_MST      BOLD            0.0000       10.3900        0.01         0.01           0.02
-    R_FEF          R_PSL      BOLD            0.0000       12.6200        0.03         0.03           0.03
-    R_FEF          R_TE1a     BOLD            0.0000       8.1300        0.00         0.00           0.02
-    R_FEF          R_TGd      BOLD            0.0000       4.2500        0.00         0.00           0.02
-
-
-
-#######################################################################################################  21-Feb-2026 13:31:58
-
-Significant 16 area(s) for R_IFJa in BOLD:
-
- 
-    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
-    -----------------------------------------------------------------------------------------------------
-    R_IFJa         R_FOP2     BOLD            0.0000       7.0300        0.00         -0.00           0.02
-    R_IFJa         R_7AL      BOLD            0.0001       3.8700        -0.00         -0.00           0.02
-    R_IFJa         R_PBelt    BOLD            0.0024       3.0400        0.01         0.01           0.02
-    R_IFJa         R_A4       BOLD            0.0000       6.5100        0.01         0.01           0.02
-    R_IFJa         R_STV      BOLD            0.0000       4.4800        0.03         0.03           0.03
-    R_IFJa         R_A5       BOLD            0.0000       14.4100        0.01         0.01           0.02
-    R_IFJa         R_PGi      BOLD            0.0000       5.5500        0.00         0.00           0.02
-    R_IFJa         R_TPOJ1    BOLD            0.0000       16.8600        0.03         0.03           0.03
-    R_IFJa         R_STGa     BOLD            0.0000       6.7700        0.00         0.00           0.02
-    R_IFJa         R_STSda    BOLD            0.0000       16.2400        0.02         0.02           0.02
-    R_IFJa         R_STSdp    BOLD            0.0000       17.9500        0.02         0.01           0.02
-    R_IFJa         R_STSvp    BOLD            0.0400       2.0500        0.00         -0.00           0.02
-    R_IFJa         R_TGv      BOLD            0.0294       2.1800        0.00         -0.00           0.02
-    R_IFJa         R_44       BOLD            0.0000       22.4900        0.04         0.04           0.03
-    R_IFJa         R_45       BOLD            0.0000       19.2700        0.03         0.02           0.03
-    R_IFJa         R_47l      BOLD            0.0000       6.2200        0.01         0.00           0.03
-
-
-
-
-
-### FEF vs IFJa full correlation all regions: 
-![[FEF vs IFJa full correlation all regions.png]]
-Significant 16 area(s) for R_FEF in BOLD:
-
- 
-    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
-    -----------------------------------------------------------------------------------------------------
-    R_FEF          R_FOP1     BOLD            0.0000       24.4700        0.29         0.29           0.09
-    R_FEF          R_FOP2     BOLD            0.0000       20.3400        0.19         0.18           0.09
-    R_FEF          R_FOP3     BOLD            0.0000       24.4700        0.23         0.22           0.08
-    R_FEF          R_7AL      BOLD            0.0000       23.6500        0.28         0.29           0.11
-    R_FEF          R_7Am      BOLD            0.0000       24.4400        0.38         0.38           0.10
-    R_FEF          R_7PC      BOLD            0.0000       23.5300        0.30         0.30           0.11
-    R_FEF          R_PF       BOLD            0.0000       24.1400        0.44         0.44           0.10
-    R_FEF          R_PFop     BOLD            0.0000       24.1500        0.38         0.39           0.10
-    R_FEF          R_PFcm     BOLD            0.0000       23.9000        0.35         0.36           0.11
-    R_FEF          R_MT       BOLD            0.0000       19.6300        0.27         0.28           0.12
-    R_FEF          R_MST      BOLD            0.0000       23.0500        0.34         0.35           0.10
-    R_FEF          R_PBelt    BOLD            0.0000       13.3000        0.27         0.27           0.11
-    R_FEF          R_A4       BOLD            0.0000       8.9000        0.29         0.29           0.11
-    R_FEF          R_STV      BOLD            0.0000       10.4800        0.37         0.37           0.11
-    R_FEF          R_PSL      BOLD            0.0000       22.7300        0.44         0.44           0.09
-    R_FEF          R_TA2      BOLD            0.0000       16.3500        0.21         0.21           0.09
-
-
-
-#######################################################################################################  21-Feb-2026 13:33:25
-
-Significant 12 area(s) for R_IFJa in BOLD:
-
- 
-    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
-    -----------------------------------------------------------------------------------------------------
-    R_IFJa         R_A5       BOLD            0.0000       5.3800        0.24         0.24           0.13
-    R_IFJa         R_PGi      BOLD            0.0000       21.7600        0.16         0.15           0.14
-    R_IFJa         R_STGa     BOLD            0.0000       7.8400        0.14         0.13           0.10
-    R_IFJa         R_STSda    BOLD            0.0000       16.5700        0.23         0.22           0.13
-    R_IFJa         R_STSdp    BOLD            0.0000       8.5300        0.27         0.26           0.13
-    R_IFJa         R_STSva    BOLD            0.0000       21.8400        0.13         0.12           0.12
-    R_IFJa         R_STSvp    BOLD            0.0000       21.4900        0.19         0.19           0.13
-    R_IFJa         R_TE1a     BOLD            0.0000       21.5800        0.04         0.03           0.13
-    R_IFJa         R_TGd      BOLD            0.0000       17.8200        0.12         0.12           0.12
-    R_IFJa         R_44       BOLD            0.0000       12.4100        0.28         0.28           0.11
-    R_IFJa         R_45       BOLD            0.0000       16.6300        0.26         0.26           0.12
-    R_IFJa         R_47l      BOLD            0.0000       22.9400        0.18         0.17           0.12
-
-
-Out of 30 tests, 29 are significant using a false discovery rate of 0.050000.
-FDR/FCR procedure used is guaranteed valid for independent or positively dependent tests.
-
-#######################################################################################################  21-Feb-2026 13:33:35
-
-Significant 15 area(s) for L_FEF in BOLD:
-
- 
-    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
-    -----------------------------------------------------------------------------------------------------
-    L_FEF          L_FOP1     BOLD            0.0000       24.2800        0.26         0.26           0.09
-    L_FEF          L_FOP2     BOLD            0.0000       20.0200        0.20         0.19           0.10
-    L_FEF          L_FOP3     BOLD            0.0000       24.3000        0.21         0.21           0.08
-    L_FEF          L_7AL      BOLD            0.0000       24.3300        0.31         0.31           0.11
-    L_FEF          L_7Am      BOLD            0.0000       24.3800        0.35         0.36           0.11
-    L_FEF          L_7PC      BOLD            0.0000       24.1700        0.31         0.31           0.11
-    L_FEF          L_PF       BOLD            0.0000       22.2300        0.39         0.40           0.11
-    L_FEF          L_PFop     BOLD            0.0000       23.8000        0.36         0.37           0.11
-    L_FEF          L_PFcm     BOLD            0.0000       24.0600        0.34         0.35           0.11
-    L_FEF          L_MT       BOLD            0.0000       21.3600        0.28         0.28           0.12
-    L_FEF          L_MST      BOLD            0.0000       23.6800        0.33         0.34           0.11
-    L_FEF          L_PBelt    BOLD            0.0000       16.9300        0.29         0.28           0.12
-    L_FEF          L_A4       BOLD            0.0000       9.9400        0.29         0.29           0.11
-    L_FEF          L_STV      BOLD            0.0000       8.0400        0.33         0.34           0.12
-    L_FEF          L_TA2      BOLD            0.0000       16.2800        0.21         0.20           0.10
-
-
-
-#######################################################################################################  21-Feb-2026 13:33:35
-
-Significant 14 area(s) for L_IFJa in BOLD:
-
- 
-    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
-    -----------------------------------------------------------------------------------------------------
-    L_IFJa         L_PSL      BOLD            0.0000       4.4900        0.29         0.29           0.12
-    L_IFJa         L_A5       BOLD            0.0000       10.1700        0.26         0.26           0.13
-    L_IFJa         L_PGi      BOLD            0.0000       22.6400        0.22         0.22           0.14
-    L_IFJa         L_STGa     BOLD            0.0000       12.4600        0.17         0.16           0.11
-    L_IFJa         L_STSda    BOLD            0.0000       16.0600        0.24         0.22           0.13
-    L_IFJa         L_STSdp    BOLD            0.0000       19.4200        0.29         0.30           0.13
-    L_IFJa         L_STSva    BOLD            0.0000       21.8600        0.18         0.17           0.13
-    L_IFJa         L_STSvp    BOLD            0.0000       23.0200        0.25         0.24           0.14
-    L_IFJa         L_TE1a     BOLD            0.0000       21.8800        0.09         0.08           0.13
-    L_IFJa         L_TGd      BOLD            0.0000       19.1900        0.16         0.15           0.12
-    L_IFJa         L_TGv      BOLD            0.0000       11.4400        0.11         0.10           0.08
-    L_IFJa         L_44       BOLD            0.0000       22.9600        0.30         0.31           0.11
-    L_IFJa         L_45       BOLD            0.0000       23.5900        0.31         0.30           0.12
-    L_IFJa         L_47l      BOLD            0.0000       23.3200        0.24         0.23           0.13
-
-
-
-IFJa vs IFJp part corr: 
-
-![[IFJa vs IFJp part corr all areas.png]]
-
-#######################################################################################################  21-Feb-2026 13:37:23
-
-Significant 1 area(s) for R_IFJp in BOLD:
-
- 
-    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
-    -----------------------------------------------------------------------------------------------------
-    R_IFJp         R_TE1a     BOLD            0.0023       3.0500        -0.00         -0.00           0.02
-
-
-
-#######################################################################################################  21-Feb-2026 13:37:23
-
-Significant 21 area(s) for R_IFJa in BOLD:
-
- 
-    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
-    -----------------------------------------------------------------------------------------------------
-    R_IFJa         R_7AL      BOLD            0.0229       2.2800        -0.00         -0.00           0.02
-    R_IFJa         R_7PC      BOLD            0.0000       6.5600        -0.00         -0.00           0.02
-    R_IFJa         R_PF       BOLD            0.0000       4.7200        -0.00         -0.00           0.02
-    R_IFJa         R_PFop     BOLD            0.0339       2.1200        -0.00         0.00           0.02
-    R_IFJa         R_PBelt    BOLD            0.0000       6.5600        0.01         0.01           0.02
-    R_IFJa         R_A4       BOLD            0.0000       10.2300        0.01         0.01           0.02
-    R_IFJa         R_STV      BOLD            0.0000       16.4000        0.03         0.03           0.03
-    R_IFJa         R_PSL      BOLD            0.0000       14.7500        0.01         0.01           0.02
-    R_IFJa         R_A5       BOLD            0.0000       7.9500        0.01         0.01           0.02
-    R_IFJa         R_PGi      BOLD            0.0001       3.8300        0.00         0.00           0.02
-    R_IFJa         R_TPOJ1    BOLD            0.0000       19.0900        0.03         0.03           0.03
-    R_IFJa         R_STGa     BOLD            0.0173       2.3800        0.00         0.00           0.02
-    R_IFJa         R_STSda    BOLD            0.0000       14.6300        0.02         0.02           0.02
-    R_IFJa         R_STSdp    BOLD            0.0000       14.8000        0.02         0.01           0.02
-    R_IFJa         R_STSva    BOLD            0.0048       2.8200        0.00         0.00           0.02
-    R_IFJa         R_STSvp    BOLD            0.0000       8.1200        0.00         -0.00           0.02
-    R_IFJa         R_TGv      BOLD            0.0386       2.0700        0.00         -0.00           0.02
-    R_IFJa         R_TA2      BOLD            0.0000       4.6600        0.00         0.00           0.02
-    R_IFJa         R_44       BOLD            0.0000       21.7700        0.04         0.04           0.03
-    R_IFJa         R_45       BOLD            0.0000       18.5800        0.03         0.02           0.03
-    R_IFJa         R_47l      BOLD            0.0000       7.6600        0.01         0.00           0.03
-
-
-Out of 30 tests, 24 are significant using a false discovery rate of 0.050000.
-FDR/FCR procedure used is guaranteed valid for independent or positively dependent tests.
-
-#######################################################################################################  21-Feb-2026 13:37:38
-
-Significant 3 area(s) for L_IFJp in BOLD:
-
- 
-    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
-    -----------------------------------------------------------------------------------------------------
-    L_IFJp         L_FOP2     BOLD            0.0055       2.7800        0.00         0.00           0.02
-    L_IFJp         L_MT       BOLD            0.0087       2.6200        -0.00         -0.00           0.02
-    L_IFJp         L_TE1a     BOLD            0.0000       4.8500        -0.00         -0.00           0.02
-
-
-
-#######################################################################################################  21-Feb-2026 13:37:38
-
-Significant 21 area(s) for L_IFJa in BOLD:
-
- 
-    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
-    -----------------------------------------------------------------------------------------------------
-    L_IFJa         L_FOP1     BOLD            0.0040       2.8800        -0.00         -0.00           0.02
-    L_IFJa         L_7AL      BOLD            0.0044       2.8500        -0.00         -0.00           0.02
-    L_IFJa         L_7PC      BOLD            0.0000       9.5900        -0.00         -0.00           0.02
-    L_IFJa         L_PF       BOLD            0.0000       4.5900        0.01         0.01           0.02
-    L_IFJa         L_PFop     BOLD            0.0048       2.8200        0.00         0.00           0.02
-    L_IFJa         L_PFcm     BOLD            0.0000       4.2700        0.00         0.00           0.02
-    L_IFJa         L_A4       BOLD            0.0000       9.5000        0.01         0.01           0.02
-    L_IFJa         L_STV      BOLD            0.0000       18.3900        0.03         0.03           0.03
-    L_IFJa         L_PSL      BOLD            0.0000       10.3000        0.01         0.01           0.03
-    L_IFJa         L_A5       BOLD            0.0000       10.9700        0.01         0.01           0.02
-    L_IFJa         L_PGi      BOLD            0.0000       8.6400        0.00         0.00           0.02
-    L_IFJa         L_TPOJ1    BOLD            0.0000       16.5600        0.02         0.02           0.03
-    L_IFJa         L_STGa     BOLD            0.0000       5.8200        0.00         0.00           0.02
-    L_IFJa         L_STSda    BOLD            0.0000       10.1700        0.01         0.01           0.02
-    L_IFJa         L_STSdp    BOLD            0.0000       13.4500        0.02         0.01           0.03
-    L_IFJa         L_STSva    BOLD            0.0000       4.3700        0.00         0.00           0.02
-    L_IFJa         L_STSvp    BOLD            0.0000       8.3200        0.00         0.00           0.02
-    L_IFJa         L_TA2      BOLD            0.0012       3.2500        0.00         -0.00           0.02
-    L_IFJa         L_44       BOLD            0.0000       21.6200        0.04         0.04           0.03
-    L_IFJa         L_45       BOLD            0.0000       20.2500        0.03         0.02           0.03
-    L_IFJa         L_47l      BOLD            0.0000       11.2500        0.01         0.01           0.03
-
-
-
-### 44 vs 45 partial correlation
-
-![[44 vs 45 part corr all areas.png]]
-
-#######################################################################################################  21-Feb-2026 15:07:57
-
-Significant 9 area(s) for L_44 in BOLD:
-
- 
-    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
-    -----------------------------------------------------------------------------------------------------
-    L_44           L_FOP2     BOLD            0.0126       2.4900        0.00         0.00           0.02
-    L_44           L_PF       BOLD            0.0000       9.1300        0.01         0.01           0.02
-    L_44           L_PFop     BOLD            0.0000       5.8600        -0.01         -0.01           0.02
-    L_44           L_PFcm     BOLD            0.0204       2.3200        -0.00         -0.00           0.02
-    L_44           L_MT       BOLD            0.0331       2.1300        -0.00         -0.00           0.02
-    L_44           L_PBelt    BOLD            0.0000       4.1500        -0.00         -0.00           0.02
-    L_44           L_A4       BOLD            0.0000       4.2300        -0.01         -0.01           0.02
-    L_44           L_STV      BOLD            0.0331       2.1300        -0.00         -0.00           0.02
-    L_44           L_IFJa     BOLD            0.0000       11.1500        0.04         0.04           0.03
-
-
-
-#######################################################################################################  21-Feb-2026 15:07:57
-
-Significant 18 area(s) for L_45 in BOLD:
-
- 
-    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
-    -----------------------------------------------------------------------------------------------------
-    L_45           L_FOP3     BOLD            0.0000       6.0900        0.00         0.00           0.02
-    L_45           L_7AL      BOLD            0.0040       2.8800        0.00         0.00           0.02
-    L_45           L_7Am      BOLD            0.0000       5.2900        -0.00         -0.00           0.02
-    L_45           L_7PC      BOLD            0.0000       6.6900        0.00         0.00           0.02
-    L_45           L_PSL      BOLD            0.0000       5.3600        0.06         0.06           0.04
-    L_45           L_A5       BOLD            0.0000       9.3800        0.01         0.01           0.02
-    L_45           L_PGi      BOLD            0.0000       16.2900        0.04         0.04           0.03
-    L_45           L_TPOJ1    BOLD            0.0000       7.0600        0.02         0.01           0.03
-    L_45           L_STGa     BOLD            0.0000       13.3000        0.02         0.02           0.02
-    L_45           L_STSda    BOLD            0.0000       12.3200        0.02         0.02           0.02
-    L_45           L_STSdp    BOLD            0.0000       11.6800        0.06         0.06           0.04
-    L_45           L_STSva    BOLD            0.0000       15.1900        0.02         0.02           0.02
-    L_45           L_STSvp    BOLD            0.0000       9.6500        0.05         0.05           0.03
-    L_45           L_TE1a     BOLD            0.0000       7.2000        0.00         0.00           0.02
-    L_45           L_TGd      BOLD            0.0000       19.8500        0.03         0.03           0.02
-    L_45           L_TGv      BOLD            0.0000       7.5500        0.02         0.02           0.02
-    L_45           L_TA2      BOLD            0.0000       4.4400        0.00         0.00           0.02
-    L_45           L_47l      BOLD            0.0000       24.4500        0.17         0.17           0.04
-
-
-Out of 30 tests, 26 are significant using a false discovery rate of 0.050000.
-FDR/FCR procedure used is guaranteed valid for independent or positively dependent tests.
-
-#######################################################################################################  21-Feb-2026 15:08:05
-
-Significant 9 area(s) for R_44 in BOLD:
-
- 
-    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
-    -----------------------------------------------------------------------------------------------------
-    R_44           R_FEF      BOLD            0.0000       6.5200        0.00         0.00           0.02
-    R_44           R_PF       BOLD            0.0000       19.3500        0.01         0.01           0.02
-    R_44           R_PFop     BOLD            0.0000       8.7300        -0.00         -0.00           0.02
-    R_44           R_MT       BOLD            0.0000       5.2400        -0.00         -0.00           0.02
-    R_44           R_MST      BOLD            0.0000       5.3600        -0.00         -0.00           0.02
-    R_44           R_PBelt    BOLD            0.0000       4.4200        0.00         0.00           0.02
-    R_44           R_A4       BOLD            0.0000       5.4600        -0.00         -0.00           0.02
-    R_44           R_STSvp    BOLD            0.0000       4.2500        0.04         0.04           0.03
-    R_44           R_IFJa     BOLD            0.0000       8.9300        0.04         0.04           0.03
-
-
-
-#######################################################################################################  21-Feb-2026 15:08:05
-
-Significant 17 area(s) for R_45 in BOLD:
-
- 
-    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
-    -----------------------------------------------------------------------------------------------------
-    R_45           R_FOP1     BOLD            0.0002       3.6800        0.01         0.01           0.02
-    R_45           R_FOP3     BOLD            0.0000       7.3200        -0.00         -0.00           0.02
-    R_45           R_7AL      BOLD            0.0179       2.3700        -0.00         -0.00           0.02
-    R_45           R_7Am      BOLD            0.0019       3.1000        -0.00         -0.00           0.02
-    R_45           R_7PC      BOLD            0.0011       3.2500        0.00         0.00           0.02
-    R_45           R_PSL      BOLD            0.0000       16.9100        0.06         0.06           0.04
-    R_45           R_A5       BOLD            0.0000       4.9500        0.00         0.00           0.02
-    R_45           R_PGi      BOLD            0.0000       16.6100        0.03         0.03           0.03
-    R_45           R_TPOJ1    BOLD            0.0000       19.9900        0.05         0.05           0.03
-    R_45           R_STGa     BOLD            0.0000       17.5700        0.02         0.02           0.02
-    R_45           R_STSda    BOLD            0.0000       21.1400        0.04         0.03           0.02
-    R_45           R_STSdp    BOLD            0.0000       20.1200        0.05         0.05           0.03
-    R_45           R_STSva    BOLD            0.0000       13.8800        0.01         0.01           0.02
-    R_45           R_TE1a     BOLD            0.0341       2.1200        -0.01         -0.01           0.02
-    R_45           R_TGd      BOLD            0.0000       20.5000        0.03         0.03           0.02
-    R_45           R_TGv      BOLD            0.0000       18.1500        0.02         0.02           0.02
-    R_45           R_47l      BOLD            0.0000       20.5900        0.10         0.10           0.04
-
 
 
 ### see also
