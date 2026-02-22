@@ -31,7 +31,7 @@ ventral:
 
 dorsal: 
 - anatomy:
-	- A4 and A5 also have effective connectivity to MT and MST, which connect to superior parietal regions forming a dorsal auditory “where” stream involved in actions in space. Connections of PBelt, A4, and A5 with BA44 may form a language-related dorsal stream. ^cef3ea
+	- A4 and A5 also have effective connectivity to [[MT]] and [[MST]], which connect to superior parietal regions forming a dorsal auditory “where” stream involved in actions in space. Connections of PBelt, A4, and A5 with BA44 may form a language-related dorsal stream. ^cef3ea
 	- Inferior parietal and premotor cortices are all part of this dorsal stream network ^10a9fd
 - tasks
 	- An auditory dorsal pathway is involved in sensorimotor integration and control (Rauschecker 2011), and in humans plays a role in speech production as well as categorization of phonemes during speech processing (Rauschecker 2012). ^27f996

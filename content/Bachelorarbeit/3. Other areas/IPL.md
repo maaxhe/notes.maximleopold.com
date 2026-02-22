@@ -13,8 +13,6 @@ modified: 2026-02-22
 
 **Stream:** #stream/where #stream/dorsal 
 **Classical equivalent:** IPL
-**Mapped to Glasser:** BA39/BA40: [[PGi]], [[PSL]], [[STV]] -> BA40 //
-[[TPOJ1]], TPOJ2 -> BA39
 
 ---
 

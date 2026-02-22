@@ -2,7 +2,6 @@
 modified: 2026-02-22
 ---
 
-Glasser, M. F., Coalson, T. S., Robinson, E. C., Hacker, C. D., Harwell, J., Yacoub, E., Ugurbil, K., Andersson, J., Beckmann, C. F., Jenkinson, M., Smith, S. M., & Van Essen, D. C. (2016). A multi-modal parcellation of human cerebral cortex. _Nature_, _536_(7615), 171–178.
 
 [https://doi.org/10.1038/nature18933](https://doi.org/10.1038/nature18933)
 
@@ -117,6 +116,12 @@ from SUPPL about PSL:
         - Inferior to Superior in **Area 44**.
             
         - Anterior to Posterior in **SFL** (more prominent on the Left).
+
+
+
+We identified the temporo-parieto-occipital junction as a strip of cortex bounded by auditory, lateral temporal, inferior parietal and occipital (visual MT+ complex) regions. This region contains five multimodal areas, TPOJ1, TPOJ2, TPOJ3, STV, and PSL, that are surrounded by areas PGp, PGi, PFm, PF, PFcm, RI, A4, A5, STSdp, STSvp, PHT, FST, MST, MT, and LO3. Areas TPOJ1-3 are moderately myelinated and show strong functional connectivity among themselves and with STV. They form a bridge between higher auditory and higher visual areas, as they are correlated with both. Figure 17 shows the multi-modal information used to parcellate these areas, along with the areas on a folding map (Panel A). All five areas have novel names, as these areas to do not clearly correspond with previous parcellations of this region.
+
+OP4’s boundary with area 1 was covered previously in Section #6 Somatosensory and Motor Cortex. Relative to its supero-posterior neighbor PFop, area OP4 differs in functional connectivity (Panel D) and is modestly activated vs strongly deactivated in the LANGUAGE STORY contrast (Panel F).
 
 ![[Glasser fMRI auditory cortex.png]]
 

@@ -25,6 +25,9 @@ L_55b, L_SCEF, L_FOP1, L_FOP2, L_FOP3, L_OP4, L_7AL, L_7Am, L_7PC, L_PF, L_PFcm,
 
 L_SCEF, L_55b, L_OP4, L_FOP1, L_FOP2, L_FOP3, L_7AL, L_7Am, L_7PC, L_PF, L_PFop, L_PFcm, L_MT, L_MST, L_PBelt, L_A4, L_A5, L_PSL, L_STV, L_PGi, L_TPOJ1, L_STGa, L_STSda, L_STSdp, L_STSva, L_STSvp, L_TA2, L_TE1a, L_TGd, L_TGv, L_AVI, L_47l, L_45, L_44, L_IFSp, L_IFJp
 
+oder right hemisphere: 
+R_SCEF, R_55b, L_43, L_FOP1, L_FOP2, L_FOP3, L_OP4, R_7AL, R_7Am, R_7PC, R_PF, R_PFop, R_PFcm, R_MT, R_MST, R_PBelt, R_A4, R_A5, R_PSL, R_STV, R_PGi, R_TPOJ1, R_STGa, R_STSda, R_STSdp, R_STSva, R_STSvp, R_TA2, R_TE1a, R_TGd, R_TGv, R_AVI, R_47l, R_45, R_44, R_IFSp, R_IFJp
+
 
 spatial orienting network: 8
 - L_7AL, L_7Am, L_7PC, 
@@ -34,7 +37,7 @@ spatial orienting network: 8
 articulatory-motor interface: 6
 - L_55b, 
 - L_44
-- L_OP4, L_FOP1, L_FOP2, L_FOP3
+- L_43, L_FOP1, L_FOP2, L_FOP3, L_OP4
 
 ventral semantic and identity network: 11
 - L_STGa, L_STSda, L_STSdp, L_STSva, L_STSvp, L_TA2, 
