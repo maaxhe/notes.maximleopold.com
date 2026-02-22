@@ -1,5 +1,5 @@
 ---
-modified: 2026-02-21
+modified: 2026-02-22
 ---
 
 ## Fusiform face area (FFA)

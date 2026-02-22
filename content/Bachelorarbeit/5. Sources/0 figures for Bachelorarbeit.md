@@ -1,5 +1,5 @@
 ---
-modified: 2026-02-21
+modified: 2026-02-22
 ---
 
 # figures for Bachelorarbeit 
@@ -26,29 +26,29 @@ L_55b, L_SCEF, L_FOP1, L_FOP2, L_FOP3, L_OP4, L_7AL, L_7Am, L_7PC, L_PF, L_PFcm,
 L_SCEF, L_55b, L_OP4, L_FOP1, L_FOP2, L_FOP3, L_7AL, L_7Am, L_7PC, L_PF, L_PFop, L_PFcm, L_MT, L_MST, L_PBelt, L_A4, L_A5, L_PSL, L_STV, L_PGi, L_TPOJ1, L_STGa, L_STSda, L_STSdp, L_STSva, L_STSvp, L_TA2, L_TE1a, L_TGd, L_TGv, L_AVI, L_47l, L_45, L_44, L_IFSp, L_IFJp
 
 
-spatial orienting network: 
+spatial orienting network: 8
 - L_7AL, L_7Am, L_7PC, 
 - L_PF, L_PFop, L_PFcm, 
 - L_MT, L_MST
 
-articulatory-motor interface: 
+articulatory-motor interface: 6
 - L_55b, 
 - L_44
 - L_OP4, L_FOP1, L_FOP2, L_FOP3
 
-ventral semantic and identity network:
+ventral semantic and identity network: 11
 - L_STGa, L_STSda, L_STSdp, L_STSva, L_STSvp, L_TA2, 
 - L_AVI, L_SCEF, 
 - L_45, L_47l, L_IFSp
 
-hierarchical gateways and supramodal connectors
+hierarchical gateways and supramodal connectors: 7
 - L_PSL, L_STV, L_PGi, L_TPOJ1, 
 - L_PBelt, L_A4, L_A5,
 
-anteroir temporal semantic periphery: 
+anteroir temporal semantic periphery: 3
 - L_TE1a, L_TGd, L_TGv, 
 
-control node:
+control node: 1
 - L_IFJp
 
 
