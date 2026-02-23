@@ -69,7 +69,10 @@ export default ((opts?: Partial<Options>) => {
                 <span class="rag-chat-icon">🧠</span>
                 <div>
                   <h3>Mika</h3>
-                  <p class="rag-chat-subtitle">mein BA-Assistent</p>
+                  <div class="rag-header-meta">
+                    <p class="rag-chat-subtitle">BA-Assistent</p>
+                    <span class="rag-page-badge" id="rag-page-badge" title="Aktuelle Seite"></span>
+                  </div>
                 </div>
               </div>
               <div class="rag-chat-header-actions">

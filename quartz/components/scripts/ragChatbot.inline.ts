@@ -78,6 +78,7 @@ function updateCurrentPageTitle() {
   if (newTitle !== currentPageTitle) {
     currentPageTitle = newTitle
     console.log("📍 Seitenwechsel erkannt:", currentPageTitle)
+    updatePageBadge()
   }
 }
 
@@ -129,11 +130,23 @@ document.addEventListener("click", () => {
   }
 })
 
+function updatePageBadge() {
+  const badge = document.getElementById("rag-page-badge")
+  if (!badge) return
+  if (currentPageTitle && currentPageTitle !== "aktuelle Seite") {
+    badge.textContent = currentPageTitle
+    badge.classList.add("visible")
+  } else {
+    badge.classList.remove("visible")
+  }
+}
+
 function updateWelcomeMessage() {
   const welcomeEl = document.querySelector("#rag-messages .rag-message.assistant .rag-message-content")
   if (welcomeEl && currentPageTitle && currentPageTitle !== "aktuelle Seite") {
     welcomeEl.innerHTML = `Hallo! Ich bin <strong>Mika</strong>, dein KI-Assistent.<br>Ich sehe gerade <em>${currentPageTitle}</em> – stell mir eine Frage!`
   }
+  updatePageBadge()
 }
 
 function openChat() {
@@ -167,10 +180,27 @@ overlay?.addEventListener("click", (e) => {
   }
 })
 
-// Close on Escape key
+// Keyboard shortcuts
 document.addEventListener("keydown", (e) => {
+  // Escape: Chat schließen
   if (e.key === "Escape" && !overlay?.classList.contains("hidden")) {
     closeChat()
+    return
+  }
+  // Cmd/Ctrl+K: Chat öffnen/schließen (kein Konflikt mit Browser)
+  if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+    const activeEl = document.activeElement as HTMLElement
+    // Nicht auslösen wenn User in einem Input/Textarea tippt (ausser im Chat)
+    const inChatInput = activeEl?.id === "rag-input"
+    if (!inChatInput) {
+      e.preventDefault()
+      if (overlay?.classList.contains("hidden")) {
+        openChat()
+        setTimeout(() => (document.getElementById("rag-input") as HTMLTextAreaElement)?.focus(), 100)
+      } else {
+        closeChat()
+      }
+    }
   }
 })
 
@@ -2713,6 +2743,77 @@ function renderAssistantResponse(text: string, sources: any[] = []) {
   return { messageDiv, contentDiv }
 }
 
+// Generiere Follow-up Vorschläge basierend auf Antwort + Seite
+async function addFollowUpSuggestions(messageDiv: HTMLElement, assistantText: string, userMessage: string) {
+  if (!messagesContainer) return
+  // Entferne vorherige Follow-ups
+  document.querySelectorAll(".rag-followup-chips").forEach(el => el.remove())
+
+  try {
+    const res = await fetchApi("/chat-stream", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: `Generiere genau 3 kurze Folgefragen (je max. 8 Wörter, auf Deutsch) die jemand nach dieser Antwort stellen würde. Nur die 3 Fragen, eine pro Zeile, kein Nummerierung, kein Prefix.
+Kontext: Nutzer fragte "${userMessage}" und bekam: "${assistantText.slice(0, 400)}"
+Aktuelle Seite: ${currentPageTitle}`,
+        conversationHistory: [],
+        language: currentLanguage,
+      }),
+    })
+
+    if (!res.ok) return
+
+    // Lese Streaming-Response
+    const reader = res.body?.getReader()
+    if (!reader) return
+    const decoder = new TextDecoder()
+    let buffer = ""
+    let fullText = ""
+
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+      buffer += decoder.decode(value, { stream: true })
+      const parts = buffer.split("\n\n")
+      buffer = parts.pop() || ""
+      for (const part of parts) {
+        const dataLine = part.split("\n").find(l => l.startsWith("data:"))
+        if (!dataLine) continue
+        const payload = dataLine.slice(5).trim()
+        if (payload === "[DONE]") break
+        try {
+          const parsed = JSON.parse(payload)
+          if (parsed.type === "text" && parsed.content) fullText += parsed.content
+        } catch {}
+      }
+    }
+
+    const questions = fullText.split("\n").map(q => q.trim()).filter(q => q.length > 4 && q.length < 80).slice(0, 3)
+    if (questions.length === 0) return
+
+    const chipsDiv = document.createElement("div")
+    chipsDiv.className = "rag-followup-chips"
+    questions.forEach(q => {
+      const btn = document.createElement("button")
+      btn.className = "rag-followup-chip"
+      btn.textContent = q
+      btn.addEventListener("click", () => {
+        if (inputField) {
+          inputField.value = q
+          chipsDiv.remove()
+          sendMessage()
+        }
+      })
+      chipsDiv.appendChild(btn)
+    })
+    messagesContainer.appendChild(chipsDiv)
+    messagesContainer.scrollTop = messagesContainer.scrollHeight
+  } catch (e) {
+    // Follow-ups sind optional — Fehler ignorieren
+  }
+}
+
 function finalizeAssistantInteraction(
   messageDiv: HTMLElement,
   contentDiv: HTMLElement,
@@ -2748,6 +2849,9 @@ function finalizeAssistantInteraction(
     currentSessionId = newSession.id
   }
   saveCurrentSession()
+
+  // Follow-up Vorschläge asynchron generieren (nach kurzer Pause)
+  setTimeout(() => addFollowUpSuggestions(messageDiv, assistantText, userMessage), 300)
 }
 
 function addMessage(
@@ -3021,6 +3125,17 @@ async function sendMessage() {
     enrichedMessage = `[Kontext: Nutzer ist auf Seite "${currentPageTitle}"] ${enrichedMessage}`
   }
 
+  // Memory: Wenn die Seite sich seit dem letzten Austausch geändert hat,
+  // injiziere eine System-Notiz in die conversationHistory damit Mika den Wechsel kennt
+  const lastMemoryEntry = conversationHistory.findLast?.((m: any) => m.role === "system")
+  const lastMemoryPage = lastMemoryEntry?.content?.match(/Seite: "([^"]+)"/)?.[1]
+  if (currentPageTitle !== "aktuelle Seite" && lastMemoryPage !== currentPageTitle) {
+    conversationHistory.push({
+      role: "user" as const,
+      content: `[System: Ich wechsle jetzt zur Seite "${currentPageTitle}". Beziehe dich in folgenden Antworten darauf.]`,
+    } as any)
+  }
+
   // Debug logging
   console.log("🔍 Original Message:", userMessage)
   console.log("🔍 Enriched Message:", enrichedMessage)
@@ -3041,12 +3156,13 @@ async function sendMessage() {
 
     setStatus(t('status.generating'))
 
-    // Erstelle leere Assistenten-Nachricht für Streaming
+    // Erstelle Assistenten-Nachricht mit Typing-Dots für Streaming
     const messageDiv = document.createElement("div")
     messageDiv.className = "rag-message assistant"
 
     const contentDiv = document.createElement("div")
     contentDiv.className = "rag-message-content"
+    contentDiv.innerHTML = `<span class="rag-typing-dots"><span></span><span></span><span></span></span>`
     messageDiv.appendChild(contentDiv)
 
     if (messagesContainer) {
@@ -3056,6 +3172,7 @@ async function sendMessage() {
 
     let fullResponse = ""
     let sources: any[] = []
+    let firstTokenReceived = false
 
     const applyParsedChunk = (parsed: any, eventHint: string | null) => {
       const eventType = (parsed.event ?? parsed.type ?? eventHint ?? "").toLowerCase()
@@ -3088,6 +3205,11 @@ async function sendMessage() {
 
       const textDelta = extractTextFromPayload(parsed, eventType)
       if (textDelta) {
+        if (!firstTokenReceived) {
+          firstTokenReceived = true
+          // Typing-Dots entfernen beim ersten echten Token
+          contentDiv.innerHTML = ""
+        }
         fullResponse += textDelta
         const preparedSources = enrichSourcesWithCitations(fullResponse, sources)
         contentDiv.innerHTML = formatMarkdown(fullResponse, preparedSources)
