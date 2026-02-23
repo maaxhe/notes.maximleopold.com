@@ -112,21 +112,32 @@ const expandBtn = document.getElementById("rag-chat-expand")
 let isFullscreen = false
 let chatInitialized = false
 
-// ⋯ Mehr-Menü
+// ⋯ Mehr-Menü — event delegation (fresh DOM lookup every time)
 const moreBtn = document.getElementById("rag-chat-more")
 const moreDropdown = document.getElementById("rag-more-dropdown")
 
-function isMenuOpen() { return moreDropdown?.style.display !== "none" }
-function openMenu() { if (moreDropdown) moreDropdown.style.display = ""; moreBtn?.classList.add("active") }
-function closeMenu() { if (moreDropdown) moreDropdown.style.display = "none"; moreBtn?.classList.remove("active") }
+function getMenuDropdown() { return document.getElementById("rag-more-dropdown") }
+function getMenuBtn() { return document.getElementById("rag-chat-more") }
+function isMenuOpen() { return getMenuDropdown()?.style.display !== "none" }
+function openMenu() {
+  const d = getMenuDropdown(); const b = getMenuBtn()
+  if (d) d.style.display = ""
+  b?.classList.add("active")
+}
+function closeMenu() {
+  const d = getMenuDropdown(); const b = getMenuBtn()
+  if (d) d.style.display = "none"
+  b?.classList.remove("active")
+}
 
-moreBtn?.addEventListener("click", (e) => {
-  e.stopPropagation()
-  isMenuOpen() ? closeMenu() : openMenu()
+document.addEventListener("click", (e) => {
+  const target = e.target as HTMLElement
+  if (target.closest("#rag-chat-more")) {
+    isMenuOpen() ? closeMenu() : openMenu()
+    return
+  }
+  if (isMenuOpen()) closeMenu()
 })
-
-// Close dropdown when clicking outside
-document.addEventListener("click", () => { if (isMenuOpen()) closeMenu() })
 
 function updatePageBadge() {
   const badge = document.getElementById("rag-page-badge")
