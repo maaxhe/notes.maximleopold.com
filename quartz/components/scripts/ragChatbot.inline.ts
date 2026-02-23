@@ -2743,53 +2743,26 @@ function renderAssistantResponse(text: string, sources: any[] = []) {
   return { messageDiv, contentDiv }
 }
 
-// Generiere Follow-up Vorschläge basierend auf Antwort + Seite
-async function addFollowUpSuggestions(messageDiv: HTMLElement, assistantText: string, userMessage: string) {
+// Generiere Follow-up Vorschläge via dediziertem /followups-Endpoint (kein RAG)
+async function addFollowUpSuggestions(_messageDiv: HTMLElement, assistantText: string, userMessage: string) {
   if (!messagesContainer) return
-  // Entferne vorherige Follow-ups
   document.querySelectorAll(".rag-followup-chips").forEach(el => el.remove())
 
   try {
-    const res = await fetchApi("/chat-stream", {
+    const res = await fetchApi("/followups", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        message: `Generiere genau 3 kurze Folgefragen (je max. 8 Wörter, auf Deutsch) die jemand nach dieser Antwort stellen würde. Nur die 3 Fragen, eine pro Zeile, kein Nummerierung, kein Prefix.
-Kontext: Nutzer fragte "${userMessage}" und bekam: "${assistantText.slice(0, 400)}"
-Aktuelle Seite: ${currentPageTitle}`,
-        conversationHistory: [],
+        assistantText,
+        userMessage,
+        currentPage: currentPageTitle,
         language: currentLanguage,
       }),
-    })
+    }, { retryOn404: false })
 
     if (!res.ok) return
-
-    // Lese Streaming-Response
-    const reader = res.body?.getReader()
-    if (!reader) return
-    const decoder = new TextDecoder()
-    let buffer = ""
-    let fullText = ""
-
-    while (true) {
-      const { done, value } = await reader.read()
-      if (done) break
-      buffer += decoder.decode(value, { stream: true })
-      const parts = buffer.split("\n\n")
-      buffer = parts.pop() || ""
-      for (const part of parts) {
-        const dataLine = part.split("\n").find(l => l.startsWith("data:"))
-        if (!dataLine) continue
-        const payload = dataLine.slice(5).trim()
-        if (payload === "[DONE]") break
-        try {
-          const parsed = JSON.parse(payload)
-          if (parsed.type === "text" && parsed.content) fullText += parsed.content
-        } catch {}
-      }
-    }
-
-    const questions = fullText.split("\n").map(q => q.trim()).filter(q => q.length > 4 && q.length < 80).slice(0, 3)
+    const data = await res.json()
+    const questions: string[] = data.questions || []
     if (questions.length === 0) return
 
     const chipsDiv = document.createElement("div")
@@ -2809,7 +2782,7 @@ Aktuelle Seite: ${currentPageTitle}`,
     })
     messagesContainer.appendChild(chipsDiv)
     messagesContainer.scrollTop = messagesContainer.scrollHeight
-  } catch (e) {
+  } catch {
     // Follow-ups sind optional — Fehler ignorieren
   }
 }

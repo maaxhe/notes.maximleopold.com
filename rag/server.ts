@@ -795,6 +795,51 @@ function canonicalChunkKey(chunk: DocumentChunk & { score: number }) {
 }
 
 /**
+ * Follow-up Suggestions Endpoint — kein RAG, direkt Claude
+ */
+apiRouter.post("/followups", async (req, res) => {
+  try {
+    const { assistantText = "", userMessage = "", currentPage = "", language = "de" } = req.body
+
+    const prompt = language === "de"
+      ? `Generiere genau 3 kurze Folgefragen (je max. 8 Wörter) die jemand nach dieser Unterhaltung stellen würde.
+Nutzer fragte: "${userMessage}"
+Antwort: "${assistantText.slice(0, 500)}"
+Aktuelle Seite: "${currentPage}"
+
+Regeln:
+- Nur die 3 Fragen, eine pro Zeile
+- Keine Nummerierung, kein Prefix, keine Anführungszeichen
+- Auf Deutsch
+- Konkret und spezifisch zur Seite/Antwort`
+      : `Generate exactly 3 short follow-up questions (max 8 words each) someone would ask after this conversation.
+User asked: "${userMessage}"
+Answer: "${assistantText.slice(0, 500)}"
+Current page: "${currentPage}"
+
+Rules:
+- Only the 3 questions, one per line
+- No numbering, no prefix, no quotes
+- In English
+- Specific to the page/answer`
+
+    const response = await anthropic.messages.create({
+      model: "claude-haiku-4-5-20251001",
+      max_tokens: 150,
+      messages: [{ role: "user", content: prompt }],
+    })
+
+    const text = response.content[0].type === "text" ? response.content[0].text : ""
+    const questions = text.split("\n").map((q: string) => q.trim()).filter((q: string) => q.length > 4 && q.length < 80).slice(0, 3)
+
+    res.json({ questions })
+  } catch (error: any) {
+    console.error("❌ Followups error:", error)
+    res.status(500).json({ questions: [] })
+  }
+})
+
+/**
  * Chat Endpoint mit RAG (Non-Streaming für Kompatibilität)
  */
 apiRouter.post("/chat", async (req, res) => {
