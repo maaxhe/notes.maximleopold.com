@@ -2677,17 +2677,37 @@ function addSourcesToMessage(messageDiv: HTMLElement, sources: any[]) {
     sourceItem.className = "rag-source-item"
 
     const url = meta.url || "/"
-    const venueText = meta.venue ? `<div class="rag-source-meta">${meta.venue}</div>` : ""
     const label = meta.year ? `${meta.authors} (${meta.year})` : meta.authors
+    const excerpt = source.excerpt || source.content || ""
+    const excerptShort = excerpt.length > 240 ? excerpt.slice(0, 240).trimEnd() + "…" : excerpt
+    const venueHtml = meta.venue ? `<span class="rag-source-venue">${meta.venue}</span>` : ""
+    const categoryHtml = source.category ? `<span class="rag-source-category">${source.category}</span>` : ""
 
     sourceItem.innerHTML = `
-      <div class="rag-source-title">
-        <a href="${url}" target="_blank" rel="noopener noreferrer">
-          ${label}${meta.title ? ` – ${meta.title}` : ""}
+      <button class="rag-source-toggle" aria-expanded="false">
+        <span class="rag-source-toggle-icon">›</span>
+        <span class="rag-source-label">${label}${meta.title ? ` – <em>${meta.title}</em>` : ""}</span>
+        <span class="rag-source-tags">${venueHtml}${categoryHtml}</span>
+      </button>
+      <div class="rag-source-details hidden">
+        ${excerptShort ? `<blockquote class="rag-source-excerpt">${excerptShort}</blockquote>` : ""}
+        <a class="rag-source-link" href="${url}" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Notiz öffnen
         </a>
       </div>
-      ${venueText}
     `
+
+    const toggle = sourceItem.querySelector(".rag-source-toggle") as HTMLButtonElement
+    const details = sourceItem.querySelector(".rag-source-details") as HTMLElement
+    const icon = sourceItem.querySelector(".rag-source-toggle-icon") as HTMLElement
+    toggle?.addEventListener("click", () => {
+      const isOpen = !details.classList.contains("hidden")
+      details.classList.toggle("hidden", isOpen)
+      toggle.setAttribute("aria-expanded", String(!isOpen))
+      icon.style.transform = isOpen ? "" : "rotate(90deg)"
+    })
+
     sourcesDiv.appendChild(sourceItem)
   })
 

@@ -684,67 +684,125 @@ apiRouter.post("/chat-stream", async (req, res) => {
       context = formatContext(finalChunks)
 
       // Erkenne Anfrage-Typ
-      const isSummaryRequest = message.toLowerCase().includes("zusammenfassen") ||
-                              message.toLowerCase().includes("fasse") ||
-                              message.toLowerCase().includes("zusammenfassung")
-      const isMainPointsRequest = message.toLowerCase().includes("hauptpunkte") ||
-                                 message.toLowerCase().includes("key points")
+      const msgLower = message.toLowerCase()
+      const isSummaryRequest = msgLower.includes("zusammenfassen") ||
+                               msgLower.includes("fasse") ||
+                               msgLower.includes("zusammenfassung") ||
+                               msgLower.includes("summarize") ||
+                               msgLower.includes("summary")
+      const isMainPointsRequest = msgLower.includes("hauptpunkte") ||
+                                  msgLower.includes("key points") ||
+                                  msgLower.includes("stichpunkte")
+      const isAnalysisRequest = msgLower.includes("analysiere") ||
+                                msgLower.includes("analyse") ||
+                                msgLower.includes("erkläre") ||
+                                msgLower.includes("was bedeutet") ||
+                                msgLower.includes("what does")
 
-      let specificInstructions = ""
-      if (isSummaryRequest) {
-        specificInstructions = `
-ZUSAMMENFASSUNG ANGEFORDERT:
-- Gib eine echte ZUSAMMENFASSUNG in 2-3 Sätzen
-- Konzentriere dich auf die KERNAUSSAGE, nicht auf Details
-- Verwende EIGENE WORTE, keine Ausschnitte aus den Quellen
-- Formuliere ÜBERGREIFEND und ABSTRAHIEREND`
-      } else if (isMainPointsRequest) {
-        specificInstructions = `
-HAUPTPUNKTE ANGEFORDERT:
-- Gib EXAKT 3 kurze Bullet Points aus (verwende • als Symbol)
-- Jeder Punkt: MAXIMAL 1 Zeile
-- Nur die WICHTIGSTEN Kernaussagen
-- Keine Details, keine Erklärungen`
-      }
-
-      const pageContextSection = pageContent
-        ? (language === "de"
-          ? `\n\nAKTUELLER SEITENINHALT (gerenderte Seite inkl. eingebetteter Unterseiten):\n${pageContent}`
-          : `\n\nCURRENT PAGE CONTENT (rendered page including embedded sub-pages):\n${pageContent}`)
+      // 1c: Seiteninhalt priorisieren — bei Zusammenfassungen & Analyse mehr Gewicht auf die aktuelle Seite
+      const hasPageContent = pageContent && pageContent.trim().length > 100
+      // Mehr Seiteninhalt bei Zusammenfassungen: bis zu 12000 Zeichen statt 6000
+      const pageContentTruncated = hasPageContent
+        ? (isSummaryRequest || isAnalysisRequest ? pageContent.slice(0, 12000) : pageContent.slice(0, 6000))
         : ""
 
-      systemPrompt = language === "de"
-        ? `Du bist Mika, ein hilfreicher wissenschaftlicher Assistent, der Fragen zur Bachelorarbeit über auditorische Streams im Gehirn beantwortet.
+      const pageContextSection = pageContentTruncated
+        ? (language === "de"
+          ? `\n\n---\nAKTUELLER SEITENINHALT (vollständig gerendert, inkl. eingebetteter Unterseiten):\n${pageContentTruncated}\n---`
+          : `\n\n---\nCURRENT PAGE CONTENT (fully rendered, including embedded sub-pages):\n${pageContentTruncated}\n---`)
+        : ""
 
-WICHTIGE REGELN:
-1. Beantworte Fragen ausschließlich basierend auf den bereitgestellten Quellen
-2. Sei EXTREM PRÄGNANT - keine ausschweifenden Erklärungen
-3. Zitiere Quellen DIREKT mit ihrem Namen in eckigen Klammern (z.B. "[FEF]" oder "[Bedini & Baldauf (2021)]")
-4. Verwende IMMER den exakten Dokumenttitel (z.B. "Rauschecker & Scott (2009) - Nature Neuroscience"), niemals generische Labels wie "Quelle 4"
-5. NIEMALS Quellen in Überschriften (##, ###) einfügen - nur im Fließtext!
-6. Verwende NUR Quellen, die du auch wirklich zitierst
-7. Wenn die Informationen nicht in den Quellen enthalten sind, sage das klar
-8. Verwende wissenschaftliche, aber zugängliche Sprache
-9. Bei widersprüchlichen Informationen, erwähne beide Perspektiven kurz
-10. Antworte auf Deutsch
+      // 1b: Spezialisierte Anweisungen je nach Anfrage-Typ
+      let specificInstructions = ""
+
+      if (isSummaryRequest) {
+        specificInstructions = language === "de"
+          ? `
+ZUSAMMENFASSUNG ANGEFORDERT — Folge exakt dieser Struktur:
+1. **Kernthese** (1-2 Sätze): Worum geht es? Was wird untersucht?
+2. **Methode** (1 Satz): Wie wurde es untersucht?
+3. **Ergebnis** (2-3 Sätze): Was wurde gefunden? Wichtigste Befunde?
+4. **Bedeutung** (1 Satz): Warum ist das relevant?
+
+Regeln:
+- Wenn ein AKTUELLER SEITENINHALT verfügbar ist, basiere die Zusammenfassung PRIMÄR darauf
+- Schreibe in eigenen Worten, keine direkten Zitate
+- Wissenschaftlich präzise, aber verständlich
+- Keine Einleitung wie "Hier ist eine Zusammenfassung von..."`
+          : `
+SUMMARY REQUESTED — Follow this exact structure:
+1. **Core Thesis** (1-2 sentences): What is investigated?
+2. **Method** (1 sentence): How was it investigated?
+3. **Results** (2-3 sentences): What was found?
+4. **Significance** (1 sentence): Why does it matter?
+
+Rules:
+- If CURRENT PAGE CONTENT is available, base the summary PRIMARILY on it
+- Write in your own words, no direct quotes
+- Scientifically precise but accessible`
+      } else if (isMainPointsRequest) {
+        specificInstructions = language === "de"
+          ? `
+HAUPTPUNKTE ANGEFORDERT:
+- Gib EXAKT 3-5 Bullet Points (verwende • als Symbol)
+- Jeder Punkt: maximal 1-2 Zeilen
+- Nur die wichtigsten Kernaussagen
+- Wenn SEITENINHALT verfügbar ist, nutze ihn als primäre Quelle`
+          : `
+KEY POINTS REQUESTED:
+- Give EXACTLY 3-5 bullet points (use • symbol)
+- Each point: max 1-2 lines
+- Most important takeaways only`
+      } else if (isAnalysisRequest && hasPageContent) {
+        specificInstructions = language === "de"
+          ? `
+ANALYSE ANGEFORDERT:
+- Analysiere ZUERST den AKTUELLEN SEITENINHALT gründlich
+- Ziehe dann ergänzende Informationen aus den Vault-Quellen hinzu
+- Erkläre Zusammenhänge, nicht nur Fakten
+- Zeige auf was unklar, widersprüchlich oder besonders interessant ist`
+          : `
+ANALYSIS REQUESTED:
+- FIRST analyze the CURRENT PAGE CONTENT thoroughly
+- Then supplement with information from vault sources
+- Explain connections, not just facts`
+      } else if (hasPageContent) {
+        // Für alle anderen Anfragen: Seiteninhalt als primäre Erkenntnisquelle nutzen
+        specificInstructions = language === "de"
+          ? `\nHINWEIS: Ein AKTUELLER SEITENINHALT ist verfügbar. Nutze ihn zusammen mit den Vault-Quellen um die Frage zu beantworten. Priorisiere den Seiteninhalt wenn er direkt relevant ist.`
+          : `\nNOTE: CURRENT PAGE CONTENT is available. Use it together with vault sources. Prioritize page content when directly relevant.`
+      }
+
+      systemPrompt = language === "de"
+        ? `Du bist Mika, ein präziser wissenschaftlicher Assistent für eine Bachelorarbeit über auditorische Streams im Gehirn (Cognitive Neuroscience).
+
+KERNREGELN:
+1. Antworte NUR basierend auf den bereitgestellten Quellen und dem Seiteninhalt
+2. Zitiere mit exaktem Dokumenttitel in eckigen Klammern: [FEF], [Bedini & Baldauf (2021)]
+3. NIEMALS generische Labels wie "Quelle 4" — immer echte Titel
+4. KEINE Zitate in Überschriften (##, ###) — nur im Fließtext
+5. Wenn Information fehlt: sage es klar
+6. Wissenschaftliche, präzise Sprache
+7. Bei Widersprüchen: beide Perspektiven kurz nennen
+8. Antworte auf Deutsch
 ${specificInstructions}
 
-KONTEXT AUS DEN DOKUMENTEN:
+VAULT-QUELLEN (${finalChunks.length} relevante Passagen):
 ${context}${pageContextSection}`
-        : `You are Mika, a helpful scientific assistant answering questions about the bachelor thesis on auditory streams in the brain.
+        : `You are Mika, a precise scientific assistant for a bachelor thesis on auditory streams in the brain (Cognitive Neuroscience).
 
-IMPORTANT RULES:
-1. Answer questions exclusively based on the provided sources
-2. Be EXTREMELY CONCISE - no lengthy explanations
-3. Always cite sources (e.g. "[Source 1]" or "[Source 2, 3]")
-4. Use the exact document title when citing (e.g. "Rauschecker & Scott (2009) - Nature Neuroscience"); never write placeholders like "Source 4"
-5. If information is not in the sources, state this clearly
-6. Use scientific but accessible language
-7. For contradictory information, briefly mention both perspectives
+CORE RULES:
+1. Answer ONLY based on provided sources and page content
+2. Cite with exact document title in brackets: [FEF], [Bedini & Baldauf (2021)]
+3. NEVER use generic labels like "Source 4" — always real titles
+4. NO citations in headings (##, ###) — only in body text
+5. If information is missing: say so clearly
+6. Scientific, precise language
+7. For contradictions: briefly mention both perspectives
 8. Answer in English
 ${specificInstructions}
 
-CONTEXT FROM DOCUMENTS:
+VAULT SOURCES (${finalChunks.length} relevant passages):
 ${context}${pageContextSection}`
     }
 
@@ -929,68 +987,69 @@ apiRouter.post("/chat", async (req, res) => {
     // Formatiere Kontext
     const context = formatContext(finalChunks)
 
-    // Erkenne den Anfrage-Typ
-    const isSummaryRequest = message.toLowerCase().includes("zusammenfassen") ||
-                            message.toLowerCase().includes("fasse") ||
-                            message.toLowerCase().includes("zusammenfassung")
-    const isMainPointsRequest = message.toLowerCase().includes("hauptpunkte") ||
-                               message.toLowerCase().includes("key points")
-
-    // System Prompt für akademische Zusammenfassungen
-    let specificInstructions = ""
-
-    if (isSummaryRequest) {
-      specificInstructions = `
-ZUSAMMENFASSUNG ANGEFORDERT:
-- Gib eine echte ZUSAMMENFASSUNG in 2-3 Sätzen
-- Konzentriere dich auf die KERNAUSSAGE, nicht auf Details
-- Verwende EIGENE WORTE, keine Ausschnitte aus den Quellen
-- Formuliere ÜBERGREIFEND und ABSTRAHIEREND`
-    } else if (isMainPointsRequest) {
-      specificInstructions = `
-HAUPTPUNKTE ANGEFORDERT:
-- Gib EXAKT 3 kurze Bullet Points aus (verwende • als Symbol)
-- Jeder Punkt: MAXIMAL 1 Zeile
-- Nur die WICHTIGSTEN Kernaussagen
-- Keine Details, keine Erklärungen`
-    }
-
-    const pageContextSectionChat = pageContent
-      ? (language === "de"
-        ? `\n\nAKTUELLER SEITENINHALT (gerenderte Seite inkl. eingebetteter Unterseiten):\n${pageContent}`
-        : `\n\nCURRENT PAGE CONTENT (rendered page including embedded sub-pages):\n${pageContent}`)
+    // Erkenne Anfrage-Typ (gleiche Logik wie chat-stream)
+    const msgLower = message.toLowerCase()
+    const isSummaryRequest = msgLower.includes("zusammenfassen") || msgLower.includes("fasse") ||
+                             msgLower.includes("zusammenfassung") || msgLower.includes("summarize") || msgLower.includes("summary")
+    const isMainPointsRequest = msgLower.includes("hauptpunkte") || msgLower.includes("key points") || msgLower.includes("stichpunkte")
+    const isAnalysisRequest = msgLower.includes("analysiere") || msgLower.includes("analyse") ||
+                              msgLower.includes("erkläre") || msgLower.includes("was bedeutet")
+    const hasPageContent = pageContent && pageContent.trim().length > 100
+    const pageContentTruncated = hasPageContent
+      ? (isSummaryRequest || isAnalysisRequest ? pageContent.slice(0, 12000) : pageContent.slice(0, 6000))
       : ""
 
+    const pageContextSectionChat = pageContentTruncated
+      ? (language === "de"
+        ? `\n\n---\nAKTUELLER SEITENINHALT (vollständig gerendert):\n${pageContentTruncated}\n---`
+        : `\n\n---\nCURRENT PAGE CONTENT (fully rendered):\n${pageContentTruncated}\n---`)
+      : ""
+
+    let specificInstructions = ""
+    if (isSummaryRequest) {
+      specificInstructions = language === "de"
+        ? `\nZUSAMMENFASSUNG — Struktur: 1) Kernthese 2) Methode 3) Ergebnis 4) Bedeutung. Basiere PRIMÄR auf dem Seiteninhalt wenn verfügbar. Eigene Worte, keine Zitate.`
+        : `\nSUMMARY — Structure: 1) Core Thesis 2) Method 3) Results 4) Significance. Base PRIMARILY on page content if available.`
+    } else if (isMainPointsRequest) {
+      specificInstructions = language === "de"
+        ? `\nHAUPTPUNKTE: Genau 3-5 Bullet Points (•), max. 2 Zeilen je Punkt. Nur Kernaussagen.`
+        : `\nKEY POINTS: Exactly 3-5 bullet points (•), max 2 lines each.`
+    } else if (isAnalysisRequest && hasPageContent) {
+      specificInstructions = language === "de"
+        ? `\nANALYSE: Zuerst den SEITENINHALT gründlich analysieren, dann Vault-Quellen ergänzen. Zusammenhänge erklären.`
+        : `\nANALYSIS: First analyze PAGE CONTENT thoroughly, then supplement with vault sources.`
+    } else if (hasPageContent) {
+      specificInstructions = language === "de"
+        ? `\nSeiteninhalt ist verfügbar — nutze ihn als primäre Quelle wenn relevant.`
+        : `\nPage content available — use as primary source when relevant.`
+    }
+
     const systemPrompt = language === "de"
-      ? `Du bist Mika, ein hilfreicher wissenschaftlicher Assistent, der Fragen zur Bachelorarbeit über auditorische Streams im Gehirn beantwortet.
+      ? `Du bist Mika, ein präziser wissenschaftlicher Assistent für eine Bachelorarbeit über auditorische Streams im Gehirn.
 
-WICHTIGE REGELN:
-1. Beantworte Fragen ausschließlich basierend auf den bereitgestellten Quellen
-2. Sei EXTREM PRÄGNANT - keine ausschweifenden Erklärungen
-3. Zitiere Quellen DIREKT mit ihrem Namen in eckigen Klammern (z.B. "[FEF]" oder "[Bedini & Baldauf (2021)]")
-4. NIEMALS Quellen in Überschriften (##, ###) einfügen - nur im Fließtext!
-5. Verwende NUR Quellen, die du auch wirklich zitierst
-6. Wenn die Informationen nicht in den Quellen enthalten sind, sage das klar
-7. Verwende wissenschaftliche, aber zugängliche Sprache
-8. Bei widersprüchlichen Informationen, erwähne beide Perspektiven kurz
-9. Antworte auf Deutsch
+KERNREGELN:
+1. Antworte NUR basierend auf den bereitgestellten Quellen und Seiteninhalt
+2. Zitiere mit exaktem Titel in eckigen Klammern: [FEF], [Bedini & Baldauf (2021)]
+3. NIEMALS generische Labels wie "Quelle 4"
+4. Keine Zitate in Überschriften (##, ###)
+5. Fehlt Information: sage es klar
+6. Wissenschaftliche, präzise Sprache auf Deutsch
 ${specificInstructions}
 
-KONTEXT AUS DEN DOKUMENTEN:
+VAULT-QUELLEN (${finalChunks.length} Passagen):
 ${context}${pageContextSectionChat}`
-      : `You are Mika, a helpful scientific assistant answering questions about the bachelor thesis on auditory streams in the brain.
+      : `You are Mika, a precise scientific assistant for a bachelor thesis on auditory streams in the brain.
 
-IMPORTANT RULES:
-1. Answer questions exclusively based on the provided sources
-2. Be EXTREMELY CONCISE - no lengthy explanations
-3. Always cite sources (e.g. "[Source 1]" or "[Source 2, 3]")
-4. If information is not in the sources, state this clearly
-5. Use scientific but accessible language
-6. For contradictory information, briefly mention both perspectives
-7. Answer in English
+CORE RULES:
+1. Answer ONLY based on provided sources and page content
+2. Cite with exact title in brackets: [FEF], [Bedini & Baldauf (2021)]
+3. NEVER generic labels like "Source 4"
+4. No citations in headings (##, ###)
+5. If information missing: say so clearly
+6. Scientific, precise language in English
 ${specificInstructions}
 
-CONTEXT FROM DOCUMENTS:
+VAULT SOURCES (${finalChunks.length} passages):
 ${context}${pageContextSectionChat}`
 
     // Bereite Konversationshistorie vor

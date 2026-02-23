@@ -2981,44 +2981,92 @@
     }
 
     .rag-source-item {
+      border-bottom: 1px solid var(--lightgray);
+      &:last-child { border-bottom: none; }
+    }
+
+    // Toggle-Button (klickbare Zeile)
+    .rag-source-toggle {
+      all: unset;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      width: 100%;
+      padding: 0.45rem 0;
+      cursor: pointer;
+      box-sizing: border-box;
+      font-size: 0.84rem;
+
+      &:hover .rag-source-label {
+        color: var(--secondary);
+      }
+    }
+
+    .rag-source-toggle-icon {
+      color: var(--gray);
+      font-size: 1rem;
+      line-height: 1;
+      flex-shrink: 0;
+      transition: transform 0.15s ease;
+      display: inline-block;
+      width: 12px;
+    }
+
+    .rag-source-label {
+      flex: 1;
+      font-weight: 600;
+      color: var(--dark);
+      transition: color 0.15s;
+      em { font-style: normal; color: var(--darkgray); font-weight: 400; }
+    }
+
+    .rag-source-tags {
+      display: flex;
+      gap: 0.3rem;
+      flex-shrink: 0;
+    }
+
+    .rag-source-venue,
+    .rag-source-category {
+      font-size: 0.72rem;
+      background: var(--lightgray);
+      color: var(--darkgray);
+      padding: 0.1rem 0.4rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    // Ausgeklappter Bereich
+    .rag-source-details {
+      padding: 0 0 0.6rem 1.1rem;
       display: flex;
       flex-direction: column;
-      gap: 0.15rem;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid var(--lightgray);
+      gap: 0.5rem;
 
-      &:last-child {
-        border-bottom: none;
-      }
+      &.hidden { display: none; }
+    }
 
-      .rag-source-title {
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
+    .rag-source-excerpt {
+      margin: 0;
+      padding: 0.5rem 0.75rem;
+      border-left: 3px solid var(--secondary);
+      background: color-mix(in srgb, var(--secondary) 6%, transparent);
+      font-size: 0.82rem;
+      color: var(--darkgray);
+      line-height: 1.55;
+      border-radius: 0 6px 6px 0;
+      font-style: italic;
+    }
 
-        .rag-evidence-indicator {
-          font-size: 0.9rem;
-          flex-shrink: 0;
-          cursor: help;
-        }
-
-        a {
-          color: var(--secondary);
-          text-decoration: none;
-          transition: color 0.2s ease;
-          &:hover {
-            color: var(--tertiary);
-            text-decoration: underline;
-          }
-        }
-      }
-
-      .rag-source-meta {
-        font-size: 0.78rem;
-        color: var(--gray);
-        font-style: italic;
-      }
+    .rag-source-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.78rem;
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 500;
+      &:hover { text-decoration: underline; }
     }
   }
 
