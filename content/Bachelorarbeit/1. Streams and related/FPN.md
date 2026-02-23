@@ -5,7 +5,7 @@ tags:
   - region/network
   - stream/pfc
   - stream/safe
-modified: 2026-02-22
+modified: 2026-02-23
 ---
 # FPN (Frontoparietal Network)
 
