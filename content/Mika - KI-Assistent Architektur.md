@@ -69,7 +69,7 @@ Das Problem mit reinen LLMs (wie ChatGPT): Sie wissen nichts über meine spezifi
 | **LLM (Follow-ups)** | Anthropic Claude Haiku | Schnell, günstig für kurze Tasks |
 | **Server** | Express.js + SSE Streaming | Echtzeit-Streaming im Browser |
 | **Frontend** | Quartz (SSG) + Inline TypeScript | Integriert in Notiz-System |
-| **Deployment** | VPS + PM2 + nginx | Self-hosted, volle Kontrolle |
+| **Deployment** | VPS + PM2 + nginx + GitHub Actions | Self-hosted, 24/7, automatisch |
 
 ---
 
@@ -129,6 +129,56 @@ Das bedeutet: jeder Chunk enthält eine **semantisch zusammenhängende Einheit**
 ## Was ich im Interview sagen würde
 
 > "Mika ist ein RAG-System das auf meiner persönlichen Notiz-Wissensdatenbank läuft. Ich habe alle meine Markdown-Notizen und PDFs offline mit OpenAI Embeddings vektorisiert und in einem JSON-basierten Vektorspeicher abgelegt — insgesamt etwa 6400 Chunks. Bei einer Anfrage wird die Query ebenfalls embedded, dann kombiniere ich semantische Ähnlichkeit per Cosinus mit einem BM25 Keyword-Score, um sowohl konzeptuell verwandte als auch exakt passende Passagen zu finden. Die Top-Kandidaten werden nochmals reranked und als Kontext an Claude Sonnet übergeben. Das Besondere ist das kontextsensitive Boosting: Chunks der aktuell angeschauten Seite bekommen einen Score-Boost, sodass Mika immer auch die gerade gelesene Seite 'versteht'. Geantwortet wird per Server-Sent Events für echtes Token-by-Token Streaming im Browser."
+
+---
+
+## Infrastruktur & Deployment
+
+### VPS (Virtual Private Server)
+Der RAG-Server läuft auf einem eigenen Linux-VPS (Ubuntu, 91.99.236.172). Das bedeutet:
+- **Kein Cold Start** — im Gegensatz zu Serverless-Funktionen (Vercel, Lambda) ist der Server dauerhaft im Speicher geladen, inklusive des ~292 MB großen Vector Stores
+- **Keine API-Kosten für das Hosting** — nur der VPS-Tarif, keine Pay-per-Request-Gebühren
+- **Volle Kontrolle** über Logs, Prozesse, Konfiguration
+
+### PM2 — Process Manager
+PM2 hält den Server dauerhaft am Laufen:
+
+```bash
+pm2 list
+# rag-server   online   uptime: 5D   restarts: 2
+```
+
+- **Auto-Restart bei Crashes** — wenn der Prozess unerwartet stirbt, startet PM2 ihn sofort neu
+- **Boot-Persistenz** — `pm2 startup` ist konfiguriert, sodass alle Prozesse nach einem VPS-Neustart automatisch wieder starten (`systemctl is-enabled pm2-max → enabled`)
+- **Der ↺ Counter** zeigt wie oft PM2 den Server neu gestartet hat (z.B. bei Deploys)
+
+### nginx — Reverse Proxy
+nginx sitzt vor dem Express-Server und:
+- Terminiert HTTPS (SSL/TLS)
+- Leitet `/api/rag/*` Anfragen auf `localhost:3030` weiter
+- Stellt die statischen Quartz-Seiten aus `/var/www/html` bereit
+
+```
+Browser → nginx (Port 443, HTTPS)
+               ├── /api/rag/*  → localhost:3030 (RAG Server)
+               └── /*          → /var/www/html  (Quartz Static Site)
+```
+
+### GitHub Actions — CI/CD
+Jeder Push auf `main` löst automatisch aus:
+
+```
+git push → GitHub Actions:
+  1. npm run build        (Quartz → statische HTML/CSS/JS)
+  2. rsync public/ → VPS  (Statische Site deployen)
+  3. scp rag/server.ts → VPS  (Server-Code deployen)
+  4. pm2 restart rag-server   (Server neustarten)
+```
+
+→ **Kein manuelles Deployen nötig.** Änderungen an Notizen, Frontend oder Server-Code werden alle automatisch live.
+
+### Warum kein Serverless / Railway / Render?
+Der Vector Store (`vector-store.json`, ~292 MB) muss beim Start in den RAM geladen werden. Bei Serverless würde das bei jeder Anfrage passieren → mehrere Sekunden Kaltstart. Auf dem VPS ist er dauerhaft geladen → Antwortzeit <1 Sekunde für die Retrieval-Phase.
 
 ---
 
