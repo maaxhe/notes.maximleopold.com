@@ -1,6 +1,6 @@
 const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-// Use same-origin API path to avoid CORS issues
-const API_URL = isLocalhost ? "http://localhost:3030" : "/api/rag"
+// Use same-origin API path to avoid CORS issues; coxilab is the actual backend host
+const API_URL = isLocalhost ? "http://localhost:3030" : "https://notes.coxilab.de/api/rag"
 
 function normalizeBase(url: string | null | undefined) {
   if (!url) return null
