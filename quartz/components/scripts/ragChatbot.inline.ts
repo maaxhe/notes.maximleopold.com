@@ -3309,6 +3309,20 @@ async function fallbackToChatEndpoint(enrichedMessage: string, userMessage: stri
   }
 }
 
+// Verhindere dass Quartz-SPA-Router Citation-Links im Chat abfängt
+// Alle Links im Chat-Panel in neuem Tab öffnen (kein SPA-Navigate)
+const chatPanel = document.querySelector(".rag-chat-panel")
+chatPanel?.addEventListener("click", (e) => {
+  const target = (e.target as HTMLElement).closest("a")
+  if (!target) return
+  e.stopPropagation() // Quartz-Router nicht triggern
+  const href = target.getAttribute("href") || ""
+  if (href && href !== "#") {
+    e.preventDefault()
+    window.open(href, "_blank", "noopener,noreferrer")
+  }
+}, true) // capture phase, vor dem Router
+
 // Link-Button: Fügt [[ zum Input hinzu
 const linkBtn = document.getElementById("rag-link-btn")
 
