@@ -94,7 +94,7 @@ export default ((opts?: Partial<Options>) => {
             </div>
 
             {/* Hamburger Menu Panel */}
-            <div class="rag-menu-panel hidden" id="rag-more-dropdown">
+            <div class="rag-menu-panel" id="rag-more-dropdown" style="display:none">
               <div class="rag-menu-group">
                 <button class="rag-menu-item" id="rag-chat-expand">
                   <span class="rag-menu-icon">

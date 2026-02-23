@@ -116,19 +116,17 @@ let chatInitialized = false
 const moreBtn = document.getElementById("rag-chat-more")
 const moreDropdown = document.getElementById("rag-more-dropdown")
 
+function isMenuOpen() { return moreDropdown?.style.display !== "none" }
+function openMenu() { if (moreDropdown) moreDropdown.style.display = ""; moreBtn?.classList.add("active") }
+function closeMenu() { if (moreDropdown) moreDropdown.style.display = "none"; moreBtn?.classList.remove("active") }
+
 moreBtn?.addEventListener("click", (e) => {
   e.stopPropagation()
-  moreDropdown?.classList.toggle("hidden")
-  moreBtn.classList.toggle("active")
+  isMenuOpen() ? closeMenu() : openMenu()
 })
 
 // Close dropdown when clicking outside
-document.addEventListener("click", () => {
-  if (!moreDropdown?.classList.contains("hidden")) {
-    moreDropdown?.classList.add("hidden")
-    moreBtn?.classList.remove("active")
-  }
-})
+document.addEventListener("click", () => { if (isMenuOpen()) closeMenu() })
 
 function updatePageBadge() {
   const badge = document.getElementById("rag-page-badge")
@@ -1184,8 +1182,7 @@ quickBtns.forEach((btn) => {
   btn.addEventListener("click", async () => {
     console.log("🔘 Quick action button clicked")
     // Close hamburger menu if open
-    moreDropdown?.classList.add("hidden")
-    moreBtn?.classList.remove("active")
+    closeMenu()
     const prompt =
       btn.getAttribute("data-prompt")?.replace("{currentFile}", currentPageTitle) || ""
     const inputField = document.getElementById("rag-input") as HTMLTextAreaElement | null
@@ -2851,8 +2848,7 @@ function finalizeAssistantInteraction(
   }
   saveCurrentSession()
 
-  // Follow-up Vorschläge asynchron generieren (nach kurzer Pause)
-  setTimeout(() => addFollowUpSuggestions(messageDiv, assistantText, userMessage), 300)
+  // Follow-up suggestions disabled
 }
 
 function addMessage(
