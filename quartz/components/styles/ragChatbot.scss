@@ -155,8 +155,9 @@
       .rag-header-meta {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        flex-wrap: wrap;
+        gap: 0.4rem;
+        flex-wrap: nowrap;
+        overflow: hidden;
       }
 
       .rag-page-badge {
@@ -190,37 +191,38 @@
     }
 
     .rag-chat-more {
-      background: transparent;
-      border: none;
+      background: transparent !important;
+      border: none !important;
+      border-radius: 6px !important;
       color: #ffffff !important;
       cursor: pointer;
       padding: 0.5rem;
-      border-radius: 6px;
-      transition: background 0.2s;
-      display: flex;
+      display: flex !important;
       align-items: center;
       justify-content: center;
+      transition: background 0.2s;
+      box-shadow: none !important;
 
       &:hover, &.active {
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.15) !important;
       }
     }
 
     .rag-more-dropdown {
-      position: absolute;
-      top: calc(100% + 0.5rem);
-      right: 0;
-      background: var(--light);
-      border: 1px solid var(--lightgray);
-      border-radius: 10px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-      min-width: 190px;
-      z-index: 10000;
-      overflow: hidden;
-      animation: fadeIn 0.15s ease;
-      // WICHTIG: vertikale Liste erzwingen
-      display: flex;
-      flex-direction: column;
+      position: absolute !important;
+      top: calc(100% + 0.4rem) !important;
+      right: 0 !important;
+      background: var(--light) !important;
+      border: 1px solid var(--lightgray) !important;
+      border-radius: 10px !important;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18) !important;
+      width: 200px !important;
+      z-index: 99999 !important;
+      overflow: hidden !important;
+      animation: fadeIn 0.12s ease;
+      display: flex !important;
+      flex-direction: column !important;
+      padding: 4px 0 !important;
 
       &.hidden {
         display: none !important;
@@ -228,41 +230,49 @@
     }
 
     .rag-more-item {
-      width: 100%;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid var(--lightgray);
-      padding: 0.7rem 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
+      // Reset all browser button defaults
+      appearance: none !important;
+      -webkit-appearance: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      outline: none !important;
+      // Layout
+      width: 100% !important;
+      background: transparent !important;
+      border: none !important;
+      border-bottom: 1px solid var(--lightgray) !important;
+      padding: 0.65rem 1rem !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 0.6rem;
       cursor: pointer;
       font-size: 0.875rem;
-      color: var(--dark);
+      color: var(--dark) !important;
       text-align: left;
-      transition: background 0.15s;
+      transition: background 0.12s;
       white-space: nowrap;
       flex-shrink: 0;
+      box-sizing: border-box !important;
 
       &:last-child {
-        border-bottom: none;
+        border-bottom: none !important;
       }
 
       svg {
         flex-shrink: 0;
         color: var(--gray);
-        width: 16px;
-        height: 16px;
+        width: 15px;
+        height: 15px;
       }
 
       &:hover {
-        background: var(--lightgray);
+        background: var(--lightgray) !important;
       }
 
       &--danger {
-        color: #ef4444;
+        color: #ef4444 !important;
         svg { color: #ef4444; }
-        &:hover { background: rgba(239, 68, 68, 0.08); }
+        &:hover { background: rgba(239, 68, 68, 0.08) !important; }
       }
     }
 
