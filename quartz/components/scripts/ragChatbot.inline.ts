@@ -112,31 +112,19 @@ const expandBtn = document.getElementById("rag-chat-expand")
 let isFullscreen = false
 let chatInitialized = false
 
-// ⋯ Mehr-Menü — event delegation (fresh DOM lookup every time)
+// ⋯ Mehr-Menü — native <details> handles open/close, JS only closes externally
 const moreBtn = document.getElementById("rag-chat-more")
 const moreDropdown = document.getElementById("rag-more-dropdown")
 
-function getMenuDropdown() { return document.getElementById("rag-more-dropdown") }
-function getMenuBtn() { return document.getElementById("rag-chat-more") }
-function isMenuOpen() { return getMenuDropdown()?.style.display !== "none" }
-function openMenu() {
-  const d = getMenuDropdown(); const b = getMenuBtn()
-  if (d) d.style.display = ""
-  b?.classList.add("active")
-}
-function closeMenu() {
-  const d = getMenuDropdown(); const b = getMenuBtn()
-  if (d) d.style.display = "none"
-  b?.classList.remove("active")
-}
+function getMenuDetails() { return document.getElementById("rag-menu-details") as HTMLDetailsElement | null }
+function isMenuOpen() { return getMenuDetails()?.open ?? false }
+function closeMenu() { const d = getMenuDetails(); if (d) d.open = false }
+function openMenu() { const d = getMenuDetails(); if (d) d.open = true }
 
+// Close when clicking outside the details element
 document.addEventListener("click", (e) => {
   const target = e.target as HTMLElement
-  if (target.closest("#rag-chat-more")) {
-    isMenuOpen() ? closeMenu() : openMenu()
-    return
-  }
-  if (isMenuOpen()) closeMenu()
+  if (!target.closest("#rag-menu-details") && isMenuOpen()) closeMenu()
 })
 
 function updatePageBadge() {
@@ -2779,49 +2767,6 @@ function renderAssistantResponse(text: string, sources: any[] = []) {
   return { messageDiv, contentDiv }
 }
 
-// Generiere Follow-up Vorschläge via dediziertem /followups-Endpoint (kein RAG)
-async function addFollowUpSuggestions(_messageDiv: HTMLElement, assistantText: string, userMessage: string) {
-  if (!messagesContainer) return
-  document.querySelectorAll(".rag-followup-chips").forEach(el => el.remove())
-
-  try {
-    const res = await fetchApi("/followups", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        assistantText,
-        userMessage,
-        currentPage: currentPageTitle,
-        language: currentLanguage,
-      }),
-    }, { retryOn404: false })
-
-    if (!res.ok) return
-    const data = await res.json()
-    const questions: string[] = data.questions || []
-    if (questions.length === 0) return
-
-    const chipsDiv = document.createElement("div")
-    chipsDiv.className = "rag-followup-chips"
-    questions.forEach(q => {
-      const btn = document.createElement("button")
-      btn.className = "rag-followup-chip"
-      btn.textContent = q
-      btn.addEventListener("click", () => {
-        if (inputField) {
-          inputField.value = q
-          chipsDiv.remove()
-          sendMessage()
-        }
-      })
-      chipsDiv.appendChild(btn)
-    })
-    messagesContainer.appendChild(chipsDiv)
-    messagesContainer.scrollTop = messagesContainer.scrollHeight
-  } catch {
-    // Follow-ups sind optional — Fehler ignorieren
-  }
-}
 
 function finalizeAssistantInteraction(
   messageDiv: HTMLElement,

@@ -76,25 +76,16 @@ export default ((opts?: Partial<Options>) => {
                 </div>
               </div>
               <div class="rag-chat-header-actions">
-                {/* Hamburger Menu */}
-                <button class="rag-chat-more" id="rag-chat-more" aria-label="Menü" title="Menü">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                  </svg>
-                </button>
-                <button class="rag-chat-close" id="rag-chat-close" aria-label="Close">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            {/* Hamburger Menu Panel */}
-            <div class="rag-menu-panel" id="rag-more-dropdown" style="display:none">
+                {/* Hamburger Menu — native details/summary, no JS needed */}
+                <details class="rag-menu-details" id="rag-menu-details">
+                  <summary class="rag-chat-more" id="rag-chat-more" aria-label="Menü" title="Menü">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                      <line x1="3" y1="6" x2="21" y2="6"></line>
+                      <line x1="3" y1="12" x2="21" y2="12"></line>
+                      <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                  </summary>
+                  <div class="rag-menu-panel" id="rag-more-dropdown">
               <div class="rag-menu-group">
                 <button class="rag-menu-item" id="rag-chat-expand">
                   <span class="rag-menu-icon">
@@ -174,6 +165,15 @@ export default ((opts?: Partial<Options>) => {
                     </svg>
                   </span>
                   <span class="rag-menu-label">Chat löschen</span>
+                </button>
+              </div>
+                  </div>{/* end rag-menu-panel */}
+                </details>{/* end rag-menu-details */}
+                <button class="rag-chat-close" id="rag-chat-close" aria-label="Close">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
                 </button>
               </div>
             </div>

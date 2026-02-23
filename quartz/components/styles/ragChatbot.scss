@@ -185,36 +185,55 @@
       align-items: center;
     }
 
-    // Hamburger Button
-    .rag-chat-more {
-      appearance: none;
-      -webkit-appearance: none;
-      background: rgba(255,255,255,0.12) !important;
-      border: none !important;
-      border-radius: 8px !important;
-      color: #ffffff !important;
-      cursor: pointer;
-      padding: 0.45rem 0.55rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.15s;
-      box-shadow: none !important;
+    // Hamburger — details/summary wrapper
+    .rag-menu-details {
+      position: relative;
+      list-style: none;
 
-      &:hover, &.active {
+      // Remove default disclosure triangle
+      summary { list-style: none; }
+      summary::-webkit-details-marker { display: none; }
+
+      // The summary IS the hamburger button
+      summary.rag-chat-more {
+        appearance: none;
+        -webkit-appearance: none;
+        background: rgba(255,255,255,0.12) !important;
+        border: none !important;
+        border-radius: 8px !important;
+        color: #ffffff !important;
+        cursor: pointer;
+        padding: 0.45rem 0.55rem;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.15s;
+        box-shadow: none !important;
+        outline: none;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.22) !important;
+        }
+      }
+
+      &[open] summary.rag-chat-more {
         background: rgba(255, 255, 255, 0.22) !important;
       }
-    }
 
-  // Hamburger Menu Panel — inline below header, slides open
-  .rag-menu-panel {
-    background: var(--light);
-    border-bottom: 1px solid var(--lightgray);
-
-    &.hidden {
-      display: none !important;
+      // Dropdown panel — positioned below header
+      .rag-menu-panel {
+        position: absolute;
+        right: 0;
+        top: calc(100% + 4px);
+        z-index: 9999;
+        min-width: 220px;
+        background: var(--light);
+        border: 1px solid var(--lightgray);
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        overflow: hidden;
+      }
     }
-  }
 
   .rag-menu-group {
     padding: 6px 8px;
