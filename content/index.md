@@ -1,6 +1,6 @@
 ---
 title: Research Vault
-modified: 2026-02-12
+modified: 2026-02-23
 ---
 
 # Research Vault
@@ -79,3 +79,11 @@ Und für meinen Betreuer: für alle Referenzen zur Arbeit, Grundlage für Diskus
 - [🧠 Auditory Stream Overview](Bachelorarbeit/Auditory-Streams-Overview)
 - [💬 Alle Annotationen](/annotations)
 - [🏷️ Alle Tags](/alle-tags)
+
+---
+
+## Mika — KI-Assistent
+
+Diese Seite wird von **Mika** begleitet, einem KI-Assistenten der direkt auf diesem Vault basiert. Mika kann Fragen zu allen Notizen, Papers und Hypothesen beantworten.
+
+→ [[Mika - KI-Assistent Architektur|Wie Mika funktioniert (Architektur & Deployment)]]

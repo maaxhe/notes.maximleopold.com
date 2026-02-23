@@ -3,6 +3,7 @@ title: "Mika — KI-Assistent Architektur"
 date: 2026-02-23
 tags: [meta, ki, rag, architektur]
 modified: 2026-02-23
+draft: false
 ---
 
 # Mika — Wie der KI-Assistent funktioniert
