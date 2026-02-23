@@ -127,6 +127,24 @@ export default ((opts?: Partial<Options>) => {
                   </span>
                   <span class="rag-menu-label">Chat-Verlauf</span>
                 </button>
+                <button class="rag-menu-item rag-quick-btn" id="rag-menu-literature" data-prompt="Welche Paper und Studien diskutieren {currentFile}? Liste alle Quellen mit wichtigen Findings" data-type="literature">
+                  <span class="rag-menu-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                  </span>
+                  <span class="rag-menu-label">📖 Literatur durchsuchen</span>
+                </button>
+                <button class="rag-menu-item rag-writing-assistant-btn" id="rag-writing-assistant-btn">
+                  <span class="rag-menu-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 20h9"></path>
+                      <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                  </span>
+                  <span class="rag-menu-label">✍️ Writing Assistant</span>
+                </button>
                 <button class="rag-menu-item" id="rag-chat-features">
                   <span class="rag-menu-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -351,12 +369,6 @@ export default ((opts?: Partial<Options>) => {
             <div class="rag-quick-actions">
               <button class="rag-quick-btn" data-prompt="Fasse {currentFile} zusammen" data-type="summary">
                 📄 Zusammenfassen
-              </button>
-              <button class="rag-quick-btn" data-prompt="Welche Paper und Studien diskutieren {currentFile}? Liste alle Quellen mit wichtigen Findings" data-type="literature">
-                📖 Literatur durchsuchen
-              </button>
-              <button class="rag-quick-btn rag-writing-assistant-btn" id="rag-writing-assistant-btn" data-type="writing">
-                ✍️ Writing Assistant
               </button>
             </div>
 

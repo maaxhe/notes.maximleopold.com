@@ -897,6 +897,9 @@ const writingFormContainer = document.getElementById("rag-writing-form-container
 const writingToggleButton = document.getElementById("rag-writing-toggle")
 
 writingAssistantBtn?.addEventListener("click", () => {
+  // Close hamburger menu
+  moreDropdown?.classList.add("hidden")
+  moreBtn?.classList.remove("active")
   writingPanel?.classList.toggle("hidden")
   featuresPanel?.classList.add("hidden")
   settingsPanel?.classList.add("hidden")
@@ -1180,6 +1183,9 @@ const quickBtns = document.querySelectorAll(".rag-quick-btn")
 quickBtns.forEach((btn) => {
   btn.addEventListener("click", async () => {
     console.log("🔘 Quick action button clicked")
+    // Close hamburger menu if open
+    moreDropdown?.classList.add("hidden")
+    moreBtn?.classList.remove("active")
     const prompt =
       btn.getAttribute("data-prompt")?.replace("{currentFile}", currentPageTitle) || ""
     const inputField = document.getElementById("rag-input") as HTMLTextAreaElement | null
