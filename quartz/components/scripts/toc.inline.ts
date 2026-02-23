@@ -34,6 +34,48 @@ function setupToc() {
   }
 }
 
+function addTranscludedHeadingsToToc() {
+  const tocContent = document.querySelector(".toc-content ul, .toc-content ol, .toc-content")
+  if (!tocContent) return
+
+  // Find all headings inside transcluded blocks
+  const transcludes = document.querySelectorAll("blockquote.transclude")
+  if (transcludes.length === 0) return
+
+  // Determine the minimum depth already in TOC (to normalize depth)
+  const existingDepths = Array.from(tocContent.querySelectorAll("li[class]"))
+    .map(li => parseInt(li.className.replace("depth-", "")) || 0)
+  const baseDepth = existingDepths.length > 0 ? Math.min(...existingDepths) : 0
+
+  transcludes.forEach((block) => {
+    const headings = block.querySelectorAll("h2, h3, h4")
+    headings.forEach((heading) => {
+      const h = heading as HTMLElement
+      const text = h.textContent?.trim() || ""
+      if (!text) return
+
+      // Ensure the heading has an id for anchor linking
+      if (!h.id) {
+        h.id = text.toLowerCase().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-")
+      }
+
+      const depth = parseInt(h.tagName[1]) - 2 // h2 → 0, h3 → 1, h4 → 2
+      const li = document.createElement("li")
+      li.className = `depth-${depth + baseDepth} transcluded-toc-entry`
+      const a = document.createElement("a")
+      a.href = `#${h.id}`
+      a.setAttribute("data-for", h.id)
+      a.textContent = text
+      li.appendChild(a)
+
+      // Find a list inside tocContent or use tocContent directly
+      const list = tocContent.querySelector("ul, ol") || tocContent
+      list.appendChild(li)
+      observer.observe(h)
+    })
+  })
+}
+
 document.addEventListener("nav", () => {
   setupToc()
 
@@ -41,4 +83,7 @@ document.addEventListener("nav", () => {
   observer.disconnect()
   const headers = document.querySelectorAll("h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]")
   headers.forEach((header) => observer.observe(header))
+
+  // Add headings from transcluded content
+  addTranscludedHeadingsToToc()
 })
