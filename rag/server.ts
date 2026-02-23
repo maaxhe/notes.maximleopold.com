@@ -85,56 +85,100 @@ async function loadVectorStore() {
  */
 function cosineSimilarity(a: number[], b: number[]): number {
   if (a.length !== b.length) return 0
-
-  let dotProduct = 0
-  let normA = 0
-  let normB = 0
-
+  let dotProduct = 0, normA = 0, normB = 0
   for (let i = 0; i < a.length; i++) {
     dotProduct += a[i] * b[i]
     normA += a[i] * a[i]
     normB += b[i] * b[i]
   }
-
   return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB))
 }
 
 /**
- * Finde die relevantesten Chunks für eine Query
+ * BM25 Score — lexikalische Keyword-Suche als Ergänzung zur semantischen Suche.
+ * Bewertet Chunks nach Häufigkeit der Query-Terme unter Berücksichtigung der Dokumentlänge.
+ */
+function bm25Score(queryTerms: string[], chunkText: string, avgDocLen: number, k1 = 1.5, b = 0.75): number {
+  const words = chunkText.toLowerCase().split(/\s+/)
+  const docLen = words.length
+  const termFreq: Record<string, number> = {}
+  for (const w of words) termFreq[w] = (termFreq[w] || 0) + 1
+
+  let score = 0
+  for (const term of queryTerms) {
+    const tf = termFreq[term] || 0
+    if (tf === 0) continue
+    const numerator = tf * (k1 + 1)
+    const denominator = tf + k1 * (1 - b + b * (docLen / avgDocLen))
+    score += numerator / denominator
+  }
+  return score
+}
+
+/**
+ * Reranking: verfeinert Top-N Kandidaten per Keyword-Overlap.
+ * Kombiniert semantischen Score mit BM25 für finale Reihenfolge.
+ */
+function rerankChunks(
+  candidates: Array<DocumentChunk & { score: number; bm25: number }>,
+  queryTerms: string[],
+  topK: number
+): Array<DocumentChunk & { score: number }> {
+  // Normalisiere Cosine und BM25 auf [0,1]
+  const maxCosine = Math.max(...candidates.map(c => c.score), 1e-9)
+  const maxBm25 = Math.max(...candidates.map(c => c.bm25), 1e-9)
+
+  return candidates
+    .map(c => {
+      const normCosine = c.score / maxCosine
+      const normBm25 = c.bm25 / maxBm25
+      // Keyword-Overlap als zusätzliches Reranking-Signal
+      const content = c.content.toLowerCase()
+      const overlap = queryTerms.filter(t => content.includes(t)).length / Math.max(queryTerms.length, 1)
+      const finalScore = 0.6 * normCosine + 0.25 * normBm25 + 0.15 * overlap
+      return { ...c, score: finalScore }
+    })
+    .sort((a, b) => b.score - a.score)
+    .slice(0, topK)
+}
+
+/**
+ * Finde die relevantesten Chunks für eine Query (Hybrid Search + Reranking)
  */
 async function findRelevantChunks(
   query: string,
   topK = 5
 ): Promise<Array<DocumentChunk & { score: number }>> {
-  if (!vectorStore) {
-    throw new Error("Vector Store nicht geladen")
-  }
+  if (!vectorStore) throw new Error("Vector Store nicht geladen")
 
-  // 1. Extrahiere Page Context: [Kontext: Nutzer ist auf Seite "FEF"]
+  // Extrahiere Metadaten aus der Query
   const pageContextMatch = query.match(/\[Kontext: Nutzer ist auf Seite "([^"]+)"\]/)
   const currentPage = pageContextMatch ? pageContextMatch[1] : null
 
-  // 2. Extrahiere Wikilinks: (Suche gezielt nach Informationen über: FEF, IFJ)
   const wikilinkMatch = query.match(/\(Suche gezielt nach Informationen über: ([^\)]+)\)/)
   const wikilinks = wikilinkMatch ? wikilinkMatch[1].split(", ").map(s => s.trim().toUpperCase()) : []
 
-  // 3. Extrahiere spezifische Dateinamen aus Query (z.B. "FEF", "IFJ")
   const fileNameMatch = query.match(/(?:über|nach|zu|von|aus)\s+[:\s]*([A-Z0-9]+)/i)
   const specificFile = fileNameMatch ? fileNameMatch[1].toUpperCase() : null
 
-  // Erstelle Embedding für Query
+  // Query-Terme für BM25 (Stoppwörter entfernen)
+  const stopwords = new Set(["was", "ist", "der", "die", "das", "ein", "eine", "und", "oder", "in", "an", "zu", "von", "für", "mit", "wie", "wo", "wer", "the", "is", "a", "an", "and", "or", "in", "of", "to", "for", "how", "what"])
+  const queryTerms = query.toLowerCase()
+    .replace(/[^\w\s]/g, "")
+    .split(/\s+/)
+    .filter(t => t.length > 2 && !stopwords.has(t))
+
+  // Embedding für semantische Suche
   const queryEmbedding = await openai.embeddings.create({
     input: query,
     model: "text-embedding-3-large",
     dimensions: 1536,
   })
-
   const queryVector = queryEmbedding.data[0].embedding
 
-  // Filtere Chunks (bevorzuge spezifische Dateien, falls angegeben)
-  let chunks = vectorStore.chunks.filter(chunk => chunk.embedding && chunk.embedding.length > 0)
+  let chunks = vectorStore.chunks.filter(c => c.embedding && c.embedding.length > 0)
 
-  // PRIORITÄT 1: Wikilinks (explizite [[File]]-Referenzen haben immer Vorrang!)
+  // Wikilinks haben absolute Priorität
   if (wikilinks.length > 0) {
     const wikilinkChunks = chunks.filter(chunk =>
       wikilinks.some(link =>
@@ -142,56 +186,51 @@ async function findRelevantChunks(
         chunk.metadata.title?.toUpperCase().includes(link)
       )
     )
-
     if (wikilinkChunks.length > 0) {
       console.log(`📌 WIKILINKS: ${wikilinkChunks.length} Chunks für [${wikilinks.join(", ")}]`)
       chunks = wikilinkChunks
-    } else {
-      console.log(`⚠️  Keine Chunks für Wikilinks [${wikilinks.join(", ")}] gefunden`)
     }
   }
 
-  // Berechne Ähnlichkeiten für ALLE Chunks
-  const scoredChunks = chunks
-    .map(chunk => {
-      let score = cosineSimilarity(queryVector, chunk.embedding!)
+  // Durchschnittliche Dokumentlänge für BM25
+  const avgDocLen = chunks.reduce((sum, c) => sum + c.content.split(/\s+/).length, 0) / Math.max(chunks.length, 1)
 
-      // PRIORITÄT 2: Boost Current Page Chunks (moderate Bevorzugung, nicht Exklusivität!)
+  // Hybrid Scoring: Cosine + BM25 + Context Boost → Top-20 Kandidaten für Reranking
+  const CANDIDATES = Math.min(20, chunks.length)
+  const candidates = chunks
+    .map(chunk => {
+      let cosine = cosineSimilarity(queryVector, chunk.embedding!)
+      const bm25 = bm25Score(queryTerms, chunk.content, avgDocLen)
+
+      // Context Boost: aktuelle Seite bevorzugen
       if (currentPage) {
         const isCurrentPage =
           chunk.metadata.title?.toUpperCase() === currentPage.toUpperCase() ||
           chunk.metadata.source.toUpperCase().includes(`/${currentPage.toUpperCase()}.MD`)
-
-        if (isCurrentPage) {
-          score *= 2.0  // 100% Boost für aktuelle Seite
-        }
-      }
-
-      // PRIORITÄT 3: Boost Specific File (falls erwähnt in Query)
-      else if (specificFile) {
+        if (isCurrentPage) cosine *= 2.0
+      } else if (specificFile) {
         const isSpecificFile =
           chunk.metadata.source.toUpperCase().includes(specificFile) ||
           chunk.metadata.title?.toUpperCase().includes(specificFile)
-
-        if (isSpecificFile) {
-          score *= 1.2  // 20% Boost für spezifisch erwähnte Dateien
-        }
+        if (isSpecificFile) cosine *= 1.2
       }
 
-      return { ...chunk, score }
+      return { ...chunk, score: cosine, bm25 }
     })
     .sort((a, b) => b.score - a.score)
-    .slice(0, topK)
+    .slice(0, CANDIDATES)
 
-  // Logging für besseres Debugging
+  // Reranking der Top-20 Kandidaten → finale Top-K
+  const reranked = rerankChunks(candidates, queryTerms, topK)
+
   if (currentPage) {
-    const currentPageCount = scoredChunks.filter(c =>
+    const currentPageCount = reranked.filter(c =>
       c.metadata.title?.toUpperCase() === currentPage.toUpperCase()
     ).length
-    console.log(`📌 CONTEXT: Auf Seite "${currentPage}" (${currentPageCount}/${scoredChunks.length} Chunks von aktueller Seite)`)
+    console.log(`📌 CONTEXT: "${currentPage}" (${currentPageCount}/${reranked.length} Chunks), BM25+Rerank aktiv`)
   }
 
-  return scoredChunks
+  return reranked
 }
 
 /**

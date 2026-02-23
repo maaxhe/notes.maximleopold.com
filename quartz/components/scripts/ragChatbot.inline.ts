@@ -161,6 +161,8 @@ function openChat() {
 }
 
 function closeChat() {
+  // Speichere Session bevor Chat geschlossen wird
+  saveCurrentSession()
   overlay?.classList.add("hidden")
   fab?.classList.remove("hidden")
   document.body.style.overflow = ""
@@ -3352,13 +3354,30 @@ async function sendMessage() {
     setStatus("")
   } catch (error: any) {
     console.error("Error:", error)
-    addMessage(
-      "assistant",
-      `❌ Fehler: ${error.message}\n\nStelle sicher, dass der RAG-Server läuft (npm run rag:server).`,
-    )
-    setStatus("Fehler bei der Verbindung zum Server", "error")
+    const isOffline = error.message?.includes("fetch") || error.message?.includes("network") || error.message?.includes("erreichbar")
+    const errorHtml = isOffline
+      ? `<div class="rag-error-msg">
+           <span class="rag-error-icon">🔌</span>
+           <div>
+             <strong>Server nicht erreichbar</strong>
+             <p>Mika ist gerade offline. Bitte versuche es in einem Moment erneut.</p>
+             <button class="rag-retry-btn" onclick="document.getElementById('rag-send')?.click()">↻ Erneut versuchen</button>
+           </div>
+         </div>`
+      : `<div class="rag-error-msg">
+           <span class="rag-error-icon">⚠️</span>
+           <div>
+             <strong>Fehler</strong>
+             <p>${error.message}</p>
+           </div>
+         </div>`
 
-    setTimeout(() => setStatus(""), 3000)
+    const result = renderAssistantResponse("", [])
+    if (result) {
+      result.contentDiv.innerHTML = errorHtml
+      result.messageDiv.classList.add("rag-message--error")
+    }
+    setStatus("")
   } finally {
     setLoading(false)
   }

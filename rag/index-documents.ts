@@ -27,24 +27,70 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 })
 
-// Chunk-Größe für bessere semantische Einheiten
-const CHUNK_SIZE = 800 // Zeichen pro Chunk
-const CHUNK_OVERLAP = 200 // Überlappung zwischen Chunks
+// Chunk-Größe für Fallback (wenn kein Heading vorhanden)
+const CHUNK_SIZE = 800
+const CHUNK_OVERLAP = 150
+const MIN_CHUNK_SIZE = 80  // Zu kurze Chunks ignorieren
 
 /**
- * Teilt Text in semantisch sinnvolle Chunks auf
+ * Heading-basiertes Chunking — teilt Markdown an ## / ### Grenzen auf.
+ * Jeder Chunk enthält einen semantisch zusammenhängenden Abschnitt.
+ * Sehr lange Abschnitte werden zusätzlich per Satz-Splitting aufgeteilt.
+ */
+function chunkMarkdownByHeadings(rawMarkdown: string): string[] {
+  const chunks: string[] = []
+
+  // Splitte an H2 oder H3 Headings (## oder ###)
+  const sections = rawMarkdown.split(/\n(?=#{1,3}\s)/g)
+
+  for (const section of sections) {
+    const trimmed = section.trim()
+    if (trimmed.length < MIN_CHUNK_SIZE) continue
+
+    // Abschnitt passt direkt als Chunk
+    if (trimmed.length <= CHUNK_SIZE * 1.5) {
+      chunks.push(trimmed)
+    } else {
+      // Zu langer Abschnitt: Heading als Präfix behalten, Rest per Satz aufteilen
+      const lines = trimmed.split("\n")
+      const heading = lines[0].startsWith("#") ? lines[0] + "\n" : ""
+      const body = heading ? lines.slice(1).join("\n") : trimmed
+
+      const sentences = body.split(/(?<=[.!?])\s+/)
+      let current = heading
+
+      for (const sentence of sentences) {
+        if ((current + sentence).length > CHUNK_SIZE && current.length > MIN_CHUNK_SIZE) {
+          chunks.push(current.trim())
+          // Überlappung: letzten Satz des vorherigen Chunks mitnehmen
+          const prevSentences = current.trim().split(/(?<=[.!?])\s+/)
+          const overlap = prevSentences.slice(-1).join(" ")
+          current = (heading || "") + overlap + " " + sentence
+        } else {
+          current += " " + sentence
+        }
+      }
+
+      if (current.trim().length > MIN_CHUNK_SIZE) {
+        chunks.push(current.trim())
+      }
+    }
+  }
+
+  return chunks.filter(c => c.length >= MIN_CHUNK_SIZE)
+}
+
+/**
+ * Fallback: Satz-basiertes Chunking für PDFs und plain text
  */
 function chunkText(text: string, maxChunkSize = CHUNK_SIZE, overlap = CHUNK_OVERLAP): string[] {
   const chunks: string[] = []
   const sentences = text.split(/(?<=[.!?])\s+/)
-
   let currentChunk = ""
 
   for (const sentence of sentences) {
     if ((currentChunk + sentence).length > maxChunkSize && currentChunk.length > 0) {
       chunks.push(currentChunk.trim())
-
-      // Füge Überlappung hinzu
       const words = currentChunk.split(" ")
       const overlapWords = words.slice(-Math.floor(overlap / 5))
       currentChunk = overlapWords.join(" ") + " " + sentence
@@ -53,10 +99,7 @@ function chunkText(text: string, maxChunkSize = CHUNK_SIZE, overlap = CHUNK_OVER
     }
   }
 
-  if (currentChunk.trim().length > 0) {
-    chunks.push(currentChunk.trim())
-  }
-
+  if (currentChunk.trim().length > 0) chunks.push(currentChunk.trim())
   return chunks
 }
 
@@ -80,12 +123,11 @@ async function processMarkdownFile(filePath: string): Promise<DocumentChunk[]> {
     const content = await fs.readFile(filePath, "utf-8")
     const { data: frontmatter, content: markdownContent } = matter(content)
 
-    // Bereinige Markdown von Syntax (Links, etc.)
+    // Bereinige Markdown minimal — Headings BEHALTEN für heading-basiertes Chunking
     const cleanContent = markdownContent
-      .replace(/\[\[([^\]]+)\]\]/g, "$1") // Wikilinks
-      .replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1") // Regular links
-      .replace(/#{1,6}\s/g, "") // Headings
-      .replace(/[*_~`]/g, "") // Formatting
+      .replace(/\[\[([^\]]+)\]\]/g, "$1") // Wikilinks flatten
+      .replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1") // Regular links flatten
+      .replace(/[*_~`]/g, "") // Formatting entfernen
       .trim()
 
     if (cleanContent.length < 50) {
@@ -93,7 +135,8 @@ async function processMarkdownFile(filePath: string): Promise<DocumentChunk[]> {
       return []
     }
 
-    const chunks = chunkText(cleanContent)
+    // Heading-basiertes Chunking für Markdown
+    const chunks = chunkMarkdownByHeadings(cleanContent)
     const category = extractCategory(filePath)
 
     return chunks.map((chunk, idx) => ({
