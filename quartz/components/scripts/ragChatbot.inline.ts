@@ -59,11 +59,22 @@ async function fetchApi(path: string, init?: RequestInit, options: FetchApiOptio
 }
 
 // Get current page info (dynamically updated)
-let currentPageTitle = document.querySelector("h1.article-title")?.textContent || "aktuelle Seite"
+let currentPageTitle = document.querySelector("h1.article-title")?.textContent?.trim() || "aktuelle Seite"
+
+// Extracts full rendered page content including transcluded ![[...]] embeds
+function extractPageContent(): string {
+  const article = document.querySelector("article.popover-hint, .page-content, article, main")
+  if (!article) return ""
+  const clone = article.cloneNode(true) as HTMLElement
+  // Remove noise: scripts, styles, nav, the chatbot itself
+  clone.querySelectorAll("script, style, nav, .rag-chatbot, .sidebar").forEach(el => el.remove())
+  const text = (clone as HTMLElement).innerText || clone.textContent || ""
+  return text.trim().slice(0, 6000)
+}
 
 // Update current page title when navigating (for SPA-style navigation)
 function updateCurrentPageTitle() {
-  const newTitle = document.querySelector("h1.article-title")?.textContent || "aktuelle Seite"
+  const newTitle = document.querySelector("h1.article-title")?.textContent?.trim() || "aktuelle Seite"
   if (newTitle !== currentPageTitle) {
     currentPageTitle = newTitle
     console.log("📍 Seitenwechsel erkannt:", currentPageTitle)
@@ -98,17 +109,48 @@ const overlay = document.getElementById("rag-chat-overlay")
 const closeBtn = document.getElementById("rag-chat-close")
 const expandBtn = document.getElementById("rag-chat-expand")
 let isFullscreen = false
+let chatInitialized = false
+
+// ⋯ Mehr-Menü
+const moreBtn = document.getElementById("rag-chat-more")
+const moreDropdown = document.getElementById("rag-more-dropdown")
+
+moreBtn?.addEventListener("click", (e) => {
+  e.stopPropagation()
+  moreDropdown?.classList.toggle("hidden")
+  moreBtn.classList.toggle("active")
+})
+
+// Close dropdown when clicking outside
+document.addEventListener("click", () => {
+  if (!moreDropdown?.classList.contains("hidden")) {
+    moreDropdown?.classList.add("hidden")
+    moreBtn?.classList.remove("active")
+  }
+})
+
+function updateWelcomeMessage() {
+  const welcomeEl = document.querySelector("#rag-messages .rag-message.assistant .rag-message-content")
+  if (welcomeEl && currentPageTitle && currentPageTitle !== "aktuelle Seite") {
+    welcomeEl.innerHTML = `Hallo! Ich bin <strong>Mika</strong>, dein KI-Assistent.<br>Ich sehe gerade <em>${currentPageTitle}</em> – stell mir eine Frage!`
+  }
+}
 
 function openChat() {
   overlay?.classList.remove("hidden")
-  fab?.classList.add("hidden") // Hide FAB when chat is open
-  document.body.style.overflow = "hidden" // Prevent background scroll
+  fab?.classList.add("hidden")
+  document.body.style.overflow = "hidden"
+  // Dynamische Begrüssung beim ersten Öffnen
+  if (!chatInitialized) {
+    chatInitialized = true
+    updateWelcomeMessage()
+  }
 }
 
 function closeChat() {
   overlay?.classList.add("hidden")
-  fab?.classList.remove("hidden") // Show FAB when chat is closed
-  document.body.style.overflow = "" // Restore scroll
+  fab?.classList.remove("hidden")
+  document.body.style.overflow = ""
   if (isFullscreen) {
     toggleFullscreen(false)
   }
@@ -873,15 +915,13 @@ const translations = {
     placeholder: "Frage zu deiner Bachelorarbeit... (tippe [[ für Dateiauswahl)",
     quickActions: {
       summary: "📄 Zusammenfassen",
-      connectivity: "🔗 Connectivity anzeigen",
-      compare: "🔄 Mit anderen vergleichen",
-      literature: "📖 Literatur durchsuchen"
+      literature: "📖 Literatur durchsuchen",
+      writing: "✍️ Writing Assistant"
     },
     quickPrompts: {
       summary: "Fasse {currentFile} zusammen",
-      connectivity: "Zeige alle Verbindungen und Connectivity von {currentFile}",
-      compare: "Vergleiche {currentFile} mit verwandten Regionen. Zeige Unterschiede und Gemeinsamkeiten",
-      literature: "Welche Paper und Studien diskutieren {currentFile}? Liste alle Quellen mit wichtigen Findings"
+      literature: "Welche Paper und Studien diskutieren {currentFile}? Liste alle Quellen mit wichtigen Findings",
+      writing: ""
     },
     status: {
       searching: "Suche relevante Informationen...",
@@ -899,15 +939,13 @@ const translations = {
     placeholder: "Question about your bachelor thesis... (type [[ for file selection)",
     quickActions: {
       summary: "📄 Summarize",
-      connectivity: "🔗 Show connectivity",
-      compare: "🔄 Compare with others",
-      literature: "📖 Search literature"
+      literature: "📖 Search literature",
+      writing: "✍️ Writing Assistant"
     },
     quickPrompts: {
       summary: "Summarize {currentFile}",
-      connectivity: "Show all connections and connectivity of {currentFile}",
-      compare: "Compare {currentFile} with related regions. Show differences and similarities",
-      literature: "Which papers and studies discuss {currentFile}? List all sources with key findings"
+      literature: "Which papers and studies discuss {currentFile}? List all sources with key findings",
+      writing: ""
     },
     status: {
       searching: "Searching for relevant information...",
@@ -939,14 +977,15 @@ function updateUILanguage() {
     inputField.placeholder = t('placeholder')
   }
 
-  // Update quick action buttons
+  // Update quick action buttons (by data-type attribute)
   const quickBtns = document.querySelectorAll('.rag-quick-btn')
-  quickBtns.forEach((btn, idx) => {
-    const types = ['summary', 'connectivity', 'compare', 'literature']
-    const type = types[idx]
-    if (type) {
+  quickBtns.forEach((btn) => {
+    const type = btn.getAttribute('data-type')
+    if (type && type !== 'writing') {
       btn.textContent = t(`quickActions.${type}`)
       btn.setAttribute('data-prompt', t(`quickPrompts.${type}`))
+    } else if (type === 'writing') {
+      btn.textContent = t(`quickActions.writing`)
     }
   })
 
@@ -3069,6 +3108,7 @@ async function sendMessage() {
           message: enrichedMessage,
           conversationHistory,
           language: currentLanguage,
+          pageContent: extractPageContent(),
         }),
       })
 
@@ -3241,6 +3281,7 @@ async function fallbackToChatEndpoint(enrichedMessage: string, userMessage: stri
         message: enrichedMessage,
         conversationHistory,
         language: currentLanguage,
+        pageContent: extractPageContent(),
       }),
     })
 

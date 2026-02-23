@@ -584,7 +584,7 @@ apiRouter.get("/health", (req, res) => {
  */
 apiRouter.post("/chat-stream", async (req, res) => {
   try {
-    const { message, conversationHistory = [], language = "de", mode, writingSources = [] } = req.body
+    const { message, conversationHistory = [], language = "de", mode, writingSources = [], pageContent = "" } = req.body
 
     if (!message) {
       return res.status(400).json({ error: "Message ist erforderlich" })
@@ -668,6 +668,12 @@ HAUPTPUNKTE ANGEFORDERT:
 - Keine Details, keine Erklärungen`
       }
 
+      const pageContextSection = pageContent
+        ? (language === "de"
+          ? `\n\nAKTUELLER SEITENINHALT (gerenderte Seite inkl. eingebetteter Unterseiten):\n${pageContent}`
+          : `\n\nCURRENT PAGE CONTENT (rendered page including embedded sub-pages):\n${pageContent}`)
+        : ""
+
       systemPrompt = language === "de"
         ? `Du bist Mika, ein hilfreicher wissenschaftlicher Assistent, der Fragen zur Bachelorarbeit über auditorische Streams im Gehirn beantwortet.
 
@@ -685,7 +691,7 @@ WICHTIGE REGELN:
 ${specificInstructions}
 
 KONTEXT AUS DEN DOKUMENTEN:
-${context}`
+${context}${pageContextSection}`
         : `You are Mika, a helpful scientific assistant answering questions about the bachelor thesis on auditory streams in the brain.
 
 IMPORTANT RULES:
@@ -700,7 +706,7 @@ IMPORTANT RULES:
 ${specificInstructions}
 
 CONTEXT FROM DOCUMENTS:
-${context}`
+${context}${pageContextSection}`
     }
 
     // Bereite Konversationshistorie vor
@@ -793,7 +799,7 @@ function canonicalChunkKey(chunk: DocumentChunk & { score: number }) {
  */
 apiRouter.post("/chat", async (req, res) => {
   try {
-    const { message, conversationHistory = [], language = "de" } = req.body
+    const { message, conversationHistory = [], language = "de", pageContent = "" } = req.body
 
     if (!message) {
       return res.status(400).json({ error: "Message ist erforderlich" })
@@ -865,6 +871,12 @@ HAUPTPUNKTE ANGEFORDERT:
 - Keine Details, keine Erklärungen`
     }
 
+    const pageContextSectionChat = pageContent
+      ? (language === "de"
+        ? `\n\nAKTUELLER SEITENINHALT (gerenderte Seite inkl. eingebetteter Unterseiten):\n${pageContent}`
+        : `\n\nCURRENT PAGE CONTENT (rendered page including embedded sub-pages):\n${pageContent}`)
+      : ""
+
     const systemPrompt = language === "de"
       ? `Du bist Mika, ein hilfreicher wissenschaftlicher Assistent, der Fragen zur Bachelorarbeit über auditorische Streams im Gehirn beantwortet.
 
@@ -881,7 +893,7 @@ WICHTIGE REGELN:
 ${specificInstructions}
 
 KONTEXT AUS DEN DOKUMENTEN:
-${context}`
+${context}${pageContextSectionChat}`
       : `You are Mika, a helpful scientific assistant answering questions about the bachelor thesis on auditory streams in the brain.
 
 IMPORTANT RULES:
@@ -895,7 +907,7 @@ IMPORTANT RULES:
 ${specificInstructions}
 
 CONTEXT FROM DOCUMENTS:
-${context}`
+${context}${pageContextSectionChat}`
 
     // Bereite Konversationshistorie vor
     const messages: Anthropic.MessageParam[] = [
