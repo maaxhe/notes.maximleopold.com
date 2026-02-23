@@ -45,3 +45,12 @@ jobs:
           ssh -i ~/.ssh/deploy_key \
             ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_IP }} \
             "chmod -R 755 ${{ secrets.DEPLOY_SERVER_PATH }}"
+
+      - name: Deploy RAG server
+        run: |
+          scp -i ~/.ssh/deploy_key \
+            rag/server.ts \
+            ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_IP }}:/home/max/rag-server/rag/server.ts
+          ssh -i ~/.ssh/deploy_key \
+            ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_IP }} \
+            "cd /home/max/rag-server && pm2 restart rag-server"
