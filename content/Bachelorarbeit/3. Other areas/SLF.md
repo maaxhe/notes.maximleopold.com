@@ -6,7 +6,7 @@ tags:
   - stream/where
   - stream/dorsal
   - stream/safe
-modified: 2026-02-23
+modified: 2026-02-24
 ---
 # SLF (Superior Longitudinal Fasciculus)
 

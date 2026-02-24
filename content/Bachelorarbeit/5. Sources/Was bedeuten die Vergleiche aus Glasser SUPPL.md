@@ -1,5 +1,5 @@
 ---
-modified: 2026-02-23
+modified: 2026-02-24
 ---
 
 ## Was bedeuten die Vergleiche aus Glasser SUPPL

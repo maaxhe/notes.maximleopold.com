@@ -1,5 +1,5 @@
 ---
-modified: 2026-02-23
+modified: 2026-02-24
 ---
 
 Biswal, B., Zerrin Yetkin, F., Haughton, V. M., & Hyde, J. S. (1995). Functional connectivity in the motor cortex of resting human brain using echo‐planar mri. _Magnetic Resonance in Medicine_, _34_(4), 537–541. [https://doi.org/10.1002/mrm.1910340409](https://doi.org/10.1002/mrm.1910340409)

@@ -1,5 +1,5 @@
 ---
-modified: 2026-02-23
+modified: 2026-02-24
 ---
 
 Marrelec, G., Krainik, A., Duffau, H., Pélégrini-Issac, M., Lehéricy, S., Doyon, J., & Benali, H. (2006). Partial correlation for functional brain interactivity investigation in functional MRI. _NeuroImage_, _32_(1), 228–237. [https://doi.org/10.1016/j.neuroimage.2005.12.057](https://doi.org/10.1016/j.neuroimage.2005.12.057)
