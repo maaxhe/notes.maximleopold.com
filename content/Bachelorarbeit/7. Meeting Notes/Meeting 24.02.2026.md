@@ -1,24 +1,24 @@
 ---
-modified: 2026-02-24
+modified: 2026-02-25
 ---
 
 
-- [ ] results zeigen 
-- [ ] Werte in den results nur partial corr? 
-- [ ] 44 dorsal nach rolls aber hier IFJa 
-- [ ] FEF TE1a kopplung, auch nach rolls, aber ist FFA in der nähe? 
-- [ ] Umfang, wieviel? 
-- [ ] Einordnung ROIs weil manche zu beiden gehören PSL STV
-- [ ] How vs Where? Diskussion auch welche areale reinsollen
-	- [ ] PFop
-	- [ ] PFcm
-	- [ ] Dureux argumentieren 
-- [ ] Salmi 2009
-- [ ] Bahvioural analysis anschauen und überlegen, ob salmi vielleicht genug ist? 
-- [ ] methods teil, wie strukturieren? 
-	- [ ] wie tief soll ich gehen?
-- [ ] daten in den appendix? 
-- [ ] Potential für ein Paper? 
+- [x] results zeigen 
+- [x] Werte in den results nur partial corr? 
+- [x] 44 dorsal nach rolls aber hier IFJa 
+- [x] FEF TE1a kopplung, auch nach rolls, aber ist FFA in der nähe? 
+- [x] Umfang, wieviel? 
+- [x] Einordnung ROIs weil manche zu beiden gehören PSL STV
+- [x] How vs Where? Diskussion auch welche areale reinsollen
+	- [x] PFop
+	- [x] PFcm
+	- [x] Dureux argumentieren 
+- [x] Salmi 2009
+- [x] Bahvioural analysis anschauen und überlegen, ob salmi vielleicht genug ist? 
+- [x] methods teil, wie strukturieren? 
+	- [x] wie tief soll ich gehen?
+- [x] daten in den appendix? 
+- [x] Potential für ein Paper? 
 - [ ] Was packen wir alles in die diskussion?
 	- [ ] MEG analysis nötig 
 	- [ ] supramodal vs cross modal 
@@ -27,4 +27,4 @@ modified: 2026-02-24
 	- [ ] STV rolle?
 	- [ ] Rolle von 55b? Relay station?
 	- [ ] Atlas granuality, new atlas? 
-- [ ] primary auditory areas mit reinnehmen?
+- [x] primary auditory areas mit reinnehmen?
