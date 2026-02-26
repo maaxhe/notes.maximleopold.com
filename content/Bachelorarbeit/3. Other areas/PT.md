@@ -5,7 +5,7 @@ tags:
   - region/classical
   - stream/uncertain
   - stream/what
-modified: 2026-02-25
+modified: 2026-02-26
 ---
 # PT (Planum Temporale)
 
