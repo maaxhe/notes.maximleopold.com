@@ -1,7 +1,7 @@
 ---
   title: "SPL"
   created: "2025-11-18"
-  modified: 2026-02-26
+  modified: 2026-02-27
 ---
 # SPL (Superior Parietal Lobule)
 
