@@ -71,6 +71,6 @@ Tags: #cognitivescience/neuroscience #science #source
 
 ## Source
 
-
+![[Rolls et al. - 2022 - The human language effective connectome.pdf]]
 
 Created: 2025-11-20 15:14
