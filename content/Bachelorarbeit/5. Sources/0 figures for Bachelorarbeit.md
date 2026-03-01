@@ -602,8 +602,40 @@ Significant 8 area(s) for L_IFJp in BOLD:
     L_IFJp         L_IFSp     BOLD            0.0067       2.7100        0.02         0.02           0.03
     L_IFJp         L_IFJa     BOLD            0.0000       24.1400        0.09         0.09           0.03
 
-# Müll
 
+
+# Code zum Anpassen der Brain Grafiken
+
+% 1. UI-Elemente und Panels löschen (Colorbar-Schutz)
+allUI = [findall(gcf, 'Type', 'uicontrol'); findall(gcf, 'Type', 'uipanel')];
+if ~isempty(allUI), delete(allUI); end
+
+% 2. Deine bewährte Rand-Berechnung mit vertikalem Sicherheits-Offset
+ax = gca;
+outerpos = ax.OuterPosition;
+ti = ax.TightInset; 
+
+% Wir fügen 0.05 (5%) Puffer hinzu, damit oben/unten nichts abgeschnitten wird
+padding = 0.05;
+
+left = outerpos(1) + ti(1);
+bottom = outerpos(2) + ti(2) + padding; % Puffer unten
+ax_width = outerpos(3) - ti(1) - ti(3);
+ax_height = outerpos(4) - ti(2) - ti(4) - (2 * padding); % Puffer oben/unten abziehen
+
+% Position setzen
+ax.Position = [left bottom ax_width ax_height];
+
+% 3. Farbskala sicherstellen
+if isempty(findobj(gcf, 'Type', 'ColorBar')), colorbar; end
+
+% 4. Export als SVG (Vektor-Modus erzwingen)
+set(gcf, 'Renderer', 'Painters');
+saveas(gcf, 'BrainPlot_Final.svg');
+
+disp('Export fertig: 5% Puffer oben/unten hinzugefügt.');
+
+# Müll
 
 
 R_FEF
