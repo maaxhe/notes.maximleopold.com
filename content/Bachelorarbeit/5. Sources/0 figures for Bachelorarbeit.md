@@ -173,6 +173,216 @@ Significant 18 area(s) for L_IFJa in BOLD:
 
 
 
+### Data 44 vs 45 part corr
+
+#######################################################################################################  01-Mar-2026 15:19:25
+
+Significant 12 area(s) for L_44 in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    L_44           L_55b      BOLD            0.0000       5.8900        0.07         0.07           0.05
+    L_44           L_FOP2     BOLD            0.0134       2.4700        0.00         0.00           0.02
+    L_44           L_PF       BOLD            0.0000       9.1300        0.01         0.01           0.02
+    L_44           L_PFop     BOLD            0.0000       5.8600        -0.01         -0.01           0.02
+    L_44           L_PFcm     BOLD            0.0217       2.3000        -0.00         -0.00           0.02
+    L_44           L_MT       BOLD            0.0356       2.1000        -0.00         -0.00           0.02
+    L_44           L_PBelt    BOLD            0.0000       4.1400        -0.00         -0.00           0.02
+    L_44           L_A4       BOLD            0.0000       4.2200        -0.01         -0.01           0.02
+    L_44           L_STV      BOLD            0.0356       2.1000        -0.00         -0.00           0.02
+    L_44           L_AVI      BOLD            0.0000       19.1800        0.03         0.03           0.02
+    L_44           L_IFJp     BOLD            0.0000       10.5800        0.00         0.00           0.02
+    L_44           L_IFJa     BOLD            0.0000       11.1500        0.04         0.04           0.03
+
+
+
+#######################################################################################################  01-Mar-2026 15:19:25
+
+Significant 19 area(s) for L_45 in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    L_45           L_FOP3     BOLD            0.0000       6.0900        0.00         0.00           0.02
+    L_45           L_7AL      BOLD            0.0042       2.8700        0.00         0.00           0.02
+    L_45           L_7Am      BOLD            0.0000       5.2900        -0.00         -0.00           0.02
+    L_45           L_7PC      BOLD            0.0000       6.6800        0.00         0.00           0.02
+    L_45           L_A5       BOLD            0.0000       9.3800        0.01         0.01           0.02
+    L_45           L_PSL      BOLD            0.0000       5.3600        0.06         0.06           0.04
+    L_45           L_PGi      BOLD            0.0000       16.3100        0.04         0.04           0.03
+    L_45           L_TPOJ1    BOLD            0.0000       7.0600        0.02         0.01           0.03
+    L_45           L_STGa     BOLD            0.0000       13.3100        0.02         0.02           0.02
+    L_45           L_STSda    BOLD            0.0000       12.3300        0.02         0.02           0.02
+    L_45           L_STSdp    BOLD            0.0000       11.6800        0.06         0.06           0.04
+    L_45           L_STSva    BOLD            0.0000       15.2000        0.02         0.02           0.02
+    L_45           L_STSvp    BOLD            0.0000       9.6600        0.05         0.05           0.03
+    L_45           L_TA2      BOLD            0.0000       4.4300        0.00         0.00           0.02
+    L_45           L_TE1a     BOLD            0.0000       7.2000        0.00         0.00           0.02
+    L_45           L_TGd      BOLD            0.0000       19.8400        0.03         0.03           0.02
+    L_45           L_TGv      BOLD            0.0000       7.5500        0.02         0.02           0.02
+    L_45           L_47l      BOLD            0.0000       24.4400        0.17         0.17           0.04
+    L_45           L_IFSp     BOLD            0.0000       18.6500        0.08         0.08           0.03
+
+
+Out of 37 tests, 32 are significant using a false discovery rate of 0.050000.
+FDR/FCR procedure used is guaranteed valid for independent or positively dependent tests.
+
+#######################################################################################################  01-Mar-2026 15:19:46
+
+Significant 12 area(s) for R_44 in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    R_44           R_SCEF     BOLD            0.0020       3.0900        -0.00         -0.00           0.02
+    R_44           R_FEF      BOLD            0.0000       6.5200        0.00         0.00           0.02
+    R_44           R_PF       BOLD            0.0000       19.3500        0.01         0.01           0.02
+    R_44           R_PFop     BOLD            0.0000       8.7300        -0.00         -0.00           0.02
+    R_44           R_MT       BOLD            0.0000       5.2400        -0.00         -0.00           0.02
+    R_44           R_MST      BOLD            0.0000       5.3600        -0.00         -0.00           0.02
+    R_44           R_PBelt    BOLD            0.0000       4.4100        0.00         0.00           0.02
+    R_44           R_A4       BOLD            0.0000       5.4700        -0.00         -0.00           0.02
+    R_44           R_STSvp    BOLD            0.0000       4.2500        0.04         0.04           0.03
+    R_44           R_AVI      BOLD            0.0000       23.9100        0.05         0.05           0.03
+    R_44           R_IFJp     BOLD            0.0000       5.8300        0.00         -0.00           0.02
+    R_44           R_IFJa     BOLD            0.0000       8.9300        0.04         0.04           0.03
+
+
+
+#######################################################################################################  01-Mar-2026 15:19:46
+
+Significant 20 area(s) for R_45 in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    R_45           R_55b      BOLD            0.0000       18.4800        0.07         0.07           0.04
+    R_45           R_43       BOLD            0.0001       3.9900        0.00         0.00           0.02
+    R_45           R_FOP1     BOLD            0.0002       3.6700        0.01         0.01           0.02
+    R_45           R_FOP3     BOLD            0.0000       7.3100        -0.00         -0.00           0.02
+    R_45           R_7AL      BOLD            0.0178       2.3700        -0.00         -0.00           0.02
+    R_45           R_7Am      BOLD            0.0020       3.0900        -0.00         -0.00           0.02
+    R_45           R_7PC      BOLD            0.0012       3.2500        0.00         0.00           0.02
+    R_45           R_A5       BOLD            0.0000       4.9400        0.00         0.00           0.02
+    R_45           R_PSL      BOLD            0.0000       16.9100        0.06         0.06           0.04
+    R_45           R_PGi      BOLD            0.0000       16.6000        0.03         0.03           0.03
+    R_45           R_TPOJ1    BOLD            0.0000       19.9900        0.05         0.05           0.03
+    R_45           R_STGa     BOLD            0.0000       17.5700        0.02         0.02           0.02
+    R_45           R_STSda    BOLD            0.0000       21.1600        0.04         0.03           0.02
+    R_45           R_STSdp    BOLD            0.0000       20.1200        0.05         0.05           0.03
+    R_45           R_STSva    BOLD            0.0000       13.8800        0.01         0.01           0.02
+    R_45           R_TE1a     BOLD            0.0341       2.1200        -0.01         -0.01           0.02
+    R_45           R_TGd      BOLD            0.0000       20.5000        0.03         0.03           0.02
+    R_45           R_TGv      BOLD            0.0000       18.1600        0.02         0.02           0.02
+    R_45           R_47l      BOLD            0.0000       20.6000        0.10         0.10           0.04
+    R_45           R_IFSp     BOLD            0.0000       15.3900        0.07         0.06           0.03
+### Data 44 vs 45 full corr
+
+#######################################################################################################  01-Mar-2026 17:27:20
+
+Significant 12 area(s) for L_44 in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    L_44           L_SCEF     BOLD            0.0000       13.7800        0.18         0.17           0.11
+    L_44           L_FEF      BOLD            0.0000       10.2500        0.16         0.16           0.12
+    L_44           L_43       BOLD            0.0000       4.5400        0.12         0.12           0.13
+    L_44           L_FOP1     BOLD            0.0000       9.8100        0.07         0.07           0.10
+    L_44           L_FOP2     BOLD            0.0004       3.5500        0.08         0.07           0.09
+    L_44           L_FOP3     BOLD            0.0000       7.2900        0.05         0.05           0.08
+    L_44           L_7Am      BOLD            0.0000       15.7200        0.04         0.04           0.11
+    L_44           L_PF       BOLD            0.0000       19.7800        0.18         0.18           0.13
+    L_44           L_PFop     BOLD            0.0000       12.3900        0.10         0.10           0.14
+    L_44           L_PFcm     BOLD            0.0137       2.4600        0.09         0.08           0.13
+    L_44           L_AVI      BOLD            0.0000       22.1300        0.27         0.26           0.09
+    L_44           L_IFJp     BOLD            0.0000       15.9700        0.19         0.18           0.12
+
+
+
+#######################################################################################################  01-Mar-2026 17:27:20
+
+Significant 21 area(s) for L_45 in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    L_45           L_7PC      BOLD            0.0000       4.2400        0.10         0.09           0.12
+    L_45           L_MT       BOLD            0.0000       13.8100        0.13         0.12           0.11
+    L_45           L_MST      BOLD            0.0000       12.3400        0.13         0.12           0.11
+    L_45           L_PBelt    BOLD            0.0008       3.3700        0.15         0.14           0.14
+    L_45           L_A4       BOLD            0.0000       6.9400        0.17         0.15           0.16
+    L_45           L_A5       BOLD            0.0000       17.8500        0.28         0.28           0.13
+    L_45           L_PSL      BOLD            0.0000       6.5700        0.42         0.44           0.12
+    L_45           L_STV      BOLD            0.0000       12.2600        0.26         0.25           0.12
+    L_45           L_PGi      BOLD            0.0000       22.5600        0.44         0.46           0.10
+    L_45           L_TPOJ1    BOLD            0.0000       14.1600        0.32         0.33           0.13
+    L_45           L_STGa     BOLD            0.0000       21.3300        0.26         0.26           0.11
+    L_45           L_STSda    BOLD            0.0000       23.4500        0.34         0.34           0.10
+    L_45           L_STSdp    BOLD            0.0000       20.1300        0.47         0.48           0.09
+    L_45           L_STSva    BOLD            0.0000       23.9800        0.37         0.38           0.10
+    L_45           L_STSvp    BOLD            0.0000       20.2800        0.50         0.51           0.08
+    L_45           L_TA2      BOLD            0.0000       8.2600        0.10         0.08           0.12
+    L_45           L_TE1a     BOLD            0.0000       23.3000        0.33         0.33           0.11
+    L_45           L_TGd      BOLD            0.0000       24.1800        0.39         0.39           0.09
+    L_45           L_TGv      BOLD            0.0000       21.1100        0.25         0.25           0.09
+    L_45           L_47l      BOLD            0.0000       23.7100        0.55         0.56           0.07
+    L_45           L_IFSp     BOLD            0.0000       13.5900        0.39         0.40           0.11
+
+
+Out of 37 tests, 32 are significant using a false discovery rate of 0.050000.
+FDR/FCR procedure used is guaranteed valid for independent or positively dependent tests.
+
+#######################################################################################################  01-Mar-2026 17:27:32
+
+Significant 11 area(s) for R_44 in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    R_44           R_SCEF     BOLD            0.0000       9.7300        0.19         0.20           0.11
+    R_44           R_FEF      BOLD            0.0000       12.3900        0.23         0.23           0.12
+    R_44           R_FOP1     BOLD            0.0004       3.5700        0.13         0.13           0.09
+    R_44           R_FOP3     BOLD            0.0000       6.2600        0.10         0.09           0.08
+    R_44           R_7Am      BOLD            0.0000       10.1300        0.13         0.13           0.10
+    R_44           R_PF       BOLD            0.0000       23.1900        0.28         0.29           0.12
+    R_44           R_PFop     BOLD            0.0000       9.8000        0.16         0.17           0.12
+    R_44           R_AVI      BOLD            0.0000       24.4500        0.34         0.34           0.09
+    R_44           R_IFSp     BOLD            0.0000       7.5200        0.31         0.32           0.12
+    R_44           R_IFJp     BOLD            0.0000       19.3400        0.18         0.18           0.12
+    R_44           R_IFJa     BOLD            0.0002       3.6800        0.28         0.28           0.11
+
+
+
+#######################################################################################################  01-Mar-2026 17:27:32
+
+Significant 21 area(s) for R_45 in BOLD:
+
+ 
+    seed_region    ROIs       band_name       p_values     z_scores    mean_conn    median_conn    std_dev
+    -----------------------------------------------------------------------------------------------------
+    R_45           R_55b      BOLD            0.0000       13.5300        0.37         0.37           0.11
+    R_45           R_FOP2     BOLD            0.0136       2.4700        0.09         0.07           0.09
+    R_45           R_OP4      BOLD            0.0000       6.7800        0.17         0.16           0.13
+    R_45           R_7AL      BOLD            0.0000       6.4300        0.09         0.08           0.11
+    R_45           R_7PC      BOLD            0.0000       11.8300        0.12         0.11           0.11
+    R_45           R_MT       BOLD            0.0000       16.6300        0.12         0.11           0.12
+    R_45           R_MST      BOLD            0.0000       13.4700        0.14         0.13           0.12
+    R_45           R_A4       BOLD            0.0000       4.7100        0.18         0.17           0.16
+    R_45           R_A5       BOLD            0.0000       16.7300        0.23         0.22           0.15
+    R_45           R_STV      BOLD            0.0000       12.8600        0.31         0.32           0.11
+    R_45           R_PGi      BOLD            0.0000       17.1300        0.29         0.29           0.12
+    R_45           R_TPOJ1    BOLD            0.0000       19.3600        0.39         0.40           0.11
+    R_45           R_STGa     BOLD            0.0000       23.8600        0.21         0.20           0.10
+    R_45           R_STSda    BOLD            0.0000       24.2800        0.33         0.32           0.10
+    R_45           R_STSdp    BOLD            0.0000       22.9200        0.41         0.41           0.10
+    R_45           R_STSva    BOLD            0.0000       23.3400        0.23         0.24           0.11
+    R_45           R_STSvp    BOLD            0.0021       3.0800        0.38         0.39           0.10
+    R_45           R_TE1a     BOLD            0.0000       21.0300        0.16         0.16           0.12
+    R_45           R_TGd      BOLD            0.0000       24.3900        0.31         0.32           0.10
+    R_45           R_TGv      BOLD            0.0000       23.6000        0.22         0.22           0.09
+    R_45           R_47l      BOLD            0.0000       13.5900        0.39         0.39           0.10
 ## Full Correlation
 
 ![[FEF vs IFJa full corr brain.png]]
@@ -634,6 +844,36 @@ set(gcf, 'Renderer', 'Painters');
 saveas(gcf, 'BrainPlot_Final.svg');
 
 disp('Export fertig: 5% Puffer oben/unten hinzugefügt.');
+
+
+OOODDER: 
+
+% 1. UI-Elemente nur verstecken statt löschen (schont die Colorbar)
+set(findall(gcf, 'Type', 'uicontrol'), 'Visible', 'off');
+set(findall(gcf, 'Type', 'uipanel'), 'Visible', 'off');
+
+% 2. Die Colorbar explizit wieder einschalten (falls sie versteckt wurde)
+cb = findall(gcf, 'Type', 'colorbar');
+if ~isempty(cb)
+    set(cb, 'Visible', 'on');
+else
+    cb = colorbar; % Neu erstellen, falls alle Stricke reißen
+end
+
+% 3. Deine Rand-Berechnung mit Sicherheits-Puffer
+ax = gca;
+ti = ax.TightInset; 
+padding = 0.05;
+
+% Wir nutzen hier feste Werte für die Breite, um Platz für die Colorbar zu lassen
+% [Links, Unten, Breite, Höhe]
+ax.Position = [ti(1) + 0.02, ti(2) + padding, 0.75, 1 - ti(2) - ti(4) - 2*padding];
+
+% 4. Export (Painters für Vektoren)
+set(gcf, 'Renderer', 'Painters');
+print(gcf, 'BrainPlot_Final.svg', '-dsvg', '-vector');
+
+disp('Export fertig: UI ist nur unsichtbar, Colorbar sollte stehen.');
 
 # Müll
 
