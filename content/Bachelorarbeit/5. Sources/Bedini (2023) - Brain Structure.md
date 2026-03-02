@@ -1,5 +1,5 @@
 ---
-modified: 2026-03-01
+modified: 2026-03-02
 ---
 
 Bedini, M., Olivetti, E., Avesani, P., & Baldauf, D. (2023). Accurate localization and coactivation profiles of the frontal eye field and inferior frontal junction: An ALE and MACM fMRI meta-analysis. _Brain Structure and Function_, _228_(3–4), 997–1017. [https://doi.org/10.1007/s00429-023-02641-y](https://doi.org/10.1007/s00429-023-02641-y)

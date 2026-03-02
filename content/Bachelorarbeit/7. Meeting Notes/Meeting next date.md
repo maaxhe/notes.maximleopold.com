@@ -1,5 +1,5 @@
 ---
-modified: 2026-03-01
+modified: 2026-03-02
 ---
 
 - [ ] was sagen die MNI coord. aus? das ist ja nur ein Punkt - wie geht das für ein Areal? 

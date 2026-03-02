@@ -2,7 +2,7 @@
 tags:
   - region/core
   - "#stream/safe"
-modified: 2026-03-01
+modified: 2026-03-02
 ---
 ## Herschl's Gyrus
 
