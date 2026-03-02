@@ -6,7 +6,7 @@ import { classNames } from "../util/lang"
 
 const FontToggle: QuartzComponent = ({ displayClass }: QuartzComponentProps) => {
   return (
-    <button class={classNames(displayClass, "fonttoggle")} aria-label="Toggle Computer Modern font">
+    <button class={classNames(displayClass, "fonttoggle")} aria-label="Computer Modern Schrift umschalten" aria-pressed="false">
       <span class="font-label-default" title="Zu Computer Modern wechseln">
         Aa
       </span>

@@ -205,10 +205,17 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
     const includedSlugs = buildIncludedSlugs()
     const mainSlugs = new Set(sortedGroups.map((g) => g.main?.slug).filter(Boolean))
 
-    // Total word count: only sub-chapter files in the transclusion chain.
-    // Exclude main chapter shells (X.0) — they are outline/transclusion containers.
+    // Total word count: only sub-chapter files in the transclusion chain
+    // AND in the schreiben folder. Exclude main chapter shells (X.0) and
+    // exclude sources or other ba-tagged files outside the schreiben folder.
     const totalWordCount = allBAFiles
-      .filter((f) => includedSlugs.has(f.slug || "") && !mainSlugs.has(f.slug))
+      .filter((f) => {
+        const slugLower = f.slug?.toLowerCase() ?? ""
+        const inSchreibenFolder = normalizedFolderPath
+          ? slugLower.startsWith(normalizedFolderPath)
+          : true
+        return includedSlugs.has(f.slug || "") && !mainSlugs.has(f.slug) && inSchreibenFolder
+      })
       .reduce((acc, f) => acc + getWordCount(f), 0)
 
     // Page estimation based on UOS formatting guidelines:
