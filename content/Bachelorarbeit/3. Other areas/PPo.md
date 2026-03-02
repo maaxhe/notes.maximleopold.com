@@ -3,8 +3,9 @@ tags:
   - stream/where
   - stream/safe
   - region/classical
+modified: 2026-03-02
 ---
-# PPo (Parietal Operculum )
+# PPo (Planum Polare)
 
 **Stream:** 
 **Classical equivalent:** 
