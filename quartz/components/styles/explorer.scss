@@ -26,6 +26,12 @@
   }
 }
 
+.explorer + .explorer {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--lightgray);
+}
+
 .explorer {
   display: flex;
   flex-direction: column;
