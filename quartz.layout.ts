@@ -52,7 +52,15 @@ export const defaultContentPageLayout: PageLayout = {
         { Component: Component.ReaderMode() },
       ],
     }),
-    Component.Explorer(),
+    Component.Explorer({
+      filterFn: (node) => node.slugSegment !== "tags" && node.slugSegment !== "Dopamin",
+    }),
+    Component.Explorer({
+      title: "Andere Themen",
+      folderDefaultState: "collapsed",
+      filterFn: (node) =>
+        node.slugSegment !== "tags" && node.slugSegment !== "Bachelorarbeit",
+    }),
   ],
   right: [
     Component.ConditionalRender({
@@ -142,7 +150,15 @@ export const defaultListPageLayout: PageLayout = {
         { Component: Component.FontToggle() },
       ],
     }),
-    Component.Explorer(),
+    Component.Explorer({
+      filterFn: (node) => node.slugSegment !== "tags" && node.slugSegment !== "Dopamin",
+    }),
+    Component.Explorer({
+      title: "Andere Themen",
+      folderDefaultState: "collapsed",
+      filterFn: (node) =>
+        node.slugSegment !== "tags" && node.slugSegment !== "Bachelorarbeit",
+    }),
   ],
   right: [],
 }
