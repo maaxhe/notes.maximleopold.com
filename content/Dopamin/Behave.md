@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 # Behave; The Biology of our Humans Best and Worst
 
 [[Behave Thoughts]]

@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## Tyrosin
 
 Die [[Aminosäure, amino acid]] **Tyrosin** kann vom menschlichen Körper in ausreichender Menge hergestellt werden und gilt deshalb als nicht-essenziell.  

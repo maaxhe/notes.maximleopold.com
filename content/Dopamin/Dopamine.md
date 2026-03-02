@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## Dopamine
 ![[dopamine structure.png]]
 The chemical engaged in extrapersonal space is [[Dopamine]].

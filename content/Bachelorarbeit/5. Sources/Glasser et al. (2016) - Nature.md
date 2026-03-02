@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 
 [https://doi.org/10.1038/nature18933](https://doi.org/10.1038/nature18933)
 

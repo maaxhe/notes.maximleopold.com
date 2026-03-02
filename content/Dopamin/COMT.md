@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## COMT
 Das [[Enzyme]] catechol-O-methyltransferase (COMT) entfernt [[Dopamine]] von der [[Synapse]]. 
 Eine COMT-Genvariante ist wesentlich effizienter und reduziert schneller Dopamin an der Synapse. Also wird dadurch auch weniger Dopamin weitergeleitet. 

@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 Rauschecker, J. P., & Scott, S. K. (2009). Maps and streams in the auditory cortex: Nonhuman primates illuminate human speech processing. _Nature Neuroscience_, _12_(6), 718–724. [https://doi.org/10.1038/nn.2331](https://doi.org/10.1038/nn.2331)
 
 - [x] paper gelesen?

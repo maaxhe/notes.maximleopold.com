@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## Auditory Where-Stream (Dorsal)
 
 - Evidence for a postero-dorsal stream in auditory spatial processing is just as strong, if not stronger, in the human as in nonhuman primates ([[Rauschecker & Scott (2009) - Nature Neuroscience#^67d222]])

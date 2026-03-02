@@ -4,7 +4,6 @@ created: 2025-11-18
 tags:
   - stream/pfc
   - function/prosody
-modified: 2026-03-02
 ---
 # IFG
 

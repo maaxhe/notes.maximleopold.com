@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 Friston, K. J. (1994). Functional and effective connectivity in neuroimaging: A synthesis. _Human Brain Mapping_, _2_(1–2), 56–78. [https://doi.org/10.1002/hbm.460020107](https://doi.org/10.1002/hbm.460020107)
 
 ## Friston (1994) 

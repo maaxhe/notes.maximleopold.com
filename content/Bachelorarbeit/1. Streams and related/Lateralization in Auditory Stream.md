@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## Lateralization in Auditory Stream
 
 - Rechte und linke Hemisphäre haben unterschiedliche Funktionen bzw. Gewichtungen. 

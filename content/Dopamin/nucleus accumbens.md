@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 
 The nucleus accumbens (NAc) is **a subcortical brain structure located within the [[ventral striatum]]. It is often referred to as the pleasure center of the brain for its primary role in positive affect and feelings of [[Reward]], but this is an incomplete description.
 
@@ -10,7 +6,7 @@ The nucleus accumbens (NAc) is **a subcortical brain structure located within t
 - zudem führt eine höhere Dichte an Rezeptoren zu einer höhren Präferenz für einen bestimmten Partner
 - fördert. Wird der Gegenspieler vom Oxytocin-Receptor eingeführt, kann man das alloparantale Verhalten blockieren. Zusätzlich wird die Präferenz für einen bestimmten Partner aufgehoben
 
-![Nucleus Accumbens Connectivity](https://www.researchgate.net/publication/316253469/figure/fig1/AS:484919433535488@1492625210663/Basic-Neuroscience-Nucleus-Accumbens-Connectivity-The-connectivity-between-various.png)
+![[Basic-Neuroscience-Nucleus-Accumbens-Connectivity-The-connectivity-between-various.png]]
 
 ![[dopamine circuit.jpeg]]
 ### See also

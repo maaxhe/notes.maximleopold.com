@@ -6,7 +6,6 @@ tags:
   - stream/where
   - stream/safe
   - function/visual
-modified: 2026-03-02
 ---
 # MT
 

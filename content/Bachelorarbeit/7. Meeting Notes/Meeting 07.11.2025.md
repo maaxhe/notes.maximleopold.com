@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## Meeting 07.11.2025 
 
 in MNI übertragen 

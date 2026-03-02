@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 
 Source of mesolimbic dopamine projection to the [[nucleus accumbens]]
 

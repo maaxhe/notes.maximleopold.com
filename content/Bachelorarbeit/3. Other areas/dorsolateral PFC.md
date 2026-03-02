@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## dorsolateral PFC
 
 ... is the decider, the most rational, cognitive, utilitarian, and unsentimental part of the PFC. It’s the most recently evolved part of the PFC and the last part to fully mature. It mostly hears from and talks to other cortical regions.

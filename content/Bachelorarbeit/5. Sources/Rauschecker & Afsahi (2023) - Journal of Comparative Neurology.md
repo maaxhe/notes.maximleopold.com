@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## Rauschecker & Afsahi (2023) - Journal of Comparative Neurology
 
 Rauschecker, J. P., & Afsahi, R. K. (2023). Anatomy of the auditory cortex then and now. _Journal of Comparative Neurology_, _531_(18), 1883–1892. [https://doi.org/10.1002/cne.25560](https://doi.org/10.1002/cne.25560)

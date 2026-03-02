@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## Meeting 24.10.25 
 
 pöppel 2004 what and where 

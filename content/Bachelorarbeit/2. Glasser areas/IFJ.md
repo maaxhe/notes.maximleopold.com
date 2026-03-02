@@ -6,7 +6,6 @@ tags:
   - function/non-spatial
   - stream/what
   - stream/safe
-modified: 2026-03-02
 ---
 # IFJ (Inferior Frontal Junction)
 

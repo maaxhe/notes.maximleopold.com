@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## DRD4
 DRD4 ist ein Gen, welches den [[Dopamine]]-[[Receptor]] D4 kodiert. 
 Diser Rezeptor ist am häufigsten im [[cortex]] und [[nucleus accumbens]] aufzufinden. 

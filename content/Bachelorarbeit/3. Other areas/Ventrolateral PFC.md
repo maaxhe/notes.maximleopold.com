@@ -6,7 +6,6 @@ tags:
   - stream/ventral
 title: Ventrolateral PFC
 created: 2025-11-21
-modified: 2026-03-02
 ---
 # Ventrolateral PFC
 

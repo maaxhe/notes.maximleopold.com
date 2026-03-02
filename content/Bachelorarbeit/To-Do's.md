@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ### Meine nächsten Schritte
 
 #### Andere ToDo's 

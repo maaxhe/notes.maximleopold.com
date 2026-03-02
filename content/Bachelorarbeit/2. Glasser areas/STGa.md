@@ -2,7 +2,6 @@
 title: STGa
 created: 2025-11-17
 tags:
-modified: 2026-03-02
 ---
 # STGa
 

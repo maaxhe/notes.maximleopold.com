@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## Reward (Belohnung)
 
 the [[Dopamine]] system, especially when subjects had to pay to punish; the greater the dopamine increase during no-cost punishment, the more willing someone was to pay to punish. Punishing norm violations is satisfying.

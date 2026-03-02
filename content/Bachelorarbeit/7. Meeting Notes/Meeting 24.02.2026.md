@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 
 - [x] results zeigen 
 - [x] Werte in den results nur partial corr? 

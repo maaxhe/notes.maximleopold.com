@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## Friederici (2011) - Physiological Reviews
 Friederici, A. D. (2011). The Brain Basis of Language Processing: From Structure to Function. _Physiological Reviews_, _91_(4), 1357–1392. [https://doi.org/10.1152/physrev.00006.2011](https://doi.org/10.1152/physrev.00006.2011)
 

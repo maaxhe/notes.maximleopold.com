@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## De Vries et al. (2021) - Journal of Neuroscience
 
 

@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## ventral striatum
 
 ![[Frontal Cortical Changes in Cognition in Adolescence#^6d1793]]

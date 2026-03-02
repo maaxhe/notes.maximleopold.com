@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## Where-pathway
 - **Specialized for motion detection**: The parietal "where" pathway is crucial for identifying and processing movement within the visual field, allowing organisms to understand the dynamics of their environment.
 

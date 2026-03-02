@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## Fusiform face area (FFA)
 
 ### Was wird hier verarbeitet

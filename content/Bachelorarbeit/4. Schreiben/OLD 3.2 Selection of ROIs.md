@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 # OLD 3.2 Selection of Regions of Interest (ROIs)
 
 To test the hypothesis of supramodal prefrontal control, we defined a set of Regions of Interest (ROIs) based on the multimodal parcellation of the Human Connectome Project (HCP-MMP1) by [[Glasser et al. (2016) - Nature]]. This atlas maps cortical areas based on a combination of cortical architecture (myelin), function (task-fMRI) and connectivity, providing a significantly higher precision than traditional Brodmann maps. ROIs were divided into three categories: (1) Prefrontal Seed Regions (the controllers), (2) Auditory Where-Stream targets ("dorsal/spatial"), (3) Auditory What-Stream targets ("Ventral/objects").

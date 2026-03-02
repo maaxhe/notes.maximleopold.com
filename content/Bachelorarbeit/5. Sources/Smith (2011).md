@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 Smith, S. M., Miller, K. L., Salimi-Khorshidi, G., Webster, M., Beckmann, C. F., Nichols, T. E., Ramsey, J. D., & Woolrich, M. W. (2011). Network modelling methods for FMRI. _NeuroImage_, _54_(2), 875–891. [https://doi.org/10.1016/j.neuroimage.2010.08.063](https://doi.org/10.1016/j.neuroimage.2010.08.063)
 
 ## Smith (2011) 

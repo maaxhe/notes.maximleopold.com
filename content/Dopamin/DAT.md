@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## DAT
 Der [[Dopamine]]-Transporter (DAT) sorgt für den Nachschub synaptischen Dopamin. 
 Eine Genvariante, bei der DAT weniger effizeint arbeitet, erzeugt ein höheres Level an Dopamin. 

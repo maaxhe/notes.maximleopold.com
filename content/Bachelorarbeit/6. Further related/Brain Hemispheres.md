@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## Brain Hemispheres
 ### Left Hemisphere: Positive Emotions
 - Newborns: with palatable sugar solution: higher EEG activation on the left

@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## basal ganglia
 
 Basal ganglia are (mostly) located between the [[insular cortex (insula)]] and the [[Thalamus]]. The internal capsule crosses between the different BG structures.

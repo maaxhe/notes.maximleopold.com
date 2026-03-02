@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 what/where lieber als dorsal/ventral 
 
 Bedini hat das gemacht: 2023

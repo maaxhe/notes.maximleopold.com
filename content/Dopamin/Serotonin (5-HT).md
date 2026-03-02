@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 
 ## Serotonin
 - ist ein [[Neurotransmitter]], der viele verschiedene Informationen übergibt. 

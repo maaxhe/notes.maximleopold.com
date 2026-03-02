@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 
 ![[FEF vs IFJa full corr brain.png]]
 

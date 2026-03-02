@@ -4,7 +4,6 @@ created: 2025-11-20
 tags:
   - function/semantic
   - function/language
-modified: 2026-03-02
 ---
 # STV
 

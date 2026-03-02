@@ -7,7 +7,6 @@ tags:
   - function/visual
   - function/motion
   - stream/safe
-modified: 2026-03-02
 ---
 # MST
 

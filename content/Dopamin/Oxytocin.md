@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## Oxytocin
 
 - ein [[Neuropeptide]], welches die Bindung zwischen Lebewesen verstärkt

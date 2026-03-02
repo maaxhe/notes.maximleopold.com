@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## voice-sensitive cortex
 Aus [[Frühholz (2015) - NeuroImage]] eine Region, die auf Stimmen reagiert. 
 Siehe -> [[Frühholz (2015) - NeuroImage#^8f603e]]

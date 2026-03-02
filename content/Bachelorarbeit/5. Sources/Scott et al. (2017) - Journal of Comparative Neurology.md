@@ -1,7 +1,3 @@
----
-modified: 2026-03-02
----
-
 ## Scott et al. (2017) - Journal of Comparative Neurology
 
 Scott, B. H., Saleem, K. S., Kikuchi, Y., Fukushima, M., Mishkin, M., & Saunders, R. C. (2017). Thalamic connections of the core auditory cortex and rostral supratemporal plane in the macaque monkey. _Journal of Comparative Neurology_, _525_(16), 3488–3513. [https://doi.org/10.1002/cne.24283](https://doi.org/10.1002/cne.24283)
