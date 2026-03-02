@@ -53,13 +53,7 @@ export const defaultContentPageLayout: PageLayout = {
       ],
     }),
     Component.Explorer({
-      filterFn: (node) => node.slugSegment !== "tags" && node.slugSegment !== "Dopamin",
-    }),
-    Component.Explorer({
-      title: "Andere Themen",
-      folderDefaultState: "collapsed",
-      filterFn: (node) =>
-        node.slugSegment !== "tags" && node.slugSegment !== "Bachelorarbeit",
+      filterFn: (node) => node.slugSegment !== "tags",
     }),
   ],
   right: [
@@ -151,13 +145,7 @@ export const defaultListPageLayout: PageLayout = {
       ],
     }),
     Component.Explorer({
-      filterFn: (node) => node.slugSegment !== "tags" && node.slugSegment !== "Dopamin",
-    }),
-    Component.Explorer({
-      title: "Andere Themen",
-      folderDefaultState: "collapsed",
-      filterFn: (node) =>
-        node.slugSegment !== "tags" && node.slugSegment !== "Bachelorarbeit",
+      filterFn: (node) => node.slugSegment !== "tags",
     }),
   ],
   right: [],
