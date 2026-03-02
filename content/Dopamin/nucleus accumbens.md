@@ -9,7 +9,8 @@ The nucleus accumbens (NAc) is **a subcortical brain structure located within t
 - es gibt eine positive Korrelation zwischen der Dichte von Oxytocin-Receptors im nucleus accumbens und alloparentales Verhalten
 - zudem führt eine höhere Dichte an Rezeptoren zu einer höhren Präferenz für einen bestimmten Partner
 - fördert. Wird der Gegenspieler vom Oxytocin-Receptor eingeführt, kann man das alloparantale Verhalten blockieren. Zusätzlich wird die Präferenz für einen bestimmten Partner aufgehoben
-![Basic Neuroscience: Nucleus Accumbens Connectivity. The connectivity... |  Download Scientific Diagram](https://www.researchgate.net/publication/316253469/figure/fig1/AS:484919433535488@1492625210663/Basic-Neuroscience-Nucleus-Accumbens-Connectivity-The-connectivity-between-various.png)
+
+![Nucleus Accumbens Connectivity](https://www.researchgate.net/publication/316253469/figure/fig1/AS:484919433535488@1492625210663/Basic-Neuroscience-Nucleus-Accumbens-Connectivity-The-connectivity-between-various.png)
 
 ![[dopamine circuit.jpeg]]
 ### See also
