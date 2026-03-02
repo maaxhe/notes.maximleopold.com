@@ -48,6 +48,7 @@ import ExportAllButton from "./ExportAllButton"
 import AuditoryStreamsMap from "./AuditoryStreamsMap"
 import StreamBadge from "./StreamBadge"
 import RAGChatbot from "./RAGChatbot"
+import FontToggle from "./FontToggle"
 
 export {
   ArticleTitle,
@@ -100,4 +101,5 @@ export {
   AuditoryStreamsMap,
   StreamBadge,
   RAGChatbot,
+  FontToggle,
 }

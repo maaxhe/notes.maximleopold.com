@@ -48,6 +48,7 @@ export const defaultContentPageLayout: PageLayout = {
       components: [
         { Component: Component.AnnotationsBadge() },
         { Component: Component.Darkmode() },
+        { Component: Component.FontToggle() },
         { Component: Component.ReaderMode() },
       ],
     }),
@@ -138,6 +139,7 @@ export const defaultListPageLayout: PageLayout = {
       components: [
         { Component: Component.AnnotationsBadge() },
         { Component: Component.Darkmode() },
+        { Component: Component.FontToggle() },
       ],
     }),
     Component.Explorer(),

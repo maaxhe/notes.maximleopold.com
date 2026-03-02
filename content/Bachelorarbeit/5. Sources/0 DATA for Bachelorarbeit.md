@@ -77,6 +77,11 @@ control node: 1
 [[Data FEF (single seed) part correlation]]
 [[Data FEF (single seed) full correlation]]
 
+### Data IFJa (single seed)
+
+[[Data IFJa (single seed) full correlation]]
+[[Data IFJa (single seed) part correlation]]
+
 ### Data IFJa vs IFJp part corr
 
 [[Data IFJa vs IFJp part correlation]]
