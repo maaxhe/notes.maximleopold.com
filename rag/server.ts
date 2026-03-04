@@ -24,23 +24,12 @@ console.log("  ANTHROPIC_API_KEY:", process.env.ANTHROPIC_API_KEY ? "✅ Set" : 
 console.log("  OPENAI_API_KEY:", process.env.OPENAI_API_KEY ? "✅ Set" : "❌ Missing")
 console.log("  NODE_ENV:", process.env.NODE_ENV || "development")
 
-// Initialisiere APIs
-if (!process.env.ANTHROPIC_API_KEY) {
-  console.error("❌ ANTHROPIC_API_KEY nicht gesetzt!")
-  process.exit(1)
-}
-
-if (!process.env.OPENAI_API_KEY) {
-  console.error("❌ OPENAI_API_KEY nicht gesetzt!")
-  process.exit(1)
-}
-
 const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
+  apiKey: process.env.ANTHROPIC_API_KEY ?? "dummy",
 })
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY ?? "dummy",
 })
 
 interface DocumentChunk {
@@ -83,7 +72,7 @@ async function loadVectorStore() {
 /**
  * Berechne Kosinus-Ähnlichkeit zwischen zwei Vektoren
  */
-function cosineSimilarity(a: number[], b: number[]): number {
+export function cosineSimilarity(a: number[], b: number[]): number {
   if (a.length !== b.length) return 0
   let dotProduct = 0, normA = 0, normB = 0
   for (let i = 0; i < a.length; i++) {
@@ -98,7 +87,7 @@ function cosineSimilarity(a: number[], b: number[]): number {
  * BM25 Score — lexikalische Keyword-Suche als Ergänzung zur semantischen Suche.
  * Bewertet Chunks nach Häufigkeit der Query-Terme unter Berücksichtigung der Dokumentlänge.
  */
-function bm25Score(queryTerms: string[], chunkText: string, avgDocLen: number, k1 = 1.5, b = 0.75): number {
+export function bm25Score(queryTerms: string[], chunkText: string, avgDocLen: number, k1 = 1.5, b = 0.75): number {
   const words = chunkText.toLowerCase().split(/\s+/)
   const docLen = words.length
   const termFreq: Record<string, number> = {}
@@ -119,7 +108,7 @@ function bm25Score(queryTerms: string[], chunkText: string, avgDocLen: number, k
  * Reranking: verfeinert Top-N Kandidaten per Keyword-Overlap.
  * Kombiniert semantischen Score mit BM25 für finale Reihenfolge.
  */
-function rerankChunks(
+export function rerankChunks(
   candidates: Array<DocumentChunk & { score: number; bm25: number }>,
   queryTerms: string[],
   topK: number
@@ -306,12 +295,12 @@ interface SourcePayload {
   chunkIds: string[]
 }
 
-function containsInvalidCitation(text: string): boolean {
+export function containsInvalidCitation(text: string): boolean {
   if (!text) return false
   return /\bquelle\b/i.test(text) || /\bsource\s+\d+/i.test(text)
 }
 
-function normalizeCitationKey(value?: string): string {
+export function normalizeCitationKey(value?: string): string {
   return (value || "")
     .toLowerCase()
     .replace(/[\[\]\(\)\.,]/g, " ")
@@ -319,7 +308,7 @@ function normalizeCitationKey(value?: string): string {
     .trim()
 }
 
-function extractCitationMentions(text: string): Map<string, string> {
+export function extractCitationMentions(text: string): Map<string, string> {
   const matches = new Map<string, string>()
   if (!text) return matches
   CITATION_REGEX.lastIndex = 0
@@ -334,7 +323,7 @@ function extractCitationMentions(text: string): Map<string, string> {
   return matches
 }
 
-function buildPublicUrlFromSource(rawSource?: string | null) {
+export function buildPublicUrlFromSource(rawSource?: string | null) {
   if (!rawSource) return null
   if (rawSource.startsWith("http")) {
     return rawSource
@@ -355,7 +344,7 @@ function buildPublicUrlFromSource(rawSource?: string | null) {
   return `/${slug}`
 }
 
-function parseSourceMetadata(rawTitle: string, fallbackCategory?: string) {
+export function parseSourceMetadata(rawTitle: string, fallbackCategory?: string) {
   const trimmed = rawTitle?.trim() || "Unbenannte Quelle"
   const fallbackVenue = fallbackCategory?.replace(/\.md$/i, "") || "Internal Notes"
 
@@ -1285,4 +1274,8 @@ async function startServer() {
   })
 }
 
-startServer().catch(console.error)
+// Only start the server when this file is run directly (not imported in tests)
+const isMainEntry = import.meta.url === new URL(process.argv[1], "file://").href
+if (isMainEntry) {
+  startServer().catch(console.error)
+}

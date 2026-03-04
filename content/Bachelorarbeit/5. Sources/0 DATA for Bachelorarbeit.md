@@ -1,3 +1,7 @@
+---
+modified: 2026-03-04
+---
+
 # DATA for Bachelorarbeit 
 
 
@@ -85,6 +89,15 @@ control node: 1
 ### Data FEF vs IFJp part corr 
 
 [[Data FEF vs IFJp part correlation]]
+
+### Data 55b part corr
+
+[[Data 55b part corr]]
+
+### Data 55b vs IFJa part corr
+
+[[Data 55b vs IFJa part correlation]]
+
 
 
 # Code zum Anpassen der Brain Grafiken

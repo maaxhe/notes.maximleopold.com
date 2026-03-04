@@ -27,7 +27,8 @@
     "rag:index": "tsx rag/index-documents.ts",
     "rag:server": "tsx rag/server.ts",
     "rag:test": "tsx rag/test-keys.ts",
-    "rag:debug": "tsx rag/debug-env.ts"
+    "rag:debug": "tsx rag/debug-env.ts",
+    "test": "node --import tsx/esm --test 'rag/**/*.test.ts' 'quartz/**/*.test.ts'"
   },
   "engines": {
     "npm": ">=10.9.2",

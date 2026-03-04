@@ -37,7 +37,7 @@ const MIN_CHUNK_SIZE = 80  // Zu kurze Chunks ignorieren
  * Jeder Chunk enthält einen semantisch zusammenhängenden Abschnitt.
  * Sehr lange Abschnitte werden zusätzlich per Satz-Splitting aufgeteilt.
  */
-function chunkMarkdownByHeadings(rawMarkdown: string): string[] {
+export function chunkMarkdownByHeadings(rawMarkdown: string): string[] {
   const chunks: string[] = []
 
   // Splitte an H2 oder H3 Headings (## oder ###)
@@ -83,7 +83,7 @@ function chunkMarkdownByHeadings(rawMarkdown: string): string[] {
 /**
  * Fallback: Satz-basiertes Chunking für PDFs und plain text
  */
-function chunkText(text: string, maxChunkSize = CHUNK_SIZE, overlap = CHUNK_OVERLAP): string[] {
+export function chunkText(text: string, maxChunkSize = CHUNK_SIZE, overlap = CHUNK_OVERLAP): string[] {
   const chunks: string[] = []
   const sentences = text.split(/(?<=[.!?])\s+/)
   let currentChunk = ""
@@ -106,7 +106,7 @@ function chunkText(text: string, maxChunkSize = CHUNK_SIZE, overlap = CHUNK_OVER
 /**
  * Extrahiere Kategorie aus dem Dateipfad
  */
-function extractCategory(filePath: string): string {
+export function extractCategory(filePath: string): string {
   const parts = filePath.split("/")
   const baIndex = parts.findIndex(p => p === "Bachelorarbeit")
   if (baIndex !== -1 && baIndex + 1 < parts.length) {
@@ -306,5 +306,8 @@ async function indexDocuments() {
   console.log(`   Größe: ${((await fs.stat(outputPath)).size / 1024 / 1024).toFixed(2)} MB`)
 }
 
-// Führe Indexierung aus
-indexDocuments().catch(console.error)
+// Only run when executed directly (not imported in tests)
+const isMainEntry = import.meta.url === new URL(process.argv[1], "file://").href
+if (isMainEntry) {
+  indexDocuments().catch(console.error)
+}

@@ -107,6 +107,7 @@ git commit -m "Remove .env from Git"
 
 ## Beispiel:
 
+
 So sieht eine ausgefüllte `.env` aus:
 
 ```env

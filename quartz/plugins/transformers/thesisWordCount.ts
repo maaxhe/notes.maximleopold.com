@@ -43,7 +43,7 @@ export const ThesisWordCount: QuartzTransformerPlugin = () => {
   }
 }
 
-function countThesisWords(markdown: string): number {
+export function countThesisWords(markdown: string): number {
   let text = markdown
 
   // 1. Find main chapter heading (# X.X ... where X are digits)
