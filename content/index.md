@@ -1,6 +1,6 @@
 ---
 title: Research Vault
-modified: 2026-02-23
+modified: 2026-03-12
 ---
 
 # Research Vault
@@ -14,8 +14,9 @@ Diese Seite ist das zentrale Wissenssystem für meine Bachelorarbeit in Cognitiv
 
 Hier kannst du all meine Notizen durchsuchen, die ich mal gemacht habe.
 
-Derzeit besteht diese Seite ausschließlich aus meinen Notizen zu meiner Bachelorarbeit.
+Derzeit besteht diese Seite hauptsächlich aus meinen Notizen zu meiner Bachelorarbeit.
 Das hier ist also eine Seite, die meinen Work-In-Progress bis hin zur fertigen Bachelorarbeit trackt.
+Außerdem findest du hier alle meine Blog-Artikel von [maximleopold.com/blog](https://maximleopold.com/blog), die ich im Bereich [[Blog/index|Blog]] gesammelt habe.
 
 Viel Spaß beim Durchstöbern! :D
 
@@ -79,6 +80,7 @@ Und für meinen Betreuer: für alle Referenzen zur Arbeit, Grundlage für Diskus
 - [🧠 Auditory Stream Overview](Bachelorarbeit/Auditory-Streams-Overview)
 - [💬 Alle Annotationen](/annotations)
 - [🏷️ Alle Tags](/alle-tags)
+- [📝 Blog-Artikel](Blog/index)
 
 ---
 
