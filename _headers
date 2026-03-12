@@ -1,0 +1,5 @@
+/blog/posts.json
+  Access-Control-Allow-Origin: *
+
+/blog/*.md
+  Access-Control-Allow-Origin: *

@@ -1,3 +1,7 @@
+---
+modified: 2026-03-12
+---
+
 Hickok, G., & Poeppel, D. (2007). The cortical organization of speech processing. _Nature Reviews Neuroscience_, _8_(5), 393–402. [https://doi.org/10.1038/nrn2113](https://doi.org/10.1038/nrn2113)
 
 - [x] Paper gelesen?
@@ -6,7 +10,7 @@ Hickok, G., & Poeppel, D. (2007). The cortical organization of speech processing
 ## Hickok & Poeppel 2007 - Nature
 
 summary of their model: 
-- In this model, a ventral stream processes speech signals for comprehension, and a dorsal stream maps acoustic speech signals to frontal lobe articulatory networks. The model assumes that the ventral stream is largely bilaterally organized — although there are important computational differences between the left- and right-hemisphere systems — and that the dorsal stream is strongly left-hemisphere dominant. ^0a9524
+- In this model, a ventral stream processes speech signals for comprehension, and a dorsal stream maps acoustic speech signals to frontal lobe articulatory networks. The model assumes that the ventral stream is largely bilaterally organized — although there are important computational differences between the left- and right-hemisphere systems — and that the dorsal stream is strongly left-hemisphere dominant. ^0a95
 
 history of Wernicke and STG: 
 - This position was challenged by two discoveries in the 1970s and 1980s. The first was that deficits in the ability to perceive speech sounds contributed minimally to the auditory comprehension deficit in Wernicke’s aphasia2–7. The second was that destruction of the left STG does not lead to deficits in the auditory comprehension of speech, but instead causes deficits in speech production8. These findings do not rule out a role for the left STG in speech perception, but  make it clear that additional regions participate in the process. ^104d6c
@@ -59,6 +63,11 @@ middle temporal gyrus network:
 PT:
 - One recent proposal is that the PT functions as a computational hub that takes input from the primary auditory cortex and performs a segregation and spectrotemporal patternmatching operation; this leads to the output of sound object information, which is processed further in lateral temporal lobe areas, and spatial position information, which is processed further in parietal structures. ^ed0a3e
 - PT is probably not homogeneous. In fact, four different cytoarchitectonic fields have been observed in this region96. It is therefore conceivable that one region of the PT serves as a computational hub (or some other function) and another portion computes sensorimotor transformations. Within-subject experiments with multiple stimulus and task conditions are needed to sort out a possible parcellation of the PT. ^9d3308
+
+
+### Paper
+![[Hickok and Poeppel - 2007 - The cortical organization of speech processing.pdf]]
+
 ## see also
 Tags: #cognitivescience/neuroscience #science #source 
 *Superlink:* [[050 🧠Neuroscience]] 

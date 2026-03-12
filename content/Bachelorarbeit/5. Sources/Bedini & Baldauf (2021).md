@@ -1,3 +1,7 @@
+---
+modified: 2026-03-12
+---
+
 Bedini, M., & Baldauf, D. (2021). Structure, function and connectivity fingerprints of the frontal eye field versus the inferior frontal junction: A comprehensive comparison. _European Journal of Neuroscience_, _54_(4), 5462–5506. [https://doi.org/10.1111/ejn.15393](https://doi.org/10.1111/ejn.15393)
 
 - [x] Paper gelesen?
@@ -6,6 +10,8 @@ Bedini, M., & Baldauf, D. (2021). Structure, function and connectivity fingerpri
 
 - The human prefrontal cortex contains two prominent areas, the frontal eye  field and the inferior frontal junction, that are crucially involved in the  orchestrating functions of attention, working memory and cognitive control.
 - In contrast to early visual areas, where all these cortical features are generally well aligned, and inter-individual differences are small, leading to a reliable way to parcel the underlying brain structures (Abdollahi et al., 2014; Sereno et al., 1995), in the PFC studies show that the alignment between cortical features becomes less apparent, and even the relative spatial arrangement of brain areas can sometimes vary substantially between individuals  (Eickhoff, Yeo, & Genon, 2018). Thus, to understand the modular organization of the PFC, a multimodal approach capable of combining information about all the most relevant cortical properties becomes crucial (Glasser et al., 2016; Van Essen et al., 2019).
+
+![[bedini baldauf 2021 figure 2 top-down-attention.png]]
 
 results: 
 - We found remarkable differences in how  these regions relate to sensory domains and visual topography, top-down and  bottom-up spatial attention, spatial versus non-spatial (i.e., feature- and  object-based) attention and working memory and, finally, the multipledemand system

@@ -1,3 +1,7 @@
+---
+modified: 2026-03-12
+---
+
 
 [https://doi.org/10.1038/nature18933](https://doi.org/10.1038/nature18933)
 
@@ -120,6 +124,11 @@ We identified the temporo-parieto-occipital junction as a strip of cortex bounde
 OP4’s boundary with area 1 was covered previously in Section #6 Somatosensory and Motor Cortex. Relative to its supero-posterior neighbor PFop, area OP4 differs in functional connectivity (Panel D) and is modestly activated vs strongly deactivated in the LANGUAGE STORY contrast (Panel F).
 
 ![[Glasser fMRI auditory cortex.png]]
+
+### Paper 
+
+![[Glasser et al. - 2016 - A multi-modal parcellation of human cerebral cortex.pdf]]
+#### Supplementary work
 
 ![[Glasser et al. - 2016 - A multi-modal parcellation of human cerebral cortex SUPPL.pdf]]
 
