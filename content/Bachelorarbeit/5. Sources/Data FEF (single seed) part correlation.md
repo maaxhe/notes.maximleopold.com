@@ -1,5 +1,5 @@
 ---
-modified: 2026-03-15
+modified: 2026-03-16
 ---
 
 ![[FEF part corr.png]]
@@ -54,3 +54,12 @@ Significant 15 area(s) for L_FEF in BOLD:
     L_FEF          L_IFSp     BOLD            0.0000       15.6800        0.02         0.02           0.02
     L_FEF          L_IFJp     BOLD            0.0000       11.8700        0.01         0.01           0.03
     L_FEF          L_IFJa     BOLD            0.0000       18.1700        0.02         0.02           0.02
+
+
+| ROI   | Mean_conn (l) | (R)  |
+| ----- | ------------- | ---- |
+| 55b   | 0.08          | 0.09 |
+| PSL   | -             | 0.03 |
+| PF    | 0.02          | 0.03 |
+| MST   | 0.01          | 0.01 |
+| TPOJ1 | 0.01          | 0.01 |

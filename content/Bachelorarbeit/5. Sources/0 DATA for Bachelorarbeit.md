@@ -1,61 +1,12 @@
 ---
-modified: 2026-03-15
+modified: 2026-03-16
 ---
 
 # DATA for Bachelorarbeit 
 
-
-Für BrainRest: 
-
-beste set so far: 
-Seeds: R_FEF, R_IFJa: 
-
-L_7AL, L_7Am, L_7PC, L_MT, L_MST, L_PBelt, L_A4, L_STV, L_PSL, L_A5, L_PGi, L_TPOJ1, L_STGa, L_STSda, L_STSdp, L_TGd, L_TGv, L_44, L_45, L_47l
+[[ROIs sets for BrainRest]]
 
 
-oder mit den PF und FOP areas: hier sind alle areas drin, die relevanz haben 
-R_FOP1, R_FOP2, R_FOP3, R_7AL, R_7Am, R_7PC, R_PF, R_PFop, R_PFcm, R_MT, R_MST, R_PBelt, R_A4, R_STV, R_PSL, R_A5, R_PGi, R_TPOJ1, R_STGa, R_STSda, R_STSdp, R_STSva, R_STSvp, R_TE1a, R_TGd, R_TGv, R_TA2, R_44, R_45, R_47l
-
-
-noch mit durex, aber psl raus:
-R_SCEF, R_FOP1, R_FOP2, R_FOP3, R_OP4, R_7AL, R_7Am, R_7PC, R_PF, R_PFop, R_MT, R_MST, R_PBelt, R_A4, R_STV, R_A5, R_PGi, R_TPOJ1, R_STGa, R_STSda, R_STSdp, R_STSva, R_STSvp, R_TE1a, R_TGd, R_TGv, R_TA2, R_AVI, R_47l, R_45, R_44, R_IFSp
-
-aber eigentlich müssen psl und pfcm wieder rein: 
-L_55b, L_SCEF, L_FOP1, L_FOP2, L_FOP3, L_OP4, L_7AL, L_7Am, L_7PC, L_PF, L_PFcm, L_PFop, L_MT, L_MST, L_PBelt, L_A4, L_PSL, L_STV, L_PGi, L_TPOJ1, L_A5, L_STGa, L_STSda, L_STSdp, L_STSva, L_STSvp, L_TE1a, L_TGd, L_TGv, L_TA2, L_AVI, L_47l, L_45, L_44, L_IFSp, L_IFJp
-
-L_SCEF, L_55b, L_OP4, L_FOP1, L_FOP2, L_FOP3, L_7AL, L_7Am, L_7PC, L_PF, L_PFop, L_PFcm, L_MT, L_MST, L_PBelt, L_A4, L_A5, L_PSL, L_STV, L_PGi, L_TPOJ1, L_STGa, L_STSda, L_STSdp, L_STSva, L_STSvp, L_TA2, L_TE1a, L_TGd, L_TGv, L_AVI, L_47l, L_45, L_44, L_IFSp, L_IFJp
-
-
-AKTUELLE SEED AUSWAHL (Final, Stand 01.03.2026)
-
-oder right hemisphere: 
-R_SCEF, R_55b, L_43, L_FOP1, L_FOP2, L_FOP3, L_OP4, R_7AL, R_7Am, R_7PC, R_PF, R_PFop, R_PFcm, R_MT, R_MST, R_PBelt, R_A4, R_A5, R_PSL, R_STV, R_PGi, R_TPOJ1, R_STGa, R_STSda, R_STSdp, R_STSva, R_STSvp, R_TA2, R_TE1a, R_TGd, R_TGv, R_AVI, R_47l, R_45, R_44, R_IFSp, R_IFJp
-
-
-spatial orienting network: 8
-- L_7AL, L_7Am, L_7PC, 
-- L_PF, L_PFop, L_PFcm, 
-- L_MT, L_MST
-
-articulatory-motor interface: 6
-- L_55b, 
-- L_44
-- L_43, L_FOP1, L_FOP2, L_FOP3, L_OP4
-
-ventral semantic and identity network: 11
-- L_STGa, L_STSda, L_STSdp, L_STSva, L_STSvp, L_TA2, 
-- L_AVI, L_SCEF, 
-- L_45, L_47l, L_IFSp
-
-hierarchical gateways and supramodal connectors: 7
-- L_PSL, L_STV, L_PGi, L_TPOJ1, 
-- L_PBelt, L_A4, L_A5,
-
-anteroir temporal semantic periphery: 3
-- L_TE1a, L_TGd, L_TGv, 
-
-control node: 1
-- L_IFJp
 
 ### Data FEF vs IFJa part correlation
 ^f184fc
