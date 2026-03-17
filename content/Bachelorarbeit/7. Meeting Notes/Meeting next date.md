@@ -1,14 +1,26 @@
 ---
-modified: 2026-03-16
+modified: 2026-03-17
 ---
 
 - [ ] Tabelle der ROIs sollen dann die eEgebnisse zeigen oder das, was ich vorher gedacht habe? 
-- [ ] kann ich bei der Toolbox auch mean_conn <0 einfach rausfiltern?
-	- [ ] ich will die am liebsten gar nicht erst angezeigt bekommen. 
-- [ ] soll ich MEG_PDC nutzen? 
-	- [ ] woher kommen die subjects?
-	- [ ] Warum ist FEF delta so anders zu meinen fMRI daten? 
+- [x] kann ich bei der Toolbox auch mean_conn <0 einfach rausfiltern?
+	- [x] ich will die am liebsten gar nicht erst angezeigt bekommen. 
+- [x] soll ich MEG_PDC nutzen? 
+	- [x] woher kommen die subjects? HCP
+	- [x] Warum ist FEF delta so anders zu meinen fMRI daten? 
 
+
+nochmal mit 55subs laufen lassen 
+371 auch nutzen 
+larger sample size for predicitve modelling 
+start with 55 fMRI seed based (single seed) conn 
+then directed connectivity (MEG) 
+then 371 contrast with those interesting ROIs 
+
+R= 0.3 for prediction is starting getting good 
+
+
+eyes open for MEG:
 ### MEG_PDC R_FEF delta 
 ![[MEG_pdc R_FEF delta.png]]
 
