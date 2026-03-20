@@ -1,5 +1,5 @@
 ---
-modified: 2026-03-19
+modified: 2026-03-20
 ---
 
 - [ ] Tabelle der ROIs sollen dann die eEgebnisse zeigen oder das, was ich vorher gedacht habe? 
@@ -8,6 +8,7 @@ modified: 2026-03-19
 - [x] soll ich MEG_PDC nutzen? 
 	- [x] woher kommen die subjects? HCP
 	- [x] Warum ist FEF delta so anders zu meinen fMRI daten? 
+- [ ] Goldstein Zada 2022, continuous semantics 
 
 
 nochmal mit 55subs laufen lassen 
