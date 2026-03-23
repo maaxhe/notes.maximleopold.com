@@ -62,6 +62,10 @@ Then read task-specific files depending on the work:
 
 Any task that involves reading, writing, or discussing the Bachelor's thesis requires this reading order **before responding or writing anything**:
 
+### Step 0 — Read the entire Bachelorarbeit folder (always, without exception)
+
+Before doing anything else, read **all files** in `content/Bachelorarbeit/4. Schreiben/`. The thesis is one interconnected document — any section can be relevant to any other. Do not skip files because they seem unrelated to the current task.
+
 ### Step 1 — Orientation (always)
 
 1. `content/Bachelorarbeit/4. Schreiben/0.1 Outline Bachelorarbeit.md` — chapter structure, status, word targets
@@ -103,6 +107,14 @@ Data files are in `content/Bachelorarbeit/5. Sources/` with names starting with 
 ### Rule: Never answer thesis questions from memory alone
 
 If asked about the thesis content, a brain region, a paper finding, or a result — always read the relevant file first. Do not rely on training knowledge when project-specific notes exist. The notes are authoritative; general neuroscience knowledge is only a fallback when no relevant note exists.
+
+### Rule: Never directly edit thesis chapter files — always post text in the chat
+
+The `content/Bachelorarbeit/` files are synced from the Obsidian vault and get overwritten on every `npm run publish:quick`. Directly editing these files is therefore pointless and will cause confusion. Instead:
+
+- **Always post written or revised text directly in the chat** so the user can copy it into Obsidian themselves.
+- Never use file-editing tools (Edit, Write, Bash redirects) on files inside `content/Bachelorarbeit/`.
+- This applies to all thesis writing tasks: new sections, revisions, rewrites, and corrections.
 
 ---
 
