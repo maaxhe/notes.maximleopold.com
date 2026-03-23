@@ -58,6 +58,54 @@ Then read task-specific files depending on the work:
 
 ---
 
+## Thesis Writing Tasks
+
+Any task that involves reading, writing, or discussing the Bachelor's thesis requires this reading order **before responding or writing anything**:
+
+### Step 1 — Orientation (always)
+
+1. `content/Bachelorarbeit/4. Schreiben/0.1 Outline Bachelorarbeit.md` — chapter structure, status, word targets
+2. `content/Bachelorarbeit/4. Schreiben/0.0 Bachelorarbeit Gesamt.md` — understand how chapters are assembled
+
+### Step 2 — Read the relevant chapter file
+
+For any writing or question about a specific chapter or section, read that chapter file fully before responding. Chapter files live in `content/Bachelorarbeit/4. Schreiben/`. Examples:
+
+- Question about dorsal stream → read `2.2 The Auditory Where ("Dorsal") Stream.md`
+- Question about methods → read `3.0 Methods.md` + relevant sub-files
+- Question about results → read `4.0 Results.md` + relevant sub-files
+
+### Step 3 — Read relevant area notes
+
+Before writing about a brain region, always read the corresponding note first:
+
+- Glasser parcellation areas → `content/Bachelorarbeit/2. Glasser areas/<area>.md`
+- Classical anatomical regions → `content/Bachelorarbeit/3. Other areas/<area>.md`
+- Stream/network background → `content/Bachelorarbeit/1. Streams and related/<topic>.md`
+
+### Step 4 — Read relevant source notes
+
+Before writing a claim that cites a paper, read that paper's note in `content/Bachelorarbeit/5. Sources/`. Never fabricate citations or paraphrase from memory — always read the source note first.
+
+Key sources to know:
+- `Rolls et al. (2023) - Cerebral Cortex.md` — connectivity fingerprints, groups 1–4
+- `Bedini (2023) - Brain Structure.md` — FEF vs IFJa anatomy
+- `Bedini & Baldauf (2021).md` — FEF/IFJa functional dissociation
+- `Hickok & Poeppel 2007 - Nature.md` — dual stream model
+- `Rauschecker & Scott (2009) - Nature Neuroscience.md` — dorsal stream
+- `Glasser et al. (2016) - Nature.md` — HCP parcellation
+- `BA All Sources.md` — master bibliography overview
+
+### Step 5 — Read data files if writing results
+
+Data files are in `content/Bachelorarbeit/5. Sources/` with names starting with `Data`. Read the relevant one before writing about specific connectivity results.
+
+### Rule: Never answer thesis questions from memory alone
+
+If asked about the thesis content, a brain region, a paper finding, or a result — always read the relevant file first. Do not rely on training knowledge when project-specific notes exist. The notes are authoritative; general neuroscience knowledge is only a fallback when no relevant note exists.
+
+---
+
 ## Rules
 
 ### Read first, write second
