@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"/Users/maxmacbookpro/Developer/eigene Projekte/second_brain/notes.maximleopold.com\" && npm run publish:quick 2>/dev/null || true",
+            "statusMessage": "Publishing notes...",
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
+}
