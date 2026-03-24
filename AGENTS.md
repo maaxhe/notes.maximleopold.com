@@ -152,6 +152,8 @@ Do not modify files you have not read. For any task that touches more than one f
 - When starting a task, mark it as in-progress in `STATUS.md`.
 - When completing a task, mark it as done in `STATUS.md`.
 - If you discover new work needed, add it to `STATUS.md` under Open Tasks.
+- At the end of every session, write all unfinished or follow-up work into `STATUS.md` under Open Tasks with enough context (which files, what the goal was, where you stopped) so the next session can continue without re-discovery.
+- At the start of every session, check `STATUS.md` for open tasks before asking the user what to do.
 
 ---
 
