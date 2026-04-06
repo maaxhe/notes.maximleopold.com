@@ -132,6 +132,12 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
       ...ungrouped,
     ]
 
+    // Prose chapters are groups 1–6 (Introduction, Theory, Methods, Results, Discussion, Conclusion)
+    // Exclude abbreviations, sources, and other non-prose files from progress calculations
+    const proseChapterFiles = sortedGroups
+      .filter((g) => g.major >= 1 && g.major <= 6)
+      .flatMap((g) => [...(g.main ? [g.main] : []), ...g.subs])
+
     // Calculate overall statistics
     const totalFiles = allThesisFiles.length
     const statusOf = (f: (typeof thesisFiles)[number]) =>
@@ -145,10 +151,10 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
     const approvedFiles = allThesisFiles.filter((f) => statusOf(f) === "approved").length
 
     const averageProgress =
-      allThesisFiles.length > 0
+      proseChapterFiles.length > 0
         ? Math.round(
-            allThesisFiles.reduce((acc, f) => acc + (f.frontmatter?.progress || 0), 0) /
-              allThesisFiles.length,
+            proseChapterFiles.reduce((acc, f) => acc + (f.frontmatter?.progress || 0), 0) /
+              proseChapterFiles.length,
           )
         : 0
 
