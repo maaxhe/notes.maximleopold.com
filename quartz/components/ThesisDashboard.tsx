@@ -444,28 +444,36 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
 
   ThesisDashboard.css = style
   ThesisDashboard.afterDOMLoaded = `
-    document.querySelectorAll('.chapter-subs-list').forEach(function(subsList) {
-      subsList.classList.add('collapsed')
-    })
-    document.querySelectorAll('.chapter-toggle').forEach(function(toggleBtn) {
-      toggleBtn.setAttribute('aria-expanded', 'false')
-      toggleBtn.querySelector('.toggle-icon').style.transform = 'rotate(-90deg)'
-      toggleBtn.addEventListener('click', function() {
-        var isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true'
-        toggleBtn.setAttribute('aria-expanded', String(!isExpanded))
-        var row = toggleBtn.closest('.chapter-main-row')
-        var subsList = row && row.nextElementSibling
-        if (subsList) {
-          if (isExpanded) {
-            subsList.classList.add('collapsed')
-            toggleBtn.querySelector('.toggle-icon').style.transform = 'rotate(-90deg)'
-          } else {
-            subsList.classList.remove('collapsed')
-            toggleBtn.querySelector('.toggle-icon').style.transform = 'rotate(0deg)'
+    function initThesisDashboardToggles() {
+      document.querySelectorAll('.chapter-subs-list').forEach(function(subsList) {
+        subsList.classList.add('collapsed')
+      })
+      document.querySelectorAll('.chapter-toggle').forEach(function(toggleBtn) {
+        toggleBtn.setAttribute('aria-expanded', 'false')
+        toggleBtn.querySelector('.toggle-icon').style.transform = 'rotate(-90deg)'
+        function handleToggleClick() {
+          var isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true'
+          toggleBtn.setAttribute('aria-expanded', String(!isExpanded))
+          var row = toggleBtn.closest('.chapter-main-row')
+          var subsList = row && row.nextElementSibling
+          if (subsList) {
+            if (isExpanded) {
+              subsList.classList.add('collapsed')
+              toggleBtn.querySelector('.toggle-icon').style.transform = 'rotate(-90deg)'
+            } else {
+              subsList.classList.remove('collapsed')
+              toggleBtn.querySelector('.toggle-icon').style.transform = 'rotate(0deg)'
+            }
           }
         }
+        toggleBtn.removeEventListener('click', handleToggleClick)
+        toggleBtn.addEventListener('click', handleToggleClick)
+        window.addCleanup && window.addCleanup(function() {
+          toggleBtn.removeEventListener('click', handleToggleClick)
+        })
       })
-    })
+    }
+    document.addEventListener('nav', initThesisDashboardToggles)
   `
   return ThesisDashboard
 }) satisfies QuartzComponentConstructor
