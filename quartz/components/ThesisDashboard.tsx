@@ -401,6 +401,26 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
                 const avgProgress = hasSubs && hasMain ? groupAverageProgress(group) : undefined
                 const cumulativeWords = hasSubs && hasMain ? groupWordCount(group) : undefined
 
+                if (hasMain && hasSubs) {
+                  return (
+                    <div class="chapter-group">
+                      <div class="chapter-main-row">
+                        {renderChapterCard(group.main!, false, avgProgress, cumulativeWords)}
+                        <button
+                          class="chapter-toggle"
+                          aria-expanded="true"
+                          aria-label="Unterkapitel ein-/ausblenden"
+                        >
+                          <span class="toggle-icon">▾</span>
+                        </button>
+                      </div>
+                      <div class="chapter-subs-list">
+                        {group.subs.map((sub) => renderChapterCard(sub, true))}
+                      </div>
+                    </div>
+                  )
+                }
+
                 return (
                   <>
                     {group.main && renderChapterCard(group.main, false, avgProgress, cumulativeWords)}
@@ -417,5 +437,16 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
   }
 
   ThesisDashboard.css = style
+  ThesisDashboard.afterDOMLoaded = `
+    document.querySelectorAll('.chapter-toggle').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var isExpanded = btn.getAttribute('aria-expanded') === 'true'
+        btn.setAttribute('aria-expanded', String(!isExpanded))
+        var row = btn.closest('.chapter-main-row')
+        var subsList = row && row.nextElementSibling
+        if (subsList) subsList.classList.toggle('collapsed', isExpanded)
+      })
+    })
+  `
   return ThesisDashboard
 }) satisfies QuartzComponentConstructor
