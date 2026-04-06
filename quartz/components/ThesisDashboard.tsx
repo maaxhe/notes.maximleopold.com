@@ -444,13 +444,19 @@ export default ((opts?: Partial<ThesisDashboardOptions>) => {
 
   ThesisDashboard.css = style
   ThesisDashboard.afterDOMLoaded = `
-    document.querySelectorAll('.chapter-toggle').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var isExpanded = btn.getAttribute('aria-expanded') === 'true'
-        btn.setAttribute('aria-expanded', String(!isExpanded))
-        var row = btn.closest('.chapter-main-row')
+    document.querySelectorAll('.chapter-toggle').forEach(function(toggleBtn) {
+      toggleBtn.addEventListener('click', function() {
+        var isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true'
+        toggleBtn.setAttribute('aria-expanded', String(!isExpanded))
+        var row = toggleBtn.closest('.chapter-main-row')
         var subsList = row && row.nextElementSibling
-        if (subsList) subsList.classList.toggle('collapsed', isExpanded)
+        if (subsList) {
+          if (isExpanded) {
+            subsList.classList.add('collapsed')
+          } else {
+            subsList.classList.remove('collapsed')
+          }
+        }
       })
     })
   `
