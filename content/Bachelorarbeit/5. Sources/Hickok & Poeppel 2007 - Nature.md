@@ -34,7 +34,7 @@ lateralization of both streams:
 
 ![[Hickok & Poeppel 2007 Figure 1 dosal and ventral auditory stream.png]]
 Text to figure 1: 
-- Regions shaded blue represent the dorsal stream, which is strongly left dominant. The posterior region of the dorsal stream corresponds to an area in the Sylvian fissure at the parietotemporal boundary (area Spt), which is proposed to be a sensorimotor interface, whereas the more anterior locations in the frontal lobe, probably involving Broca’s region and a more dorsal premotor site, correspond to portions of the articulatory network. aITS, anterior inferior temporal sulcus; aMTG, anterior middle temporal gyrus; pIFG, posterior inferior frontal gyrus; PM, premotor cortex.
+- Regions shaded blue represent the dorsal stream, which is strongly left dominant. The posterior region of the dorsal stream corresponds to an area in the Sylvian fissure at the parietotemporal boundary (area Spt), which is proposed to be a sensorimotor interface, whereas the more anterior locations in the frontal lobe, probably involving Broca’s region and a more dorsal premotor site, correspond to portions of the articulatory network. aITS, anterior inferior temporal sulcus; aMTG, anterior middle temporal gyrus; pIFG, posterior inferior frontal gyrus; PM, premotor cortex. ^277549
 - listening to speech activates the STG bilaterally, including the dorsal STG and superior temporal sulcus (STS).
 
 ![[Hockok & Poeppel 2007 Figure 2 parallel routes.png]]
