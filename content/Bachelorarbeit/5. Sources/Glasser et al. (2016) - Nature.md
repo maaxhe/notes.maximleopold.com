@@ -5,6 +5,9 @@ modified: 2026-04-08
 
 [https://doi.org/10.1038/nature18933](https://doi.org/10.1038/nature18933)
 
+
+https://www.humanconnectome.org/storage/app/media/documentation/s1200/HCP_S1200_Release_Reference_Manual.pdf
+
 - [x] paper gelesen?
 - [x] Infos rausgeschrieben?
 ## Glasser et al. (2016) - Nature
