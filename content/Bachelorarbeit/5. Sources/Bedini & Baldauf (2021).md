@@ -1,5 +1,5 @@
 ---
-modified: 2026-04-08
+modified: 2026-04-09
 ---
 
 Bedini, M., & Baldauf, D. (2021). Structure, function and connectivity fingerprints of the frontal eye field versus the inferior frontal junction: A comprehensive comparison. _European Journal of Neuroscience_, _54_(4), 5462–5506. [https://doi.org/10.1111/ejn.15393](https://doi.org/10.1111/ejn.15393)
