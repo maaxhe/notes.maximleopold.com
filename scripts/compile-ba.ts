@@ -216,6 +216,8 @@ function main(): void {
     `generated: ${today}`,
     "tags:",
     "  - ba",
+    "cssclasses:",
+    "  - blocksatz",
     "---",
     "",
     "> [!info] Auto-generated",
