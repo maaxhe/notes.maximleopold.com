@@ -65,6 +65,7 @@ const CONFIG = {
     /<!--\s*private:start\s*-->[\s\S]*?<!--\s*private:end\s*-->/gi,
     /%%\s*private\b[\s\S]*?%%[\s\S]*?%%\s*endprivate\s*%%/gi,
     /```private[\s\S]*?```/gi,
+    /^# Notes & Scrapbook[\s\S]*/m,
   ] as RegExp[],
 }
 
