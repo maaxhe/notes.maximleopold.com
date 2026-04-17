@@ -233,7 +233,7 @@ body:has(.sidebar.left.sidebar-hidden):has(.sidebar.right.sidebar-hidden) .page 
 
 /* Blocksatz for the compiled BA page */
 article.blocksatz p {
-  text-align: justify;
+  text-align: justify !important;
   hyphens: auto;
   -webkit-hyphens: auto;
 }
