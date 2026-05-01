@@ -79,12 +79,13 @@ modified: 2026-05-01
 - [x] 5.2.1 polish: MST sentences merged, Rauschecker & Scott integrated, summary sentence added ← done 2026-05-01
 - [ ] Check wording + sources (all of 5.2)
 
-**5.3 Re-evaluating the auditory what stream**
-- [ ] Define core argument
-- [ ] IFJa as semantic controller — discuss IFJa semantics
-- [ ] Discuss Rolls et al. (2023) groups in context of IFJa connectivity
-- [ ] IFJa vs. 44/45/47l: left > right lateralization for language areas
-- [ ] Frame IFJa in context of multiple demand system (Bedini & Baldauf 2021)
+**5.3 Re-evaluating the auditory what stream** ← prose written 2026-05-01
+- [x] Define core argument ← covered in 5.3.1
+- [x] IFJa as semantic controller ← covered in 5.3.1
+- [x] Discuss Rolls et al. (2023) groups in context of IFJa/44/45 ← covered in 5.3.2
+- [x] A5 as auditory entry point ← 5.3.3 written
+- [ ] 5.3.2 gap: lateralization argument missing (bilateral IFJa → left-lateralized Broca complex) — add before final polish
+- [ ] Frame IFJa in context of multiple demand system (Bedini & Baldauf 2021) — not yet in prose
 - [ ] Check wording + sources
 
 **5.4 Anatomical Ambiguities**
@@ -94,6 +95,7 @@ modified: 2026-05-01
 - [ ] STSdp: clarify stream assignment
 - [ ] STV hemispheric inversion — novel finding, needs discussion
 - [ ] Check wording + sources
+- [ ] Single-seed analysis mit A4/A5 als Seeds noch durchführen — dafür erst Nils nach seinen Account-Daten fragen (Zugang zu den HCP-Daten / CONN)
 
 **5.5 Predictive Modelling**
 - [ ] Define core argument
