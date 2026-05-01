@@ -14,6 +14,44 @@ modified: 2026-05-01
 
 ---
 
+### Introduction — Open Content
+
+**1.0 Introduction**
+- [x] Write 1.1.1: classic visual model (two streams hypothesis) ← written in 1.1 file
+- [x] Write 1.1.2: state of the art in auditory cortex / auditory dual-stream history ← written in 1.1 file
+- [ ] Write 1.1.3: Introduction to dual-stream processing (model: Friederici 2011 Fig 3; introduce Hickok & Poeppel 2007 + Rauschecker & Scott 2009)
+
+**1.2 The Gap — Top-Down Control of Auditory Streams**
+- [ ] Argue: we know those paths exist, but who controls them?
+- [ ] Introduce top-down attention concept
+- [ ] Comparison to Bedini & Baldauf (2021)
+- [ ] Make research gap explicit: does the FEF/IFJa dissociation hold for the auditory domain?
+
+**1.3 Hypothesis — A Supramodal Organization**
+- [ ] State: prefrontal organization is supramodal
+- [ ] Prediction 1: FEF controls auditory dorsal stream
+- [ ] Prediction 2: IFJa controls auditory ventral stream
+
+**1.1 The Auditory Dual-Stream Framework**
+- [ ] Write historical section (origins of dual-stream model)
+
+---
+
+### Theoretical Background — Open Content
+
+**2.1 The Auditory What (Ventral) Stream**
+- [ ] Definition
+- [ ] Function
+- [ ] Lateralization differences
+- [ ] Anatomy (Rolls Group 1)
+
+**2.2 The Auditory Where (Dorsal) Stream**
+- [ ] 2.2.1 Debate: Rauschecker vs. Hickok & Poeppel (where vs. how) — explain both models
+- [ ] 2.2.2 Anatomical Definition & Evidence: A4, A5, parietal cortex; Rolls Group 3
+- [ ] 2.2.3 Synthesis: define where-stream as spatial/motion stream (possibly motor component)
+
+---
+
 ### Phase 3 — Writing & Language
 - [ ] Language sweep: replace "control", "drives", "directs" → "couples with", "shows functional connectivity", "is associated with", "suggests a top-down influence" throughout all sections
 - [ ] Remove alpha/beta rhythm references → replace with fMRI-only structural/functional framing
@@ -25,9 +63,12 @@ modified: 2026-05-01
 
 ### Discussion — Open Content
 
-**5.1.4 Supramodal Prefrontal Architecture** (in Compiled — needs writing)
-- [ ] Write section: same two hubs (FEF, IFJa) organize top-down control across vision and audition
-- [ ] Argue: general-purpose attention hubs — spatial/non-spatial axis cuts across modalities
+**5.1.4 Supramodal Prefrontal Architecture**
+- [x] Write section: same two hubs (FEF, IFJa) organize top-down control across vision and audition ← prose exists in 5.1 file
+- [x] Argue: general-purpose attention hubs — spatial/non-spatial axis cuts across modalities ← covered
+- [x] Add evolutionary efficiency argument (Bedini & Baldauf 2021) ← covered
+- [x] Add caveat: resting-state coupling is correlational — top-down directionality requires MEG or effective connectivity ← covered
+- [ ] Check wording + sources (still needed)
 
 **5.2 Re-evaluating the auditory where stream**
 - [ ] Discuss how vs. where distinction
@@ -38,14 +79,24 @@ modified: 2026-05-01
 
 **5.3 Re-evaluating the auditory what stream**
 - [ ] Define core argument of this chapter
-- [ ] Check wording
-- [ ] Check sources
+- [ ] Check wording + sources
 
-**5.7 Limitations**
-- [ ] resting-state fMRI is indirect — note as limitation
-- [ ] Glasser atlas is detailed but some areas (A4, A5) could be further subdivided
-- [ ] Suggest future use of effective connectivity to prove top-down direction
-- [ ] Suggest future MEG study to see frequency-band signatures [De Vries et al. (2021)]
+**5.4 Anatomical Ambiguities**
+- [ ] Define core argument of this chapter
+- [ ] Check wording + sources
+
+**5.5 Predictive Modelling**
+- [ ] Define core argument of this chapter
+- [ ] Check wording + sources
+
+**5.6 / 5.7 Limitations**
+- [x] resting-state fMRI is indirect — note as limitation ← written in 5.6 / 5.7
+- [x] Glasser atlas is detailed but some areas (A4, A5) could be further subdivided ← written
+- [x] No auditory spatial task in HCP dataset — limits behavioral validation for where-stream ← written
+- [ ] ROI exclusion: core areas (A1, MBelt) excluded → no statement about primary auditory cortex
+- [ ] Suggest future use of effective connectivity (DCM, Granger causality) to prove top-down direction ← section header exists, prose missing
+- [ ] Suggest future MEG study to see frequency-band signatures [De Vries et al. (2021)] ← section header exists, prose missing
+- [x] Suggest dedicated auditory spatial task for Brain-Behavior validation ← mentioned in 5.6
 - [ ] Check wording + sources
 
 **5.8 Future Directions**
@@ -73,9 +124,11 @@ modified: 2026-05-01
 - [ ] Compare with BA44/45/47l
 
 **4.4 Resolving Ambiguities**
+- [ ] Define core argument of this chapter
 - [ ] Determine A5 alignment: does it couple more with IFJ or FEF?
 - [ ] Determine PSL alignment
 - [ ] Determine STV alignment
+- [ ] Check wording + sources
 
 **4.5 Functional Roles of Adjacent Areas**
 - [ ] 55b as alternative dorsal seed → couples with dorsal language network, not spatial/motion
@@ -90,20 +143,26 @@ modified: 2026-05-01
 ### Methods — Open Content
 
 **3.1 Data Acquisition & Preprocessing** — needs fleshing out
-**3.2 Selection of ROIs**
-- [ ] 3.3.1 Seed definition: FEF
-- [ ] 3.3.1 Seed definition: IFJa
-- [ ] 3.3.2 Target Definition: what-stream target list
-- [ ] 3.3.2 Target Definition: where-stream target list
 
 **3.3 Matrix Construction**
-- [ ] Explain CONN toolbox
-- [ ] 3.4.1 Explain functional connectivity (EC vs. RSFC distinction)
-- [ ] 3.4.2 Partial vs. full correlation — explain difference
-- [ ] 3.4.3 FDR correction — explain
+- [x] Explain CONN toolbox ← sections 3.3.1–3.3.6 written
+- [x] 3.4.1 Explain functional connectivity (EC vs. RSFC distinction) ← written
+- [x] 3.4.2 Partial vs. full correlation — explain difference ← written
+- [x] 3.4.3 FDR correction — explain ← written
+- [x] Define core argument ← methodological framework complete
+- [ ] Check wording + sources
 
 **3.4 Brain-Behavior Correlation**
-- [ ] Explain predictive modelling approach (WM task / Language Story task)
+- [x] Explain predictive modelling approach (WM task / Language Story task) ← comprehensive coverage including 3.4.2.1–3.4.2.3
+- [x] Clarify: use Language Story task for behavioral prediction ← done
+
+**3.2 Selection of ROIs**
+- [x] 3.3.1 Seed definition: FEF ← in 3.2.2
+- [x] 3.3.1 Seed definition: IFJa ← in 3.2.2
+- [x] 3.3.2 Target Definition: what-stream target list ← Table in 3.2.3
+- [x] 3.3.2 Target Definition: where-stream target list ← Table in 3.2.3
+- [ ] Confirm MT/MST exclusion: link the paper showing absence of auditory responses in MT/MST
+- [ ] Shorten 3.2 — too many discussion points embedded; move them to Discussion section
 
 ---
 
