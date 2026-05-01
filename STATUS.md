@@ -8,7 +8,28 @@ Living file. Update this whenever tasks change state.
 
 ## Current Focus
 
-_Nothing in progress. Add a task here when starting work._
+_Last session: 2026-05-01_
+
+### What was done
+- [5.2.1] — MST sentences merged into one, paragraph restructured for flow, summary sentence added at end
+- [5.3 Notes] — bullet-point argument notes written in Scrapbook (3 subsections); main text is placeholder — Max writes prose himself
+- [5.4 Notes] — organized bullet-point notes added for 5.4.1 (A4/A5 router framing), 5.4.2 (PSL hemispheric inversion), 5.4.3 (STV hemispheric inversion, Frühholz)
+- [5.5 Notes] — English argument bullets added; all German notes translated to English
+- [5.6 Notes] — English argument bullets added for all limitations + future directions; German notes translated
+- [skill.md] — added rule: all notes must be in English
+- [To-Do's] — Introduction, Theory, 4.6, 5.2.1 polish crossed off as confirmed done
+
+### What's next (top priorities)
+- [ ] Max writes 5.3 prose (notes are ready in Scrapbook)
+- [ ] Write 5.4 prose (notes ready)
+- [ ] Write 5.5 prose (notes ready)
+- [ ] Complete 5.6.2 Future Directions prose (placeholders exist)
+- [ ] Abstract (write last)
+- [ ] Language sweep: replace "control/drives/directs" → hedged fMRI language
+- [ ] References: Zotero import into 6.0
+
+### Blockers / open questions
+- Supervisor feedback items still open: negative predictions in Results + Discussion, ceiling effect (left hemisphere language story accuracy), Soyuhos PPA/FFA paper, offline/online tasks paper for Methods
 
 ---
 

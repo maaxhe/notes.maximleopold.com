@@ -2,7 +2,7 @@
 modified: 2026-05-01
 ---
 
-## Open Tasks (auto-collected 2026-04-30)
+## Open Tasks (auto-collected 2026-05-01)
 
 ### Supervisor Feedback — Meeting 22.04.2026
 - [x] BrainRest: decide how to mention it — describe analysis approach without naming dataset?
@@ -19,36 +19,36 @@ modified: 2026-05-01
 **1.0 Introduction**
 - [x] Write 1.1.1: classic visual model (two streams hypothesis) ← written in 1.1 file
 - [x] Write 1.1.2: state of the art in auditory cortex / auditory dual-stream history ← written in 1.1 file
-- [ ] Write 1.1.3: Introduction to dual-stream processing (model: Friederici 2011 Fig 3; introduce Hickok & Poeppel 2007 + Rauschecker & Scott 2009)
+- [x] Write 1.1.3: Introduction to dual-stream processing ← confirmed done 2026-05-01
 
 **1.2 The Gap — Top-Down Control of Auditory Streams**
-- [ ] Argue: we know those paths exist, but who controls them?
-- [ ] Introduce top-down attention concept
-- [ ] Comparison to Bedini & Baldauf (2021)
-- [ ] Make research gap explicit: does the FEF/IFJa dissociation hold for the auditory domain?
+- [x] Argue: we know those paths exist, but who controls them? ← confirmed done 2026-05-01
+- [x] Introduce top-down attention concept ← confirmed done 2026-05-01
+- [x] Comparison to Bedini & Baldauf (2021) ← confirmed done 2026-05-01
+- [x] Make research gap explicit: does the FEF/IFJa dissociation hold for the auditory domain? ← confirmed done 2026-05-01
 
 **1.3 Hypothesis — A Supramodal Organization**
-- [ ] State: prefrontal organization is supramodal
-- [ ] Prediction 1: FEF controls auditory dorsal stream
-- [ ] Prediction 2: IFJa controls auditory ventral stream
+- [x] State: prefrontal organization is supramodal ← confirmed done 2026-05-01
+- [x] Prediction 1: FEF controls auditory dorsal stream ← confirmed done 2026-05-01
+- [x] Prediction 2: IFJa controls auditory ventral stream ← confirmed done 2026-05-01
 
 **1.1 The Auditory Dual-Stream Framework**
-- [ ] Write historical section (origins of dual-stream model)
+- [x] Write historical section ← confirmed done 2026-05-01
 
 ---
 
 ### Theoretical Background — Open Content
 
 **2.1 The Auditory What (Ventral) Stream**
-- [ ] Definition
-- [ ] Function
-- [ ] Lateralization differences
-- [ ] Anatomy (Rolls Group 1)
+- [x] Definition ← confirmed done 2026-05-01
+- [x] Function ← confirmed done 2026-05-01
+- [x] Lateralization differences ← confirmed done 2026-05-01
+- [x] Anatomy (Rolls Group 1) ← confirmed done 2026-05-01
 
 **2.2 The Auditory Where (Dorsal) Stream**
-- [ ] 2.2.1 Debate: Rauschecker vs. Hickok & Poeppel (where vs. how) — explain both models
-- [ ] 2.2.2 Anatomical Definition & Evidence: A4, A5, parietal cortex; Rolls Group 3
-- [ ] 2.2.3 Synthesis: define where-stream as spatial/motion stream (possibly motor component)
+- [x] 2.2.1 Debate: Rauschecker vs. Hickok & Poeppel (where vs. how) ← confirmed done 2026-05-01
+- [x] 2.2.2 Anatomical Definition & Evidence ← confirmed done 2026-05-01
+- [x] 2.2.3 Synthesis ← confirmed done 2026-05-01
 
 ---
 
@@ -76,7 +76,7 @@ modified: 2026-05-01
 - [x] Explain FEF vs. 55b: FEF = more spatial, 55b = more language ← written in 5.2.3
 - [x] Argue both FEF and 55b are important but with different functional emphasis ← written in 5.2.3
 - [x] Address Hickok sensorimotor integration → may relate more to 55b than FEF ← written in 5.2.2
-- [ ] 5.2.1 polish: FEF connection to MT/MST, PBelt; discuss Rauschecker & Scott (2009); right-hemispheric parietal note
+- [x] 5.2.1 polish: MST sentences merged, Rauschecker & Scott integrated, summary sentence added ← done 2026-05-01
 - [ ] Check wording + sources (all of 5.2)
 
 **5.3 Re-evaluating the auditory what stream**
@@ -144,7 +144,7 @@ modified: 2026-05-01
 - [ ] Argue: FEF drives spatial/motion-dorsal; 55b drives dorsal language stream
 
 **4.6 Behavioral Prediction**
-- [ ] Write/complete this section (whole section needs content)
+- [x] Write/complete this section ← confirmed done 2026-05-01
 
 ---
 
