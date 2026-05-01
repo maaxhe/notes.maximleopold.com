@@ -71,22 +71,34 @@ modified: 2026-05-01
 - [ ] Check wording + sources (still needed)
 
 **5.2 Re-evaluating the auditory where stream**
-- [ ] Discuss how vs. where distinction
-- [ ] Argue: how-pathway may be similar to dorsal language pathway (motor interaction needed for expressing)
-- [ ] Explain FEF vs. 55b: FEF = more spatial, 55b = more language
-- [ ] Argue both FEF and 55b are important but with different functional emphasis
-- [ ] Address Hickok sensorimotor integration → may relate more to 55b than FEF
+- [x] Discuss how vs. where distinction ← written in 5.2.2
+- [x] Argue: how-pathway / dorsal stream as spatial-motor integration ← written in 5.2.2
+- [x] Explain FEF vs. 55b: FEF = more spatial, 55b = more language ← written in 5.2.3
+- [x] Argue both FEF and 55b are important but with different functional emphasis ← written in 5.2.3
+- [x] Address Hickok sensorimotor integration → may relate more to 55b than FEF ← written in 5.2.2
+- [ ] 5.2.1 polish: FEF connection to MT/MST, PBelt; discuss Rauschecker & Scott (2009); right-hemispheric parietal note
+- [ ] Check wording + sources (all of 5.2)
 
 **5.3 Re-evaluating the auditory what stream**
-- [ ] Define core argument of this chapter
+- [ ] Define core argument
+- [ ] IFJa as semantic controller — discuss IFJa semantics
+- [ ] Discuss Rolls et al. (2023) groups in context of IFJa connectivity
+- [ ] IFJa vs. 44/45/47l: left > right lateralization for language areas
+- [ ] Frame IFJa in context of multiple demand system (Bedini & Baldauf 2021)
 - [ ] Check wording + sources
 
 **5.4 Anatomical Ambiguities**
-- [ ] Define core argument of this chapter
+- [ ] Define core argument
+- [ ] A5: alignment with which stream?
+- [ ] PSL: reconcile Dureux, Rolls, and current results
+- [ ] STSdp: clarify stream assignment
+- [ ] STV hemispheric inversion — novel finding, needs discussion
 - [ ] Check wording + sources
 
 **5.5 Predictive Modelling**
-- [ ] Define core argument of this chapter
+- [ ] Define core argument
+- [ ] Look up Glasser et al. (2016) SUPPL offline LANGUAGE-STORY task scores to compare
+- [ ] Discuss De Vries & Baldauf (2021) in this context
 - [ ] Check wording + sources
 
 **5.6 / 5.7 Limitations**
@@ -97,10 +109,6 @@ modified: 2026-05-01
 - [ ] Suggest future use of effective connectivity (DCM, Granger causality) to prove top-down direction ← section header exists, prose missing
 - [ ] Suggest future MEG study to see frequency-band signatures [De Vries et al. (2021)] ← section header exists, prose missing
 - [x] Suggest dedicated auditory spatial task for Brain-Behavior validation ← mentioned in 5.6
-- [ ] Check wording + sources
-
-**5.8 Future Directions**
-- [ ] Define core argument
 - [ ] Check wording + sources
 
 ---
