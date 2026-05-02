@@ -187,6 +187,8 @@ modified: 2026-05-02
 ---
 
 ### References & Formatting
+- [ ] Fix Soyuhos year discrepancy: text cites 2022 in §1.1 and §3.3.6, references list has 2023 — update wikilinks to [[Soyuhos, O., & Baldauf, D. (2023)]]
+- [ ] Insert 4 uncited references: Wu-Minn HCP Consortium (2018) → §3.1.1; Romanski et al. (1999) → §2.0; Griffiths et al. (1998) → §2.2.1; Veniero et al. (2021) → §5.6.2
 - [ ] Import all citations from Zotero into 6.0 References.md
 
 ---
