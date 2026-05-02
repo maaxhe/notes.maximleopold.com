@@ -55,6 +55,8 @@ modified: 2026-05-02
 ### Phase 3 — Writing & Language
 - [ ] Language sweep: replace "control", "drives", "directs" → "couples with", "shows functional connectivity", "is associated with", "suggests a top-down influence" throughout all sections
 - [ ] Remove alpha/beta rhythm references → replace with fMRI-only structural/functional framing
+- [ ] `5.2` section title capitalisation — check consistency across all files ("auditory where stream" vs "Auditory Where Stream")
+- [ ] `5.1.md` line 53: inline note `→ und hier nochmal single seed 55b anschauen` — check if still needed or covered by 4.5
 - [ ] Embed Romanski (1999) in Introduction
 - [ ] Embed Salmi (2009/2025) — FEF auditory connectivity
 - [ ] Cite Tavor (2026) in Methods (resting-state task activity predictions)
@@ -99,11 +101,19 @@ modified: 2026-05-02
 
 **5.5 Predictive Modelling**
 - [ ] Define core argument
+- [ ] Explain negative dorsal submodel prediction (R = −0.15 for Place task)
+- [ ] Discuss ceiling effect in left hemisphere for language story accuracy
+- [ ] Offline vs. online tasks in fMRI scanner — find paper, integrate into argument
 - [ ] Look up Glasser et al. (2016) SUPPL offline LANGUAGE-STORY task scores to compare
 - [ ] Discuss De Vries & Baldauf (2021) in this context
 - [ ] Check wording + sources
 
-**5.6 / 5.7 Limitations**
+**5.6 Hemispheric Lateralization** ← section does not yet exist; mentioned in outline
+- [ ] Left hemisphere: confirmation of Hickok & Poeppel (2007) — bilateral/left-dominant speech pathway
+- [ ] Right hemisphere: Frühholz (2015) emotional prosody + Griffiths et al. (1998) auditory spatial right-lateralization
+- [ ] Create file `5.6 Hemispheric Lateralization.md` once content is ready to write
+
+**5.8 / Limitations**
 - [x] resting-state fMRI is indirect — note as limitation ← written in 5.6 / 5.7
 - [x] Glasser atlas is detailed but some areas (A4, A5) could be further subdivided ← written
 - [x] No auditory spatial task in HCP dataset — limits behavioral validation for where-stream ← written
