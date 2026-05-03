@@ -2,21 +2,17 @@
 
 Living file. Update this whenever tasks change state.
 
-**Last updated:** 2026-05-02
+**Last updated:** 2026-05-03
 
 ---
 
 ## Current Focus
 
-_Last session: 2026-05-02_
+_Last session: 2026-05-03_
 
 ### What was done
-- [chapters/04_results.tex] — Full rewrite from vault: added PBelt as new §4.4.2 (subsection between A4/A5 and PSL); added A4/A5 gateway sentence to Area 45 in §4.5.4; added Appendix A2 reference sentence to §4.6; updated cross-references (PSL→4.4.3, STV→4.4.4)
-- [chapters/05_discussion.tex] — Full rewrite from vault: updated cross-references for PSL (4.4.2→4.4.3) and STV (4.4.3→4.4.4) to match new results numbering
-- [chapters/09_abbreviations.tex] — Rewritten from vault (no content changes)
-- [chapters/10_appendix.tex] — Rewritten: updated dagger cross-references PSL S4.4.2→S4.4.3, STV S4.4.3→S4.4.4
-- [chapters/11_declaration.tex] — Rewritten from vault (no content changes)
-- [compile] — Full pipeline: pdflatex → biber → pdflatex × 2; clean compile 63 pages, no errors; PDF synced to iCloud vault
+- [chapters/02_background.tex] — Removed 7 stale `% TODO: verify BibTeX key` comments (romanski1999, rolls2022 ×2, griffiths1998, baker2018, salmi2009, salmi2007 — all keys confirmed valid in references.bib)
+- [compile] — Clean recompile after TODO removal: 63 pages, no errors; PDF synced to iCloud vault
 
 ### What's next (top priorities)
 - [ ] Write 5.5 Predictive Modelling prose — agreed scope: 3 paragraphs (what-stream result, where-stream honest accounting, noise filtering); right lateralization brief + hedged
@@ -27,6 +23,8 @@ _Last session: 2026-05-02_
 - [ ] Abstract (write last)
 - [ ] Language sweep: "control/drives/directs" → hedged fMRI language across all sections
 - [ ] Insert 4 uncited references (Wu-Minn 2018 → §3.1.1; Romanski 1999 → §2.0; Griffiths 1998 → §2.2.1; Veniero 2021 → §5.6.2)
+- [ ] Vault fix: move abstract text from N&S to main body in 0.2 Abstract.md
+- [ ] Vault fix: move §5.4.1–5.4.4 detailed subsections from N&S to main body in 5.4 anatomical Ambiguities.md
 
 ### Blockers / open questions
 - Soyuhos PPA/FFA paper (Human Brain Mapping) — not yet in Zotero; needed for Methods methodological precedent
@@ -63,6 +61,7 @@ _Add tasks here as they come up. Include context so the next session can pick up
 | 2026-05-02 | 5.4 STV paragraph | Frühholz stripped (pSTG = A5 territory, not STV); STV positioned as what-stream primary; grammar fix applied |
 | 2026-05-02 | 5.4 LaTeX compile | Added missing intro para + bold summaries + PBelt sentence to 05_discussion.tex; clean compile 63pp |
 | 2026-05-02 | Full compile pipeline | All 7 chapter .tex files rewritten from vault; PBelt added as §4.4.2; cross-refs updated throughout; clean 63pp PDF |
+| 2026-05-03 | 02_background.tex cleanup | Removed 7 stale TODO comments; all BibTeX keys verified valid; clean recompile 63pp |
 
 ---
 
