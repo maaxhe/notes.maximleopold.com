@@ -2,33 +2,36 @@
 
 Living file. Update this whenever tasks change state.
 
-**Last updated:** 2026-05-01
+**Last updated:** 2026-05-02
 
 ---
 
 ## Current Focus
 
-_Last session: 2026-05-01_
+_Last session: 2026-05-02_
 
 ### What was done
-- [Citation audit] — full audit of all citations vs. references list completed
-- [6.0 References.md] — 7 missing citations added: Barch (2013), Binder (2011), Ghazanfar & Schroeder (2006), Romanski (2004), Salmi (2007), Spagna (2015), Zecker (2013)
-- [6.0 References.md] — 2 placeholders fixed: Baker (2018) and Dureux (2024) now have complete citations
-- [6.0 References.md] — Zecker et al. (2013) added as final entry
-- [5. Sources/] — 2 new source files created: Romanski (2004).md, Zecker et al. (2013).md
-- [5. Sources/] — 3 stub source files enriched with full notes: Salmi (2007).md, Binder (2011).md, Barch et al. (2013).md
-- [5. Sources/thesis.bib] — master BibTeX file created with all 37 references (ready for Overleaf/LaTeX)
-- [9.0 Abbreviations] — audit complete: list is comprehensive; minor: "7AM" vs "7Am" inconsistency in text
+- [chapters/04_results.tex] — Full rewrite from vault: added PBelt as new §4.4.2 (subsection between A4/A5 and PSL); added A4/A5 gateway sentence to Area 45 in §4.5.4; added Appendix A2 reference sentence to §4.6; updated cross-references (PSL→4.4.3, STV→4.4.4)
+- [chapters/05_discussion.tex] — Full rewrite from vault: updated cross-references for PSL (4.4.2→4.4.3) and STV (4.4.3→4.4.4) to match new results numbering
+- [chapters/09_abbreviations.tex] — Rewritten from vault (no content changes)
+- [chapters/10_appendix.tex] — Rewritten: updated dagger cross-references PSL S4.4.2→S4.4.3, STV S4.4.3→S4.4.4
+- [chapters/11_declaration.tex] — Rewritten from vault (no content changes)
+- [compile] — Full pipeline: pdflatex → biber → pdflatex × 2; clean compile 63 pages, no errors; PDF synced to iCloud vault
 
 ### What's next (top priorities)
-- [ ] Fix Soyuhos year: text cites 2022 in §1.1 and §3.3.6, references has 2023 — update both wikilinks to [[Soyuhos, O., & Baldauf, D. (2023)]]
-- [ ] Insert 4 uncited references where needed (see below)
+- [ ] Write 5.5 Predictive Modelling prose — agreed scope: 3 paragraphs (what-stream result, where-stream honest accounting, noise filtering); right lateralization brief + hedged
+- [ ] Fix Soyuhos year: text cites 2022 in §1.1 and §3.3.6, references has 2023 — update wikilinks to [[Soyuhos, O., & Baldauf, D. (2023)]]
 - [ ] 5.3.2 gap: add lateralization argument (bilateral IFJa → left-lateralized Broca system; Hickok & Poeppel 2007)
-- [ ] Write 5.4 prose (notes ready in Scrapbook: A4/A5 ambiguity, PSL inversion, STV inversion)
-- [ ] Write 5.5 prose (notes comprehensive; includes negative edges treatment)
-- [ ] Complete 5.6.2 Future Directions prose (section headers exist, prose missing)
+- [ ] Complete 5.6.1 Limitations prose (headers exist, prose missing)
+- [ ] Complete 5.6.2 Future Directions prose (headers exist, prose missing)
 - [ ] Abstract (write last)
 - [ ] Language sweep: "control/drives/directs" → hedged fMRI language across all sections
+- [ ] Insert 4 uncited references (Wu-Minn 2018 → §3.1.1; Romanski 1999 → §2.0; Griffiths 1998 → §2.2.1; Veniero 2021 → §5.6.2)
+
+### Blockers / open questions
+- Soyuhos PPA/FFA paper (Human Brain Mapping) — not yet in Zotero; needed for Methods methodological precedent
+- Glasser et al. (2016) SUPPL offline LANGUAGE-STORY scores — not yet checked (5.5 todo)
+- No git repository in /Developer/Bachelorarbeit — git push step skipped; PDF only synced via iCloud
 
 ### Uncited references that need to be placed
 - Wu-Minn HCP Consortium (2018) → §3.1.1: cite when introducing the HCP S1200 dataset
@@ -57,6 +60,9 @@ _Add tasks here as they come up. Include context so the next session can pick up
 | 2026-05-01 | 5.2.1 polish | MST sentence merged, summary sentence added |
 | 2026-05-01 | 5.3 prose | All three subsections written and polished |
 | 2026-05-01 | 4.5.4 cleanup | Smoothened, terminology corrected, redundant sentence removed |
+| 2026-05-02 | 5.4 STV paragraph | Frühholz stripped (pSTG = A5 territory, not STV); STV positioned as what-stream primary; grammar fix applied |
+| 2026-05-02 | 5.4 LaTeX compile | Added missing intro para + bold summaries + PBelt sentence to 05_discussion.tex; clean compile 63pp |
+| 2026-05-02 | Full compile pipeline | All 7 chapter .tex files rewritten from vault; PBelt added as §4.4.2; cross-refs updated throughout; clean 63pp PDF |
 
 ---
 

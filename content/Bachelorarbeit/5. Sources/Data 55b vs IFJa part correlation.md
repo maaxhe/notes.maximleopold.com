@@ -1,5 +1,5 @@
 ---
-modified: 2026-05-02
+modified: 2026-05-03
 ---
 
 ![[55b vs IFJa part corr.png]]

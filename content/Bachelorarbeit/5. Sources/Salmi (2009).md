@@ -1,5 +1,5 @@
 ---
-modified: 2026-05-02
+modified: 2026-05-03
 ---
 
 Salmi, J., Rinne, T., Koistinen, S., Salonen, O., & Alho, K. (2009). Brain networks of bottom-up triggered and top-down controlled shifting of auditory attention. _Brain Research_, _1286_, 155–164. [https://doi.org/10.1016/j.brainres.2009.06.083](https://doi.org/10.1016/j.brainres.2009.06.083)
