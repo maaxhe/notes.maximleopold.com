@@ -12,7 +12,9 @@ _Last session: 2026-05-03_
 
 ### What was done
 - [chapters/02_background.tex] — Removed 7 stale `% TODO: verify BibTeX key` comments (romanski1999, rolls2022 ×2, griffiths1998, baker2018, salmi2009, salmi2007 — all keys confirmed valid in references.bib)
-- [compile] — Clean recompile after TODO removal: 63 pages, no errors; PDF synced to iCloud vault
+- [figures/] — Converted 4 missing .tif → .png (brain_LH/RH_fef_ifja, circular_LH/RH_full_corr); skill rule updated to always use .png, never .tif
+- [chapters/04_results.tex] — Fixed all figure filenames (14 wrong names corrected; added fef_55b_heatmap, fef_55b_brain_LH/RH, ifja_circular_LH/RH, fef_circular_LH/RH, circular_LH/RH_full_corr; removed non-existent diff_FEF_IFJa_part and FEF_vs_IFJa_full_corr_brain blocks)
+- [compile] — Clean recompile: 79 pages, no errors; PDF synced to iCloud vault and iCloud Drive
 
 ### What's next (top priorities)
 - [ ] Write 5.5 Predictive Modelling prose — agreed scope: 3 paragraphs (what-stream result, where-stream honest accounting, noise filtering); right lateralization brief + hedged
@@ -62,6 +64,7 @@ _Add tasks here as they come up. Include context so the next session can pick up
 | 2026-05-02 | 5.4 LaTeX compile | Added missing intro para + bold summaries + PBelt sentence to 05_discussion.tex; clean compile 63pp |
 | 2026-05-02 | Full compile pipeline | All 7 chapter .tex files rewritten from vault; PBelt added as §4.4.2; cross-refs updated throughout; clean 63pp PDF |
 | 2026-05-03 | 02_background.tex cleanup | Removed 7 stale TODO comments; all BibTeX keys verified valid; clean recompile 63pp |
+| 2026-05-03 | Figure format fix + full compile | Converted 4 .tif → .png; fixed all 14 wrong figure filenames in 04_results.tex; clean 79pp compile |
 
 ---
 
