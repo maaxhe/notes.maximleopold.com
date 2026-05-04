@@ -10,7 +10,7 @@ tags:
   - auditory
   - cognitivescience
   - Neuroscience
-modified: 2026-05-03
+modified: 2026-05-04
 ---
 
 Zecker, S. G., Hoffman, H. J., Frisina, R., Dubno, J. R., Dhar, S., Wallhagen, M., Kraus, N., Griffith, J. W., Walton, J. P., Eddins, D. A., Newman, C., Victorson, D., Warrier, C. M., & Wilson, R. H. (2013). Audition assessment using the NIH Toolbox. *Neurology*, *80*(11 Suppl 3), S45–S48. https://doi.org/10.1212/WNL.0b013e3182872dd2

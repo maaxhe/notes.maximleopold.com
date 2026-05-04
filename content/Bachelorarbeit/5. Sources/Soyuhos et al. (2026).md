@@ -14,7 +14,7 @@ tags:
   - PPA
   - cognitivescience
   - Neuroscience
-modified: 2026-05-03
+modified: 2026-05-04
 ---
 
 Soyuhos, O., Scarpa, A., & Baldauf, D. (2026). Distinct resting-state connectomes for face and scene perception predict individual task performance. *Human Brain Mapping*, *47*, e70498. https://doi.org/10.1002/hbm.70498
@@ -85,5 +85,5 @@ Soyuhos, O., Scarpa, A., & Baldauf, D. (2026). Distinct resting-state connectome
 ## see also
 [[Soyuhos, O., & Baldauf, D. (2022)]]
 [[3.3 Matrix Construction]]
-[[3.4 Brain Behavior Correlation]]
+[[3.4 Brain Behaviour Correlation]]
 Tags: #cognitivescience/neuroscience #science #source

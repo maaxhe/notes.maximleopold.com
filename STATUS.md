@@ -2,19 +2,21 @@
 
 Living file. Update this whenever tasks change state.
 
-**Last updated:** 2026-05-03
+**Last updated:** 2026-05-04
 
 ---
 
 ## Current Focus
 
-_Last session: 2026-05-03_
+_Last session: 2026-05-04_
 
 ### What was done
-- [chapters/02_background.tex] — Removed 7 stale `% TODO: verify BibTeX key` comments (romanski1999, rolls2022 ×2, griffiths1998, baker2018, salmi2009, salmi2007 — all keys confirmed valid in references.bib)
-- [figures/] — Converted 4 missing .tif → .png (brain_LH/RH_fef_ifja, circular_LH/RH_full_corr); skill rule updated to always use .png, never .tif
-- [chapters/04_results.tex] — Fixed all figure filenames (14 wrong names corrected; added fef_55b_heatmap, fef_55b_brain_LH/RH, ifja_circular_LH/RH, fef_circular_LH/RH, circular_LH/RH_full_corr; removed non-existent diff_FEF_IFJa_part and FEF_vs_IFJa_full_corr_brain blocks)
-- [compile] — Clean recompile: 79 pages, no errors; PDF synced to iCloud vault and iCloud Drive
+- [compile] — Full vault-to-LaTeX compile pipeline completed: all 7 chapter .tex files (01–05, 09, 10) rewritten from vault sources; three-pass pdflatex+biber compile produced clean 75-page PDF; PDF synced to iCloud Bachelorarbeit vault folder
+- [chapters/04_results.tex] — Added beh_acc_all_neg + beh_acc_all_pos figures as LH+RH side-by-side pair alongside existing beh_acc_all_bar (triple figure group)
+- [chapters/05_discussion.tex] — Rewritten from vault 5.1–5.4 (with 5.5 Predictive Modelling and 5.6 Limitations as stubs); N&S exclusion rule applied throughout
+- [chapters/09_abbreviations.tex] + [chapters/10_appendix.tex] — Rewritten from vault 9.0 and 7.0 respectively
+- [vault publish] — notes.maximleopold.com pushed (including heatmap_LH, ifja_circular_LH/RH new figures)
+- [chapters/03_methods.tex §3.2] — Converted all `\begin{itemize}` blocks in §3.2.2–3.2.5 to plain `\textbf{Name.}` paragraphs (no bullets); surgical edit only; clean 71pp compile
 
 ### What's next (top priorities)
 - [ ] Write 5.5 Predictive Modelling prose — agreed scope: 3 paragraphs (what-stream result, where-stream honest accounting, noise filtering); right lateralization brief + hedged
@@ -27,6 +29,23 @@ _Last session: 2026-05-03_
 - [ ] Insert 4 uncited references (Wu-Minn 2018 → §3.1.1; Romanski 1999 → §2.0; Griffiths 1998 → §2.2.1; Veniero 2021 → §5.6.2)
 - [ ] Vault fix: move abstract text from N&S to main body in 0.2 Abstract.md
 - [ ] Vault fix: move §5.4.1–5.4.4 detailed subsections from N&S to main body in 5.4 anatomical Ambiguities.md
+
+### 🔒 compile pipeline exception — chapters/04_results.tex
+`/thesis-assistant compile` must NEVER do a full overwrite of `chapters/04_results.tex`.
+It contains VS Code-level figure layout overrides (height=, keepaspectratio, subfigure/minipage structure) that cannot be expressed in Markdown.
+
+**Rule:** For text/prose changes from vault 4.x files → apply as targeted surgical edits to the existing `04_results.tex`, leaving all figure environments, sizing, and layout untouched.
+All other chapter files (01, 02, 03, 05, 09, 10) continue to full-overwrite from vault as normal.
+
+### VS Code formatting overrides (DO NOT overwrite on next compile)
+These were edited directly in VS Code and must be preserved manually after any vault→LaTeX compile:
+- **main.tex line 41**: `\captionsetup{font=small}` — global small captions (safe, in main.tex, survives compile)
+- **04_results.tex Fig 4.4** (brain_LH/RH_fef_ifja, lines 48/50): `height=5.5cm, keepaspectratio` — do NOT revert to `width=0.48\textwidth`
+- **04_results.tex Fig 4.10** (fef_55b_brain_LH/RH, lines 177/179): `height=5.5cm, keepaspectratio` — same rule
+- **04_results.tex §4.6 beh_acc_all figure** (lines 222–242): stacked layout — neg + bar-on-right, then pos + bar-on-right; bars at `height=2.8cm` with `\raisebox{0.4cm}`, gap `\hspace{0.004\textwidth}`, subfigures at `0.80\textwidth`, bar minipage at `0.07\textwidth`
+- All circular/heatmap figure pairs: `width=0.48\textwidth` — do not change
+- VS Code outDir set to `%DIR%` (project root); all vault PDF names are symlinks to `main.pdf`
+- **.vscode/settings.json**: `autoClean.run: "never"`; clean list = `.blg .fls .log .fdb_latexmk .out .idx .ind` only — `.toc .lof .lot .aux .bbl` must stay for ToC to work
 
 ### Blockers / open questions
 - Soyuhos PPA/FFA paper (Human Brain Mapping) — not yet in Zotero; needed for Methods methodological precedent
@@ -65,6 +84,8 @@ _Add tasks here as they come up. Include context so the next session can pick up
 | 2026-05-02 | Full compile pipeline | All 7 chapter .tex files rewritten from vault; PBelt added as §4.4.2; cross-refs updated throughout; clean 63pp PDF |
 | 2026-05-03 | 02_background.tex cleanup | Removed 7 stale TODO comments; all BibTeX keys verified valid; clean recompile 63pp |
 | 2026-05-03 | Figure format fix + full compile | Converted 4 .tif → .png; fixed all 14 wrong figure filenames in 04_results.tex; clean 79pp compile |
+| 2026-05-03 | Full vault-to-LaTeX pipeline (session 2) | All 7 chapter .tex files rewritten from vault; beh_acc_all_neg/pos triple-figure group added; 75pp clean compile; PDF synced to iCloud |
+| 2026-05-04 | 03_methods.tex §3.2 bullet→paragraph conversion | All 6 itemize blocks in §3.2.2–3.2.5 converted to plain \textbf{Name.} paragraphs; surgical edit; clean 71pp compile |
 
 ---
 
