@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wie funktioniert ein CNN? – Slides für Lehrkräfte</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --bg-2: #1e293b;
+    --fg: #f8fafc;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --accent-2: #f472b6;
+    --good: #34d399;
+    --warn: #fbbf24;
+    --grid: rgba(148, 163, 184, 0.15);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+                 Arial, "Noto Sans", sans-serif;
+    overflow: hidden;
+  }
+
+  .deck {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    padding: clamp(2rem, 5vw, 4.5rem) clamp(2rem, 7vw, 6rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 350ms ease, transform 350ms ease;
+    pointer-events: none;
+    overflow-y: auto;
+  }
+
+  .slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  .slide.prev {
+    transform: translateX(-40px);
+  }
+
+  .slide h1 {
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .slide h2 {
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    margin: 0 0 1.5rem 0;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .slide h3 {
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    margin: 1.5rem 0 0.5rem 0;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .slide p, .slide li {
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.55;
+    color: #e2e8f0;
+  }
+
+  .slide ul {
+    padding-left: 1.4rem;
+  }
+
+  .slide li {
+    margin-bottom: 0.6rem;
+  }
+
+  .slide li::marker {
+    color: var(--accent);
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+    margin-bottom: 2rem;
+  }
+
+  .accent { color: var(--accent); }
+  .accent-2 { color: var(--accent-2); }
+  .good { color: var(--good); }
+  .warn { color: var(--warn); }
+  .muted { color: var(--muted); }
+
+  .pill {
+    display: inline-block;
+    padding: 0.2em 0.7em;
+    border-radius: 999px;
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--accent);
+    font-size: 0.85em;
+    font-weight: 600;
+    margin-right: 0.4rem;
+  }
+
+  /* Title slide */
+  .title-slide {
+    text-align: center;
+    align-items: center;
+  }
+
+  .title-slide h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .title-slide .subtitle {
+    max-width: 800px;
+    margin: 1rem auto 3rem auto;
+  }
+
+  .meta {
+    display: flex;
+    gap: 2rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Two-column layout */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (max-width: 900px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+
+  /* Cards */
+  .card {
+    background: var(--bg-2);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 16px;
+    padding: 1.5rem;
+  }
+
+  .card h3 {
+    margin-top: 0;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  /* Code-ish / formula */
+  .formula {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 10px;
+    padding: 1rem 1.4rem;
+    font-size: 1.1rem;
+    color: var(--accent);
+    display: inline-block;
+    margin: 0.5rem 0;
+  }
+
+  /* Navigation UI */
+  .progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    transition: width 300ms ease;
+    z-index: 100;
+  }
+
+  .controls {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    z-index: 100;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .controls button {
+    background: var(--bg-2);
+    color: var(--fg);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 150ms;
+  }
+
+  .controls button:hover {
+    background: rgba(56, 189, 248, 0.2);
+  }
+
+  .slide-num {
+    margin-right: 0.5rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hint {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+    z-index: 100;
+  }
+
+  /* Pixel grid (image visualization) */
+  .pixel-grid {
+    display: inline-grid;
+    gap: 2px;
+    padding: 8px;
+    background: var(--bg-2);
+    border-radius: 8px;
+  }
+
+  .pixel-grid span {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    font-size: 0.75rem;
+    border-radius: 3px;
+    color: rgba(0,0,0,0.6);
+    font-weight: 600;
+  }
+
+  /* Convolution canvas demo */
+  .conv-demo {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+  }
+
+  .conv-demo canvas {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    image-rendering: pixelated;
+  }
+
+  .conv-controls {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.8rem;
+  }
+
+  .conv-controls button {
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 150ms;
+  }
+
+  .conv-controls button:hover {
+    opacity: 0.85;
+  }
+
+  .conv-controls button.secondary {
+    background: var(--bg-2);
+    color: var(--fg);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+  }
+
+  .conv-label {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 0.4rem;
+  }
+
+  /* Architecture diagram */
+  .arch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+  }
+
+  .arch-block {
+    background: var(--bg-2);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    text-align: center;
+    min-width: 90px;
+    font-size: 0.9rem;
+  }
+
+  .arch-block.input { border-color: var(--good); }
+  .arch-block.conv { border-color: var(--accent); }
+  .arch-block.pool { border-color: var(--accent-2); }
+  .arch-block.fc { border-color: var(--warn); }
+
+  .arch-block strong {
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+
+  .arch-block small {
+    color: var(--muted);
+    font-size: 0.75rem;
+  }
+
+  .arch-arrow {
+    color: var(--muted);
+    font-size: 1.2rem;
+  }
+
+  /* Hierarchy */
+  .hierarchy {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 800px) {
+    .hierarchy { grid-template-columns: 1fr; }
+  }
+
+  .hier-step {
+    background: var(--bg-2);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+  }
+
+  .hier-step:nth-child(2) { border-left-color: var(--accent-2); }
+  .hier-step:nth-child(3) { border-left-color: var(--good); }
+
+  .hier-step strong {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 1.1rem;
+  }
+
+  .hier-step small {
+    color: var(--muted);
+    display: block;
+    margin-top: 0.4rem;
+  }
+
+  /* Print */
+  @media print {
+    html, body { overflow: visible; height: auto; }
+    .deck { height: auto; }
+    .slide {
+      position: relative;
+      page-break-after: always;
+      opacity: 1 !important;
+      transform: none !important;
+      pointer-events: auto;
+      height: 100vh;
+    }
+    .controls, .progress, .hint { display: none; }
+  }
+
+  /* Helper for kbd */
+  kbd {
+    background: var(--bg-2);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    border-radius: 4px;
+    padding: 0.1em 0.4em;
+    font-size: 0.85em;
+    font-family: monospace;
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<div class="deck" id="deck">
+
+  <!-- Slide 1: Title -->
+  <section class="slide title-slide active">
+    <h1>Wie funktioniert ein CNN?</h1>
+    <p class="subtitle">
+      Convolutional Neural Networks anschaulich erklärt –<br>
+      eine Einführung für Lehrkräfte im Themenfeld <span class="accent">Künstliche Intelligenz</span>
+    </p>
+    <div class="meta">
+      <span>20 Folien · ca. 30–45 Min.</span>
+      <span>Sek. II · Informatik / NaWi</span>
+      <span>Steuerung: <kbd>←</kbd> <kbd>→</kbd> <kbd>Leertaste</kbd></span>
+    </div>
+  </section>
+
+  <!-- Slide 2: Lernziele -->
+  <section class="slide">
+    <h2>Lernziele</h2>
+    <p class="subtitle">Nach diesen Folien können Sie...</p>
+    <ul>
+      <li>erklären, <strong>warum</strong> klassische neuronale Netze für Bilder ungeeignet sind.</li>
+      <li>die drei Kernoperationen eines CNN benennen: <span class="accent">Faltung</span>, <span class="accent-2">Aktivierung</span>, <span class="good">Pooling</span>.</li>
+      <li>die <strong>hierarchische Merkmalsextraktion</strong> in eigenen Worten beschreiben.</li>
+      <li>typische <strong>Anwendungen, Grenzen und Risiken</strong> einordnen.</li>
+      <li>eigene <strong>Unterrichtssequenzen</strong> ableiten und Schüler:innen durch Visualisierungen führen.</li>
+    </ul>
+  </section>
+
+  <!-- Slide 3: Was ist ein CNN -->
+  <section class="slide">
+    <h2>Was ist ein CNN?</h2>
+    <p class="subtitle">Convolutional Neural Network – „faltendes neuronales Netz"</p>
+    <div class="two-col">
+      <div>
+        <p>
+          Ein <strong>CNN</strong> ist eine spezielle Form eines künstlichen
+          neuronalen Netzes, das <span class="accent">räumliche Muster in Bildern</span>
+          (oder Audio, Video, Zeitreihen) erkennt.
+        </p>
+        <p>
+          Statt jeden Pixel einzeln zu betrachten, schaut ein CNN durch
+          <strong>kleine Fenster</strong> über das Bild und sucht nach
+          wiederkehrenden Mustern – Kanten, Ecken, Texturen, später Augen, Räder, Buchstaben.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Erfunden von ...</h3>
+        <p>Yann LeCun, Ende der 1980er. Sein Netz <strong>LeNet-5</strong> erkannte handgeschriebene Postleitzahlen.</p>
+        <h3>Durchbruch</h3>
+        <p><strong>AlexNet (2012)</strong> gewann den ImageNet-Wettbewerb mit großem Abstand und löste den Deep-Learning-Boom aus.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 4: Anwendungen -->
+  <section class="slide">
+    <h2>Wo begegnen uns CNNs heute?</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>📱 Smartphone</h3>
+        <p>Gesichtserkennung beim Entsperren, Foto-Verbesserung, Bokeh-Effekt, Objekterkennung in Fotos.</p>
+      </div>
+      <div class="card">
+        <h3>🚗 Autonomes Fahren</h3>
+        <p>Erkennung von Verkehrsschildern, Fußgängern, Fahrbahnmarkierungen.</p>
+      </div>
+      <div class="card">
+        <h3>🏥 Medizin</h3>
+        <p>Auswertung von Röntgen-, MRT- und CT-Bildern, Erkennung von Tumoren oder diabetischer Retinopathie.</p>
+      </div>
+      <div class="card">
+        <h3>🌾 Landwirtschaft</h3>
+        <p>Drohnenbilder analysieren, Schädlinge oder Krankheiten an Pflanzen erkennen.</p>
+      </div>
+      <div class="card">
+        <h3>🛰️ Satellitenbilder</h3>
+        <p>Waldbrände, Abholzung, Stadtentwicklung – automatisiert ausgewertet.</p>
+      </div>
+      <div class="card">
+        <h3>🎨 Kreative KI</h3>
+        <p>CNNs sind Bausteine in Bildgeneratoren wie Stable Diffusion (im Encoder/Decoder).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 5: Wie sieht ein Computer ein Bild -->
+  <section class="slide">
+    <h2>Wie „sieht" ein Computer ein Bild?</h2>
+    <p class="subtitle">Ein Bild ist für den Rechner einfach eine Tabelle aus Zahlen.</p>
+    <div class="two-col">
+      <div>
+        <p>Jedes Pixel hat einen <strong>Helligkeitswert</strong> (Graustufe: 0–255).<br>
+        Bei Farbbildern gibt es drei solcher Tabellen: <span style="color:#ef4444">R</span>, <span style="color:#22c55e">G</span>, <span style="color:#3b82f6">B</span>.</p>
+        <p>Aus Sicht des Netzes: nur eine <strong>Matrix von Zahlen</strong> – keine „Augen", keine Vorstellung von Form. Das CNN muss die Bedeutung erst <em>lernen</em>.</p>
+        <p class="accent">→ Eine 224×224-Farbeingabe = 150.528 Zahlen.</p>
+      </div>
+      <div style="text-align:center">
+        <div class="pixel-grid" id="pixelGrid"></div>
+        <div class="conv-label">Beispiel: stilisierte „7" als 8×8-Pixelmatrix</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 6: Problem klassisches NN -->
+  <section class="slide">
+    <h2>Warum reicht ein klassisches Netz nicht?</h2>
+    <div class="two-col">
+      <div>
+        <h3>Problem 1: Zu viele Parameter</h3>
+        <p>Verbindet man jedes Pixel eines 224×224×3-Bildes mit nur 1.000 Neuronen, erhält man bereits <strong>~150 Mio. Gewichte</strong> – pro Schicht.</p>
+        <h3>Problem 2: Keine Translationsinvarianz</h3>
+        <p>Verschiebt man eine Katze um 5 Pixel nach rechts, „sieht" das klassische Netz ein <em>völlig anderes</em> Bild.</p>
+        <h3>Problem 3: Räumliche Struktur geht verloren</h3>
+        <p>Pixel werden zu einem langen Vektor „flachgeklopft" – Nachbarschaften zählen plötzlich nicht mehr.</p>
+      </div>
+      <div class="card">
+        <h3>💡 Die Lösung des CNN</h3>
+        <p><strong>Gewichte teilen.</strong> Statt jedes Pixel mit jedem Neuron zu verbinden, nutzt das CNN <em>kleine, wiederverwendbare Filter</em>, die über das ganze Bild gleiten.</p>
+        <p>So entsteht ein Netz, das:
+        <ul>
+          <li>viel <span class="good">weniger Parameter</span> hat,</li>
+          <li><span class="good">verschiebungsinvariant</span> ist,</li>
+          <li>räumliche <span class="good">Nachbarschaften erhält</span>.</li>
+        </ul></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 7: Idee Faltung -->
+  <section class="slide">
+    <h2>Die Kernidee: <span class="accent">Faltung</span> (Convolution)</h2>
+    <p class="subtitle">Ein kleines Fenster (Filter) wandert über das Bild und reagiert auf bestimmte Muster.</p>
+    <div class="two-col">
+      <div>
+        <p>Stellen Sie sich eine <strong>Lupe mit Schablone</strong> vor, die Sie über das Bild schieben. An jeder Position fragt sie:</p>
+        <p class="formula">„Wie gut passt mein Muster hier?"</p>
+        <p>Das Ergebnis ist eine neue Matrix – eine <strong>Aktivierungskarte</strong> (feature map). Helle Stellen zeigen: „hier passt das Muster", dunkle: „hier nicht".</p>
+      </div>
+      <div class="card">
+        <h3>So funktioniert es mathematisch</h3>
+        <p>An jeder Position: Filterwerte <strong>elementweise mit dem Bildausschnitt multiplizieren</strong> und alles aufsummieren.</p>
+        <p class="formula">y = Σ (Filter × Bildausschnitt)</p>
+        <p>Anschließend wandert der Filter ein Pixel weiter (Stride = 1) – und das Spiel beginnt von vorn.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 8: Faltung Demo -->
+  <section class="slide">
+    <h2>Faltung – live im Browser</h2>
+    <p class="subtitle">Ein 3×3-Filter (Kantenerkennung) gleitet über das Eingabebild.</p>
+    <div class="conv-demo">
+      <div>
+        <canvas id="inputCanvas" width="280" height="280"></canvas>
+        <div class="conv-label">Eingabebild (28×28)</div>
+      </div>
+      <div>
+        <canvas id="filterCanvas" width="120" height="120"></canvas>
+        <div class="conv-label" id="filterLabel">Filter (3×3)</div>
+      </div>
+      <div>
+        <canvas id="outputCanvas" width="260" height="260"></canvas>
+        <div class="conv-label">Aktivierungskarte</div>
+      </div>
+    </div>
+    <div class="conv-controls">
+      <button onclick="convDemo.start()">▶ Animation</button>
+      <button onclick="convDemo.stop()" class="secondary">⏸ Pause</button>
+      <button onclick="convDemo.setFilter('edgeX')" class="secondary">Kanten ↔</button>
+      <button onclick="convDemo.setFilter('edgeY')" class="secondary">Kanten ↕</button>
+      <button onclick="convDemo.setFilter('blur')" class="secondary">Weichzeichner</button>
+      <button onclick="convDemo.setFilter('sharpen')" class="secondary">Schärfen</button>
+    </div>
+    <p class="conv-label" style="margin-top:1rem">
+      Die <span class="accent">blaue Markierung</span> zeigt das aktuelle Sichtfenster des Filters. Helle Pixel rechts = starke Filterantwort.
+    </p>
+  </section>
+
+  <!-- Slide 9: Filter Beispiele -->
+  <section class="slide">
+    <h2>Was ist ein Filter eigentlich?</h2>
+    <p class="subtitle">Eine kleine Matrix mit Zahlen – jede Zahl ist ein Gewicht, das das Netz lernt.</p>
+    <div class="two-col">
+      <div>
+        <h3>Beispiel: Vertikale Kanten</h3>
+        <div class="pixel-grid" style="grid-template-columns: repeat(3, 1fr)">
+          <span style="background:#f87171">−1</span>
+          <span style="background:#e5e7eb">0</span>
+          <span style="background:#34d399">+1</span>
+          <span style="background:#f87171">−1</span>
+          <span style="background:#e5e7eb">0</span>
+          <span style="background:#34d399">+1</span>
+          <span style="background:#f87171">−1</span>
+          <span style="background:#e5e7eb">0</span>
+          <span style="background:#34d399">+1</span>
+        </div>
+        <p style="margin-top:0.8rem">Reagiert dort stark, wo links dunkel und rechts hell ist – also an einer <strong>vertikalen Kante</strong>.</p>
+      </div>
+      <div>
+        <h3>Wichtig zu verstehen</h3>
+        <ul>
+          <li>Ein CNN hat <strong>viele Filter pro Schicht</strong> (z. B. 32 oder 64).</li>
+          <li>Jeder Filter spezialisiert sich auf ein eigenes Muster.</li>
+          <li>Die Filterwerte werden <span class="accent">nicht von Hand programmiert</span> – das Netz lernt sie selbst durch Training.</li>
+          <li>Der gleiche Filter wird über das ganze Bild verwendet → <strong>geteilte Gewichte</strong> (Parameter Sharing).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 10: Stride und Padding -->
+  <section class="slide">
+    <h2>Zwei wichtige Stellschrauben</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3>🚶 Stride – die Schrittweite</h3>
+        <p>Wie weit springt der Filter zwischen zwei Positionen?</p>
+        <ul>
+          <li><strong>Stride 1:</strong> Filter wandert pixelweise – feines Ergebnis.</li>
+          <li><strong>Stride 2:</strong> Filter überspringt jedes zweite Pixel – Ausgabe halbiert sich.</li>
+        </ul>
+        <p>Größerer Stride = kleinere Aktivierungskarte = schnellere Berechnung, aber gröber.</p>
+      </div>
+      <div class="card">
+        <h3>🖼️ Padding – Rand auffüllen</h3>
+        <p>Ohne Maßnahmen schrumpft das Bild bei jeder Faltung. Mit <strong>Padding</strong> legt man einen Rand aus Nullen um das Bild.</p>
+        <ul>
+          <li><strong>„valid":</strong> kein Padding – Ausgabe schrumpft.</li>
+          <li><strong>„same":</strong> Padding so gewählt, dass die Ausgabegröße gleich der Eingabegröße bleibt.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 11: Aktivierung ReLU -->
+  <section class="slide">
+    <h2>Aktivierungsfunktion: <span class="accent">ReLU</span></h2>
+    <p class="subtitle">Damit das Netz nichtlineare Muster lernen kann.</p>
+    <div class="two-col">
+      <div>
+        <p>Nach der Faltung wird jeder Wert durch eine Funktion gejagt. Die einfachste und gebräuchlichste:</p>
+        <p class="formula">ReLU(x) = max(0, x)</p>
+        <p>Im Klartext: <strong>negative Werte werden zu 0</strong>, positive bleiben unverändert.</p>
+        <p>Warum? Ohne diese Nichtlinearität ließe sich ein tiefes CNN mathematisch zu einer <em>einzigen</em> linearen Operation zusammenfassen – es könnte nichts Komplexes mehr lernen.</p>
+      </div>
+      <div style="text-align:center">
+        <canvas id="reluCanvas" width="320" height="240" style="background:#fff;border-radius:12px"></canvas>
+        <div class="conv-label">ReLU schneidet alles unter 0 ab.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 12: Pooling -->
+  <section class="slide">
+    <h2>Pooling – das Bild verkleinern</h2>
+    <p class="subtitle">Damit das Netz nicht in Pixeln ertrinkt.</p>
+    <div class="two-col">
+      <div>
+        <p>Nach Faltung + ReLU folgt meist ein <strong>Pooling-Layer</strong>. Er fasst kleine Bereiche zusammen, z. B. 2×2-Blöcke.</p>
+        <h3>Max Pooling</h3>
+        <p>Aus jedem 2×2-Block wird nur der <strong>größte Wert</strong> übernommen.</p>
+        <p><strong>Effekt:</strong></p>
+        <ul>
+          <li>Bild wird auf die Hälfte verkleinert.</li>
+          <li>Auffällige Aktivierungen bleiben erhalten.</li>
+          <li>Das Netz wird robuster gegen kleine Verschiebungen.</li>
+        </ul>
+      </div>
+      <div style="text-align:center">
+        <canvas id="poolCanvas" width="380" height="200" style="background:#fff;border-radius:12px"></canvas>
+        <div class="conv-label">Aus jedem 2×2-Block bleibt das Maximum.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 13: Architektur -->
+  <section class="slide">
+    <h2>Die Architektur eines CNN</h2>
+    <p class="subtitle">Faltung → ReLU → Pooling – mehrfach hintereinander, dann „flachgeklopft" und klassifiziert.</p>
+    <div class="arch">
+      <div class="arch-block input"><strong>Bild</strong><small>28×28×1</small></div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-block conv"><strong>Conv</strong><small>3×3, 32 Filter</small></div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-block pool"><strong>Pool</strong><small>2×2 max</small></div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-block conv"><strong>Conv</strong><small>3×3, 64 Filter</small></div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-block pool"><strong>Pool</strong><small>2×2 max</small></div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-block fc"><strong>Flatten + FC</strong><small>128 Neuronen</small></div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-block fc"><strong>Softmax</strong><small>10 Klassen</small></div>
+    </div>
+    <p style="margin-top:1.5rem;text-align:center;color:var(--muted)">
+      Tiefer im Netz: <strong>räumlich kleiner</strong>, aber <strong>kanal-tiefer</strong> –
+      die Information wird zunehmend „verdichtet" und abstrahiert.
+    </p>
+  </section>
+
+  <!-- Slide 14: Hierarchie -->
+  <section class="slide">
+    <h2>Was lernen die einzelnen Schichten?</h2>
+    <p class="subtitle">CNNs lernen Bilder <strong>hierarchisch</strong> – wie ein Kind, das zeichnen lernt.</p>
+    <div class="hierarchy">
+      <div class="hier-step">
+        <strong>1. Frühe Schichten</strong>
+        Kanten, Linien, Farbverläufe.
+        <small>Wie die ersten Striche eines Bleistifts.</small>
+      </div>
+      <div class="hier-step">
+        <strong>2. Mittlere Schichten</strong>
+        Ecken, Texturen, einfache Formen.
+        <small>Aus Strichen werden Kreise und Quadrate.</small>
+      </div>
+      <div class="hier-step">
+        <strong>3. Tiefe Schichten</strong>
+        Komplexe Objektteile: Augen, Räder, Buchstaben.
+        <small>Aus Formen werden Gesichter und Autos.</small>
+      </div>
+    </div>
+    <p style="margin-top:2rem">
+      <span class="pill">Didaktischer Hinweis</span>
+      Schon Schüler:innen ohne Mathematikkenntnisse verstehen diese Hierarchie schnell – Visualisierungen
+      gelernter Filter (z. B. von <strong>Olah/Distill</strong>) sind hier sehr eindrücklich.
+    </p>
+  </section>
+
+  <!-- Slide 15: FC Layer + Softmax -->
+  <section class="slide">
+    <h2>Vom Bild zur Entscheidung</h2>
+    <div class="two-col">
+      <div>
+        <h3>Flatten</h3>
+        <p>Nach den Faltungs- und Pooling-Schichten wird die 3D-Aktivierung in einen langen Vektor „ausgerollt".</p>
+        <h3>Fully Connected Layer</h3>
+        <p>Dieser Vektor wandert durch eine oder zwei klassische, vollständig verbundene Schichten – sie kombinieren die gelernten Merkmale zu einer Gesamtbeurteilung.</p>
+        <h3>Softmax</h3>
+        <p>Die Ausgabe wird in <strong>Wahrscheinlichkeiten</strong> umgewandelt, die sich zu 100 % addieren.</p>
+      </div>
+      <div class="card">
+        <h3>Beispiel-Ausgabe</h3>
+        <p style="font-family:monospace;font-size:1rem;line-height:1.8">
+          🐈 Katze: <span class="good">87 %</span><br>
+          🐕 Hund:  &nbsp;&nbsp;9 %<br>
+          🐰 Hase:  &nbsp;&nbsp;3 %<br>
+          🦊 Fuchs: &nbsp;&nbsp;1 %
+        </p>
+        <p>Das Netz entscheidet sich für die Klasse mit der höchsten Wahrscheinlichkeit – aber liefert immer auch ein Maß für seine <strong>Unsicherheit</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 16: Training -->
+  <section class="slide">
+    <h2>Wie lernt das Netz die Filter?</h2>
+    <p class="subtitle">Drei Begriffe genügen für ein erstes Verständnis.</p>
+    <div class="card-grid">
+      <div class="card">
+        <h3>1. Trainingsdaten</h3>
+        <p>Tausende Bilder mit bekannter Antwort („Das ist eine Katze"). Diese Paare sind das <strong>Lehrmaterial</strong>.</p>
+      </div>
+      <div class="card">
+        <h3>2. Verlustfunktion</h3>
+        <p>Misst, wie weit die Vorhersage daneben liegt. Je größer der Fehler, desto stärker das Korrektursignal.</p>
+      </div>
+      <div class="card">
+        <h3>3. Backpropagation</h3>
+        <p>Der Fehler wird <strong>rückwärts</strong> durchs Netz gerechnet. Jeder Filterwert wird ein winziges Stück in die richtige Richtung verschoben.</p>
+      </div>
+    </div>
+    <p style="margin-top:2rem">
+      Dieser Zyklus läuft <strong>Millionen Mal</strong>. Am Anfang sind die Filter zufällig, am Ende erkennen sie verlässlich Kanten, Texturen, Objekte –
+      <span class="accent">ohne dass jemand das Aussehen einer Katze in Code formuliert hat</span>.
+    </p>
+  </section>
+
+  <!-- Slide 17: Beispiel MNIST -->
+  <section class="slide">
+    <h2>Klassisches Beispiel: <span class="accent">MNIST</span></h2>
+    <p class="subtitle">70.000 handgeschriebene Ziffern – das „Hello World" der Bilderkennung.</p>
+    <div class="two-col">
+      <div>
+        <p>Mit einem kleinen CNN (zwei Faltungsschichten, ~ 50.000 Parameter) erreicht man auf MNIST <strong>über 99 % Trefferquote</strong> – auf einem Laptop in wenigen Minuten.</p>
+        <p>Im Unterricht eignet sich MNIST hervorragend, weil:</p>
+        <ul>
+          <li>Schüler:innen die Eingabe (eine Ziffer) sofort verstehen,</li>
+          <li>Fehler greifbar sind („das Netz hält meine 7 für eine 1"),</li>
+          <li>der Datensatz frei und klein ist.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Werkzeuge für den Unterricht</h3>
+        <ul>
+          <li><strong>Teachable Machine</strong> (Google) – CNN-Training im Browser, ohne Code.</li>
+          <li><strong>TensorFlow Playground</strong> – kleine Netze interaktiv erkunden.</li>
+          <li><strong>CNN Explainer</strong> (Poloclub) – Live-Visualisierung jeder Schicht.</li>
+          <li><strong>Google Colab</strong> – Python-Notebook mit GPU, kostenlos.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 18: Grenzen -->
+  <section class="slide">
+    <h2>Grenzen, Risiken und Verantwortung</h2>
+    <p class="subtitle">Was Schüler:innen mitnehmen sollten – jenseits der Technik.</p>
+    <div class="card-grid">
+      <div class="card">
+        <h3 class="warn">⚠️ Bias in den Daten</h3>
+        <p>Wenn 90 % der Trainingsbilder helle Hauttöne zeigen, erkennt das Netz dunkle schlechter. <strong>Trainingsdaten = Weltbild des Netzes.</strong></p>
+      </div>
+      <div class="card">
+        <h3 class="warn">🎭 Adversarial Attacks</h3>
+        <p>Winzige, für Menschen unsichtbare Pixeländerungen können das Netz dazu bringen, eine Schildkröte als Gewehr zu erkennen.</p>
+      </div>
+      <div class="card">
+        <h3 class="warn">🔒 Datenschutz</h3>
+        <p>Gesichtserkennung in öffentlichen Räumen wirft erhebliche rechtliche und ethische Fragen auf (DSGVO, KI-Verordnung).</p>
+      </div>
+      <div class="card">
+        <h3 class="warn">🌍 Energie</h3>
+        <p>Große Modelle verbrauchen erhebliche Mengen Strom – Nachhaltigkeit ist eine reale Designfrage.</p>
+      </div>
+      <div class="card">
+        <h3 class="warn">🤖 Erklärbarkeit</h3>
+        <p>CNNs sind <em>Black Boxes</em>. Warum eine konkrete Entscheidung fiel, ist oft schwer nachvollziehbar – kritisch in Medizin oder Justiz.</p>
+      </div>
+      <div class="card">
+        <h3 class="warn">📦 Generalisierung</h3>
+        <p>Ein auf Studio-Fotos trainiertes Netz versagt oft bei Schnappschüssen mit anderem Licht oder Hintergrund.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 19: Unterrichtsideen -->
+  <section class="slide">
+    <h2>Ideen für den Unterricht</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>🎨 Filter per Hand</h3>
+        <p>Auf Karopapier ein 5×5-Bild zeichnen, einen 3×3-Filter daraufschreiben, von Hand falten. Macht Faltung physisch erlebbar.</p>
+      </div>
+      <div class="card">
+        <h3>📷 Eigenes Mini-CNN</h3>
+        <p>Mit <strong>Teachable Machine</strong> lassen Schüler:innen ein Netz auf eigene Geste, Farbe oder Objekt trainieren – in 10 Minuten.</p>
+      </div>
+      <div class="card">
+        <h3>🔍 Bias-Experiment</h3>
+        <p>Trainieren mit absichtlich verzerrten Daten (z. B. nur eine Stiftfarbe). Klasse soll vorhersagen, was das Netz danach falsch macht.</p>
+      </div>
+      <div class="card">
+        <h3>⚖️ Ethik-Debatte</h3>
+        <p>Pro/Contra: „Soll Gesichtserkennung in Bahnhöfen erlaubt sein?" – Sachargumente nach Datenschutz, Sicherheit, Bias.</p>
+      </div>
+      <div class="card">
+        <h3>🧪 CNN Explainer</h3>
+        <p>Im Browser Schicht für Schicht durchklicken. Schüler:innen schreiben auf, was sie in jeder Schicht sehen.</p>
+      </div>
+      <div class="card">
+        <h3>🧮 Rechen-Aufgabe</h3>
+        <p>Wie viele Parameter hat eine Conv-Schicht mit 16 Filtern, 3×3, 3 Eingangs­kanälen? <span class="muted">(Lösung: 16·3·3·3 + 16 = 448)</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 20: Zusammenfassung -->
+  <section class="slide">
+    <h2>Zusammenfassung in einem Bild</h2>
+    <p class="subtitle">Drei Ideen tragen das ganze Konzept.</p>
+    <div class="card-grid" style="margin-top:2rem">
+      <div class="card" style="border-left:4px solid var(--accent)">
+        <h3>1. Faltung</h3>
+        <p>Kleine Filter gleiten über das Bild und reagieren auf bestimmte Muster.</p>
+      </div>
+      <div class="card" style="border-left:4px solid var(--accent-2)">
+        <h3>2. Hierarchie</h3>
+        <p>Erst Kanten, dann Formen, dann Objekte – Schicht für Schicht abstrakter.</p>
+      </div>
+      <div class="card" style="border-left:4px solid var(--good)">
+        <h3>3. Lernen statt Programmieren</h3>
+        <p>Niemand sagt dem Netz, wie eine Katze aussieht. Es findet die Filter selbst – durch viele Beispiele und Backpropagation.</p>
+      </div>
+    </div>
+    <p style="margin-top:2.5rem;font-size:1.3rem;text-align:center" class="accent">
+      Wer diese drei Ideen im Kopf hat, versteht 90 % aller Bilderkennungs-KI von heute.
+    </p>
+  </section>
+
+  <!-- Slide 21: Ressourcen -->
+  <section class="slide">
+    <h2>Vertiefende Ressourcen</h2>
+    <div class="two-col">
+      <div>
+        <h3>Interaktiv</h3>
+        <ul>
+          <li><strong>CNN Explainer</strong> – poloclub.github.io/cnn-explainer</li>
+          <li><strong>Teachable Machine</strong> – teachablemachine.withgoogle.com</li>
+          <li><strong>TensorFlow Playground</strong> – playground.tensorflow.org</li>
+          <li><strong>Distill.pub</strong> – distill.pub (visuell hervorragende Artikel)</li>
+        </ul>
+        <h3>Video</h3>
+        <ul>
+          <li><strong>3Blue1Brown</strong> – Reihe „Neural Networks"</li>
+          <li><strong>Computerphile</strong> – mehrere Folgen zu CNNs</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Literatur (kostenlos online)</h3>
+        <ul>
+          <li>Goodfellow, Bengio, Courville – <em>Deep Learning</em>, MIT Press, Kap. 9</li>
+          <li>Nielsen – <em>Neural Networks and Deep Learning</em>, neuralnetworksanddeeplearning.com</li>
+          <li>Olah et al. – <em>Feature Visualization</em>, Distill 2017</li>
+        </ul>
+        <h3>Curricula / Materialien (DE)</h3>
+        <ul>
+          <li><strong>KI-Campus</strong> – ki-campus.org</li>
+          <li><strong>App Camps</strong> – KI-Module für Sek. I/II</li>
+          <li><strong>BWKI</strong> – Bundeswettbewerb Künstliche Intelligenz</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:2.5rem;text-align:center;color:var(--muted)">
+      Druckversion: <kbd>Strg/Cmd + P</kbd> – jede Folie wird automatisch eine eigene Seite.
+    </p>
+  </section>
+
+</div>
+
+<div class="hint">
+  <kbd>←</kbd> <kbd>→</kbd> Folien · <kbd>F</kbd> Vollbild · <kbd>P</kbd> Drucken
+</div>
+
+<div class="controls">
+  <span class="slide-num"><span id="curNum">1</span> / <span id="totNum">21</span></span>
+  <button onclick="deck.prev()" aria-label="Zurück">‹</button>
+  <button onclick="deck.next()" aria-label="Weiter">›</button>
+</div>
+
+<script>
+  // ============================================================
+  //  Slide deck navigation
+  // ============================================================
+  const deck = (() => {
+    const slides = document.querySelectorAll('.slide');
+    const total = slides.length;
+    const progress = document.getElementById('progress');
+    const curNum = document.getElementById('curNum');
+    const totNum = document.getElementById('totNum');
+    let i = 0;
+
+    totNum.textContent = total;
+
+    function show(n) {
+      i = Math.max(0, Math.min(total - 1, n));
+      slides.forEach((s, idx) => {
+        s.classList.remove('active', 'prev');
+        if (idx === i) s.classList.add('active');
+        else if (idx < i) s.classList.add('prev');
+      });
+      progress.style.width = ((i + 1) / total * 100) + '%';
+      curNum.textContent = i + 1;
+
+      // restart conv demo when its slide is visible
+      if (slides[i].querySelector('#inputCanvas')) {
+        if (!convDemo.running) convDemo.start();
+      } else {
+        convDemo.stop();
+      }
+    }
+
+    return {
+      next: () => show(i + 1),
+      prev: () => show(i - 1),
+      go:   (n) => show(n),
+      get current() { return i; }
+    };
+  })();
+
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    switch (e.key) {
+      case 'ArrowRight':
+      case ' ':
+      case 'PageDown':
+        e.preventDefault();
+        deck.next();
+        break;
+      case 'ArrowLeft':
+      case 'PageUp':
+        e.preventDefault();
+        deck.prev();
+        break;
+      case 'Home':
+        deck.go(0);
+        break;
+      case 'End':
+        deck.go(999);
+        break;
+      case 'f':
+      case 'F':
+        if (document.fullscreenElement) document.exitFullscreen();
+        else document.documentElement.requestFullscreen();
+        break;
+      case 'p':
+      case 'P':
+        if (e.ctrlKey || e.metaKey) return;
+        window.print();
+        break;
+    }
+  });
+
+  // Click on right/left half to navigate
+  document.getElementById('deck').addEventListener('click', (e) => {
+    if (e.target.closest('button, a, .conv-controls, canvas')) return;
+    const x = e.clientX / window.innerWidth;
+    if (x > 0.7) deck.next();
+    else if (x < 0.3) deck.prev();
+  });
+
+  // ============================================================
+  //  Pixel grid for slide 5
+  // ============================================================
+  (function buildPixelGrid() {
+    const g = document.getElementById('pixelGrid');
+    if (!g) return;
+    // stylized "7"
+    const m = [
+      [0,0,0,0,0,0,0,0],
+      [0,0,255,255,255,255,0,0],
+      [0,0,0,0,0,200,0,0],
+      [0,0,0,0,180,0,0,0],
+      [0,0,0,160,0,0,0,0],
+      [0,0,140,0,0,0,0,0],
+      [0,0,120,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0],
+    ];
+    g.style.gridTemplateColumns = `repeat(${m[0].length}, 1fr)`;
+    m.flat().forEach(v => {
+      const s = document.createElement('span');
+      s.textContent = v;
+      const t = v / 255;
+      s.style.background = `rgb(${255 - t*255}, ${255 - t*255}, ${255 - t*100})`;
+      s.style.color = t > 0.5 ? '#fff' : '#475569';
+      g.appendChild(s);
+    });
+  })();
+
+  // ============================================================
+  //  Convolution demo (slide 8)
+  // ============================================================
+  const convDemo = (() => {
+    const inputC  = document.getElementById('inputCanvas');
+    const filterC = document.getElementById('filterCanvas');
+    const outputC = document.getElementById('outputCanvas');
+    const filterLabel = document.getElementById('filterLabel');
+    if (!inputC) return { start(){}, stop(){}, setFilter(){}, running:false };
+
+    const N = 28;            // input size
+    const px = inputC.width / N;
+    const opx = outputC.width / (N - 2);
+
+    // Build a synthetic input image: a stylized digit "5"
+    const input = new Float32Array(N * N);
+    function makeImage() {
+      input.fill(0);
+      // top horizontal bar
+      for (let x = 6; x < 22; x++) for (let y = 5; y < 8; y++) input[y*N+x] = 1;
+      // left vertical
+      for (let y = 5; y < 14; y++) for (let x = 6; x < 9; x++) input[y*N+x] = 1;
+      // middle bar
+      for (let x = 6; x < 22; x++) for (let y = 13; y < 16; y++) input[y*N+x] = 1;
+      // right vertical lower
+      for (let y = 13; y < 22; y++) for (let x = 19; x < 22; x++) input[y*N+x] = 1;
+      // bottom bar
+      for (let x = 6; x < 22; x++) for (let y = 21; y < 24; y++) input[y*N+x] = 1;
+    }
+    makeImage();
+
+    const filters = {
+      edgeX:   { k: [[-1,0,1],[-2,0,2],[-1,0,1]],   name: "Sobel-X (vertikale Kanten)" },
+      edgeY:   { k: [[-1,-2,-1],[0,0,0],[1,2,1]],    name: "Sobel-Y (horizontale Kanten)" },
+      blur:    { k: [[1/9,1/9,1/9],[1/9,1/9,1/9],[1/9,1/9,1/9]], name: "Box-Weichzeichner" },
+      sharpen: { k: [[0,-1,0],[-1,5,-1],[0,-1,0]],   name: "Schärfen" },
+    };
+    let cur = filters.edgeX;
+    let output = new Float32Array((N-2)*(N-2));
+    let cx = 0, cy = 0;
+    let timer = null;
+
+    function drawInput() {
+      const ctx = inputC.getContext('2d');
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, inputC.width, inputC.height);
+      for (let y = 0; y < N; y++) {
+        for (let x = 0; x < N; x++) {
+          const v = input[y*N+x];
+          ctx.fillStyle = `rgb(${(1-v)*255 | 0}, ${(1-v)*255 | 0}, ${(1-v)*255 | 0})`;
+          ctx.fillRect(x*px, y*px, px, px);
+        }
+      }
+      // highlight current 3x3 window
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(cx*px, cy*px, 3*px, 3*px);
+    }
+
+    function drawFilter() {
+      const ctx = filterC.getContext('2d');
+      const fpx = filterC.width / 3;
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, filterC.width, filterC.height);
+      for (let y = 0; y < 3; y++) {
+        for (let x = 0; x < 3; x++) {
+          const v = cur.k[y][x];
+          // color: red for negative, green for positive, white for ~0
+          const t = Math.max(-1, Math.min(1, v));
+          let r, g, b;
+          if (t > 0) { r = 255*(1-t); g = 255; b = 255*(1-t); }
+          else       { r = 255; g = 255*(1+t); b = 255*(1+t); }
+          ctx.fillStyle = `rgb(${r|0},${g|0},${b|0})`;
+          ctx.fillRect(x*fpx, y*fpx, fpx, fpx);
+          ctx.strokeStyle = '#cbd5e1';
+          ctx.strokeRect(x*fpx, y*fpx, fpx, fpx);
+          ctx.fillStyle = '#0f172a';
+          ctx.font = 'bold 14px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          const txt = (Math.round(v*100)/100).toString();
+          ctx.fillText(txt, x*fpx + fpx/2, y*fpx + fpx/2);
+        }
+      }
+      filterLabel.textContent = cur.name;
+    }
+
+    function drawOutput() {
+      const ctx = outputC.getContext('2d');
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(0, 0, outputC.width, outputC.height);
+      // normalize
+      let mn = Infinity, mx = -Infinity;
+      for (const v of output) { if (v < mn) mn = v; if (v > mx) mx = v; }
+      const range = (mx - mn) || 1;
+      for (let y = 0; y < N-2; y++) {
+        for (let x = 0; x < N-2; x++) {
+          const v = (output[y*(N-2)+x] - mn) / range;
+          ctx.fillStyle = `rgb(${v*255|0}, ${v*255|0}, ${v*255|0})`;
+          ctx.fillRect(x*opx, y*opx, opx, opx);
+        }
+      }
+    }
+
+    function step() {
+      // compute convolution at (cx, cy)
+      let s = 0;
+      for (let dy = 0; dy < 3; dy++)
+        for (let dx = 0; dx < 3; dx++)
+          s += input[(cy+dy)*N + (cx+dx)] * cur.k[dy][dx];
+      output[cy*(N-2)+cx] = s;
+
+      drawInput();
+      drawOutput();
+
+      cx++;
+      if (cx >= N-2) { cx = 0; cy++; }
+      if (cy >= N-2) { cy = 0; /* loop */ }
+    }
+
+    function start() {
+      api.running = true;
+      drawFilter();
+      drawInput();
+      drawOutput();
+      if (timer) clearInterval(timer);
+      timer = setInterval(step, 30);
+    }
+    function stop() {
+      api.running = false;
+      if (timer) clearInterval(timer);
+      timer = null;
+    }
+    function setFilter(name) {
+      cur = filters[name];
+      output = new Float32Array((N-2)*(N-2));
+      cx = 0; cy = 0;
+      drawFilter();
+      drawInput();
+      drawOutput();
+    }
+
+    const api = { start, stop, setFilter, running: false };
+    // initial draw
+    drawFilter();
+    drawInput();
+    drawOutput();
+    return api;
+  })();
+
+  // ============================================================
+  //  ReLU plot (slide 11)
+  // ============================================================
+  (function drawRelu() {
+    const c = document.getElementById('reluCanvas');
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    const ox = W/2, oy = H*0.7;
+    const scale = 30;
+
+    // axes
+    ctx.strokeStyle = '#cbd5e1';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, oy); ctx.lineTo(W, oy);
+    ctx.moveTo(ox, 0); ctx.lineTo(ox, H);
+    ctx.stroke();
+
+    // labels
+    ctx.fillStyle = '#475569';
+    ctx.font = '12px sans-serif';
+    ctx.fillText('x', W - 12, oy - 4);
+    ctx.fillText('ReLU(x)', ox + 6, 12);
+
+    // grid ticks
+    ctx.strokeStyle = '#e2e8f0';
+    for (let i = -4; i <= 4; i++) {
+      ctx.beginPath();
+      ctx.moveTo(ox + i*scale, oy - 3);
+      ctx.lineTo(ox + i*scale, oy + 3);
+      ctx.stroke();
+    }
+
+    // ReLU curve
+    ctx.strokeStyle = '#38bdf8';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    let first = true;
+    for (let px = 0; px <= W; px += 2) {
+      const x = (px - ox) / scale;
+      const y = Math.max(0, x);
+      const py = oy - y * scale;
+      if (first) { ctx.moveTo(px, py); first = false; }
+      else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+  })();
+
+  // ============================================================
+  //  Pooling diagram (slide 12)
+  // ============================================================
+  (function drawPool() {
+    const c = document.getElementById('poolCanvas');
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, W, H);
+
+    // input 4x4
+    const input = [
+      [1, 3, 2, 4],
+      [5, 6, 7, 8],
+      [3, 2, 1, 0],
+      [1, 2, 3, 4],
+    ];
+    const cell = 38;
+    const xs = 20, ys = 20;
+    ctx.font = 'bold 16px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    for (let y = 0; y < 4; y++) {
+      for (let x = 0; x < 4; x++) {
+        const isMax = isMaxIn(input, x, y);
+        ctx.fillStyle = isMax ? '#dbeafe' : '#f1f5f9';
+        ctx.fillRect(xs + x*cell, ys + y*cell, cell, cell);
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.strokeRect(xs + x*cell, ys + y*cell, cell, cell);
+        ctx.fillStyle = '#0f172a';
+        ctx.fillText(input[y][x], xs + x*cell + cell/2, ys + y*cell + cell/2);
+      }
+    }
+    // 2x2 highlight boxes
+    ctx.strokeStyle = '#38bdf8';
+    ctx.lineWidth = 3;
+    for (let by = 0; by < 2; by++)
+      for (let bx = 0; bx < 2; bx++)
+        ctx.strokeRect(xs + bx*2*cell, ys + by*2*cell, 2*cell, 2*cell);
+
+    // arrow
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '24px sans-serif';
+    ctx.fillText('→', xs + 4*cell + 24, ys + 2*cell);
+
+    // output 2x2
+    const ocell = 56;
+    const xo = xs + 4*cell + 60, yo = ys + 20;
+    ctx.font = 'bold 22px sans-serif';
+    for (let by = 0; by < 2; by++) {
+      for (let bx = 0; bx < 2; bx++) {
+        let m = -Infinity;
+        for (let dy = 0; dy < 2; dy++)
+          for (let dx = 0; dx < 2; dx++)
+            m = Math.max(m, input[by*2+dy][bx*2+dx]);
+        ctx.fillStyle = '#dbeafe';
+        ctx.fillRect(xo + bx*ocell, yo + by*ocell, ocell, ocell);
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(xo + bx*ocell, yo + by*ocell, ocell, ocell);
+        ctx.fillStyle = '#0369a1';
+        ctx.fillText(m, xo + bx*ocell + ocell/2, yo + by*ocell + ocell/2);
+      }
+    }
+
+    function isMaxIn(m, x, y) {
+      const bx = Math.floor(x/2)*2, by = Math.floor(y/2)*2;
+      let mx = -Infinity;
+      for (let dy = 0; dy < 2; dy++)
+        for (let dx = 0; dx < 2; dx++)
+          mx = Math.max(mx, m[by+dy][bx+dx]);
+      return m[y][x] === mx;
+    }
+  })();
+</script>
+</body>
+</html>
