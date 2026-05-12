@@ -8,27 +8,19 @@ Living file. Update this whenever tasks change state.
 
 ## Current Focus
 
-_Last session: 2026-05-04_
+_Last session: 2026-05-11 (Quality Check + Citation Standardization)_
 
 ### What was done
-- [compile] — Full vault-to-LaTeX compile pipeline completed: all 7 chapter .tex files (01–05, 09, 10) rewritten from vault sources; three-pass pdflatex+biber compile produced clean 75-page PDF; PDF synced to iCloud Bachelorarbeit vault folder
-- [chapters/04_results.tex] — Added beh_acc_all_neg + beh_acc_all_pos figures as LH+RH side-by-side pair alongside existing beh_acc_all_bar (triple figure group)
-- [chapters/05_discussion.tex] — Rewritten from vault 5.1–5.4 (with 5.5 Predictive Modelling and 5.6 Limitations as stubs); N&S exclusion rule applied throughout
-- [chapters/09_abbreviations.tex] + [chapters/10_appendix.tex] — Rewritten from vault 9.0 and 7.0 respectively
-- [vault publish] — notes.maximleopold.com pushed (including heatmap_LH, ifja_circular_LH/RH new figures)
-- [chapters/03_methods.tex §3.2] — Converted all `\begin{itemize}` blocks in §3.2.2–3.2.5 to plain `\textbf{Name.}` paragraphs (no bullets); surgical edit only; clean 71pp compile
+- [quality-check] — Comprehensive QA audit completed: identified 4 critical issues (Soyuhos year, language hedging, unfinished sections, citation format inconsistency) + 7 moderate/minor issues
+- [citation-format] — ALL wikilink citations standardized: removed journal names, fixed year formatting, removed block-refs. Format: [[Author & Author (Year)]] now consistent across 13 files (1.1–5.6, 3.3–3.4)
+- [citation-audit] — Verified all 4 "missing" references are actually present in vault: Wu-Minn (2018) in §3.1, Romanski (1999) in §2.0, Griffiths (1998) in §2.2.1, Veniero (2021) in §5.6 — only Veniero not yet in main body prose
 
 ### What's next (top priorities)
-- [ ] Write 5.5 Predictive Modelling prose — agreed scope: 3 paragraphs (what-stream result, where-stream honest accounting, noise filtering); right lateralization brief + hedged
-- [ ] Fix Soyuhos year: text cites 2022 in §1.1 and §3.3.6, references has 2023 — update wikilinks to [[Soyuhos, O., & Baldauf, D. (2023)]]
-- [ ] 5.3.2 gap: add lateralization argument (bilateral IFJa → left-lateralized Broca system; Hickok & Poeppel 2007)
-- [ ] Complete 5.6.1 Limitations prose (headers exist, prose missing)
-- [ ] Complete 5.6.2 Future Directions prose (headers exist, prose missing)
-- [ ] Abstract (write last)
-- [ ] Language sweep: "control/drives/directs" → hedged fMRI language across all sections
-- [ ] Insert 4 uncited references (Wu-Minn 2018 → §3.1.1; Romanski 1999 → §2.0; Griffiths 1998 → §2.2.1; Veniero 2021 → §5.6.2)
-- [ ] Vault fix: move abstract text from N&S to main body in 0.2 Abstract.md
-- [ ] Vault fix: move §5.4.1–5.4.4 detailed subsections from N&S to main body in 5.4 anatomical Ambiguities.md
+- [ ] Fix Soyuhos year: standardize 2022/2023/2026 inconsistency; verify which papers are published
+- [ ] Language sweep: "control/drives/directs" → hedged fMRI language ("couples with", "shows connectivity", "is associated with") across all sections
+- [ ] Complete 5.5, 5.6 unfinished prose (Predictive Modelling, Limitations, Future Directions)
+- [ ] Write Abstract (last)
+- [ ] Final compile pipeline
 
 ### 🔒 compile pipeline exception — chapters/04_results.tex
 `/thesis-assistant compile` must NEVER do a full overwrite of `chapters/04_results.tex`.
