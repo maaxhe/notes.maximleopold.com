@@ -1,5 +1,5 @@
 ---
-modified: 2026-05-12
+modified: 2026-05-13
 ---
 
 # DATA for Bachelorarbeit 
