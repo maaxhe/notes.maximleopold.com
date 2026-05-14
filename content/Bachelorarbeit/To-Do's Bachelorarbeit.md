@@ -1,5 +1,5 @@
 ---
-modified: 2026-05-13
+modified: 2026-05-14
 ---
 
 ## Open Tasks (auto-collected 2026-05-01)
@@ -11,6 +11,7 @@ modified: 2026-05-13
 - [ ] Ceiling effect in left hemisphere behavioral prediction (language story accuracy) — discuss as limitation
 - [ ] Find Soyuhos PPA/FFA paper (Human Brain Mapping) — cite in Methods as methodological precedent
 - [ ] Offline vs. online tasks in fMRI scanner context — find paper title, add to Methods
+- [ ] zu allen figures: z scores reinschreiben! 
 
 ---
 
