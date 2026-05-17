@@ -14,7 +14,7 @@ tags:
   - PPA
   - cognitivescience
   - Neuroscience
-modified: 2026-05-16
+modified: 2026-05-17
 ---
 
 Soyuhos, O., Scarpa, A., & Baldauf, D. (2026). Distinct resting-state connectomes for face and scene perception predict individual task performance. *Human Brain Mapping*, *47*, e70498. https://doi.org/10.1002/hbm.70498
