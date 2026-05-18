@@ -1,5 +1,5 @@
 ---
-modified: 2026-05-17
+modified: 2026-05-18
 ---
 
 ![[IFJa part corr.png]]
