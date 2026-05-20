@@ -8,7 +8,7 @@ tags:
   - multisensory
   - cognitivescience
   - Neuroscience
-modified: 2026-05-19
+modified: 2026-05-20
 ---
 
 Ghazanfar, A. A., & Schroeder, C. E. (2006). Is neocortex essentially multisensory? _Trends in Cognitive Sciences_, _10_(6), 278–285. https://doi.org/10.1016/j.tics.2006.04.008
