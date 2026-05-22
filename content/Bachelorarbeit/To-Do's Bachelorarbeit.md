@@ -12,6 +12,7 @@ modified: 2026-05-22
 - [ ] Find Soyuhos PPA/FFA paper (Human Brain Mapping) — cite in Methods as methodological precedent
 - [ ] Offline vs. online tasks in fMRI scanner context — find paper title, add to Methods
 - [ ] zu allen figures: z scores reinschreiben! 
+- [ ] NIHL noise comp schreiben, dass es offline ist
 
 ---
 
