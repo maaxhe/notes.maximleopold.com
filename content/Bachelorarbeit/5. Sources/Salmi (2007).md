@@ -11,7 +11,7 @@ tags:
   - auditory
   - cognitivescience
   - Neuroscience
-modified: 2026-05-21
+modified: 2026-05-22
 ---
 
 Salmi, J., Rinne, T., Degerman, A., Salonen, O., & Alho, K. (2007). Orienting and maintenance of spatial attention in audition and vision: Multimodal and modality-specific brain activations. *Brain Structure and Function*, *212*(2), 181–194. https://doi.org/10.1007/s00429-007-0152-2
