@@ -1,3 +1,7 @@
+---
+modified: 2026-05-27
+---
+
 ## Evolution of the Brain 
 
 In this week's workgroup, we discussed Paul Cisek's talk on the evolution of the brain. He highlighted that each brain module is involved in multiple tasks. Given the brain's distributed representations and parallel processes, Cisek suggests that studying individual concepts like "decision-making" or "planning" may be impractical. 
@@ -17,12 +21,17 @@ Roth, G., & Dicke, U. (2005). Evolution of the brain and intelligence. _Trends i
 word count: 195, source: wordcounter.io
 
 
-[[evolution of the brain 1.png]]
-[[evolution of the brain 2.png]]
-[[evolution of the brain 3.png]]
-[[evolution of the brain 4.png]]
-[[evolution of the brain 5.png]]
+![[evolution of the brain 1.png]]
+![[evolution of the brain 2.png]]![[evolution of the brain 3.png]]
+![[evolution of the brain 4.png]]
+![[evolution of the brain 5.png]]
+
+## Visual Evolution
+![[evolution of the visual system 1.png]]
+![[evolution of the visual system 2.png]]
+![[evolution of the visual system 3.png]]
 ### see also
+- [[AC MS – Evolution of the Motor System (Phylogenetic Refinement)]] — connects these figures (Cisek) to the human motor system: each motor structure (tectum, cerebellum, basal ganglia, M1, premotor) as one stage in the phylogenetic refinement of an action-control core
 Type:
 Tags: 
 Status: 
