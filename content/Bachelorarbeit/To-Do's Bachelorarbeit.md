@@ -1,5 +1,5 @@
 ---
-modified: 2026-05-27
+modified: 2026-05-28
 ---
 
 ## Open Tasks (auto-collected 2026-05-01)
