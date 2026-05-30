@@ -10,7 +10,7 @@ tags:
   - dataset
   - cognitivescience
   - Neuroscience
-modified: 2026-05-29
+modified: 2026-05-30
 ---
 
 Van Essen, D. C., Smith, S. M., Barch, D. M., Behrens, T. E. J., Yacoub, E., Ugurbil, K., & WU-Minn HCP Consortium. (2013). The WU-Minn Human Connectome Project: An overview. *NeuroImage*, *80*, 62–79. https://doi.org/10.1016/j.neuroimage.2013.05.041
