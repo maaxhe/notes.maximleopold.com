@@ -10,7 +10,7 @@ tags:
   - domain-specificity
   - cognitivescience
   - Neuroscience
-modified: 2026-05-30
+modified: 2026-05-31
 ---
 
 Romanski, L. M. (2004). Domain specificity in the primate prefrontal cortex. *Cognitive, Affective, & Behavioral Neuroscience*, *4*(4), 421–429. https://doi.org/10.3758/CABN.4.4.421
