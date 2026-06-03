@@ -5,7 +5,7 @@ tags:
   - ba
   - todo
 created: 2026-04-30
-modified: 2026-06-02
+modified: 2026-06-03
 ai_generated: true
 model: claude-sonnet-4-6
 ---
