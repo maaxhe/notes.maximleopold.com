@@ -2,7 +2,7 @@
 ai_generated: true
 model: claude-opus-4-8
 date_created: 04/06/26
-tags: [ai-generated, marine]
+tags: [ai-generated]
 type: note
 ---
 
@@ -214,6 +214,5 @@ flowchart TB
 - YACHT — *Bloß nicht „Over and Out"* — https://www.yacht.de/
 
 ---
-Tags: #marine
 *Superlink:* [[Funkzeugnis-Kurs SRC und UBI]]
 Created: 04/06/26

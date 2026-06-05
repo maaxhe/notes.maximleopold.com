@@ -1,7 +1,3 @@
----
-modified: 2026-06-05
----
-
 ## Open Tasks (auto-collected 2026-05-01)
 
 ### Supervisor Feedback — Meeting 22.04.2026

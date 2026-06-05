@@ -2,7 +2,7 @@
 ai_generated: true
 model: claude-opus-4-8
 date_created: 04/06/26
-tags: [ai-generated, marine]
+tags: [ai-generated]
 type: note
 ---
 
@@ -30,7 +30,7 @@ Modul des [[Funkzeugnis-Kurs SRC und UBI|Funkzeugnis-Kurs SRC & UBI]]. **Komplet
 | **Empfänger** | Küstenfunkstelle / **MRCC „Bremen Rescue"** | **Revierzentrale** (Verkehrsposten) / andere Schiffe |
 | **Identifikation** | **MMSI** + Rufzeichen + Schiffsname | **Schiffsname** (+ automatische **ATIS**-Kennung) |
 | **Sprache** | **Englisch** | **Deutsch** |
-| **Kennwörter** | MAYDAY · PAN PAN · SÉCURITÉ (+ SEELONCE …) | gleiche Kennwörter, aber **nur Sprechfunk** |
+| **Kennwörter** | MAYDAY · PAN PAN · SÉCURITÉ (+ Silence …) | gleiche Kennwörter, aber **nur Sprechfunk** |
 
 ```mermaid
 flowchart TD
@@ -76,7 +76,7 @@ Aussprache: **PAN PAN** = „pann pann", **SÉCURITÉ** = „ßekürität".
 >   - **Suchmuster** organisieren und die eintreffenden Helfer einteilen,
 >   - **Funk-Bindeglied** zwischen den Einheiten vor Ort und dem MRCC,
 >   - On-Scene-Funkverkehr meist auf **Kanal 06** (oder 16) bündeln, Doppelarbeit vermeiden.
->   - Darf auch **SEELONCE** anordnen, wenn er den Notverkehr leitet.
+>   - Darf auch **Silence** anordnen, wenn er den Notverkehr leitet.
 >
 > **Merke:** Dein DSC-Notalarm/MAYDAY landet beim **MRCC** (Bremen Rescue). Das **MRCC plant** den Gesamteinsatz und bestimmt einen **OSC**, der die Helfer **vor Ort** dirigiert.
 
@@ -122,7 +122,7 @@ Der Seefunk kennt **vier Verkehrsarten**, streng nach Priorität geordnet (Not g
 ![[funkkurs-verkehrsarten-prio.png]]
 
 > [!abstract] Prioritäts-Merksatz
-> **Not → Dringlichkeit → Sicherheit → Routine.** Eine höhere Stufe hat immer Vorrang; bei Notverkehr müssen alle anderen schweigen (SEELONCE).
+> **Not → Dringlichkeit → Sicherheit → Routine.** Eine höhere Stufe hat immer Vorrang; bei Notverkehr müssen alle anderen schweigen (Silence).
 
 ---
 
@@ -165,7 +165,7 @@ flowchart TD
     Q1 -->|JA| Q1b{Eigenes Schiff<br/>in Not?}
     Q1b -->|eigenes| MD[MAYDAY senden<br/>roter Knopf → DSC K70<br/>→ MAYDAY auf K16]
     Q1b -->|fremdes / kann<br/>nicht selbst| MR[MAYDAY RELAY<br/>×3 auf K16<br/>Notmeldung weitertragen]
-    MD --> DT[Notverkehr:<br/>RECEIVED MAYDAY<br/>→ SEELONCE MAYDAY<br/>→ ... → SEELONCE FEENEE]
+    MD --> DT[Notverkehr:<br/>RECEIVED MAYDAY<br/>→ Silence Mayday<br/>→ ... → Silence Fini]
     MR --> DT
 
     Q1 -->|NEIN| Q2{Dringend? Hilfe/Info,<br/>aber nicht lebensbedrohlich}
@@ -230,13 +230,13 @@ THIS IS  <eigener Schiffsname 3×>  Call Sign  MMSI
 OVER
 ```
 
-### 4) Funkstille anordnen — SEELONCE MAYDAY / SEELONCE DISTRESS
+### 4) Funkstille anordnen — Silence Mayday / Silence Distress
 Damit der Notverkehr nicht gestört wird, wird **Funkstille** geboten (auf K16):
-- **SEELONCE MAYDAY** — gesprochen vom **Schiff in Not** oder der **leitenden Station** (MRCC/OSC).
-- **SEELONCE DISTRESS** — gesprochen von **jeder anderen** Station, die Störungen bemerkt.
+- **Silence Mayday** (Aussprache: „Seelonce Mäidäi") — gesprochen vom **Schiff in Not** oder der **leitenden Station** (MRCC/OSC).
+- **Silence Distress** (Aussprache: „Seelonce Distress") — gesprochen von **jeder anderen** Station, die Störungen bemerkt.
 
 ```
-SEELONCE MAYDAY        (Aussprache: „seelonce mäidäi")
+Silence Mayday        (Aussprache: „Seelonce Mäidäi")
 ```
 → Alle, die nicht am Notverkehr beteiligt sind, **dürfen auf diesen Frequenzen nicht senden**.
 
@@ -246,7 +246,7 @@ Wenn der Notverkehr **teilweise** wieder eingeschränkten Normalverkehr zulässt
 PRU-DONCE             (von „prudence" — Vorsicht; eingeschränkter Verkehr wieder erlaubt)
 ```
 
-### 6) Notverkehr beenden — SEELONCE FEENEE
+### 6) Notverkehr beenden — Silence Fini
 Wenn der Notfall **abgeschlossen** ist und der Verkehr wieder frei läuft (nur **leitende Station / MRCC / Schiff in Not**):
 ```
 MAYDAY
@@ -254,7 +254,7 @@ ALL STATIONS – ALL STATIONS – ALL STATIONS
 THIS IS  <Name der Station 3×>
 <Uhrzeit UTC>
 <Name + Rufzeichen des havarierten Schiffes>
-SEELONCE FEENEE        (Aussprache: „seelonce fini" — Stille beendet)
+Silence Fini        (Aussprache: „Seelonce Feenee" — Stille beendet)
 ```
 
 ### 7) Fehlalarm widerrufen — Cancel Distress Alert
@@ -293,10 +293,10 @@ Dann auf dem **angekündigten Arbeitskanal** die eigentliche Meldung (Navigation
 flowchart LR
     A[DSC-Alarm K70] --> B[MAYDAY auf K16]
     B --> C[RECEIVED MAYDAY<br/>durch MRCC/Schiff]
-    C --> D[SEELONCE MAYDAY<br/>Funkstille]
+    C --> D[Silence Mayday<br/>Funkstille]
     D --> E[Notverkehr / Rettung]
     E --> F[PRU-DONCE<br/>eingeschränkt frei]
-    F --> G[SEELONCE FEENEE<br/>Notverkehr beendet]
+    F --> G[Silence Fini<br/>Notverkehr beendet]
     style A fill:#4dabf7,color:#fff
     style B fill:#ff6b6b,color:#fff
     style D fill:#ffa94d,color:#000
@@ -304,9 +304,8 @@ flowchart LR
 ```
 
 > [!tip] Merkkette für die Teilnehmer
-> *Alarm → MAYDAY → RECEIVED → SEELONCE → (Rettung) → PRU-DONCE → SEELONCE FEENEE.*
+> *Alarm → MAYDAY → RECEIVED → Silence → (Rettung) → PRU-DONCE → Silence Fini.*
 
 ---
-Tags: #marine
 *Superlink:* [[Funkzeugnis-Kurs SRC und UBI]]
 Created: 04/06/26

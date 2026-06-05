@@ -1,7 +1,3 @@
----
-modified: 2026-06-05
----
-
 ![[FEF part corr.png]]
 
 ![[FEF part corr brain RH.png]]

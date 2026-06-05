@@ -1,7 +1,3 @@
----
-modified: 2026-06-05
----
-
 ## Meeting NEXT DATE 
 
 - [ ] orhan fragen, wie ich mit den negative edges umgehen soll

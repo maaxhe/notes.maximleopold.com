@@ -1,7 +1,3 @@
----
-modified: 2026-06-05
----
-
 ## Soyuhos, O., & Baldauf, D. (2022) 
 
 “Neuroimaging evidence suggests that the frontal eye field (FEF) and inferior frontal junction (IFJ) govern the encoding of spatial and non-spatial” (Soyuhos and Baldauf, 2022, p. 1)

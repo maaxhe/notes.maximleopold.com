@@ -2,7 +2,7 @@
 ai_generated: true
 model: claude-opus-4-8
 date_created: 04/06/26
-tags: [ai-generated, marine]
+tags: [ai-generated]
 type: note
 ---
 
@@ -51,6 +51,5 @@ Modul des [[Funkzeugnis-Kurs SRC und UBI|Funkzeugnis-Kurs SRC & UBI]]. Wochenend
 | 16:30 | Offene Fragen, Prüfungsorganisation, Abschluss |
 
 ---
-Tags: #marine
 *Superlink:* [[Funkzeugnis-Kurs SRC und UBI]]
 Created: 04/06/26

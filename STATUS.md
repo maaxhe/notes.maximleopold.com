@@ -95,6 +95,9 @@ _Record significant decisions so future sessions understand why things are the w
 |------|----------|--------|
 | 2026-05-01 | Area 44 "inferior parietal coupling for spatial processing" claim removed | Data shows PFop mean=−0.01 (negative), PF mean=0.01 (negligible) — claim not defensible |
 | 2026-05-01 | Soyuhos "negative=positive edge equivalence" claim flagged as unverified | Not found in either available Soyuhos paper; PPA/FFA paper still missing |
+| 2026-06-05 | Standalone Funkkurs site at **funk.maximilianherrmann.com** | Funkkurs published as its own Quartz site (reuses theme). Build+deploy: `npm run sync && bash scripts/publish-funk.sh`. Serves from server `/var/www/funk.maximilianherrmann.com` (nginx + certbot SSL). Quartz baseUrl/title now env-overridable. |
+| 2026-06-05 | Dropped `705789691-VOLENTIERI-A2 2.pdf` (63 MB) from sync+git | Too large to push over the flaky connection; not Funkkurs-related. Excluded in `sync-from-vault.ts` + `.gitignore`. |
+| 2026-06-05 | Git pushes time out (HTTP 408) on big asset packs | Repo carries ~1.4 GB of PDFs/images; pushes >~30 MB fail on slow link. Workaround: batch commits + retry. **TODO: migrate assets to Git LFS.** |
 
 ---
 

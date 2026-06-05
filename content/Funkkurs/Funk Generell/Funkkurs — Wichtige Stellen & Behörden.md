@@ -2,7 +2,7 @@
 ai_generated: true
 model: claude-opus-4-8
 date_created: 04/06/26
-tags: [ai-generated, marine]
+tags: [ai-generated]
 type: note
 ---
 
@@ -118,6 +118,5 @@ flowchart TD
 > 3. **Praxis am Wasser** → DSV/DMYV (Schein) · DGzRS „Bremen Rescue" (Seenot) · DP07 (kommerzieller Küstenfunk).
 
 ---
-Tags: #marine
 *Superlink:* [[Funkzeugnis-Kurs SRC und UBI]]
 Created: 04/06/26

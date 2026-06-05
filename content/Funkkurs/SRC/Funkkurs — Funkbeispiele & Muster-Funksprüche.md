@@ -2,7 +2,7 @@
 ai_generated: true
 model: claude-opus-4-8
 date_created: 04/06/26
-tags: [ai-generated, marine]
+tags: [ai-generated]
 type: note
 ---
 
@@ -209,6 +209,5 @@ Modul des [[Funkzeugnis-Kurs SRC und UBI|Funkzeugnis-Kurs SRC & UBI]]. Fertige *
 > Karten mit Situationen ziehen lassen (Container treibt, Motor aus, Liegeplatz, Schleuse, Mensch über Bord …) → Teilnehmer wählen **Zeugnis (SRC/UBI), Sprache und Verkehrsart** und sprechen den passenden Muster-Funkspruch. Gegenseitig **Readability** geben.
 
 ---
-Tags: #marine
 *Superlink:* [[Funkzeugnis-Kurs SRC und UBI]]
 Created: 04/06/26

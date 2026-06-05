@@ -1,7 +1,3 @@
----
-modified: 2026-06-05
----
-
 # Agent Notes
 
 Start with `WORKSPACE_OVERVIEW.md`. Read before you write anything.

@@ -2,7 +2,7 @@
 ai_generated: true
 model: claude-opus-4-8
 date_created: 04/06/26
-tags: [ai-generated, marine]
+tags: [ai-generated]
 type: note
 ---
 
@@ -162,6 +162,5 @@ flowchart TD
 > Not-, Dringlichkeits- und Sicherheitsverkehr werden **in Englisch** mit dem internationalen Buchstabieralphabet aufgenommen und dann ins Deutsche übersetzt. → Buchstabieralphabet muss **sitzen** ([[Funkkurs — Funkverfahren & Buchstabieralphabet]]).
 
 ---
-Tags: #marine
 *Superlink:* [[Funkzeugnis-Kurs SRC und UBI]]
 Created: 04/06/26

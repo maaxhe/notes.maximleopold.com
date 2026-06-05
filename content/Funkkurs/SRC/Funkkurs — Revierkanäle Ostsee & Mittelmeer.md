@@ -2,7 +2,7 @@
 ai_generated: true
 model: claude-opus-4-8
 date_created: 04/06/26
-tags: [ai-generated, marine]
+tags: [ai-generated]
 type: note
 ---
 
@@ -92,6 +92,5 @@ Häufige Verständnisfrage: **Werden Wettermeldungen angezeigt oder muss man zuh
 > Regionale Arbeitskanäle (DP07, kroatische Stationen) ändern sich gelegentlich — vor dem Kurs gegen aktuelle DP07-Seite / Hafenhandbuch / BSH „Wetter- und Warnfunk" checken.
 
 ---
-Tags: #marine
 *Superlink:* [[Funkzeugnis-Kurs SRC und UBI]]
 Created: 04/06/26

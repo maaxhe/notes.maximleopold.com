@@ -3,7 +3,6 @@ tags:
   - stream/where
   - stream/safe
   - region/classical
-modified: 2026-06-05
 ---
 # PPo (Planum Polare)
 

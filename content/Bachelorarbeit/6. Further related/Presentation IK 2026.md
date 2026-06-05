@@ -1,7 +1,3 @@
----
-modified: 2026-06-05
----
-
 _While the dual-stream model (dorsal "Where" vs. ventral "What") is well-established in the auditory system, the top-down mechanisms controlling these streams remain underexplored._
 
 _In the visual system, the Frontal Eye Field (FEF) directs spatial attention, whereas the Inferior Frontal Junction (IFJ) controls object-based attention (Bedini & Baldauf, 2021)._

@@ -22,6 +22,7 @@
     "deploy": "echo 'Use CI/CD for deployment'",
     "compile-ba": "tsx scripts/compile-ba.ts",
     "publish:quick": "npm run compile-ba && npm run sync && git add . && git commit -m 'Auto-update notes' && git push",
+    "publish:funk": "npm run sync && bash scripts/publish-funk.sh",
     "quartz": "./quartz/bootstrap-cli.mjs",
     "prepare": "husky install",
     "frontmatter:add": "tsx scripts/add-frontmatter.ts",

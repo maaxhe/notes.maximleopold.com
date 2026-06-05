@@ -1,7 +1,3 @@
----
-modified: 2026-06-05
----
-
 Hickok, G., & Poeppel, D. (2007). The cortical organization of speech processing. _Nature Reviews Neuroscience_, _8_(5), 393–402. [https://doi.org/10.1038/nrn2113](https://doi.org/10.1038/nrn2113)
 
 - [x] Paper gelesen?

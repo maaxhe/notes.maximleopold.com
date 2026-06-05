@@ -2,7 +2,7 @@
 ai_generated: true
 model: claude-opus-4-8
 date_created: 04/06/26
-tags: [ai-generated, marine]
+tags: [ai-generated]
 type: note
 ---
 
@@ -120,11 +120,11 @@ Fragen zum **SRC / Seefunk**. Modul des [[Funkzeugnis-Kurs SRC und UBI|Funkzeugn
 **33.** Wie bestätigt man eine empfangene Notmeldung?
 <details><summary>Antwort</summary>„MAYDAY, [Notschiff ×3], THIS IS [eigener Name ×3], <b>RECEIVED MAYDAY</b>".</details>
 
-**34.** Was bedeutet SEELONCE MAYDAY, wer spricht es?
-<details><summary>Antwort</summary>Funkstille; gesprochen vom <b>Schiff in Not</b> oder der <b>leitenden Station</b>. (Andere: „SEELONCE DISTRESS".)</details>
+**34.** Was bedeutet Silence Mayday (Aussprache: „Seelonce Mäidäi"), wer spricht es?
+<details><summary>Antwort</summary>Funkstille; gesprochen vom <b>Schiff in Not</b> oder der <b>leitenden Station</b>. (Andere: „Silence Distress".)</details>
 
-**35.** Was bedeutet SEELONCE FEENEE?
-<details><summary>Antwort</summary>„silence fini" — Notverkehr beendet, Normalverkehr frei.</details>
+**35.** Was bedeutet Silence Fini (Aussprache: „Seelonce Feenee")?
+<details><summary>Antwort</summary>„Silence Fini" — Notverkehr beendet, Normalverkehr frei.</details>
 
 **36.** Was heißt PRU-DONCE?
 <details><summary>Antwort</summary>Funkstille gelockert — eingeschränkter Verkehr wieder erlaubt.</details>
@@ -239,6 +239,5 @@ Fragen zum **SRC / Seefunk**. Modul des [[Funkzeugnis-Kurs SRC und UBI|Funkzeugn
 > K70 nur DSC · 3 Dringlichkeitsstufen · MMSI 9-stellig · Position nur bei Not · A1-Seegebiet · Funksprache Englisch · K16 = Anruf/Not · BNetzA für MMSI · DSC→K16→MAYDAY · Fehlalarm widerrufen.
 
 ---
-Tags: #marine
 *Superlink:* [[Funkzeugnis-Kurs SRC und UBI]]
 Created: 04/06/26

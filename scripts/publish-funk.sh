@@ -23,8 +23,8 @@ echo "🧹 Preparing Funkkurs content..."
 rm -rf "$BUILD" "$OUT"
 mkdir -p "$BUILD/assets"
 
-# 1. Copy all Funkkurs markdown
-cp "$SRC"/*.md "$BUILD/"
+# 1. Copy all Funkkurs markdown, preserving the SRC / UBI / Funk Generell subfolders
+rsync -a --prune-empty-dirs --include='*/' --include='*.md' --exclude='*' "$SRC"/ "$BUILD/"
 
 # 2. Copy referenced assets (Quartz resolves [[name]] by basename, folder doesn't matter)
 for f in "$BILDER"/Funk-* "$BILDER"/funkkurs-* "$BILDER"/Funkschema-* \
@@ -52,7 +52,13 @@ QUARTZ_PAGE_TITLE_SUFFIX="" \
 
 echo "🚀 Deploying to $SERVER_USER@$SERVER_IP:$SERVER_PATH ..."
 ssh -i "$SSH_KEY" "$SERVER_USER@$SERVER_IP" "sudo mkdir -p $SERVER_PATH && sudo chown -R $SERVER_USER:$SERVER_USER $SERVER_PATH"
-rsync -avz --delete -e "ssh -i $SSH_KEY" "$OUT"/ "$SERVER_USER@$SERVER_IP:$SERVER_PATH/"
+# rsync can drop on a flaky connection — retry until it completes (idempotent)
+ok=0
+for i in 1 2 3 4 5; do
+  if rsync -az --delete --timeout=120 -e "ssh -i $SSH_KEY" "$OUT"/ "$SERVER_USER@$SERVER_IP:$SERVER_PATH/"; then ok=1; break; fi
+  echo "  rsync attempt $i failed, retrying..."; sleep 3
+done
+[ "$ok" -eq 1 ] || { echo "❌ rsync failed after retries"; exit 1; }
 ssh -i "$SSH_KEY" "$SERVER_USER@$SERVER_IP" "chmod -R 755 $SERVER_PATH"
 
 echo "✅ Funkkurs site deployed: https://funk.maximilianherrmann.com"

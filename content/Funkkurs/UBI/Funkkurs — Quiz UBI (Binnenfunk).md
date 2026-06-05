@@ -2,7 +2,7 @@
 ai_generated: true
 model: claude-opus-4-8
 date_created: 04/06/26
-tags: [ai-generated, marine]
+tags: [ai-generated]
 type: note
 ---
 
@@ -100,6 +100,5 @@ Fragen zum **UBI / Binnenschifffahrtsfunk**. Modul des [[Funkzeugnis-Kurs SRC un
 > ATIS wann gesendet · 4 Verkehrskreise · Kanal 10 Dauerhörwache · kein DSC/K70 · Sprache Deutsch · ATIS-Aufbau (9+MID+2+4) · See=DSC/Binnen=ATIS · Ergänzungsprüfung 10/8 · Notruf an Revierzentrale.
 
 ---
-Tags: #marine
 *Superlink:* [[Funkzeugnis-Kurs SRC und UBI]]
 Created: 04/06/26

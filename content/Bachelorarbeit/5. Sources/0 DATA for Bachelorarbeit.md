@@ -1,7 +1,3 @@
----
-modified: 2026-06-05
----
-
 # DATA for Bachelorarbeit 
 
 [[ROIs sets for BrainRest]]

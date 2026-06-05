@@ -2,7 +2,7 @@
 ai_generated: true
 model: claude-opus-4-8
 date_created: 04/06/26
-tags: [ai-generated, marine]
+tags: [ai-generated]
 type: note
 ---
 
@@ -33,7 +33,7 @@ Modul des [[Funkzeugnis-Kurs SRC und UBI|Funkzeugnis-Kurs SRC & UBI]]. Das **Her
 
 ### DSC, wenn Kanal 16 blockiert ist
 > [!info] Warum DSC den Kanal 16 entlastet
-> DSC ist nicht nur für den Notfall — es ist auch der **saubere Weg, jemanden zu erreichen, ohne Kanal 16 zu benutzen**. Das ist besonders wichtig, wenn **K16 belegt ist** (z. B. durch laufenden **Notverkehr / SEELONCE** — dann **darfst du auf K16 gar nicht senden**).
+> DSC ist nicht nur für den Notfall — es ist auch der **saubere Weg, jemanden zu erreichen, ohne Kanal 16 zu benutzen**. Das ist besonders wichtig, wenn **K16 belegt ist** (z. B. durch laufenden **Notverkehr / Silence** — dann **darfst du auf K16 gar nicht senden**).
 
 **So läuft ein DSC-Anruf bei blockiertem Kanal 16:**
 1. Du machst **keinen** Sprech-Anruf auf K16. Stattdessen im DSC-Menü einen **Individual Call** an die **MMSI** der Gegenstation.
@@ -142,6 +142,5 @@ flowchart TD
 > Im **Binnenfunk gibt es kein DSC** (und keinen Kanal 70). Dort identifiziert **ATIS** den Sender, der Notruf läuft per Sprechfunk an die Revierzentrale. → [[Funkkurs — UBI Binnenfunk]].
 
 ---
-Tags: #marine
 *Superlink:* [[Funkzeugnis-Kurs SRC und UBI]]
 Created: 04/06/26

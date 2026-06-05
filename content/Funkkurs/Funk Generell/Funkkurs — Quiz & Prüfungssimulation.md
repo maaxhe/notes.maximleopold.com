@@ -2,7 +2,7 @@
 ai_generated: true
 model: claude-opus-4-8
 date_created: 04/06/26
-tags: [ai-generated, marine]
+tags: [ai-generated]
 type: note
 ---
 
@@ -18,6 +18,5 @@ Modul des [[Funkzeugnis-Kurs SRC und UBI|Funkzeugnis-Kurs SRC & UBI]]. Die Frage
 > Samstag (SRC) → **SRC-Quiz**; Sonntag (UBI) → **UBI-Quiz**. Wer beide macht, übt am Ende beide. Jeweils erst **ohne Aufklappen** beantworten, dann auflösen.
 
 ---
-Tags: #marine
 *Superlink:* [[Funkzeugnis-Kurs SRC und UBI]]
 Created: 04/06/26

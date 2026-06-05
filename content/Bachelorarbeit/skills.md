@@ -1,7 +1,3 @@
----
-modified: 2026-06-05
----
-
 # Skills
 
 Repeatable procedures for common tasks in this project. Each skill documents the exact steps, relevant files, and things to watch out for.

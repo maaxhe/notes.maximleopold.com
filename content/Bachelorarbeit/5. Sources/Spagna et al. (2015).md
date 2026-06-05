@@ -9,7 +9,6 @@ tags:
   - attention
   - cognitivescience
   - Neuroscience
-modified: 2026-06-05
 ---
 
 Spagna, A., Mackie, M.-A., & Fan, J. (2015). Supramodal executive control of attention. _Frontiers in Psychology_, _6_, 65. https://doi.org/10.3389/fpsyg.2015.00065

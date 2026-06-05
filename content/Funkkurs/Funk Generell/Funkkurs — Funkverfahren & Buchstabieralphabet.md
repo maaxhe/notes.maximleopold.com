@@ -2,7 +2,7 @@
 ai_generated: true
 model: claude-opus-4-8
 date_created: 04/06/26
-tags: [ai-generated, marine]
+tags: [ai-generated]
 type: note
 ---
 
@@ -158,6 +158,5 @@ sequenceDiagram
 <sub>K16 ist nur zum **Anrufen** da — Gespräch immer auf einen Arbeitskanal verlegen.</sub>
 
 ---
-Tags: #marine
 *Superlink:* [[Funkzeugnis-Kurs SRC und UBI]]
 Created: 04/06/26

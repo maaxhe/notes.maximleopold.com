@@ -2,9 +2,8 @@
 ai_generated: true
 model: claude-opus-4-8
 date_created: 04/06/26
-tags: [ai-generated, marine]
+tags: [ai-generated]
 type: moc
-modified: 2026-06-05
 ---
 
 ## Funkzeugnis-Kurs SRC & UBI (Hub)
@@ -37,7 +36,7 @@ modified: 2026-06-05
 - [[Funkkurs — Grafik-Generator (Python)]] — erzeugt die matplotlib-Plots des Kurses.
 
 ### 📡 Funkpraxis
-- [[Funkkurs — Notverfahren & Funkschema (alle Fälle)]] — MAYDAY, RELAY, Abbruch, SEELONCE, PAN PAN, SÉCURITÉ + Funkschema-Matrix.
+- [[Funkkurs — Notverfahren & Funkschema (alle Fälle)]] — MAYDAY, RELAY, Abbruch, Silence, PAN PAN, SÉCURITÉ + Funkschema-Matrix.
 - [[Funkkurs — Funkverfahren & Buchstabieralphabet]] — Buchstabieralphabet, Floskeln, Routine-Anruf, Funkprobe.
 - [[Funkkurs — Funkbeispiele & Muster-Funksprüche]] — viele fertige Funksprüche (Routine, Not, Dringlich, Sicherheit, DSC) mit Tipps.
 - [[Funkkurs — Revierkanäle Ostsee & Mittelmeer]] — Praxis-Kanäle für Ostsee & Mittelmeer/Adria.
@@ -55,7 +54,7 @@ modified: 2026-06-05
 > Fertige A4-PDFs für die Teilnehmer — einfach öffnen und drucken (A4, 100 %).
 
 - 📘 [[SRC-Handout.pdf]] — **3 Seiten** Übersicht: Notruf-Schema, 4 Verkehrsarten, Kanäle, Sendeleistung, Alphabet, DSC, Seegebiete, Behörden + **Funk-Vokabeln EN↔DE**.
-- 🆘 [[SRC-Notfallkarte.pdf]] — **1 Seite** nur Notverfahren (MAYDAY/RELAY/RECEIVED/Cancel/PAN PAN/SÉCURITÉ/SEELONCE) — zum **Laminieren** fürs Schiff.
+- 🆘 [[SRC-Notfallkarte.pdf]] — **1 Seite** nur Notverfahren (MAYDAY/RELAY/RECEIVED/Cancel/PAN PAN/SÉCURITÉ/Silence) — zum **Laminieren** fürs Schiff.
 - 📡 [[SRC-Geraete-und-Notfunk.pdf]] — **2 Seiten** Geräte & Bedienung: DSC, Squelch/Dual Watch/Scan, EPIRB/SART/PLB (mit Bildern), Wartung & Preise.
 - 🗣️ [[SRC-Funksprueche-Uebung.pdf]] — **2 Seiten** Muster-Funksprüche auf **Englisch** zum Nachsprechen/Üben.
 - 🔀 [[Funkkurs-Diagramme.pdf]] — **alle 18 Fluss- & Schemadiagramme** des Kurses als Bild-Sammlung (Recht, SRC, Notverfahren, DSC, Notfunk, Technik, UBI).
@@ -101,12 +100,11 @@ modified: 2026-06-05
 - ELWIS — *Sprechfunkzeugnisse* (Recht/Zuständigkeit) — https://www.elwis.de/DE/Schifffahrtsrecht/Sprechfunkzeugnisse/
 - DMYV — *Merkblatt Funkzeugnis Seefunkdienst* — https://www.dmyv.de/
 - Wikipedia/DGzRS — *Bremen Rescue Radio* (MRCC Bremen) — https://de.wikipedia.org/wiki/Bremen_Rescue_Radio
-- Detlef Hahn — *GMDSS Meldungen* (SEELONCE-Floskeln) — https://detlefhahn.de/segeln/funkschein/gmdss/wrc_07_meldungen.php
+- Detlef Hahn — *GMDSS Meldungen* (Silence-Floskeln) — https://detlefhahn.de/segeln/funkschein/gmdss/wrc_07_meldungen.php
 
 > [!note] Maßgeblich bleiben die amtlichen Fragenkataloge und Handbücher — vor der Prüfung gegenchecken.
 
 ### See also
-Tags: #marine
 *Superlink:* [[220 ⚓️Marine]]
 
 Verwandt: [[Bootsschule Land in Sicht]]

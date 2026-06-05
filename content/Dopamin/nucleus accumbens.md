@@ -1,7 +1,3 @@
----
-modified: 2026-06-05
----
-
 
 The nucleus accumbens (NAc) is **a subcortical brain structure located within the [[ventral striatum]]. It is often referred to as the pleasure center of the brain for its primary role in positive affect and feelings of [[Reward]], but this is an incomplete description.
 

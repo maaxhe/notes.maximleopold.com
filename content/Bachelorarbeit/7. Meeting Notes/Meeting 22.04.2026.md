@@ -1,7 +1,3 @@
----
-modified: 2026-06-05
----
-
 ## Meeting 22.04.2026 
 
 - [ ] Wie soll ich BrainRest erwähnen und soll ich dann
