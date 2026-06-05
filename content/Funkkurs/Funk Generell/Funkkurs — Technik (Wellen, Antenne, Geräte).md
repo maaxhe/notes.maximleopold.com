@@ -44,6 +44,9 @@ flowchart LR
 ### 3. Reichweite & Funkhorizont
 Weil UKW nur bis zum **Funkhorizont** reicht, hängt die Reichweite **vor allem von der Antennenhöhe** ab (beider Stationen) — **nicht** in erster Linie von der Sendeleistung.
 
+> [!quote] Aus der Praxis
+> Antenne hoch schlägt Watt — ich hab mal mit der Handfunke vom Cockpit aus kaum 3 sm weit gefunkt, mit der Festantenne im Masttop war derselbe Spruch plötzlich glasklar.
+
 **Faustformel (Reichweite über den Funkhorizont):**
 > [!formula] Faustformel Funkhorizont
 > **Reichweite [km] ≈ 3,84 × (√h₁ + √h₂)** — mit h₁, h₂ = Antennenhöhen in **Metern**.

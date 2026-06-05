@@ -10,6 +10,9 @@ type: note
 
 Modul des [[Funkzeugnis-Kurs SRC und UBI|Funkzeugnis-Kurs SRC & UBI]]. Alles zum **Binnenfunk**: ATIS, Verkehrskreise, Kanäle, Notverkehr, Prüfung.
 
+> [!quote] Mein Blick darauf
+> Binnen fühlt sich an wie Festnetz mit fester Nummer: jedes Mal, wenn du die Taste loslässt, „unterschreibt" dein Gerät per ATIS — die Revierzentrale weiß sofort, wer du bist.
+
 ### Was darf man mit dem UBI?
 Bedienung von UKW-Sprechfunkanlagen im **Binnenschifffahrtsfunk**. Pflicht beim Betrieb einer Funkanlage auf Binnenwasserstraßen.
 

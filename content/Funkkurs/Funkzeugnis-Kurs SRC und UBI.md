@@ -9,9 +9,7 @@ modified: 2026-06-05
 
 ## Funkzeugnis-Kurs SRC & UBI (Hub)
 
-Moin! Ich bin **Max** — Segler, und am Wochenende halte ich diesen Funkkurs. Das hier ist mein Spickzettel-Hirn dazu: alles, was ich beim Funken über die Jahre gelernt habe (oft auf die unbequeme Tour), sortiert in **Module**, damit diese Startseite schlank bleibt.
-
-Mein Anspruch: kein trockenes Behörden-Deutsch, sondern so, wie ich es an Bord erklären würde — mit den Eselsbrücken und der einen oder anderen Geschichte, bei der ich was falsch gemacht habe, damit du es nicht musst. 😄
+Übersicht & Einstieg für den Wochenend-Funkkurs (auf Deutsch) — gegeben von **Max & Holger** an der **Bootsschule „Land in Sicht"**. Die Inhalte sind in **Module** ausgelagert (Index unten), damit diese Startseite schlank bleibt — verständlich erklärt, mit Eselsbrücken und Beispielen statt trockenem Behörden-Deutsch.
 
 > [!abstract] So nutzt du diese Unterlage
 > Geh die Module der Reihe nach durch (Index unten, nach Themen sortiert) oder spring gezielt rein — jedes ist für sich lesbar und verlinkt auf verwandte Sachen. Zum Üben: [[Funkkurs — Quiz & Prüfungssimulation]].

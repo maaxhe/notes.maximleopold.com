@@ -87,6 +87,9 @@ flowchart TD
 > [!danger] Roter DISTRESS-Knopf
 > Deckel öffnen, **Knopf ~5 Sekunden gedrückt halten** → der Notalarm geht automatisch auf **Kanal 70** raus und enthält: **MMSI · Position · Zeit · (Art der Not)**. Danach schaltet das Gerät selbsttätig auf **Kanal 16** für den Sprech-MAYDAY.
 
+> [!quote] Mein Bild dafür
+> Der rote Knopf ist wie der Feueralarm im Treppenhaus: einmal gedrückt, läuft alles automatisch — aber genau deshalb nie „zum Ausprobieren" antippen.
+
 **Designated vs. undesignated:**
 - **Designated** (qualifiziert): Du **wählst die Art der Not** (siehe Liste) vor dem Senden.
 - **Undesignated** (unqualifiziert): einfach roter Knopf ohne Auswahl → „undefinierte Not". Im Zweifel/bei Zeitnot **völlig in Ordnung** — Hauptsache, der Alarm geht raus.
