@@ -75,3 +75,7 @@ replit.nix
 
 # Oversized asset that cannot push over current connection
 content/a Literatur-Notizen/PDFs/705789691-VOLENTIERI-A2 2.pdf
+
+# Funkkurs standalone site build
+funk-build/
+public-funk/

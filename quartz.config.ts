@@ -8,15 +8,15 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "Max' Notizen",
-    pageTitleSuffix: " | Brain Online",
+    pageTitle: process.env.QUARTZ_PAGE_TITLE || "Max' Notizen",
+    pageTitleSuffix: process.env.QUARTZ_PAGE_TITLE_SUFFIX ?? " | Brain Online",
     enableSPA: true,
     enablePopovers: true,
     analytics: {
       provider: "plausible",
     },
     locale: "de-DE",
-    baseUrl: "notes.coxilab.de",
+    baseUrl: process.env.QUARTZ_BASE_URL || "notes.coxilab.de",
     ignorePatterns: ["private", "templates", ".obsidian", "**/Private/**", "**/*.excalidraw"],
     defaultDateType: "modified",
     theme: {

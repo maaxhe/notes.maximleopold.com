@@ -113,13 +113,13 @@ Es gibt **drei Auslösewege:**
 ---
 
 ### Überblick: Wer macht was?
-| Gerät | Frequenz/System | Aufgabe | gebunden an |
-|---|---|---|---|
-| **EPIRB** | 406 MHz · Cospas-Sarsat | **alarmieren** (weltweit) | Schiff |
-| **PLB** | 406 MHz · Cospas-Sarsat | alarmieren (klein) | Person |
-| **SART** | 9 GHz Radar | **orten** (Radarbild) | Rettungsinsel |
-| **AIS-SART** | UKW / AIS | orten (AIS-Ziel) | Rettungsinsel |
-| **AIS/DSC-MOB** | UKW / AIS / DSC | MOB-Alarm + Position | Person |
+| Gerät           | Frequenz/System         | Aufgabe                   | gebunden an   |
+| --------------- | ----------------------- | ------------------------- | ------------- |
+| **EPIRB**       | 406 MHz · Cospas-Sarsat | **alarmieren** (weltweit) | Schiff        |
+| **PLB**         | 406 MHz · Cospas-Sarsat | alarmieren (klein)        | Person        |
+| **SART**        | 9 GHz Radar             | **orten** (Radarbild)     | Rettungsinsel |
+| **AIS-SART**    | UKW / AIS               | orten (AIS-Ziel)          | Rettungsinsel |
+| **AIS/DSC-MOB** | UKW / AIS / DSC         | MOB-Alarm + Position      | Person        |
 
 ```mermaid
 flowchart LR
@@ -146,10 +146,10 @@ flowchart LR
 > - **Registrierung aktuell halten** (Eigner/Kontakt/Schiff) — sonst ist der Alarm anonym.
 
 > [!info] Preise (Richtwerte 2026, Sportbootmarkt)
-> - **EPIRB:** ca. **300–600 €** (kompakte Sportboot-Modelle), Voll-Profi-Geräte bis **~1000 €**.
-> - **PLB:** ca. **200–350 €**.
-> - **SART (Radar) / AIS-SART:** ca. **250–500 €**.
-> - **AIS-MOB-Sender:** ca. **150–300 €**.
+> - **EPIRB:** ca. **500–1000 €** (kompakte Sportboot-Modelle), Voll-Profi-Geräte bis **~1200 €**.
+> - **PLB:** ca. **300–500 €**.
+> - **SART (Radar) / AIS-SART:** ca. **500–800 €**.
+> - **AIS-MOB-Sender:** ca. **300–550 €**.
 >
 > *(Preise schwanken je nach Hersteller/Händler — vor dem Kurs ggf. kurz aktuell prüfen.)*
 
