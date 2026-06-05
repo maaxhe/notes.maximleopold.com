@@ -1,6 +1,6 @@
 ---
 title: Research Vault
-modified: 2026-03-12
+modified: 2026-06-05
 ---
 
 # Research Vault
@@ -9,6 +9,9 @@ Diese Seite ist das zentrale Wissenssystem für meine Bachelorarbeit in Cognitiv
 
 > [!info] Bachelorarbeit
 > **[[0.0 Bachelorarbeit Gesamt]]** | **[[Dashboard BA|Dashboard]]** | **[[0 figures for Bachelorarbeit|Figures]]**
+
+> [!anchor] Funkkurs (SRC & UBI)
+> Komplette Lernunterlagen für mein Seefunkzeugnis — Technik, Notverfahren, DSC, Quiz & mehr (inkl. Mermaid-Diagramme): **[[Funkzeugnis-Kurs SRC und UBI|Funkkurs-Übersicht]]**
 
 ## Über diese Seite
 

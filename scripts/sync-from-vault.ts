@@ -28,7 +28,7 @@ const CONFIG = {
     "/Users/maxmacbookpro/Library/Mobile Documents/iCloud~md~obsidian/Documents/Brain online",
 
   // Directories to publish (relative to vault root)
-  PUBLIC_DIRS: ["/Bachelorarbeit", "/Dopamin"],
+  PUBLIC_DIRS: ["/Bachelorarbeit", "/Dopamin", "/Funkkurs"],
 
   // Asset directories (images, PDFs, etc.)
   ASSETS_DIRS: ["/a Literatur-Notizen/Bilder", "/a Literatur-Notizen/PDFs"],
