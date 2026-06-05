@@ -59,7 +59,7 @@ Fragen zum **UBI / Binnenschifffahrtsfunk**. Modul des [[Funkzeugnis-Kurs SRC un
 
 ### D) Notverkehr Binnen
 **14.** Wie läuft ein Notruf im Binnenfunk (ohne DSC)?
-<details><summary>Antwort</summary>Per <b>Sprechfunk</b> (MAYDAY/PAN PAN/SÉCURITÉ) an die <b>Revierzentrale</b> bzw. über <b>Kanal 10</b>.</details>
+<details><summary>Antwort</summary>Per <b>Sprechfunk</b>: <b>MAYDAY auf Kanal 10</b> (Schiff-Schiff, 1 W) an umliegende Schiffe <b>+</b> die <b>Revierzentrale auf ihrem Revierkanal</b> (25 W). Kein DSC.</details>
 
 **15.** Welche Kennwörter gelten im Binnen-Notverkehr?
 <details><summary>Antwort</summary>Dieselben: <b>MAYDAY · PAN PAN · SÉCURITÉ</b> — aber nur per Sprechfunk, mit ATIS statt MMSI.</details>
@@ -94,10 +94,32 @@ Fragen zum **UBI / Binnenschifffahrtsfunk**. Modul des [[Funkzeugnis-Kurs SRC un
 **24.** Grundregel vor jedem Senden?
 <details><summary>Antwort</summary><b>Erst hören, dann senden</b> — prüfen, ob der Kanal frei ist.</details>
 
+### H) Revierfunk & Notruf
+**25.** Was ist der Revierfunk (welcher Verkehrskreis)?
+<details><summary>Antwort</summary>Der Verkehrskreis <b>Nautische Information</b> — Funk zwischen <b>Schiff und Land</b> (Revierzentralen / Verkehrsposten).</details>
+
+**26.** Wie viele Revierzentralen gibt es in Deutschland — und was machen sie?
+<details><summary>Antwort</summary><b>Fünf</b> (Duisburg, Oberwesel, Minden, Magdeburg, Gösselthal). Sie senden zyklisch <b>Wasserstände, Warnungen, Anordnungen</b>, nehmen Meldungen entgegen und <b>lenken den Verkehr</b>.</details>
+
+**27.** Wo findest du den richtigen Revierkanal für eine Strecke?
+<details><summary>Antwort</summary>Im <b>Handbuch Binnenschifffahrtsfunk</b> (regionaler Teil) — und oft auf <b>Schildern/Tafelzeichen am Ufer</b>.</details>
+
+**28.** Was ist das Handbuch Binnenschifffahrtsfunk?
+<details><summary>Antwort</summary>Das jährlich neue Nachschlagewerk (ZKR/CCNR): <b>Allgemeiner Teil</b> (Verfahren) + <b>regionale Teile</b> (Kanäle/Revierzentralen je Wasserstraße).</details>
+
+**29.** Warum ist Kanal 16 im Binnenfunk verboten?
+<details><summary>Antwort</summary>K16 ist der <b>internationale Seefunk-Notkanal</b> und dem Seefunk vorbehalten. Der Binnenfunk hat ein <b>eigenes System</b> ohne gemeinsamen Not-/Anrufkanal — K16 würde den Seenotverkehr stören.</details>
+
+**30.** Wie läuft ein Notruf im Binnenfunk?
+<details><summary>Antwort</summary>(1) <b>MAYDAY auf Kanal 10</b> (Schiff-Schiff) mit <b>max. 1 W</b> — umliegende Schiffe warnen + (2) <b>Revierzentrale auf ihrem Revierkanal</b> mit <b>25 W</b> rufen (Behörden veranlassen Rettung). <b>Nicht alles K10!</b> ATIS automatisch.</details>
+
+**31.** Wo dürfen Handfunkgeräte im Binnenfunk benutzt werden?
+<details><summary>Antwort</summary>Nur im Verkehrskreis <b>Funkverkehr an Bord (Kanal 15/17)</b> — und das ist auf <b>Kleinfahrzeugen unzulässig</b>.</details>
+
 ---
 
 ### Mini-Prüfungssimulation UBI (schnell)
-> ATIS wann gesendet · 4 Verkehrskreise · Kanal 10 Dauerhörwache · kein DSC/K70 · Sprache Deutsch · ATIS-Aufbau (9+MID+2+4) · See=DSC/Binnen=ATIS · Ergänzungsprüfung 10/8 · Notruf an Revierzentrale.
+> ATIS wann gesendet · 4 Verkehrskreise · Kanal 10 Dauerhörwache · kein DSC/K70 · Sprache Deutsch · ATIS-Aufbau (9+MID+2+4) · See=DSC/Binnen=ATIS · Ergänzungsprüfung 10/8 · Notruf K10+Revierzentrale · K16 im Binnen verboten.
 
 ---
 *Superlink:* [[Funkzeugnis-Kurs SRC und UBI]]

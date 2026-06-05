@@ -52,6 +52,14 @@ Vorgeschrieben durch das Abkommen **RAINWAT** für den Binnenschifffahrtsfunk. E
 > [!tip] Merksatz
 > *DSC ruft (Seefunk, K70). ATIS verrät nur, wer gesendet hat (Binnenfunk, automatisch beim Loslassen der Taste).*
 
+> [!question] Kann man die ATIS anderer Schiffe auslesen?
+> **Normalerweise nicht** — ein normales Funkgerät zeigt die ATIS **nicht im Klartext**.
+> - Hörbar ist nur ein kurzer, „kratziger" **Datenton am Ende** jeder Aussendung. Viele Geräte blenden ihn aus (**„ATIS-Killer"** — Lautsprecher kurz stumm).
+> - Zum **Auslesen/Anzeigen** braucht man einen **ATIS-Decoder** (manche Geräte haben eine ATIS-Readout-Funktion, sonst PC + Soundkarte + Software).
+> - Vor allem **Behörden** nutzen das: **Revierzentralen, Schleusen-/NIF-Funkstellen und die Wasserschutzpolizei** haben Decoder und können jede Aussendung **eindeutig einem Schiff zuordnen** (Störer-Erkennung).
+>
+> Kurz: *Du hörst nur den Piepton — lesen kann es nur, wer einen Decoder hat (v. a. die Behörden).*
+
 ### Kombianlagen — und warum ein Seefunkgerät im Binnenfunk nicht zulässig ist
 **Kombianlage / Kombigerät** = ein UKW-Gerät, das **beide Welten** kann: **Seefunk** (mit DSC) **und** Binnenfunk (mit ATIS). Man **schaltet zwischen zwei Betriebsarten um**: **See-Modus** (DSC an, ATIS aus) ↔ **Binnen-Modus** (ATIS an, DSC aus).
 
@@ -99,7 +107,7 @@ flowchart TD
 
 ### Notverkehr Binnen
 - Auch hier **MAYDAY / PAN PAN / SÉCURITÉ**, aber **per Sprechfunk** (kein DSC).
-- Notruf geht an die **Revierzentrale** (Verkehrsposten) bzw. über **Schiff–Schiff (Kanal 10)**.
+- Notruf zweigeteilt: **MAYDAY auf Kanal 10** (Schiff–Schiff, 1 W) an umliegende Schiffe **+** Anruf der **Revierzentrale auf ihrem Revierkanal** (25 W). → [[Funkkurs — UBI Notruf & warum Kanal 16 verboten]].
 - Aufbau des MAYDAY-Spruchs analog zum Seefunk, nur mit ATIS-Identifikation statt MMSI.
 
 ### UBI-Prüfung

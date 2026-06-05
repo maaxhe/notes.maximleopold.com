@@ -51,14 +51,17 @@ QUARTZ_PAGE_TITLE_SUFFIX="" \
   npx quartz build -d "$BUILD" -o "$OUT"
 
 echo "🚀 Deploying to $SERVER_USER@$SERVER_IP:$SERVER_PATH ..."
-ssh -i "$SSH_KEY" "$SERVER_USER@$SERVER_IP" "sudo mkdir -p $SERVER_PATH && sudo chown -R $SERVER_USER:$SERVER_USER $SERVER_PATH"
-# rsync can drop on a flaky connection — retry until it completes (idempotent)
+SSH_OPTS="-i $SSH_KEY -o ConnectTimeout=15 -o ServerAliveInterval=10"
+# The whole deploy (ssh + rsync) can fail on a flaky connection — retry the lot until it completes (idempotent)
 ok=0
-for i in 1 2 3 4 5; do
-  if rsync -az --delete --timeout=120 -e "ssh -i $SSH_KEY" "$OUT"/ "$SERVER_USER@$SERVER_IP:$SERVER_PATH/"; then ok=1; break; fi
-  echo "  rsync attempt $i failed, retrying..."; sleep 3
+for i in 1 2 3 4 5 6; do
+  if ssh $SSH_OPTS "$SERVER_USER@$SERVER_IP" "sudo mkdir -p '$SERVER_PATH' && sudo chown -R $SERVER_USER:$SERVER_USER '$SERVER_PATH'" \
+     && rsync -az --delete --timeout=120 -e "ssh $SSH_OPTS" "$OUT"/ "$SERVER_USER@$SERVER_IP:$SERVER_PATH/" \
+     && ssh $SSH_OPTS "$SERVER_USER@$SERVER_IP" "chmod -R 755 '$SERVER_PATH'"; then
+    ok=1; break
+  fi
+  echo "  deploy attempt $i failed (Verbindung?), retrying in 5s..."; sleep 5
 done
-[ "$ok" -eq 1 ] || { echo "❌ rsync failed after retries"; exit 1; }
-ssh -i "$SSH_KEY" "$SERVER_USER@$SERVER_IP" "chmod -R 755 $SERVER_PATH"
+[ "$ok" -eq 1 ] || { echo "❌ Deploy nach Retries fehlgeschlagen — Server/Verbindung nicht erreichbar. Später erneut 'npm run publish:funk'."; exit 1; }
 
 echo "✅ Funkkurs site deployed: https://funk.maximilianherrmann.com"

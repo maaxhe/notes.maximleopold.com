@@ -6,19 +6,14 @@ tags: [ai-generated]
 type: note
 ---
 
-## Funkkurs — Funkbeispiele & Muster-Funksprüche
+## Funkkurs — SRC Funkbeispiele & Muster-Funksprüche (Seefunk)
 
-Modul des [[Funkzeugnis-Kurs SRC und UBI|Funkzeugnis-Kurs SRC & UBI]]. Fertige **Muster-Funksprüche** zum Vorlesen, Nachsprechen und Üben — mit **Tipps**.
+Modul des [[Funkzeugnis-Kurs SRC und UBI|Funkzeugnis-Kurs SRC & UBI]]. Fertige **Seefunk-Funksprüche** auf **Englisch** zum Nachsprechen — mit **Tipps**. Für Binnenfunk (Deutsch) → [[Funkkurs — UBI Funkbeispiele & Muster-Funksprüche]].
 
 > [!abstract] So liest du die Beispiele
-> `→` = man sendet, `←` = Antwort der Gegenstation. **Teil A = SRC (Seefunk, ENGLISCH)** · **Teil B = UBI (Binnenfunk, DEUTSCH)**. Alphabet & Floskeln: [[Funkkurs — Funkverfahren & Buchstabieralphabet]].
-
-> [!important] Der Sprach-Unterschied
-> **SRC läuft auf Englisch** (internationaler Seefunk), **UBI auf Deutsch** (Binnenfunk, Landessprache). Schon daran erkennt man im Beispiel sofort, zu welchem Zeugnis es gehört.
+> `→` = man sendet, `←` = Antwort der Gegenstation. Seefunk läuft **auf Englisch**. Alphabet & Floskeln: [[Funkkurs — Funkverfahren & Buchstabieralphabet]].
 
 ---
-
-# 🌊 Teil A — SRC (Seefunk, Englisch)
 
 ### A1 · Routine: Marina anrufen (Liegeplatz)
 ```
@@ -46,12 +41,15 @@ Modul des [[Funkzeugnis-Kurs SRC und UBI|Funkzeugnis-Kurs SRC & UBI]]. Fertige *
 
 ### A3 · Funkprobe / Radio Check
 ```
-→ "Kiel Radio, Kiel Radio – this is Albatros, Delta Alfa 4711, radio check, OVER"
-← "Albatros – this is Kiel Radio, loud and clear, OVER"
+→ "Kiel Traffic, Kiel Traffic – this is Albatros, Delta Alfa 4711, radio check, OVER"
+← "Albatros – this is Kiel Traffic, loud and clear, OVER"
 → "Thank you, Albatros, OUT"
 ```
 > [!tip] Tipp
 > **Nicht auf Kanal 16 testen.** Antwort: „loud and clear" oder **Readability 1–5**.
+
+> [!note] „Traffic" oder „Radio"? — kleine Eselsbrücke aus der Praxis
+> **…Traffic** = die **Verkehrszentrale (VTS)**, die das Revier überwacht und lenkt (z. B. **Kiel Traffic**). **…Radio** = die **Küstenfunkstelle** (DP07), die Gespräche vermittelt und Wetter sendet (z. B. **Kiel Radio**). — Ich (Max) hab den Unterschied mal auf die harte Tour gelernt: Wir sind ganz entspannt mit **Gennaker** ins **Verkehrstrennungsgebiet (TSS)** reingekreuzt — und prompt meldete sich **Kiel Traffic** und bat uns freundlich-bestimmt, den Bereich zu verlassen. Die *Traffic* passt eben auf den Verkehr auf, das *Radio* nicht. 😅
 
 ### A4 · MAYDAY (Notmeldung)
 ```
@@ -149,64 +147,72 @@ Modul des [[Funkzeugnis-Kurs SRC und UBI|Funkzeugnis-Kurs SRC & UBI]]. Fertige *
 > [!warning] Tipp
 > Zum Testen **nur „Test Call"** — niemals den DSC-Notalarm.
 
----
-
-# 🛶 Teil B — UBI (Binnenfunk, Deutsch)
-
-> [!info] Anders als im Seefunk
-> Binnenfunk läuft **auf Deutsch**, **ohne DSC** (Identifikation per **ATIS**, automatisch). Anruf-/Sicherheitskanal Schiff–Schiff ist **Kanal 10**; an Land ruft man die **Revierzentrale**.
-
-### B1 · Routine: Schleuse anrufen
+### A13 · Verständigungsproblem (Say again / I spell)
 ```
-→ "Schleuse Brunsbüttel, Schleuse Brunsbüttel – hier ist Möwe, Möwe, kommen"
-← "Möwe – hier ist Schleuse Brunsbüttel, kommen"
-→ "Wir sind ein Sportboot, 9 Meter, vor der Schleuse, bitten um Einfahrt, kommen"
-← "Möwe – bitte warten, Einfahrt in zehn Minuten, Ende"
+→ "Freya – this is Albatros, say again your position, OVER"
+← "Albatros – this is Freya, I spell my position:
+   five four degrees, three zero minutes North — I say again, OVER"
+→ "Roger, understood, OVER"
 ```
 > [!tip] Tipp
-> „**Kommen**" statt „over", „**Ende**" statt „out" — im Binnenfunk wird **deutsch** gesprochen.
+> Schlecht verstanden? **„SAY AGAIN"** (nicht „repeat"). Wichtiges per **„I spell"** buchstabieren. Bei eigenem Fehler **„CORRECTION"**.
 
-### B2 · Routine: Brücke anrufen (Öffnung)
+### A14 · Anruf einer Küstenfunkstelle (Gesprächswunsch)
 ```
-→ "Brücke Oldenburg, Brücke Oldenburg – hier ist Möwe, kommen"
-← "Möwe – hier ist Brücke Oldenburg, kommen"
-→ "Bitten um Öffnung für die Durchfahrt flussabwärts, kommen"
-```
-
-### B3 · Schiff–Schiff (Begegnung) auf Kanal 10
-```
-→ "Talfahrer vor der Kurve bei km 320 – hier ist Möwe, Bergfahrt, Kanal 10, kommen"
-← "Möwe – hier ist Talfahrer Rheingold, kommen"
-→ "Wir begegnen uns Backbord an Backbord, kommen"
-← "Verstanden, Backbord an Backbord, Ende"
+→ "Kiel Radio, Kiel Radio – this is Albatros, Delta Alfa 4711, OVER"
+← "Albatros – this is Kiel Radio, change to channel 27, OVER"
+→ "Channel 27, Albatros, OVER"
+   ... auf Kanal 27 ...
+→ "Kiel Radio, this is Albatros – request weather report
+   for the western Baltic, OVER"
 ```
 > [!tip] Tipp
-> Auf **Kanal 10** Dauerhörwache halten. Begegnungsabsprache ist Sicherheit der Schifffahrt → kurz und eindeutig.
+> Küstenfunkstelle = voll **25 W**. Anruf kurz, dann auf den **Arbeitskanal** der Station wechseln.
 
-### B4 · Nautische Information: Revierzentrale
+### A15 · Mensch über Bord (eigenes Schiff)
 ```
-→ "Revierzentrale Oberwesel, Revierzentrale Oberwesel – hier ist Möwe, kommen"
-← "Möwe – hier ist Revierzentrale Oberwesel, kommen"
-→ "Bitten um aktuelle Wasserstands- und Verkehrsinformation für die Gebirgsstrecke, kommen"
+→ "PAN PAN – PAN PAN – PAN PAN  (bei akuter Lebensgefahr: MAYDAY)
+    ALL STATIONS x3
+    THIS IS Albatros, MMSI 211123456
+    MAN OVERBOARD, position 54 30 N 010 15 E,
+    require assistance for search, OVER"
 ```
+> [!warning] Tipp
+> Schwebt die Person in **akuter Lebensgefahr**, ist es ein **MAYDAY** (dann erst DSC-Alarm K70). Sonst **PAN PAN**. Personenzahl & letzte Position nennen.
 
-### B5 · Notruf im Binnenfunk (per Sprechfunk!)
+### A16 · Funkstille im Notverkehr (SILENCE MAYDAY)
 ```
-→ "MAYDAY – MAYDAY – MAYDAY
-    hier ist Möwe, Möwe, Möwe
-    Position: Rhein km 320, am rechten Ufer
-    Wir haben Wassereinbruch nach Grundberührung
-    Brauchen sofort Hilfe
-    Drei Personen an Bord
-    kommen"
+[Du störst laufenden Notverkehr nicht und forderst Ruhe:]
+→ "SILENCE DISTRESS (seelonce distress), this is Albatros, OUT"
+
+[Leitende Station / Schiff in Not:]
+→ "SILENCE MAYDAY (seelonce mayday)"
 ```
-> [!danger] Tipp
-> **Kein DSC im Binnenfunk** — der Notruf geht **per Sprechfunk** an die **Revierzentrale** oder über **Kanal 10**. ATIS-Kennung wird automatisch mitgesendet. Sonst gleicher Aufbau wie der Seefunk-MAYDAY.
+> [!tip] Tipp
+> **SILENCE MAYDAY** (Aussprache *seelonce mayday*) = Funkstille vom Notschiff/der leitenden Station. **SILENCE DISTRESS** (*seelonce distress*) = von einer anderen Station. → Details: [[Funkkurs — Notverfahren & Funkschema (alle Fälle)]].
+
+### A17 · Notverkehr beenden (SILENCE FINI)
+```
+→ "MAYDAY, ALL STATIONS x3,
+    THIS IS Bremen Rescue, time 1450 UTC,
+    yacht Freya, SILENCE FINI (seelonce feenee)"
+```
+> [!tip] Tipp
+> **SILENCE FINI** (Aussprache *seelonce feenee*) beendet den Notverkehr — nur **leitende Station / Schiff in Not**. Danach läuft Normalverkehr wieder.
+
+### A18 · SÉCURITÉ empfangen (Wetterwarnung)
+```
+← "SÉCURITÉ x3, ALL STATIONS x3, this is Kiel Radio,
+   listen channel 27 for a gale warning, OVER"
+[→ auf Kanal 27 zuhören — nicht antworten, nur mitschreiben]
+```
+> [!tip] Tipp
+> Bei **SÉCURITÉ/Wetterwarnung**: auf den angekündigten Kanal wechseln und **zuhören** — keine Bestätigung nötig.
 
 ---
 
 > [!success] Übungs-Idee für den Kurs
-> Karten mit Situationen ziehen lassen (Container treibt, Motor aus, Liegeplatz, Schleuse, Mensch über Bord …) → Teilnehmer wählen **Zeugnis (SRC/UBI), Sprache und Verkehrsart** und sprechen den passenden Muster-Funkspruch. Gegenseitig **Readability** geben.
+> Karten mit Situationen ziehen lassen (Container treibt, Motor aus, Liegeplatz, Mensch über Bord, Wetterwarnung …) → Teilnehmer wählen **Verkehrsart** und sprechen den passenden **englischen** Muster-Funkspruch. Gegenseitig **Readability** geben. Binnen-Beispiele → [[Funkkurs — UBI Funkbeispiele & Muster-Funksprüche]].
 
 ---
 *Superlink:* [[Funkzeugnis-Kurs SRC und UBI]]

@@ -10,11 +10,14 @@ type: note
 
 Modul des [[Funkzeugnis-Kurs SRC und UBI|Funkzeugnis-Kurs SRC & UBI]]. Alles zum **Seefunk**: System, DSC, Kanäle, Notverkehr, Prüfung.
 
+> [!quote] Mein Blick darauf
+> Der Seefunk ist im Grunde das **Handynetz der Ostsee** — nur dass alle auf wenigen offenen „Leitungen" mithören. Wer das Prinzip einmal hat (kurz reden, Kanal 16 freihalten, im Notfall der rote Knopf), für den ist der Rest Vokabeln. Lass dich vom Behörden-Sprech nicht abschrecken.
+
 ### Was darf man mit dem SRC?
 Bedienung von UKW-Seefunkanlagen **mit DSC** auf Sportbooten. Pflicht, sobald eine Seefunkanlage an Bord betrieben wird (auch wenn man "nur zuhört" — der Betrieb ist zeugnispflichtig).
 
 ### GMDSS — Global Maritime Distress and Safety System
-Weltweites Seenot- und Sicherheitsfunksystem. Kerngedanke: **automatischer Notalarm per Knopfdruck (DSC)**, dann Sprechfunk.
+Weltweites Seenot- und Sicherheitsfunksystem. Kerngedanke: **automatischer Notalarm per Knopfdruck (DSC)**, dann Sprechfunk. Stell dir GMDSS wie einen **weltweiten Rauchmelder-Verbund** vor: einer drückt, und alle Zuständigen in Reichweite kriegen es automatisch mit.
 
 **Die GMDSS-Seegebiete (A1–A4)**
 Die Seegebiete sagen, **welche Funktechnik** in welcher Entfernung von der Küste **gebraucht** wird — je weiter raus, desto aufwendiger. Wichtig: Die Gebiete sind **ineinander gestaffelt** — ein Schiff in A3 durchfährt auf dem Weg auch A1 und A2.

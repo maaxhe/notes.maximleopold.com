@@ -11,6 +11,9 @@ type: note
 
 Modul des [[Funkzeugnis-Kurs SRC und UBI|Funkzeugnis-Kurs SRC & UBI]]. **Komplettes Ablaufschema** für alle GMDSS-Fälle: Notmeldung, Weiterleiten, Bestätigen, Funkstille, Aufheben, Fehlalarm, Dringlichkeit, Sicherheit.
 
+> [!quote] Mein wichtigster Tipp fürs Notverfahren
+> Im Ernstfall vergisst du die Hälfte von dem hier — das ist normal, der Puls geht hoch. Deshalb übe ich mit der Crew genau **eine** Reflexkette ein: **roter Knopf → Kanal 16 → „MAYDAY, this is …, Position, was los ist, wie viele wir sind".** Den Rest macht das Gerät oder die Küstenfunkstelle. Lieber holprig den Notruf raushauen als perfekt zu schweigen.
+
 **Funkschema-Matrix — alle Fälle auf einen Blick:**
 
 ![[Funkschema-GMDSS-Matrix-alle-Faelle.png]]

@@ -4,14 +4,27 @@ model: claude-opus-4-8
 date_created: 04/06/26
 tags: [ai-generated]
 type: moc
+modified: 2026-06-05
 ---
 
 ## Funkzeugnis-Kurs SRC & UBI (Hub)
 
-Übersicht & Einstieg für meinen Wochenend-Kurs (auf Deutsch). Die Inhalte sind in **Module** ausgelagert (siehe Index unten), damit diese Datei schlank bleibt.
+Moin! Ich bin **Max** — Segler, und am Wochenende halte ich diesen Funkkurs. Das hier ist mein Spickzettel-Hirn dazu: alles, was ich beim Funken über die Jahre gelernt habe (oft auf die unbequeme Tour), sortiert in **Module**, damit diese Startseite schlank bleibt.
+
+Mein Anspruch: kein trockenes Behörden-Deutsch, sondern so, wie ich es an Bord erklären würde — mit den Eselsbrücken und der einen oder anderen Geschichte, bei der ich was falsch gemacht habe, damit du es nicht musst. 😄
 
 > [!abstract] So nutzt du diese Unterlage
-> Diese Seite ist der **Hub**. Arbeite die Module der Reihe nach durch (Index unten, thematisch gruppiert), oder spring gezielt rein. Jedes Modul ist eigenständig lesbar und verlinkt auf verwandte Themen. Zum Üben: [[Funkkurs — Quiz & Prüfungssimulation]].
+> Geh die Module der Reihe nach durch (Index unten, nach Themen sortiert) oder spring gezielt rein — jedes ist für sich lesbar und verlinkt auf verwandte Sachen. Zum Üben: [[Funkkurs — Quiz & Prüfungssimulation]].
+
+> [!tip]+ 🧭 Start hier (für Teilnehmer)
+> Neu im Funk? In dieser Reihenfolge kommst du am besten rein:
+> 1. **Überblick** lesen: [[Funkkurs — SRC Seefunk (GMDSS)]] (See) bzw. [[Funkkurs — UBI Binnenfunk]] (Binnen) — *was darf ich, wie ist das System*.
+> 2. **Notverfahren** anschauen — der wichtigste Teil: [[Funkkurs — Notverfahren & Funkschema (alle Fälle)]].
+> 3. **Vokabeln & Floskeln**: [[Funkkurs — Funkverfahren & Buchstabieralphabet]], dann **Beispielsprüche** nachsprechen.
+> 4. **Testen**: 🌊 [[Funkkurs — Quiz SRC (Seefunk)]] / 🛶 [[Funkkurs — Quiz UBI (Binnenfunk)]].
+> 5. **Zum Ausdrucken**: die A4-Handouts unten (Spickzettel, Notfallkarte, Vokabeln).
+>
+> Unbekannte Abkürzung? → [[Funkkurs — Glossar (Abkürzungen)]].
 
 > [!warning] Vor dem Kurs gegenchecken
 > Kanäle, MMSI/ATIS-Formate und Prüfungsmodalitäten können sich ändern. Aktuelle Quellen: *Handbuch Seefunk* / *Handbuch Binnenschifffahrtsfunk* (Bundesnetzagentur), DSV/DMYV-Prüfungsfragenkatalog. Diese Notiz ist ein Lehr-Gerüst, **kein Ersatz** für den amtlichen Fragenkatalog.
@@ -23,10 +36,13 @@ type: moc
 ### 📋 Grundlagen & Recht
 - [[Funkkurs — Rechtliche Grundlagen]] — Wann braucht man SRC/UBI? Pflicht, Zeugnisarten, Rufzeichen, MMSI/ATIS.
 - [[Funkkurs — Wichtige Stellen & Behörden]] — Wer macht was: BNetzA, BSH, Seeschiffsregister, DGzRS/Bremen Rescue, GDWS/WSV, ITU, DSV/DMYV.
+- [[Funkkurs — Glossar (Abkürzungen)]] — alle Abkürzungen (SRC, DSC, MMSI, ATIS, MRCC, VTS, NAVTEX …) zum Nachschlagen.
 
 ### 🌊 Die zwei Zeugnisse
 - [[Funkkurs — SRC Seefunk (GMDSS)]] — GMDSS, Seegebiete, DSC, MMSI, Kanäle, Sendeleistung, MAYDAY, SRC-Prüfung.
 - [[Funkkurs — UBI Binnenfunk]] — ATIS, die 4 Verkehrskreise, Kanal 10, Notverkehr, UBI-Prüfung.
+- [[Funkkurs — UBI Revierfunk & Nautische Information]] — Revierzentralen, Reviereinteilung, Handbuch Binnenschifffahrtsfunk, Revierzentrale rufen.
+- [[Funkkurs — UBI Notruf & warum Kanal 16 verboten]] — Binnen-Notruf (Kanal 10 + Revierzentrale), warum K16 im Binnenfunk verboten ist.
 
 ### 🔌 Technik
 - [[Funkkurs — Technik (Wellen, Antenne, Geräte)]] — UKW-Wellen, Frequenzen, Reichweite, Antenne, Strom/Batterie, Simplex/Duplex/Semiduplex, Praxis.
@@ -38,7 +54,8 @@ type: moc
 ### 📡 Funkpraxis
 - [[Funkkurs — Notverfahren & Funkschema (alle Fälle)]] — MAYDAY, RELAY, Abbruch, Silence, PAN PAN, SÉCURITÉ + Funkschema-Matrix.
 - [[Funkkurs — Funkverfahren & Buchstabieralphabet]] — Buchstabieralphabet, Floskeln, Routine-Anruf, Funkprobe.
-- [[Funkkurs — Funkbeispiele & Muster-Funksprüche]] — viele fertige Funksprüche (Routine, Not, Dringlich, Sicherheit, DSC) mit Tipps.
+- [[Funkkurs — Funkbeispiele & Muster-Funksprüche]] — **SRC** (Seefunk, Englisch): 18 fertige Funksprüche mit Tipps.
+- [[Funkkurs — UBI Funkbeispiele & Muster-Funksprüche]] — **UBI** (Binnenfunk, Deutsch): Schleuse, Brücke, Schiff-Schiff, Revierzentrale, Notruf.
 - [[Funkkurs — Revierkanäle Ostsee & Mittelmeer]] — Praxis-Kanäle für Ostsee & Mittelmeer/Adria.
 
 ### 🎓 Kurs & Prüfung
@@ -104,9 +121,4 @@ type: moc
 
 > [!note] Maßgeblich bleiben die amtlichen Fragenkataloge und Handbücher — vor der Prüfung gegenchecken.
 
-### See also
-*Superlink:* [[220 ⚓️Marine]]
-
-Verwandt: [[Bootsschule Land in Sicht]]
-
-Created: 04/06/26 · Erweitert (Web-Recherche + Bilder): 04/06/26 · In Module gesplittet: 04/06/26
+Created: 04/06/26 · zuletzt erweitert: 05/06/26
