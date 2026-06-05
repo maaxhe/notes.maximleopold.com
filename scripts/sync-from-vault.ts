@@ -41,6 +41,8 @@ const CONFIG = {
     "**/.obsidian/**",
     "**/Templates/**",
     "**/_archive/**",
+    // Too large (63 MB) to push reliably over the current connection; not Funkkurs-related.
+    "**/705789691-VOLENTIERI-A2 2.pdf",
   ],
 
   // Target directories
