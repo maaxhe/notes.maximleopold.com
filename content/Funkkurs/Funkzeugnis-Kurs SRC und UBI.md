@@ -2,7 +2,7 @@
 date_created: 04/06/26
 tags: [funkkurs]
 type: moc
-modified: 2026-06-06
+modified: 2026-06-07
 ---
 
 ## Funkzeugnis-Kurs SRC & UBI (Hub)
