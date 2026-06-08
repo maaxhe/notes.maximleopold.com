@@ -233,11 +233,14 @@
     // Add locked class to prevent scrolling
     document.body.classList.add('vault-locked');
 
+    // Title depends on the site: Funkkurs vs. the research vault
+    var siteTitle = location.hostname.indexOf('funk') !== -1 ? 'Funkkurs SRC & UBI' : 'Research Vault';
+
     const overlay = document.createElement('div');
     overlay.id = 'vault-overlay';
     overlay.innerHTML = `
       <div id="vault-card">
-        <h1>🔒 Research Vault – Zugang</h1>
+        <h1>🔒 ${siteTitle} – Zugang</h1>
         <p>Bitte Passwort eingeben</p>
         <form id="vault-form">
           <input

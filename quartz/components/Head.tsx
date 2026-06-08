@@ -40,7 +40,7 @@ export default (() => {
       <head>
         <title>{title}</title>
         <meta charSet="utf-8" />
-        {/* Vault authentication - inline check and overlay injection */}
+        {/* Vault authentication - inline check and overlay injection (password gate, also on Funkkurs) */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -140,14 +140,18 @@ export default (() => {
           }
         })}
 
-        {/* Hypothesis configuration */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.hypothesisConfig = function () { return { showHighlights: 'always', openSidebar: false, enableExperimentalNewNoteButton: true }; };`,
-          }}
-        />
-        {/* Load Hypothesis with defer to ensure DOM is ready but script loads early */}
-        <script defer src="https://hypothes.is/embed.js"></script>
+        {/* Hypothesis annotations — skipped on the standalone Funkkurs site */}
+        {process.env.QUARTZ_BASE_URL !== "funk.maximilianherrmann.com" && (
+          <>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.hypothesisConfig = function () { return { showHighlights: 'always', openSidebar: false, enableExperimentalNewNoteButton: true }; };`,
+              }}
+            />
+            {/* Load Hypothesis with defer to ensure DOM is ready but script loads early */}
+            <script defer src="https://hypothes.is/embed.js"></script>
+          </>
+        )}
         {/* Dedicated print stylesheet - loaded last to override everything */}
         <link rel="stylesheet" href={joinSegments(baseDir, "static/print-override.css")} media="print" />
       </head>

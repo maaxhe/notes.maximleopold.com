@@ -93,7 +93,10 @@ const config: QuartzConfig = {
       Plugin.Static(),
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
-      Plugin.AnnotationsPage(),
+      // Hypothesis annotations overview — skipped on the standalone Funkkurs site
+      ...(process.env.QUARTZ_BASE_URL === "funk.maximilianherrmann.com"
+        ? []
+        : [Plugin.AnnotationsPage()]),
       Plugin.TagCloudPage(),
       // Comment out CustomOgImages to speed up build time
       Plugin.CustomOgImages(),

@@ -23,7 +23,7 @@ echo "🧹 Preparing Funkkurs content..."
 rm -rf "$BUILD" "$OUT"
 mkdir -p "$BUILD/assets"
 
-# 1. Copy all Funkkurs markdown, preserving the SRC / UBI / Funk Generell subfolders
+# 1. Copy all Funkkurs markdown, preserving the numbered module subfolders (00 Start, 01 Grundlagen & Recht, …)
 rsync -a --prune-empty-dirs --include='*/' --include='*.md' --exclude='*' "$SRC"/ "$BUILD/"
 
 # 2. Copy referenced assets (Quartz resolves [[name]] by basename, folder doesn't matter)
@@ -41,7 +41,7 @@ title: Funkkurs SRC & UBI
 > [!info] Funkzeugnis-Kurs
 > Komplette Lernunterlagen für das **SRC** (Seefunk) und **UBI** (Binnenfunk) — Technik, Notverfahren, DSC, Quiz & mehr.
 
-![[Funkzeugnis-Kurs SRC und UBI]]
+![[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis]]
 EOF
 
 echo "🏗️  Building Quartz (Funkkurs only)..."

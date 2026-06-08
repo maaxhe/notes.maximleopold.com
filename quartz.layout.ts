@@ -1,14 +1,24 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
 
+// The standalone Funkkurs site (funk.maximilianherrmann.com) is a stripped-down
+// public course: no "Zuletzt geändert / Wörter"-Meta, no Mika RAG-Chatbot and no
+// Hypothesis annotations. Detected via the build env var that scripts/publish-funk.sh
+// sets; the main notes site keeps all of these.
+const isFunkBuild = process.env.QUARTZ_BASE_URL === "funk.maximilianherrmann.com"
+const contentMeta = isFunkBuild ? [] : [Component.ContentMeta()]
+const hypothesis = isFunkBuild ? [] : [Component.HypothesisSPA()]
+const ragChatbot = isFunkBuild ? [] : [Component.RAGChatbot({ collapsed: true })]
+const annotationsBadge = isFunkBuild ? [] : [{ Component: Component.AnnotationsBadge() }]
+
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
   afterBody: [
-    Component.HypothesisSPA(),
+    ...hypothesis,
     Component.SidebarToggle(),
-    Component.RAGChatbot({ collapsed: true }),
+    ...ragChatbot,
   ],
   footer: Component.Footer({
     links: {
@@ -27,7 +37,7 @@ export const defaultContentPageLayout: PageLayout = {
       condition: (page) => page.fileData.slug !== "index",
     }),
     Component.ArticleTitle(),
-    Component.ContentMeta(),
+    ...contentMeta,
     Component.ConditionalRender({
       component: Component.ThesisDashboard({ compact: true, showProgress: true }),
       condition: (page) => {
@@ -46,7 +56,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Search(),
     Component.Flex({
       components: [
-        { Component: Component.AnnotationsBadge() },
+        ...annotationsBadge,
         { Component: Component.Darkmode() },
         { Component: Component.FontToggle() },
         { Component: Component.ReaderMode() },
@@ -94,7 +104,7 @@ export const defaultContentPageLayout: PageLayout = {
   ],
   afterBody: [
     Component.ImageLightbox(),
-    Component.HypothesisSPA(),
+    ...hypothesis,
     Component.SidebarToggle(),
     Component.ConditionalRender({
       component: Component.ExportAllButton(),
@@ -126,20 +136,20 @@ export const defaultContentPageLayout: PageLayout = {
     }),
     Component.Backlinks(),
     Component.PageNavigation(),
-    Component.RAGChatbot({ collapsed: true }),
+    ...ragChatbot,
   ],
 }
 
 // components for pages that display lists of pages  (e.g. tags or folders)
 export const defaultListPageLayout: PageLayout = {
-  beforeBody: [Component.Breadcrumbs(), Component.ArticleTitle(), Component.ContentMeta()],
+  beforeBody: [Component.Breadcrumbs(), Component.ArticleTitle(), ...contentMeta],
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Flex({
       components: [
-        { Component: Component.AnnotationsBadge() },
+        ...annotationsBadge,
         { Component: Component.Darkmode() },
         { Component: Component.FontToggle() },
       ],

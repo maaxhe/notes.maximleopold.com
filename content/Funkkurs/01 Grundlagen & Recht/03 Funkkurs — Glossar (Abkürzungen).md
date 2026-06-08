@@ -1,12 +1,16 @@
 ---
 date_created: 05/06/26
-tags: [marine]
 type: note
+title: 03 – Glossar (Abkürzungen)
+lektion: 3
+modul: 1 · Grundlagen & Recht
 ---
 
-## Funkkurs - Glossar (Abkürzungen)
+## Glossar (Abkürzungen)
 
-Modul des [[Funkzeugnis-Kurs SRC und UBI|Funkzeugnis-Kurs SRC & UBI]]. Die wichtigsten Abkürzungen aus dem Kurs zum schnellen Nachschlagen.
+> [!info]- Teil des [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|Funkzeugnis-Kurs SRC & UBI]] · Modul 1 · Grundlagen & Recht
+
+Hier findest du alle wichtigen Abkürzungen aus dem Funkkurs zum schnellen Nachschlagen. Spring einfach hierher zurück, wenn dir irgendwo ein Kürzel begegnet und du die Bedeutung brauchst.
 
 ### Zeugnisse & Funkarten
 | Kürzel | Bedeutung | kurz |
@@ -57,21 +61,21 @@ Modul des [[Funkzeugnis-Kurs SRC und UBI|Funkzeugnis-Kurs SRC & UBI]]. Die wicht
 | WX | Weather | Wetter (per Sprechfunk) |
 
 ### Behörden & Stellen
-| Kürzel | Bedeutung | kurz |
-|---|---|---|
-| BNetzA | Bundesnetzagentur | Frequenz, Rufzeichen, MMSI, ATIS |
-| BSH | Bundesamt für Seeschifffahrt und Hydrographie | Flagge, Seekarten, Wetterfunk |
-| DSV / DMYV | Dt. Segler-Verband / Dt. Motoryachtverband | Prüfung + Zeugnis |
-| DGzRS | Dt. Gesellschaft zur Rettung Schiffbrüchiger | Seenotrettung (MRCC Bremen) |
-| WSV / GDWS | Wasserstraßen- u. Schifffahrtsverwaltung / Generaldirektion | Binnen, Revierzentralen |
-| ZKR / CCNR | Zentralkommission für die Rheinschifffahrt | Handbuch Binnenschifffahrtsfunk |
-| ITU | International Telecommunication Union | weltw. Funkordnung, MID |
-| DP07 | DP07 Seefunk | private Küstenfunkstellen (Rufname „…Radio") |
-
+| Kürzel     | Bedeutung                                                   | kurz                                         |
+| ---------- | ----------------------------------------------------------- | -------------------------------------------- |
+| BNetzA     | Bundesnetzagentur                                           | Frequenz, Rufzeichen, MMSI, ATIS             |
+| BSH        | Bundesamt für Seeschifffahrt und Hydrographie               | Flagge, Seekarten, Wetterfunk                |
+| DSV / DMYV | Dt. Segler-Verband / Dt. Motoryachtverband                  | Prüfung + Zeugnis                            |
+| DGzRS      | Dt. Gesellschaft zur Rettung Schiffbrüchiger                | Seenotrettung (MRCC Bremen)                  |
+| WSV / GDWS | Wasserstraßen- u. Schifffahrtsverwaltung / Generaldirektion | Binnen, Revierzentralen                      |
+| ZKR / CCNR | Zentralkommission für die Rheinschifffahrt                  | Handbuch Binnenschifffahrtsfunk              |
+| ITU        | International Telecommunication Union                       | weltw. Funkordnung, MID                      |
+| DP07       | DP07 Seefunk                                                | private Küstenfunkstellen (Rufname „…Radio") |
 > [!tip] Nicht verwechseln: Radio vs. Traffic, DSC vs. ATIS
 > „…**Radio**" ist die Küstenfunkstelle (DP07) für Gespräche und Wetter, „…**Traffic**" dagegen die Verkehrszentrale (VTS), die das Revier lenkt. Und beim Identifizieren ruft **DSC** aktiv (Seefunk), während **ATIS** nur verrät, wer gerade gesendet hat (Binnen).
 
 ---
-Tags: #marine
-*Superlink:* [[Funkzeugnis-Kurs SRC und UBI]]
-Created: 05/06/26
+**Kurs-Navigation:** [[02 Funkkurs — Wichtige Stellen & Behörden|← 02 · Wichtige Stellen & Behörden]] · [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|↑ Kursübersicht]] · [[05 Funkkurs — Technik (Wellen, Antenne, Geräte)|04 · Technik – Wellen, Antenne & Geräte →]]
+
+*Superlink:* [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|Funkzeugnis-Kurs SRC & UBI]]
+

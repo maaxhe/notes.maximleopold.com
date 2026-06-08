@@ -1,14 +1,18 @@
 ---
 date_created: 04/06/26
-tags: [funkkurs]
 type: note
+title: 18 – SRC Quiz (Seefunk)
+lektion: 18
+modul: 6 · Kurs & Prüfung
 ---
 
-## Funkkurs - Quiz SRC (Seefunk)
+## Quiz – SRC (Seefunk)
 
-Fragen zum **SRC / Seefunk**. Modul des [[Funkzeugnis-Kurs SRC und UBI|Funkzeugnis-Kurs SRC & UBI]]. Antworten ausklappbar. Für Binnenfunk → [[Funkkurs — Quiz UBI (Binnenfunk)]].
+> [!info]- Teil des [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|Funkzeugnis-Kurs SRC & UBI]] · Modul 5 · Kurs & Prüfung
 
-Beantworte jede Frage erst ohne Aufklappen, dann löse auf. Am Ende folgt eine **Mini-Prüfungssimulation**.
+Dieses Quiz geht einmal quer durch das gesamte SRC-Wissen: Recht, Technik, DSC, Notverfahren und Buchstabieren. Beantworte jede Frage erst selbst und klapp dann die Antwort auf, so siehst du am besten, wo es noch hakt. Ganz am Ende wartet eine Mini-Prüfungssimulation mit den zehn wichtigsten Merksätzen.
+
+Antworten ausklappbar. Für Binnenfunk → [[19 Funkkurs — Quiz UBI (Binnenfunk)|Funkkurs — Quiz UBI (Binnenfunk)]].
 
 ---
 
@@ -32,12 +36,12 @@ Beantworte jede Frage erst ohne Aufklappen, dann löse auf. Am Ende folgt eine *
 <details><summary>Antwort</summary>Die <b>Zuteilungsurkunde (Ship Station Licence)</b>.</details>
 
 7. Welche Funkstelle kennzeichnet die MMSI 002111240?
-<details><summary>Antwort</summary>Eine <b>deutsche Küstenfunkstelle</b> (00 = Küstenfunkstelle, 211 = MID) - „Bremen Rescue".</details>
+<details><summary>Antwort</summary>Eine <b>deutsche Küstenfunkstelle</b> (00 = Küstenfunkstelle, 211 = MID) – „Bremen Rescue".</details>
 
 8. Welche Stelle stellt das Flaggenzertifikat aus?
 <details><summary>Antwort</summary>Das <b>BSH</b> (8 Jahre gültig).</details>
 
-9. Ab welcher Rumpflänge ist die Eintragung ins Seeschiffsregister Pflicht - und wo?
+9. Ab welcher Rumpflänge ist die Eintragung ins Seeschiffsregister Pflicht – und wo?
 <details><summary>Antwort</summary>Ab <b>15 m</b>, beim Amtsgericht (Seeschiffsregister am Heimathafen).</details>
 
 ### B) GMDSS & Seegebiete
@@ -45,14 +49,14 @@ Beantworte jede Frage erst ohne Aufklappen, dann löse auf. Am Ende folgt eine *
 <details><summary>Antwort</summary><b>Global Maritime Distress and Safety System</b>; Kernidee: automatischer Notalarm per Knopfdruck (DSC), dann Sprechfunk.</details>
 
 11. Welches Seegebiet deckt das SRC ab?
-<details><summary>Antwort</summary><b>A1</b> - UKW-Reichweite einer DSC-Küstenfunkstelle (~20-35 sm).</details>
+<details><summary>Antwort</summary><b>A1</b> – UKW-Reichweite einer DSC-Küstenfunkstelle (~30-40 sm).</details>
 
-12. Was sind A2, A3, A4 grob - und welcher Schein gilt dort?
+12. Was sind A2, A3, A4 grob – und welcher Schein gilt dort?
 <details><summary>Antwort</summary>A2 = Grenzwelle (MF), A3 = Satellit, A4 = Polargebiete (KW). Dafür braucht es das <b>LRC</b>.</details>
 
 ### C) DSC & Kanal 70
 13. Welcher Kanal ist nur DSC, und was darf man dort nicht?
-<details><summary>Antwort</summary><b>Kanal 70</b> - dort wird nie gesprochen.</details>
+<details><summary>Antwort</summary><b>Kanal 70</b> – dort wird nie gesprochen.</details>
 
 14. Muss man vor einem DSC-Call manuell auf Kanal 70 wechseln?
 <details><summary>Antwort</summary><b>Nein.</b> Das Gerät überwacht K70 automatisch und schaltet beim Senden selbst drauf. Man wählt die Funktion, nicht den Kanal.</details>
@@ -61,7 +65,7 @@ Beantworte jede Frage erst ohne Aufklappen, dann löse auf. Am Ende folgt eine *
 <details><summary>Antwort</summary><b>MMSI, Position, Zeit</b> und ggf. die Art der Not.</details>
 
 16. Wird die Position auch bei PAN PAN/SÉCURITÉ automatisch per DSC gesendet?
-<details><summary>Antwort</summary><b>Nein</b> - die Position wird nur beim Notalarm automatisch mitgesendet. Bei Dringlichkeit/Sicherheit nennt man sie im Sprechfunk.</details>
+<details><summary>Antwort</summary><b>Nein</b> – die Position wird nur beim Notalarm automatisch mitgesendet. Bei Dringlichkeit/Sicherheit nennt man sie im Sprechfunk.</details>
 
 17. Nenne drei Auswahlpunkte der „Nature of Distress".
 <details><summary>Antwort</summary>z. B. Fire/explosion, Flooding, Collision, Grounding, Sinking, Man overboard (oder „undesignated").</details>
@@ -69,7 +73,7 @@ Beantworte jede Frage erst ohne Aufklappen, dann löse auf. Am Ende folgt eine *
 18. Häufiger Praxisfehler bei DSC trotz Schein?
 <details><summary>Antwort</summary><b>MMSI nie programmiert</b> → Notalarm ohne gültige Kennung.</details>
 
-19. Wie testet man DSC - und was darf man nie?
+19. Wie testet man DSC – und was darf man nie?
 <details><summary>Antwort</summary><b>„Test Call"</b> an eine Küstenfunkstellen-MMSI (auto-Bestätigung). Nie einen DSC-Notalarm zum Testen auslösen.</details>
 
 ### D) Kanäle & Frequenzen (See)
@@ -77,7 +81,7 @@ Beantworte jede Frage erst ohne Aufklappen, dann löse auf. Am Ende folgt eine *
 <details><summary>Antwort</summary><b>156,800 MHz</b> (Simplex).</details>
 
 21. Warum ist Kanal 16 ein Simplex-Kanal?
-<details><summary>Antwort</summary>Damit ihn alle mithören können - bei einem Not-/Anrufkanal gewollt.</details>
+<details><summary>Antwort</summary>Damit ihn alle mithören können – bei einem Not-/Anrufkanal gewollt.</details>
 
 22. Wofür ist Kanal 06?
 <details><summary>Antwort</summary><b>On-Scene/SAR</b> (Search and Rescue), Schiff-Schiff.</details>
@@ -93,7 +97,7 @@ Beantworte jede Frage erst ohne Aufklappen, dann löse auf. Am Ende folgt eine *
 
 ### E) Sendeleistung
 26. Welche zwei Sendeleistungen gibt es, und was heißt die Einstellung?
-<details><summary>Antwort</summary><b>1 W</b> oder <b>25 W</b> - bedeutet jeweils „maximal" (real abhängig von Antenne usw.).</details>
+<details><summary>Antwort</summary><b>1 W</b> oder <b>25 W</b> – bedeutet jeweils „maximal" (real abhängig von Antenne usw.).</details>
 
 27. Wann immer 25 W?
 <details><summary>Antwort</summary>Bei Not/Dringlich/Sicherheit und im Verkehr mit Küstenfunkstellen.</details>
@@ -121,23 +125,23 @@ Beantworte jede Frage erst ohne Aufklappen, dann löse auf. Am Ende folgt eine *
 <details><summary>Antwort</summary>Funkstille; gesprochen vom <b>Schiff in Not</b> oder der <b>leitenden Station</b>. (Andere: „Silence Distress".)</details>
 
 35. Was bedeutet Silence Fini (Aussprache: „Seelonce Feenee")?
-<details><summary>Antwort</summary>„Silence Fini" - Notverkehr beendet, Normalverkehr frei.</details>
+<details><summary>Antwort</summary>„Silence Fini" – Notverkehr beendet, Normalverkehr frei.</details>
 
 36. Was heißt PRU-DONCE?
-<details><summary>Antwort</summary>Funkstille gelockert - eingeschränkter Verkehr wieder erlaubt.</details>
+<details><summary>Antwort</summary>Funkstille gelockert – eingeschränkter Verkehr wieder erlaubt.</details>
 
-37. Versehentlicher DSC-Alarm - was tun?
+37. Versehentlicher DSC-Alarm – was tun?
 <details><summary>Antwort</summary>Nicht ausschalten! Auf K16 widerrufen: „ALL STATIONS ×3, THIS IS …, PLEASE CANCEL MY DISTRESS ALERT OF [UTC], OUT".</details>
 
 38. Was ist ein MEDICO-Gespräch, welche Stufe?
-<details><summary>Antwort</summary><b>Funkärztliche Beratung</b> (TMAS/Medico Cuxhaven) - <b>PAN PAN</b> (Dringlichkeit), nicht MAYDAY.</details>
+<details><summary>Antwort</summary><b>Funkärztliche Beratung</b> (TMAS/Medico Cuxhaven) – <b>PAN PAN</b> (Dringlichkeit), nicht MAYDAY.</details>
 
 ### G) Technik
 39. Frequenzbereich UKW-Seefunk + Ausbreitung?
 <details><summary>Antwort</summary><b>156-162 MHz</b>; quasi-optisch/Sichtweite.</details>
 
 40. Wovon hängt die Reichweite hauptsächlich ab?
-<details><summary>Antwort</summary>Von der <b>Antennenhöhe</b> - nicht von der Leistung.</details>
+<details><summary>Antwort</summary>Von der <b>Antennenhöhe</b> – nicht von der Leistung.</details>
 
 41. Faustformel für die Reichweite?
 <details><summary>Antwort</summary>Reichweite [km] ≈ <b>3,84 × (√h₁ + √h₂)</b>.</details>
@@ -146,7 +150,7 @@ Beantworte jede Frage erst ohne Aufklappen, dann löse auf. Am Ende folgt eine *
 <details><summary>Antwort</summary><b>12 V</b>; beim Senden mit 25 W ~<b>5 A</b>.</details>
 
 43. Warum nie die Batterie komplett entladen?
-<details><summary>Antwort</summary>Tiefentladung schädigt sie dauerhaft (Blei/AGM irreversibel) - und leer = kein Funk/Notruf. Max. ~50 % entnehmen.</details>
+<details><summary>Antwort</summary>Tiefentladung schädigt sie dauerhaft (Blei/AGM irreversibel) – und leer = kein Funk/Notruf. Max. ~50 % entnehmen.</details>
 
 44. Simplex vs. Duplex?
 <details><summary>Antwort</summary>Simplex = 1 Frequenz, abwechselnd. Duplex = 2 Frequenzen, gleichzeitig (Schiff↔Küstenfunkstelle).</details>
@@ -158,7 +162,7 @@ Beantworte jede Frage erst ohne Aufklappen, dann löse auf. Am Ende folgt eine *
 <details><summary>Antwort</summary><b>Festeinbau</b> (25 W, 12 V, DSC) und <b>Handfunke</b> (5-6 W, Akku).</details>
 
 ### H) Wetter, Funkprobe & Bremen Rescue
-47. WX vs. NX - hören oder lesen?
+47. WX vs. NX – hören oder lesen?
 <details><summary>Antwort</summary><b>WX = Wetter per Sprechfunk → hören.</b> <b>NX = NAVTEX-Text → lesen</b> (518/490 kHz, eigener Empfänger).</details>
 
 48. Wie macht man eine Sprechfunk-Funkprobe?
@@ -172,12 +176,12 @@ Beantworte jede Frage erst ohne Aufklappen, dann löse auf. Am Ende folgt eine *
 <details><summary>Antwort</summary>Kilo - India - Echo - Lima.</details>
 
 51. Muss man den Schiffsnamen buchstabieren?
-<details><summary>Antwort</summary><b>Nein</b> - Namen spricht man als Wort; Rufzeichen buchstabieren, Zahlen einzeln nennen.</details>
+<details><summary>Antwort</summary><b>Meistens Nein</b> – Namen spricht man als Wort; Rufzeichen buchstabieren, Zahlen einzeln nennen. Aber wenn der Name schwierig zu schreiben ist, empfiehlt es sich zu buchstabieren</details>
 
 52. Warum nie „Over and Out"?
 <details><summary>Antwort</summary>Widerspruch: OVER = Antwort erwartet, OUT = Schluss. Entweder/oder.</details>
 
-### J) Offizielle Buchfragen (Lernstandskontrolle IV)
+### J) Behörde
 53. Welche Behörde erteilt sechsstellige Rufzeichen?
 <details><summary>Antwort</summary><b>Bundesnetzagentur</b>, Außenstelle Hamburg.</details>
 
@@ -188,55 +192,50 @@ Beantworte jede Frage erst ohne Aufklappen, dann löse auf. Am Ende folgt eine *
 <details><summary>Antwort</summary>An der <b>MID</b> (Seefunkkennzahl).</details>
 
 ### K) Rechenaufgaben
-56. 100-Ah-Batterie, Funke zieht im Schnitt 0,5 A - Laufzeit (50 % nutzbar)?
+56. 100-Ah-Batterie, Funke zieht im Schnitt 0,5 A – Laufzeit (50 % nutzbar)?
 <details><summary>Lösung</summary>50 Ah ÷ 0,5 A = <b>100 h</b>.</details>
 
 57. Reichweite bei eigener Antenne 9 m, Gegenstation 4 m?
 <details><summary>Lösung</summary>3,84 × (3 + 2) = 19,2 km ≈ <b>10 sm</b>.</details>
 
-58. Du hast den Schein - welche Schritte fehlen noch, bis du legal funken darfst?
-<details><summary>Antwort</summary>Antrag bei der <b>Bundesnetzagentur</b> (Formular BNetzA 224) → Zuteilung von Rufzeichen + MMSI → Zuteilungsurkunde an Bord → MMSI ins Gerät programmieren.</details>
+### L) Sonstige
 
-59. In welcher Zeit wird im Seefunk gefunkt, und was bedeutet „Z"?
-<details><summary>Antwort</summary><b>UTC</b> (24 h, vierstellig); Z = Zulu = UTC.</details>
-
-60. Was bedeutet die Date-Time-Group 041530Z?
+58. Was bedeutet die Date-Time-Group 041530Z?
 <details><summary>Antwort</summary><b>4. Tag</b> des Monats, <b>15:30 UTC</b> (DDHHMM + Zonenkürzel Z).</details>
 
-61. Was ist die Grenzwelle, und welche Reichweite/welches Seegebiet?
+59. Was ist die Grenzwelle, und welche Reichweite/welches Seegebiet?
 <details><summary>Antwort</summary><b>Mittelfrequenz (MF)</b>, ~1,6-4 MHz; Not 2182 kHz / DSC 2187,5 kHz. Reicht als Bodenwelle ~100-150 sm → Seegebiet <b>A2</b> (LRC).</details>
 
-62. Wodurch wird Seegebiet A3 abgedeckt, und bis wohin?
-<details><summary>Antwort</summary>Durch <b>Inmarsat-Satelliten</b> - ~70° N bis 70° S (fast weltweit, außer Polkappen).</details>
+60. Wodurch wird Seegebiet A3 abgedeckt, und bis wohin?
+<details><summary>Antwort</summary>Durch <b>Inmarsat-Satelliten</b> – ~70° N bis 70° S (fast weltweit, außer Polkappen).</details>
 
-63. Warum braucht es A4 mit Kurzwelle, wenn es Satelliten gibt?
-<details><summary>Antwort</summary>Weil die geostationären Satelliten die Polargebiete nicht abdecken - dort funktioniert nur <b>Kurzwelle (HF)</b>.</details>
+61. Warum braucht es A4 mit Kurzwelle, wenn es Satelliten gibt?
+<details><summary>Antwort</summary>Weil die geostationären Satelliten die Polargebiete nicht abdecken – dort funktioniert nur <b>Kurzwelle (HF)</b>.</details>
 
-64. Wie breitet sich Kurzwelle aus - und was ist daran anders als bei UKW?
+62. Wie breitet sich Kurzwelle aus – und was ist daran anders als bei UKW?
 <details><summary>Antwort</summary>Über <b>Reflexion an der Ionosphäre (Raumwelle)</b> → weltweite, aber schwankende Reichweite (statt UKW-Sichtweite).</details>
 
-65. Wie wird eine mit DSC ausgerüstete Seefunkstelle gekennzeichnet? *(Buchfrage)*
+63. Wie wird eine mit DSC ausgerüstete Seefunkstelle gekennzeichnet? 
 <details><summary>Antwort</summary>Durch <b>Schiffsname, Rufzeichen und MMSI</b> (Rufnummer des mobilen Seefunkdienstes).</details>
 
-66. Wie ist eine Küstenfunkstelle gekennzeichnet? *(Buchfrage)*
+64. Wie ist eine Küstenfunkstelle gekennzeichnet? 
 <details><summary>Antwort</summary>Durch den <b>geografischen Ortsnamen</b> + Art des Dienstes: allgemeine Küstenfunkstelle „… Radio" (z. B. Kiel Radio), Revier-/Verkehrsfunk „… Traffic".</details>
 
-67. Welche Funkstelle wird mit dem Rufnamen „Warnemünde Traffic" gerufen? *(Buchfrage)*
+65. Welche Funkstelle wird mit dem Rufnamen „Warnemünde Traffic" gerufen? 
 <details><summary>Antwort</summary>Die <b>Küstenfunkstelle des Revierfunkdienstes</b> in Warnemünde.</details>
 
-68. Was ist der Unterschied zwischen „All ships" und „All stations"?
+66. Was ist der Unterschied zwischen „All ships" und „All stations"?
 <details><summary>Antwort</summary><b>All ships</b> = an alle Schiffsfunkstellen. <b>All stations</b> = an alle Funkstellen (auch Land-/Küstenfunkstellen).</details>
 
-69. Wann buchstabiert/wiederholt man laut Radio Regulations - im Anruf oder in der Meldung?
-<details><summary>Antwort</summary>In der <b>Meldung</b> (nicht im Anruf): Orts-/Eigennamen, Positionen, Zahlen, Uhrzeiten - mit „I spell" / „new word", und unbedingt befolgen.</details>
+67. Wann buchstabiert/wiederholt man laut Radio Regulations – im Anruf oder in der Meldung?
+<details><summary>Antwort</summary>In der <b>Meldung</b> (nicht im Anruf): Orts-/Eigennamen, Positionen, Zahlen, Uhrzeiten – mit „I spell" / „new word", und unbedingt befolgen.</details>
 
 ---
 
-### Mini-Prüfungssimulation SRC (schnell)
-
-> [!important] Die zehn Merksätze fürs SRC
-> K70 nur DSC · 3 Dringlichkeitsstufen · MMSI 9-stellig · Position nur bei Not · A1-Seegebiet · Funksprache Englisch · K16 = Anruf/Not · BNetzA für MMSI · DSC→K16→MAYDAY · Fehlalarm widerrufen.
+Bestehen heißt beim SRC mindestens 75 % richtig. Sprich die Antworten ruhig laut aus, bevor du aufklappst, aktives Erinnern bringt mehr als bloßes Nachlesen. Die meisten stolpern über den MMSI-Aufbau, die Silence-Begriffe und die Verwechslung von DSC-Testruf und echtem Notalarm.
 
 ---
-*Superlink:* [[Funkzeugnis-Kurs SRC und UBI]]
-Created: 04/06/26
+**Kurs-Navigation:** [[17 Funkkurs — Prüfungsfallen|← 17 · Ablaufplan & Prüfungsfallen]] · [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|↑ Kursübersicht]] · [[19 Funkkurs — Quiz UBI (Binnenfunk)|19 · Quiz – UBI (Binnenfunk) →]]
+
+*Superlink:* [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|Funkzeugnis-Kurs SRC & UBI]]
+

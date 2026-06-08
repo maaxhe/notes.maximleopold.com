@@ -1,14 +1,18 @@
 ---
 date_created: 05/06/26
-tags: [marine]
 type: note
+title: 15 – UBI Funkbeispiele (Binnenfunk, Deutsch)
+lektion: 15
+modul: 5 · Funkpraxis
 ---
 
-## Funkkurs - UBI Funkbeispiele & Muster-Funksprüche (Binnenfunk)
+## UBI Funkbeispiele & Muster-Funksprüche (Binnenfunk)
 
-Modul des [[Funkzeugnis-Kurs SRC und UBI|Funkzeugnis-Kurs SRC & UBI]]. Fertige Binnen-Funksprüche auf Deutsch zum Nachsprechen. Für Seefunk (Englisch) → [[Funkkurs — Funkbeispiele & Muster-Funksprüche]].
+> [!info]- Teil des [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|Funkzeugnis-Kurs SRC & UBI]] · Modul 4 · Funkpraxis
 
-Anders als im Seefunk läuft der Binnenfunk auf Deutsch und ohne DSC - die Identifikation passiert automatisch per ATIS. Der Schiff-Schiff-Anruf- und Sicherheitskanal ist **Kanal 10**, an Land ruft man die Revierzentrale. Statt „over" sagt man **„Kommen"**, statt „out" sagt man **„Ende"**. → [[Funkkurs — UBI Revierfunk & Nautische Information]].
+Hier bekommst du fertige Binnen-Funksprüche auf Deutsch für Schleuse, Brücke, Begegnung und Notruf. Du siehst, wie sich der Binnenfunk mit Deutsch, ATIS und ohne DSC vom Seefunk unterscheidet. Und du übst, die passende Situation zu erkennen, den richtigen Verkehrskreis zu wählen und den Spruch laut zu sprechen.
+
+Anders als im Seefunk läuft der Binnenfunk auf Deutsch und ohne DSC – die Identifikation passiert automatisch per ATIS. Der Schiff-Schiff-Anruf- und Sicherheitskanal ist **Kanal 10**, an Land ruft man die Revierzentrale. Statt „over" sagt man **„Kommen"**, statt „out" sagt man **„Ende"**. → [[10 Funkkurs — UBI Revierfunk & Nautische Information|Funkkurs — UBI Revierfunk & Nautische Information]].
 
 ---
 
@@ -19,7 +23,7 @@ Anders als im Seefunk läuft der Binnenfunk auf Deutsch und ohne DSC - die Ident
 → "Wir sind ein Sportboot, 9 Meter, vor der Schleuse, bitten um Einfahrt, kommen"
 ← "Möwe – bitte warten, Einfahrt in zehn Minuten, Ende"
 ```
-See oder Binnen? - die Grenze beachten
+See oder Binnen? – die Grenze beachten
 Ob eine Schleuse oder ein Revier unter See- oder Binnenfunk fällt, hängt von der Lage zur Seeschifffahrtsgrenze ab, nicht vom Wort „Schleuse". Die Schleuse Brunsbüttel etwa liegt an der Elbe nördlich der Elbbrücken und ist damit Seefunk, nicht Binnenfunk. Schleuse Anderten dagegen liegt am Mittellandkanal und ist Binnen. Im Zweifel hilft das Handbuch bzw. die Revierinfo.
 
 ### B2 · Routine: Brücke anrufen (Öffnung)
@@ -57,13 +61,14 @@ Die Revierzentrale rufst du mit 25 W, also voller Land-Reichweite. Welche Zentra
  kommen"
 ```
 > [!important] Kein DSC im Binnenfunk
-> Der Notruf läuft per Sprechfunk und zweigeteilt: MAYDAY auf **Kanal 10** (Schiff-Schiff, max. 1 W) an die umliegenden Schiffe und zusätzlich die Revierzentrale auf ihrem Revierkanal mit **25 W** - also nicht alles auf K10. ATIS läuft dabei automatisch mit. → [[Funkkurs — UBI Notruf & warum Kanal 16 verboten]].
+> Der Notruf läuft per Sprechfunk und zweigeteilt: MAYDAY auf **Kanal 10** (Schiff-Schiff, max. 1 W) an die umliegenden Schiffe und zusätzlich die Revierzentrale auf ihrem Revierkanal mit **25 W** – also nicht alles auf K10. ATIS läuft dabei automatisch mit. → [[11 Funkkurs — UBI Notruf & warum Kanal 16 verboten|Funkkurs — UBI Notruf & warum Kanal 16 verboten]].
 
 ---
 
-Eine schöne Übung für den Kurs: Karten mit Situationen ziehen lassen (Schleuse, Brücke, Begegnung, Motor aus, Wassereinbruch …) → Teilnehmende wählen den Verkehrskreis und sprechen den passenden Binnen-Funkspruch auf Deutsch. Anschließend gibt man sich gegenseitig die Lesbarkeit.
+Eine gute Übung: Zieh dir eine Situation (Schleuse, Brücke, Begegnung, Motor aus, Wassereinbruch …) – wähle den Verkehrskreis und sprich den passenden Binnen-Funkspruch auf Deutsch laut aus. Am besten gibst du dir danach selbst die Lesbarkeit.
 
 ---
-Tags: #marine
-*Superlink:* [[Funkzeugnis-Kurs SRC und UBI]]
-Created: 05/06/26
+**Kurs-Navigation:** [[14 Funkkurs — Funkbeispiele & Muster-Funksprüche|← 14 · Funkbeispiele SRC (Seefunk, Englisch)]] · [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|↑ Kursübersicht]] · [[16 Funkkurs — Revierkanäle Ostsee & Mittelmeer|16 · Revierkanäle Ostsee & Mittelmeer →]]
+
+*Superlink:* [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|Funkzeugnis-Kurs SRC & UBI]]
+
