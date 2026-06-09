@@ -142,10 +142,6 @@ Der typische Denkfehler: Viele denken wie beim Sprechfunk („erst Kanal einstel
 Ein Sonderfall ist der Routine-Call: Die DSC-Meldung teilt der Gegenstelle gleich den gewünschten Arbeitskanal mit – moderne Geräte stellen ihn nach der Quittung sogar automatisch ein.
 
 ---
-Zusammengefasst: 
-Kanal 16 ist der Sprech-Not- und Anrufkanal mit Hörwache, Kanal 70 dagegen ein reiner DSC-Datenkanal, auf dem nie gesprochen wird. Beim GMDSS-Notalarm drückst du die rote Taste, der DSC-Ruf geht auf Kanal 70 raus, das Gerät schaltet automatisch auf Kanal 16, und dort folgt der MAYDAY auf Englisch. Der SRC gilt für das Seegebiet A1 mit etwa 30 bis 40 sm Küstenabstand; weiter raus brauchst du das LRC. Deine MMSI schließlich ist die 9-stellige Funkkennung, die im Notfall automatisch mitgesendet wird.
-
----
 **Kurs-Navigation:** [[07 Funkkurs — NAVTEX & NAVAREA|← 07 · NAVTEX & NAVAREA]] · [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|↑ Kursübersicht]] · [[09 Funkkurs — UBI Binnenfunk|09 · UBI – Binnenfunk →]]
 
 *Superlink:* [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|Funkzeugnis-Kurs SRC & UBI]]

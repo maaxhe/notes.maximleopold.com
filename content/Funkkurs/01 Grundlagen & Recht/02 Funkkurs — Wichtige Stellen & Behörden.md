@@ -10,10 +10,6 @@ modul: 1 · Grundlagen & Recht
 
 > [!info]- Teil des [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|Funkzeugnis-Kurs SRC & UBI]] · Modul 1 · Grundlagen & Recht
 
-> [!abstract] Darum geht's
-> - Du kennst die wichtigsten Stellen im Funk- und Schifffahrtswesen und weißt, wer für was zuständig ist.
-> - Du verstehst den Unterschied zwischen Befähigungsnachweis (DSV/DMYV) und Gerätezulassung (BNetzA).
-> - Du kannst bei Prüfungsfragen zu Behörden sicher zuordnen, welche Stelle welche Aufgabe hat.
 
 ---
 

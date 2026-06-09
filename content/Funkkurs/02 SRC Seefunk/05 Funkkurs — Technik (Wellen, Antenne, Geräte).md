@@ -10,11 +10,6 @@ modul: 2 · SRC Seefunk
 
 > [!info]- Teil des [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|Funkzeugnis-Kurs SRC & UBI]] · Modul 2 · SRC Seefunk (Technik)
 
-> [!abstract] Darum geht's
-> - Du verstehst die Technik von UKW-Seefunk und wie Antennenhöhe die Reichweite bestimmt.
-> - Du kennst die wichtigsten Frequenzen, Gerätetypen und Sprechverfahren (Simplex/Duplex/Semiduplex).
-> - Du weißt, wie du Squelch, Dual Watch und DSC-Controller richtig bedienst.
-
 ---
 
 ### 1. Funkwellen – UKW (Ultrakurzwelle / VHF)
@@ -184,8 +179,6 @@ Muster für einen Routine-Anruf mit Kanalwechsel:
 → beide auf 71: Anliegen … OVER … Abschluss mit OUT
 ```
 In Deutschland ist es üblich, deutsche Häfen auf Deutsch anzufunken (mache ich auch so) – Englisch ist aber genauso akzeptiert. 
-
-Als goldene Regeln bleiben hängen: erst hören – dann senden, Kanal 16 freihalten, kurz und klar, und niemals „Over and Out".
 
 ---
 

@@ -6,14 +6,9 @@ lektion: 12
 modul: 5 · Funkpraxis
 ---
 
-## 12 Notverfahren & Funkschema (alle Fälle)
+## Notverfahren & Funkschema (alle Fälle)
 
 > [!info]- Teil des [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|Funkzeugnis-Kurs SRC & UBI]] · Modul 4 · Funkpraxis
-
-> [!abstract] Darum geht's
-> - Du kennst das komplette Ablaufschema für alle GMDSS-Fälle: Notmeldung, Weiterleiten, Bestätigen, Funkstille, Aufheben, Fehlalarm, Dringlichkeit, Sicherheit.
-> - Du weißt, welches Kennwort (MAYDAY / PAN PAN / SÉCURITÉ) du wann einsetzt und wie der genaue Wortlaut aussieht.
-> - Du kennst den Unterschied zwischen SRC-Verfahren (DSC + K70 + K16, Englisch) und UBI-Verfahren (direkt Sprechfunk, Deutsch).
 
 
 Funkschema – alle Fälle auf einen Blick:
@@ -269,9 +264,6 @@ flowchart LR
  style D fill:#ffa94d,color:#000
  style G fill:#69db7c,color:#000
 ```
-
-Die Kette im Ganzen: Alarm → MAYDAY → RECEIVED → Silence → (Rettung) → Silence Fini.
-
 
 ---
 **Kurs-Navigation:** [[11 Funkkurs — UBI Notruf & warum Kanal 16 verboten|← 11 · UBI – Notruf & warum Kanal 16 verboten]] · [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|↑ Kursübersicht]] · [[13 Funkkurs — Funkverfahren & Buchstabieralphabet|13 · Funkverfahren & Buchstabieralphabet →]]

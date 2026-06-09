@@ -10,8 +10,6 @@ modul: 4 · UBI Binnenfunk
 
 > [!info]- Teil des [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|Funkzeugnis-Kurs SRC & UBI]] · Modul 3 · UBI Binnenfunk
 
-Im Binnenfunk dreht sich fast alles um ATIS: was es ist, warum es Pflicht ist und wo der Unterschied zu DSC liegt. Dazu kommen die vier Verkehrskreise, Kanal 10 und die Sendeleistungsregeln auf Binnenwasserstraßen. Am Ende weißt du außerdem, was die UBI-Prüfung verlangt und welche Geräte du dafür brauchst.
-
 So wie ich es sehe, fühlt Binnen sich an wie ein Festnetz mit fester Nummer: jedes Mal, wenn du die Taste loslässt, „unterschreibt" dein Gerät per ATIS – die Revierzentrale weiß sofort, wer du bist.
 
 ### Was darf man mit dem UBI?
@@ -100,11 +98,6 @@ flowchart TD
 - Der Notruf ist zweigeteilt: MAYDAY auf Kanal 10 (Schiff-Schiff, 1 W) an umliegende Schiffe und Anruf der Revierzentrale auf ihrem Revierkanal (25 W). → [[11 Funkkurs — UBI Notruf & warum Kanal 16 verboten|Funkkurs — UBI Notruf & warum Kanal 16 verboten]].
 - Aufbau des MAYDAY-Spruchs analog zum Seefunk, nur mit ATIS-Identifikation statt MMSI.
 
-
-> [!tip] Kurz gemerkt
-> - ATIS ist im Binnenfunk Pflicht und ersetzt DSC: Beim Loslassen der PTT-Taste sendet dein Gerät automatisch deine digitale Kennung.
-> - Die vier Verkehrskreise auswendig: Schiff-Schiff (K10), Nautische Information, Schiff-Hafenbehörde, Bordfunk.
-> - Kombigerät = See- und Binnen-Modus umschalten; ein reines Seefunkgerät ist im Binnenfunk nicht zugelassen (kein ATIS).
 
 ---
 **Kurs-Navigation:** [[04 Funkkurs — SRC Seefunk (GMDSS)|← 08 · SRC – Seefunk (GMDSS)]] · [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|↑ Kursübersicht]] · [[10 Funkkurs — UBI Revierfunk & Nautische Information|10 · UBI – Revierfunk & Nautische Information →]]

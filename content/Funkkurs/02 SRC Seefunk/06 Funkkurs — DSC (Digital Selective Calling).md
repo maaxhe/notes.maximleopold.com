@@ -10,11 +10,7 @@ modul: 2 · SRC Seefunk
 
 > [!info]- Teil des [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|Funkzeugnis-Kurs SRC & UBI]] · Modul 2 · SRC Seefunk (Technik)
 
-DSC ist der digitale Teil des Seefunks – und der Grund, warum Kanal 70 ausschließlich für digitale Nachrichten reserviert ist. Wir gehen die DSC-Rufarten durch und den Notalarm (Distress Alert) Schritt für Schritt. Außerdem klären wir, warum eine programmierte MMSI unverzichtbar ist und was du bei einem Fehlalarm sofort tun musst.
-
-Das Herzstück des SRC: was DSC ist, welche Rufarten es gibt und wie der Notalarm funktioniert.
-
-In einem Satz: **DSC** ist der digitale Anruf per Knopfdruck. Das Gerät sendet auf Kanal 70 automatisch ein Datentelegramm mit deiner MMSI, Position und Zeit – danach wird gesprochen, meist auf Kanal 16.
+DSC ist der digitale Teil des Seefunks – und der Grund, warum Kanal 70 ausschließlich für digitale Nachrichten reserviert ist. Wir gehen die DSC-Rufarten durch und den Notalarm (Distress Alert) Schritt für Schritt. Außerdem klären wir, warum eine programmierte MMSI unverzichtbar ist und was du bei einem Fehlalarm sofort tun musst. Das Gerät sendet auf Kanal 70 automatisch ein Datentelegramm mit deiner MMSI, Position und Zeit – danach wird gesprochen, meist auf Kanal 16.
 
 ---
 

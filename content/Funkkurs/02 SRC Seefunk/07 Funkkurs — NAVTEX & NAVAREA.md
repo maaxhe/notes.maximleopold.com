@@ -75,10 +75,6 @@ Wichtig ist, NAVAREA und NAVTEX nicht zu verwechseln: NAVAREA ist das große geo
 
 ---
 
-Die wichtigsten Kernpunkte: 518 kHz englisch, 490 kHz national, das Gerät empfängt und speichert Text automatisch, A/B/D kommen immer durch – und das Ganze ist weltweit in NAVAREAs organisiert.
-
-NAVTEX empfängt auf 518 kHz (englisch) und 490 kHz (national) automatisch MSI-Meldungen und speichert sie als Text. Die Kategorien A (Navigationswarnungen), B (Wetterwarnungen) und D (SAR) lassen sich nie abwählen, sie kommen immer durch. Die Weltmeere sind in rund 21 NAVAREAs eingeteilt, und Deutschland liegt in NAVAREA I mit Großbritannien als Koordinator.
-
 ---
 **Kurs-Navigation:** [[08 Funkkurs — Notfunkgeräte (EPIRB, SART & Co.)|← 06 · Notfunkgeräte – EPIRB, SART & Co.]] · [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|↑ Kursübersicht]] · [[04 Funkkurs — SRC Seefunk (GMDSS)|08 · SRC – Seefunk (GMDSS) →]]
 

@@ -12,8 +12,6 @@ modul: 2 · SRC Seefunk
 
 Hier lernst du den Unterschied zwischen der EPIRB (weltweite Alarmierung via Satellit) und SART (Nahbereich-Ortung für die Retter) kennen. Du erfährst, wie und wann die einzelnen Geräte ausgelöst werden, also manuell, per Wasserkontakt oder Float-free. Und du lernst, einen Fehlalarm korrekt zu widerrufen und die Wartungsintervalle einzuordnen.
 
-Die Grundidee in einem Satz: Die **EPIRB** alarmiert und löst die Rettungskette aus, **SART** ortet und hilft den Rettern, uns im Nahbereich genau zu finden. Beides ergänzt den UKW- und DSC-Funk.
-
 ---
 
 ### EPIRB – Emergency Position-Indicating Radio Beacon
@@ -143,12 +141,6 @@ Zur Einordnung für den SRC: EPIRB und SART sind GMDSS-Ausrüstung und gehören 
 - on-yacht.com - *Batteriewechsel & Wartung (zertifizierter Service)* - https://on-yacht.com/batteriewechsel-wartung
 
 ---
-
-> [!tip] Kurz gemerkt
-> - Die EPIRB alarmiert weltweit über Satellit (406 MHz/Cospas-Sarsat); 121,5 MHz dient nur noch dem lokalen Homing durch SAR-Einheiten vor Ort.
-> - SART und AIS-SART orten im Nahbereich – so hoch wie möglich halten für maximale Reichweite.
-> - Fehlalarm immer sofort beim MRCC widerrufen – nicht einfach ausschalten und schweigen.
-> - HRU der EPIRB alle 2 Jahre tauschen, Registrierung aktuell halten.
 
 ---
 **Kurs-Navigation:** [[06 Funkkurs — DSC (Digital Selective Calling)|← 05 · DSC – Digital Selective Calling]] · [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|↑ Kursübersicht]] · [[07 Funkkurs — NAVTEX & NAVAREA|07 · NAVTEX & NAVAREA →]]

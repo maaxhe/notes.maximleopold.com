@@ -10,6 +10,14 @@ const contentMeta = isFunkBuild ? [] : [Component.ContentMeta()]
 const hypothesis = isFunkBuild ? [] : [Component.HypothesisSPA()]
 const ragChatbot = isFunkBuild ? [] : [Component.RAGChatbot({ collapsed: true })]
 const annotationsBadge = isFunkBuild ? [] : [{ Component: Component.AnnotationsBadge() }]
+// Same footer on every site.
+const footer = Component.Footer({
+  links: {
+    "Mein GitHub": "https://github.com/maaxhe",
+    "Website": "https://maximilianherrmann.com",
+    "Feedback": "mailto:contact@maximilianherrmann.com",
+  },
+})
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
@@ -20,13 +28,7 @@ export const sharedPageComponents: SharedLayout = {
     Component.SidebarToggle(),
     ...ragChatbot,
   ],
-  footer: Component.Footer({
-    links: {
-      "Mein GitHub": "https://github.com/maaxhe",
-      "Website": "https://maximleopold.com",
-      "Feedback": "mailto:deine-email@example.com",
-    },
-  }),
+  footer,
 }
 
 // components for pages that display a single page (e.g. a single note)

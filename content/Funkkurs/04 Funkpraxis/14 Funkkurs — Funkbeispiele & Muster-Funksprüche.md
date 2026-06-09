@@ -10,10 +10,6 @@ modul: 5 · Funkpraxis
 
 > [!info]- Teil des [[00 Funkkurs SRC & UBI – Online Lernunterlagen für Funkzeugnis|Funkzeugnis-Kurs SRC & UBI]] · Modul 4 · Funkpraxis
 
-> [!abstract] Darum geht's
-> - Du lernst fertige englische Muster-Funksprüche für alle wichtigen Situationen auf See.
-> - Du verstehst, welche Verkehrsart (MAYDAY, PAN PAN, SÉCURITÉ, Routine) wann gilt.
-> - Du kannst die Beispiele laut nachsprechen und bist damit prüfungsbereit.
 
 Fertige Seefunk-Funksprüche auf Englisch zum Nachsprechen, jeweils mit ein paar Tipps. Für Binnenfunk (Deutsch) → [[15 Funkkurs — UBI Funkbeispiele & Muster-Funksprüche|Funkkurs — UBI Funkbeispiele & Muster-Funksprüche]].
 
