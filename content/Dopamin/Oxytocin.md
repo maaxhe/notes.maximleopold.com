@@ -1,3 +1,7 @@
+---
+modified: 2026-06-15
+---
+
 ## Oxytocin
 
 - ein [[Neuropeptide]], welches die Bindung zwischen Lebewesen verstärkt
@@ -59,6 +63,8 @@ Tags: #cognitivescience/HormoneNeurotransmitter #science
 ### Quellen
 [[Behave#Chapter 4 Hours to Days Before#Oxytocin and Vasopressin A Marketing Dream]]
 
+
+→ Einordnung: [[Neurotransmitter vs Neuropeptide vs Hormone]] · [[Hormone – Overview]] · [[Neuropeptide]]
 
 Erstellt: 19-08-21 12:11
 
