@@ -61,7 +61,10 @@ function stripFrontmatter(raw: string): string {
  * - ### Source
  */
 function stripTrailingSections(content: string): string {
-  content = content.replace(/\n---\s*\n#{1,6}\s*Notes\s*&\s*Scrapbook[\s\S]*/i, "")
+  // Notes & Scrapbook is private scratchpad content — cut everything from that
+  // heading onward regardless of whether a `---` rule precedes it (it doesn't
+  // always), so a missing separator can't leak it into compiled/published output.
+  content = content.replace(/\n#{1,6}\s*Notes\s*&\s*Scrapbook[\s\S]*/i, "")
   content = content.replace(/\n#{1,6}\s*see also[\s\S]*/i, "")
   content = content.replace(/\n#{1,6}\s*Source\s*\n[\s\S]*/i, "")
   return content.trim()
@@ -85,12 +88,18 @@ function extractFromMainHeading(content: string, chapterName: string): string {
  */
 function extractSection(content: string, sectionName: string): string {
   const escaped = escapeRegex(sectionName.trim())
-  const headingRegex = new RegExp(`^(#{1,6})\\s+${escaped}\\s*$`, "m")
+  const headingRegex = new RegExp(`^(#{1,6})\\s+${escaped}\\s*$`, "mi")
   const match = headingRegex.exec(content)
 
   if (!match) {
-    console.warn(`    ⚠️  Section "${sectionName}" not found — including full file content`)
-    return content
+    // Never fall back to the full file — it may still contain a Notes & Scrapbook
+    // section that stripTrailingSections() didn't catch (e.g. missing leading `---`).
+    // Falling through silently would leak private scratchpad content into the
+    // compiled/published output, so fail loudly instead.
+    console.error(
+      `    ✗ Section "${sectionName}" not found — skipping this transclusion instead of leaking full file content. Check the heading matches the wikilink exactly.`,
+    )
+    return ""
   }
 
   const headingLevel = match[1].length
